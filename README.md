@@ -7,7 +7,9 @@ Still need mocking for testing.
     - MemoryStream / operators with buffers
     - time-related operators
 3. Cyclic dependency is painful to handle which destroys scalability.
+
 Why cyclic?
+
 Parent component cannot interpret External Events from Event Listeners attached by its child components which is a reasonable design choice.
 To pass interpreted events as messages back to parent component, part of child's sink has to be part of parent's source while part of parent's source is already part of child's source. Thus, parent and child depend on each other.
 e.g. TodoMVC, delete button is attached to child components (TodoItem) while the lifecycles of child components are managed by parent component (TodoList). Parent need DELETE event from child to perform the state transition.
@@ -19,11 +21,14 @@ e.g. TodoMVC, delete button is attached to child components (TodoItem) while the
 (in OOP, Translator Pattern**
 4.  node-to-node communication is even worse.
 Need to find a common ancestor and all the ancestor/parent along the way to be aware of the communication.
+
 **[ pic ]**
 
 ## SAM
 V = State( vm( Model.present( Action( data))), nap(Model))
+
 Moore Machine(?)
+
 1. If nap(next-action predicate, push machine out of intermediate state) is rejected by Model.present, then the entire system gets stuck in an invalid state.
 This means nap() function has to coherent with Model.present but this type of coordination is managed manually. 
 2. nap() function has to guarantee global validness which is not planned to be componentized. Scalability issue.
@@ -43,17 +48,24 @@ TODO
 
 ### Actor
 - Interactive
+
 Sender-> Receiver (**[ pic ]**)
+
 - Reactive
+
 Sender ->Receiver (**[ pic ]**)
+
 ### CSP
+
 Sender ->Mediator(Channel)-> Receiver (**[ pic ]**)
 
 **Benefit**: abstract out dependency/wiring/edge and leave components autonomic and independent from others
 
 ## Combinational Logic (acyclic composition)
 data flow/dependency/causality
+
 composition by logic gate/operator
+
 **[ pic ]**
 
 ## Feedback Loop (cyclic composition)
@@ -65,12 +77,19 @@ composition by logic gate/operator
 child state machines are in a map
 
 ## Guard
+
 Higher-order combinational logic with variables
+
 ### AND/OR Table
+
 **[ pic ]**
+
 ### Regulator, (post) Censor, (pre) Interrupter
+
 **Guard can be factored out of state transition**
+
 Used to incrementally refine the state following some global constraints.
+
 1. Pre Censor / Interrupter
 Listening to (External) Messages
 Filtered out Messages/Inputs for components based on Global Constraints
