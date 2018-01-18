@@ -105,7 +105,7 @@ Higher-order combinational logic with variables
 
 **[ pic ]**
 
-### Regulator, (post) Censor, (pre) Interrupter
+## State Refinement
 
 **Guard can be factored out of state transition**
 
@@ -129,6 +129,10 @@ After the state transition in this tick/step is done ( no more Internal Messages
 If not, roll back to previous valid state.
 
 *All intermediate states are invalid states and should not be observed by external observers.
+
+### Case Study
+#### 1. push forward
+#### 2. pull back
 
 ## Separation of Internal Representation and External Representation
 This framework is ought to be general for both Frontend and Backend application.
@@ -162,7 +166,11 @@ For example, DOM View maps the hash map of Model into a tree.
 general view container/component library
 general model testing/prototyping purpose view function
 
+### Case
+
 ## Extended Finite State Machine
+
+### time constraints
 
 ## Self-adaptive
 
@@ -189,4 +197,52 @@ signal broadcasting
 
 These composition logic will be implemented by Writer monad, Monoid, and ChainRec monad.
 
+### Reader
+### Writer
+### Monoid
+### ChainRec
+
 # Overall Architecture
+Mealy Machine + Synchronous Composition + Feedback
+## Driver
+1. DOM Driver
+2. HTTP Driver (WebSocket Driver)
+3. Time Driver
+4. Database Driver
+
+# DOM Component Library
+Framework-independent & composable
+
+## Container
+
+1. spring grid system (draggable)
+2. waterfall
+3. notification/modal
+4. scroll lazy load
+5. Router / Page with Navigator
+
+## Component
+
+1. table
+2. tree (collapse)
+3. graph
+4. (video/soundtrack) media player
+5. (geo) map
+6. time
+7. image viewer
+8. text editor (container? DOM tree inside)
+9. text area with annotation (hidden, collapse)
+
+# Examples
+
+## Cyclic-dependent Buttons
+## Autocomplete Input Box
+## TodoList
+## Container with different types of Draggable Components
+## Drag-and-drop among multiple Containers
+
+# Design Choices TODO
+## Stateful HTML Elements handling for performance
+1. Text Input Box
+2. Slider
+3. Selector
