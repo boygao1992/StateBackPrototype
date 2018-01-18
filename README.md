@@ -71,8 +71,10 @@ composition by logic gate/operator
 ## Feedback Loop (cyclic composition)
 1. Feedback loop merges the internal dependency/wiring/network into one stream.
 2. Able to express cyclic dependency
-(unachievable by combinational logic / acyclic composition)  **[ pic ]**
-*[cyclic dependency**: can be unfolded into an infinite/varying length acyclic dependency sequence. The infinite length case can be handled by Banach fixed-point theorem which is out of the scope of this project.
+(unachievable by combinational logic / acyclic composition)
+**[ pic ]**
+
+[cyclic dependency]: can be unfolded into an infinite/varying length acyclic dependency sequence. The infinite length case can be handled by Banach fixed-point theorem which is out of the scope of this project.
 3. Unified cyclic/acyclic dependencies
 child state machines are in a map
 
@@ -92,13 +94,16 @@ Used to incrementally refine the state following some global constraints.
 
 1. Pre Censor / Interrupter
 Listening to (External) Messages
+
 Filtered out Messages/Inputs for components based on Global Constraints
 2. Regulator
 Listening to (Internal) Messages which indicate State Update in any component.
+
 Push forward / Roll back the component's state to next/last intermediate state based on Global Constraints
 3. Post Censor
 After the state transition in this tick/step is done ( no more Internal Messages received), Post Censor checks if the system is in a valid state.
 If not, roll back to previous valid state.
+
 *All intermediate states are invalid states and should not be observed by external observers.
 
 ## Separation of Internal Representation and External Representation
@@ -108,15 +113,22 @@ This framework is ought to be general for both Frontend and Backend application.
 Minimal amount of information that will be presented in different formats and sent to External World through corresponding Drivers.
 Compensate Models
   - View Model ( DOM )
+
   Strictly view-related only. Parametrize the View(template) Function.
+
   e.g. Color, Opacity, Font, Coordinates, Layer etc.
+
   Targeting different platforms.
+
   e.g. Console (Terminal App), Mobile (IOS, Android), Hybrid(React Native, Cordova)
+
   Will be shipped with (pure) View Function in View Container/Component library.
   - Network Model ( HTTP(S)/WebSocket )
   Client-related states are stored in Model but protocol-related information like Server-Client Message Schema, Communication Encryption Method, etc. should be presented in HTTP Model.
+
 2. View
 A function that transforms internal representation (Model) to external representation (DOM, HTTP, Mobile, etc.).
+
 For example, DOM View maps the hash map of Model into a tree.
 
 general view container/component library
@@ -125,17 +137,26 @@ general model testing/prototyping purpose view function
 ## Extended Finite State Machine
 
 ## Self-adaptive
+
 [Multiple Levels in Self-adaptive Complex Systems: A State-Based Approach](https://arxiv.org/abs/1209.1628)
+
 [An Approach to Self-Adaptive Software based on Supervisory Control](http://www.isis.vanderbilt.edu/sites/default/files/Karsai_G_5_0_2001_An_Approac.pdf)
+
 In order to sustain the clear separation between Parent and Child components (state machines) where Parent manages the lifecycles of its children including their behaviors (State Transition Function is swappable dynamically during the runtime), the dependency network is no longer static which needs a second-order state machine.
 
 ## State Machine Composition
-1. Cascade Composition ( 2 sequential dependent tasks**
+1. Cascade Composition ( 2 sequential dependent tasks)
+
 signal passing
+
 **[ pic ]**
-2. Synchronous Parallel Composition ( n independent tasks, n >= 2**
+
+2. Synchronous Parallel Composition ( n independent tasks, n >= 2)
+
 signal broadcasting
+
 **[ pic ]**
+
 3. Feedback Loop
 
 These composition logic will be implemented by Writer monad, Monoid, and ChainRec monad.
