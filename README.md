@@ -34,6 +34,9 @@ State transition function and Output function are separated into Reducer and Mid
 1. Middlewares don't compose. Functional specification needed.
 2. Reducer can be modulized based on DOM tree's hierarchical structure but then suffer from the same communication problem as ELM. If reducer tree is flattened into a single layer hash map, then global constraints are easy to implement but cyclic dependency are still not properly handled (some parent components know too much).
 
+## Angular2 / Vue
+TODO
+
 # Tech & Design Choices
 
 ## Message-Passing / Component-Wiring Style
@@ -102,7 +105,20 @@ general model testing/prototyping purpose view function
 
 ## Extended Finite State Machine
 
+## Self-adaptive
+[Multiple Levels in Self-adaptive Complex Systems: A State-Based Approach](https://arxiv.org/abs/1209.1628)
+[An Approach to Self-Adaptive Software based on Supervisory Control](http://www.isis.vanderbilt.edu/sites/default/files/Karsai_G_5_0_2001_An_Approac.pdf)
+In order to sustain the clear separation between Parent and Child components (state machines) where Parent manages the lifecycles of its children including their behaviors (State Transition Function is swappable dynamically during the runtime), the dependency network is no longer static which needs a second-order state machine.
+
 ## State Machine Composition
-1. Synchronous
+1. Cascade Composition ( 2 sequential dependent tasks**
+signal passing
+**[ pic ]**
+2. Synchronous Parallel Composition ( n independent tasks, n >= 2**
+signal broadcasting
+**[ pic ]**
+3. Feedback Loop
 
+These composition logic will be implemented by Writer monad, Monoid, and ChainRec monad.
 
+# Overall Architecture
