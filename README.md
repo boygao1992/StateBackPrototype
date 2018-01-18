@@ -74,7 +74,8 @@ composition by logic gate/operator
 (unachievable by combinational logic / acyclic composition)
 **[ pic ]**
 
-[cyclic dependency]: can be unfolded into an infinite/varying length acyclic dependency sequence. The infinite length case can be handled by Banach fixed-point theorem which is out of the scope of this project.
+*[cyclic dependency]: can be unfolded into an infinite/varying length acyclic dependency sequence. The infinite length case can be handled by Banach fixed-point theorem which is out of the scope of this project.
+
 3. Unified cyclic/acyclic dependencies
 child state machines are in a map
 
