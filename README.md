@@ -209,6 +209,7 @@ Mealy Machine + Synchronous Composition + Feedback
 2. HTTP Driver (WebSocket Driver)
 3. Time Driver
 4. Database Driver
+![Abstract out IO Effects by Drivers](./doc/io-eff-by-drivers.png "Abstract out IO Effects by Drivers")
 
 # DOM Component Library
 Framework-independent & composable
