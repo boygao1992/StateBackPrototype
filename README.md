@@ -2,7 +2,7 @@
 ## CycleJS
 
 1. CycleJS claims that the Main Function is *Pure*, but not really.
-Still need mocking for testing.
+  Still need mocking for testing.
   - event listener attach/removal is side effect which is not abstracted away from Main.
   - RxJS Observable has many stateful operators which are declarative but encapsulate/hide state.
     - MemoryStream / operators with buffers
@@ -23,12 +23,12 @@ e.g. TodoMVC, delete button is attached to child components (TodoItem) while the
 2. state transition functions are directly attached to event handlers, which strongly couples model and view 
 
 3. child-parent message passing need child to expose state getter/lense function to its parent to grant parent access to its state (give it ability to interpret)
-(in OOP, Translator Pattern**
+  (in OOP, Translator Pattern**
 
-4.  node-to-node communication is even worse.
-Need to find a common ancestor and all the ancestor/parent along the way to be aware of the communication.
+4. node-to-node communication is even worse.
+  Need to find a common ancestor and all the ancestor/parent along the way to be aware of the communication.
 
-**[ pic ]**
+![Node-to-Node Message Passing](./doc/node-to-node_message_passing.png "Node-to-Node Message Passing")
 
 ## SAM
 
@@ -37,7 +37,7 @@ V = State( vm( Model.present( Action( data))), nap(Model))
 Moore Machine(?)
 
 1. If nap(next-action predicate, push machine out of intermediate state) is rejected by Model.present, then the entire system gets stuck in an invalid state.
-This means nap() function has to coherent with Model.present but this type of coordination is managed manually. 
+  This means nap() function has to coherent with Model.present but this type of coordination is managed manually. 
 
 2. nap() function has to guarantee global validness which is not planned to be componentized. Scalability issue.
 
@@ -246,3 +246,4 @@ Framework-independent & composable
 1. Text Input Box
 2. Slider
 3. Selector
+
