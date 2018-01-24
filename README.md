@@ -251,12 +251,18 @@ Framework-independent & composable
 
 
 # Reference
-1. [Euterpea: From signals to symphonies](https://www.youtube.com/watch?v=xtmo6Bmfahc)
+1. Euterpea: From signals to symphonies
+[Youtube](https://www.youtube.com/watch?v=xtmo6Bmfahc)
 ![causal commutative arrows](./doc/from-Euterpea-video.png "Causal Commutative Arrows")
 
-2. [Causal Commutative Arrows and Their Optimization](https://vimeo.com/6652662)
+2. Causal Commutative Arrows and Their Optimization
+[Paper](http://haskell.cs.yale.edu/wp-content/uploads/2012/06/FromJFP.pdf)
+[Youtube](https://vimeo.com/6652662)
 Causal Commutative Normal Form(CCNF):
-- A single loop containing one pure arrow and one initial state
+- A pure arrow, or a single loop containing one pure arrow and one initial state
 - Transition only based on abstract laws without committing to any particular implementation.
 
-3. [Causal Commutative Arrows Revisited](https://www.youtube.com/watch?v=bnFHYsL4QNc)
+3. Causal Commutative Arrows Revisited
+[Paper](https://www.cl.cam.ac.uk/~jdy22/papers/causal-commutative-arrows-revisited.pdf)
+[Youtube](https://www.youtube.com/watch?v=bnFHYsL4QNc)
+[Github](https://github.com/yallop/causal-commutative-arrows-revisited)
