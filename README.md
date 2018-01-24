@@ -203,6 +203,7 @@ These composition logic will be implemented by Writer monad, Monoid, and ChainRe
 ### ChainRec
 
 # Overall Architecture
+
 Mealy Machine + Synchronous Composition + Feedback
 ## Driver
 1. DOM Driver
@@ -248,3 +249,6 @@ Framework-independent & composable
 2. Slider
 3. Selector
 
+
+# Reference
+![causal communicative arrows](./doc/from-Euterpea-video.png "Causal Communicative Arrows")
