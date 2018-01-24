@@ -251,4 +251,4 @@ Framework-independent & composable
 
 
 # Reference
-![causal communicative arrows](./doc/from-Euterpea-video.png "Causal Communicative Arrows")
+![causal commutative arrows](./doc/from-Euterpea-video.png "Causal Commutative Arrows")
