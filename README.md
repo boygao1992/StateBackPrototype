@@ -4,7 +4,7 @@
 1. CycleJS claims that the Main Function is *Pure*, but not really.
   Still need mocking for testing.
   - event listener attach/removal is side effect which is not abstracted away from Main.
-  - RxJS Observable has many stateful operators which are declarative but encapsulate/hide state.
+  - RxJS Observable has many stateful operators which are declarative (named)  but encapsulate/hide state.
     - MemoryStream / operators with buffers
     - time-related operators
 
@@ -27,6 +27,8 @@ e.g. TodoMVC, delete button is attached to child components (TodoItem) while the
 
 4. node-to-node communication is even worse.
   Need to find a common ancestor and all the ancestor/parent along the way to be aware of the communication.
+  
+5. first-order FRP and static signal graph. Separation between Container and Child Component in state management (which is essential for creating General Container Widget) while maintaining the ability to add/remove child components dynamically in runtime is not possible.
 
 ![Node-to-Node Message Passing](./doc/node-to-node_message_passing.png "Node-to-Node Message Passing")
 
@@ -37,7 +39,7 @@ V = State( vm( Model.present( Action( data))), nap(Model))
 Moore Machine(?)
 
 1. If nap(next-action predicate, push machine out of intermediate state) is rejected by Model.present, then the entire system gets stuck in an invalid state.
-  This means nap() function has to coherent with Model.present but this type of coordination is managed manually. 
+  This means nap() function has to be consistent with Model.present but this type of coordination is error-prone if managed manually.
 
 2. nap() function has to guarantee global validness which is not planned to be componentized. Scalability issue.
 
@@ -349,40 +351,81 @@ e.g. Event Loop in Javascript
 
 ## Arrowized FRP
 
-1. Euterpea: From signals to symphonies
+### 1. Euterpea: From signals to symphonies
   [Youtube](https://www.youtube.com/watch?v=xtmo6Bmfahc)
 
 ![causal commutative arrows](./doc/from-Euterpea-video.png "Causal Commutative Arrows")
 
-2. Causal Commutative Arrows and Their Optimization
-  [Paper](http://haskell.cs.yale.edu/wp-content/uploads/2012/06/FromJFP.pdf) 
-  [Youtube](https://vimeo.com/6652662)
+### 2. Causal Commutative Arrows and Their Optimization
+[Paper](http://haskell.cs.yale.edu/wp-content/uploads/2012/06/FromJFP.pdf) 
+[Youtube](https://vimeo.com/6652662)
 
 Causal Commutative Normal Form(CCNF):
 - A pure arrow, or a single loop containing one pure arrow and one initial state
 - Transition only based on abstract laws without committing to any particular implementation.
 
-3. Causal Commutative Arrows Revisited
-  [Paper](https://www.cl.cam.ac.uk/~jdy22/papers/causal-commutative-arrows-revisited.pdf) 
-  [Youtube](https://www.youtube.com/watch?v=bnFHYsL4QNc) 
-  [Github](https://github.com/yallop/causal-commutative-arrows-revisited)
+### 3. Causal Commutative Arrows Revisited
+[Paper](https://www.cl.cam.ac.uk/~jdy22/papers/causal-commutative-arrows-revisited.pdf) 
+[Youtube](https://www.youtube.com/watch?v=bnFHYsL4QNc) 
+[Github](https://github.com/yallop/causal-commutative-arrows-revisited)
 
-4. [Yampa](https://wiki.haskell.org/Yampa#Primitive_signal_functions)
+### 4. [Yampa](https://wiki.haskell.org/Yampa#Primitive_signal_functions)
 
-5. [Henrik Nilsson - ITU FRP2010 Lecture](http://www.cs.nott.ac.uk/~psznhn/ITU-FRP2010/)
+### 5. [Henrik Nilsson - ITU FRP2010 Lecture](http://www.cs.nott.ac.uk/~psznhn/ITU-FRP2010/)
 
-6. [Functional reactive programming - Johannes Kepler University 2012](http://lambdor.net/wp-content/uploads/2012/06/2012%20-%20Functional%20Reactive%20Programming%20-%20Gerold%20Meisinger.pdf)
-  - Programming Paradigms
-    ![programming-paradigm](./doc/programming-paradigms.png "Programming Paradigms")
-  - FRP Variants
-    - Classic FRP
-      e.g. Fran, FrTime
-    - Push-pull FRP
-      e.g. reactive
-    - Arrowized FRP
-      e.g. Yampa, Elera
-  - Haskell Type Classes
-    ![haskell-type-classes](./doc/haskell-type-classes.png "Haskell Type Classes")
-  - Yampa Switches
-    ![yampa-switches](./doc/yampa-switches.png "Yampa Switches")
-    => Dynamic Dataflow (DDF)
+#### Lecture 01
+FRP Variants
+- Classic FRP
+  First class signal generators.
+- Extended Classic FRP
+  First class signal generators and signals
+- Yampa
+  First class signal functions, signals and secondary notion
+- Elerea
+  First class signals and signal generators
+  
+![frp-central-notions](./doc/frp-central-notions.png "Central Notions")
+
+Causality Requirement
+  output at time *t* must be determined by input on interval [0,t].
+
+Signal Function Purity
+- Pure/Stateless
+  if output at time *t* only depends on input at time *t*.
+  or if *y(t)* depends only on *x(t)*
+- Impure/Stateful
+  if output at time *t* depends on input over the interval [0,t].
+  of if *y(t)* depends on *x(t)* and *state(t)*
+  where *state(t)* summarizes input history *x(t')*, *t' \in [0,t]*
+  
+##### Classic FRP
+![Signal, Time-varying value: Signal a ~~ Time -> a. Signal Generator, maps a start time to a Signal: SG a ~~ Time -> Signal a. Signal Function, maps a signal to a signal: SF a b ~~ Signal a -> Signal b](./doc/classic-frp-central-abstractions.png "Classic FRP Central Abstractions")
+Classic FRP Behavior Examples:
+![classic-frp-behavior-examples](./doc/classic-frp-behavior-examples.png "Classic FRP Behavior Examples")
+![cfrp-behavior-exapmle01](./doc/cfrp-example01.png "CFRP Example 01")
+![cfrp-behavior-exapmle02](./doc/cfrp-example02.png "CFRP Example 02")
+![cfrp-behavior-exapmle03](./doc/cfrp-example03.png "CFRP Example 03")
+![cfrp-behavior-exapmle04](./doc/cfrp-example04.png "CFRP Example 04")
+![cfrp-behavior-exapmle05](./doc/cfrp-example05.png "CFRP Example 05")
+Classic FRP Event Examples:
+![classic-frp-event-examples](./doc/classic-frp-event-examples.png "Classic FRP Event Examples")
+
+### 6. [Functional reactive programming - Johannes Kepler University 2012](http://lambdor.net/wp-content/uploads/2012/06/2012%20-%20Functional%20Reactive%20Programming%20-%20Gerold%20Meisinger.pdf)
+- Programming Paradigms
+  ![programming-paradigm](./doc/programming-paradigms.png "Programming Paradigms")
+
+FRP Variants
+- Classic FRP
+  e.g. Fran, FrTime 
+- Push-pull FRP
+  e.g. reactive 
+- Arrowized FRP
+  e.g. Yampa, Elera
+
+Haskell Type Classes
+![haskell-type-classes](./doc/haskell-type-classes.png "Haskell Type Classes")
+
+Yampa Switches
+=> Dynamic Dataflow (DDF)
+![yampa-switches](./doc/yampa-switches.png "Yampa Switches")
+
