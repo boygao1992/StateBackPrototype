@@ -277,8 +277,7 @@ SDF actors are constrained to produce the same number of output tokens on each f
 
 ![synchronous-dataflow](./doc/synchronous-dataflow.png "SDF actor")
 All tokens that A produces are consumed by B if and only if the following balance equation is satisfied:
-
-$q_A M = q_B N$
+![q_AM=q_BN](./doc/math/SDF01.gif "q_A M = q_B N")
 
 3. Dynamic Dataflow Model (DDF)
 
