@@ -212,7 +212,7 @@ Mealy Machine + Synchronous Composition + Feedback
 2. HTTP Driver (WebSocket Driver)
 3. Time Driver
 4. Database Driver
-![Abstract out IO Effects by Drivers](./doc/io-eff-by-drivers.png "Abstract out IO Effects by Drivers")
+  ![Abstract out IO Effects by Drivers](./doc/io-eff-by-drivers.png "Abstract out IO Effects by Drivers")
 
 # DOM Component Library
 
@@ -277,7 +277,8 @@ SDF actors are constrained to produce the same number of output tokens on each f
 
 ![synchronous-dataflow](./doc/synchronous-dataflow.png "SDF actor")
 All tokens that A produces are consumed by B if and only if the following balance equation is satisfied:
-$$q_A M = q_B N$$
+
+$q_A M = q_B N$
 
 3. Dynamic Dataflow Model (DDF)
 
@@ -350,22 +351,22 @@ e.g. Event Loop in Javascript
 ## Arrowized FRP
 
 1. Euterpea: From signals to symphonies
-[Youtube](https://www.youtube.com/watch?v=xtmo6Bmfahc)
+  [Youtube](https://www.youtube.com/watch?v=xtmo6Bmfahc)
 
 ![causal commutative arrows](./doc/from-Euterpea-video.png "Causal Commutative Arrows")
 
 2. Causal Commutative Arrows and Their Optimization
-[Paper](http://haskell.cs.yale.edu/wp-content/uploads/2012/06/FromJFP.pdf) 
-[Youtube](https://vimeo.com/6652662)
+  [Paper](http://haskell.cs.yale.edu/wp-content/uploads/2012/06/FromJFP.pdf) 
+  [Youtube](https://vimeo.com/6652662)
 
 Causal Commutative Normal Form(CCNF):
 - A pure arrow, or a single loop containing one pure arrow and one initial state
 - Transition only based on abstract laws without committing to any particular implementation.
 
 3. Causal Commutative Arrows Revisited
-[Paper](https://www.cl.cam.ac.uk/~jdy22/papers/causal-commutative-arrows-revisited.pdf) 
-[Youtube](https://www.youtube.com/watch?v=bnFHYsL4QNc) 
-[Github](https://github.com/yallop/causal-commutative-arrows-revisited)
+  [Paper](https://www.cl.cam.ac.uk/~jdy22/papers/causal-commutative-arrows-revisited.pdf) 
+  [Youtube](https://www.youtube.com/watch?v=bnFHYsL4QNc) 
+  [Github](https://github.com/yallop/causal-commutative-arrows-revisited)
 
 4. [Yampa](https://wiki.haskell.org/Yampa#Primitive_signal_functions)
 
@@ -373,16 +374,16 @@ Causal Commutative Normal Form(CCNF):
 
 6. [Functional reactive programming - Johannes Kepler University 2012](http://lambdor.net/wp-content/uploads/2012/06/2012%20-%20Functional%20Reactive%20Programming%20-%20Gerold%20Meisinger.pdf)
   - Programming Paradigms
-![programming-paradigm](./doc/programming-paradigms.png "Programming Paradigms")
+    ![programming-paradigm](./doc/programming-paradigms.png "Programming Paradigms")
   - FRP Variants
     - Classic FRP
-    e.g. Fran, FrTime
+      e.g. Fran, FrTime
     - Push-pull FRP
-    e.g. reactive
+      e.g. reactive
     - Arrowized FRP
-    e.g. Yampa, Elera
+      e.g. Yampa, Elera
   - Haskell Type Classes
-  ![haskell-type-classes](./doc/haskell-type-classes.png "Haskell Type Classes")
+    ![haskell-type-classes](./doc/haskell-type-classes.png "Haskell Type Classes")
   - Yampa Switches
-  ![yampa-switches](./doc/yampa-switches.png "Yampa Switches")
-  => Dynamic Dataflow (DDF)
+    ![yampa-switches](./doc/yampa-switches.png "Yampa Switches")
+    => Dynamic Dataflow (DDF)
