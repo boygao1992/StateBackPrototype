@@ -416,6 +416,7 @@ time :: B Time
 ![cfrp-behavior-exapmle03](./doc/cfrp-behavior-example03.png "CFRP Example 03")
 
 lift1 :: (a -> b) -> (B a -> B b)
+
 (Real -> Real) -> (B Real -> B Real)
 
 ![cfrp-behavior-exapmle04](./doc/cfrp-behavior-example04.png "CFRP Example 04")
