@@ -205,7 +205,9 @@ These composition logic will be implemented by Writer monad, Monoid, and ChainRe
 # Overall Architecture
 
 Mealy Machine + Synchronous Composition + Feedback
+
 ## Driver
+
 1. DOM Driver
 2. HTTP Driver (WebSocket Driver)
 3. Time Driver
@@ -213,6 +215,7 @@ Mealy Machine + Synchronous Composition + Feedback
 ![Abstract out IO Effects by Drivers](./doc/io-eff-by-drivers.png "Abstract out IO Effects by Drivers")
 
 # DOM Component Library
+
 Framework-independent & composable
 
 ## Container
@@ -244,23 +247,30 @@ Framework-independent & composable
 ## Drag-and-drop among multiple Containers
 
 # Design Choices TODO
+
 ## Stateful HTML Elements handling for performance
+
 1. Text Input Box
 2. Slider
 3. Selector
 
 
 # Reference
+
 ## Concurrent Models of Computation
+
 [Introduction to Embedded Systems: a Cyber-Physical Systems Approach](http://leeseshia.org/releases/LeeSeshia_DigitalV1_08.pdf)
 
 ### Event Sequence
+
 Only care about the sequence of ticks while the physical time at which the ticks occur is irrelevant.
 
 1. Synchronously Reactive Model
+
 The reaction of all actors are simultaneous and instantaneous at each of a sequence of ticks of a global clock.
 
 2. Synchronous Dataflow Model (SDF)
+
 SDF actors are constrained to produce the same number of output tokens on each firing.
   - need scheduling polices that deliver bounded buffers
   - need Delay actor (produce an initial output token without having any input token available) to prevent deadlock (insufficient tokens to satisfy any of the firing rules of the actors in a directed loop)
@@ -270,60 +280,82 @@ All tokens that A produces are consumed by B if and only if the following balanc
 $$q_A M = q_B N$$
 
 3. Dynamic Dataflow Model (DDF)
+
 DDF actors support conditional firing.
   - Select Actor
   - Switch Actor
 
 Select and Switch Actor are dataflow analogs of **goto** statement in imperative programming.
+
 Bounded buffers and deadlock are undecidable for DDF models.(Buck 1993)
 
 4. Structured Dataflow (constrained DDF)
+
 A higher-order actor called Conditional is introduced, which has one or more models as parameters.
+
 When Conditional fires, it consumes one token from each input port and produces one token on its output port, so it is an SDF actor.
 
 ![structured-dataflow](./doc/structured-dataflow.png "Structured dataflow approach to conditional firing")
 The action of Conditional depends on the value of the token that arrives from B: if that value is true, then actor C fires, otherwise actor D fires.
 
 5. Process Network (PN)
+
 Processes in a PN are called **Coroutines**.
+
 Blocking reads and nonblocking writes. Such interaction between processes is called **Rendezvous**. 
+
 Boundness of buffers and deadlock are also undecidable.
 
 6. Communication Sequential Process (CSP)
+
 A variant of PN.
+
 Reads and writes are both blocking.
+
 e.g. Go Lang, Clojure (core.async), Javascript (JS-CSP)
+
 goroutine <= Coroutine
+
 Go Channel: All operations on unbuffered channels block the execution until both sender and receiver are ready to communicate.
 
 ### Timed Model of Computation
+
 1. Time-triggered Model
+
 Computations are coordinated by a global clock as in SR MoC but computations take time instead of simultaneous and instantaneous.
+
 Each computation in time-triggered MoCs is associated with a logical execution time.
+
 The inputs to the computation are provided at each tick of the global clock, but the outputs are not visible to other computations until the next tick of the global clock.
   - no race condition
+
   Between ticks, no interaction between computations.
+
   - no difficulties with feedback loop
+
   Computations are not instantanous in each tick but can take multiple ticks.
 
 The computations are tied closely to a periodic clock (whose frequency is decided by global execution time) which makes the model awkward when actions are not periodic.
 
 2. Discrete-Event (DE) System
+
 Events are endowed with a **time stamp**. Distinct time stamps must be comparable.
+
 DE system is a network of actors where each actor reacts to input events in time-stamp order and produces output events in time-stamp order.
+
 To execute a DE model, we can use an **event queue**, which is a list of events sorted by time stamp.
 
 e.g. Event Loop in Javascript
 
 ## Arrowized FRP
+
 1. Euterpea: From signals to symphonies
 [Youtube](https://www.youtube.com/watch?v=xtmo6Bmfahc)
 
 ![causal commutative arrows](./doc/from-Euterpea-video.png "Causal Commutative Arrows")
 
 2. Causal Commutative Arrows and Their Optimization
-[Paper](http://haskell.cs.yale.edu/wp-content/uploads/2012/06/FromJFP.pdf)
-
+[Paper](http://haskell.cs.yale.edu/wp-content/uploads/2012/06/FromJFP.pdf) 
 [Youtube](https://vimeo.com/6652662)
 
 Causal Commutative Normal Form(CCNF):
@@ -331,10 +363,8 @@ Causal Commutative Normal Form(CCNF):
 - Transition only based on abstract laws without committing to any particular implementation.
 
 3. Causal Commutative Arrows Revisited
-[Paper](https://www.cl.cam.ac.uk/~jdy22/papers/causal-commutative-arrows-revisited.pdf)
-
-[Youtube](https://www.youtube.com/watch?v=bnFHYsL4QNc)
-
+[Paper](https://www.cl.cam.ac.uk/~jdy22/papers/causal-commutative-arrows-revisited.pdf) 
+[Youtube](https://www.youtube.com/watch?v=bnFHYsL4QNc) 
 [Github](https://github.com/yallop/causal-commutative-arrows-revisited)
 
 4. [Yampa](https://wiki.haskell.org/Yampa#Primitive_signal_functions)
