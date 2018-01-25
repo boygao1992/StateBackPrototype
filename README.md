@@ -402,11 +402,18 @@ Signal Function Purity
 ![Signal, Time-varying value: Signal a ~~ Time -> a. Signal Generator, maps a start time to a Signal: SG a ~~ Time -> Signal a. Signal Function, maps a signal to a signal: SF a b ~~ Signal a -> Signal b](./doc/classic-frp-central-abstractions.png "Classic FRP Central Abstractions")
 Classic FRP Behavior Examples:
 ![classic-frp-behavior-examples](./doc/classic-frp-behavior-examples.png "Classic FRP Behavior Examples")
+7 :: B Real
 ![cfrp-behavior-exapmle01](./doc/cfrp-behavior-example01.png "CFRP Example 01")
+time :: B Time
 ![cfrp-behavior-exapmle02](./doc/cfrp-behavior-example02.png "CFRP Example 02")
+(+) :: B Real -> B Real -> B Real
 ![cfrp-behavior-exapmle03](./doc/cfrp-behavior-example03.png "CFRP Example 03")
+lift1 :: (a -> b) -> (B a -> B b)
+(Real -> Real) -> (B Real -> B Real)
 ![cfrp-behavior-exapmle04](./doc/cfrp-behavior-example04.png "CFRP Example 04")
+integral :: B Real -> B Real
 ![cfrp-behavior-exapmle05](./doc/cfrp-behavior-example05.png "CFRP Example 05")
+
 Classic FRP Event Examples:
 ![classic-frp-event-examples](./doc/classic-frp-event-examples.png "Classic FRP Event Examples")
 
