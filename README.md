@@ -504,4 +504,4 @@ full equational reasoning if avoid effects within SAC computation.
 The simplest and easiest approach to dealing with history within SAC is to create inputs that keep track of whatever history is important to your application.
 you simply set up calculations outside of the system that create new inputs that inject that historical information into your computation.
 
-### [FRP - Dynamic Event Switching](https://apfelmus.nfshost.com/blog/2011/05/15-frp-dynamic-event-switching.html)
+### 10.[FRP - Dynamic Event Switching](https://apfelmus.nfshost.com/blog/2011/05/15-frp-dynamic-event-switching.html)
