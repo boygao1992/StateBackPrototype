@@ -505,3 +505,5 @@ The simplest and easiest approach to dealing with history within SAC is to creat
 you simply set up calculations outside of the system that create new inputs that inject that historical information into your computation.
 
 ### 10. [FRP - Dynamic Event Switching](https://apfelmus.nfshost.com/blog/2011/05/15-frp-dynamic-event-switching.html)
+
+### 11. [Higher-order functional reactive programming without spacetime leaks](https://www.cl.cam.ac.uk/~nk480/simple-frp.pdf)
