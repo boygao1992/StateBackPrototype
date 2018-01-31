@@ -204,6 +204,8 @@ These composition logic will be implemented by Writer monad, Monoid, and ChainRe
 ### Monoid
 ### ChainRec
 
+### F-Algebra, Fixed-point data type (Fix), recursion
+
 # Overall Architecture
 
 Mealy Machine + Synchronous Composition + Feedback
