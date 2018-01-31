@@ -298,6 +298,18 @@ TODO
 
 # Reference
 
+## Dependent Type
+
+May use dependent type to further restrict the state space so that invalid states are not representable.
+
+Able to modify the type rules in runtime which aligns well with hot reloading / behavior adapting.
+
+Idris is not mature enough to be put into production yet.
+
+[Implementing State-aware Systems in Idris](http://docs.idris-lang.org/en/latest/st/introduction.html)
+
+[State Machines All The Way Down: An Architecture for Dependent Typed Applications](https://www.idris-lang.org/drafts/sms.pdf)
+
 ## Concurrent Models of Computation
 
 [Introduction to Embedded Systems: a Cyber-Physical Systems Approach](http://leeseshia.org/releases/LeeSeshia_DigitalV1_08.pdf)
@@ -546,3 +558,5 @@ you simply set up calculations outside of the system that create new inputs that
 ### 10. [FRP - Dynamic Event Switching](https://apfelmus.nfshost.com/blog/2011/05/15-frp-dynamic-event-switching.html)
 
 ### 11. [Higher-order functional reactive programming without spacetime leaks](https://www.cl.cam.ac.uk/~nk480/simple-frp.pdf)
+
+### 12. [purescript-behaviors](https://github.com/paf31/purescript-behaviors/tree/v6.0.0)
