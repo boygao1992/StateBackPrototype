@@ -546,3 +546,7 @@ you simply set up calculations outside of the system that create new inputs that
 
 ### 12. [purescript-behaviors](https://github.com/paf31/purescript-behaviors/tree/v6.0.0)
 [youtube](https://www.youtube.com/watch?v=N4tSQsKZDQ8)
+
+### 13. [TimeFiles: Push-Pull Signal-Function Functional Reactive Programming](https://github.com/eamsden/pushbasedFRP/raw/master/Docs/Thesis/thesis.pdf)
+
+[briancavalier/arrow in JS](https://github.com/briancavalier/arrow)
