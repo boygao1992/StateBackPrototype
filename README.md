@@ -304,7 +304,10 @@ May use dependent type to further restrict the state space so that invalid state
 
 Able to modify the type rules in runtime which aligns well with hot reloading / behavior adapting.
 
-Idris is not mature enough to be put into production yet.
+- Idris
+- Agda
+- ATS (with Linear Type)
+- F*(fstar)
 
 [Implementing State-aware Systems in Idris](http://docs.idris-lang.org/en/latest/st/introduction.html)
 
