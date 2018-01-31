@@ -226,9 +226,10 @@ Substitute a Functor into Free/CoFree, you can derive a Monad/CoMonad.
 
 Used to build AST and Interpreter.
 
-**One usage is to turn side effects into data.**
+**One usage is to turn Effects into data.**
 Which is exactly what I need.
-
+- time travel: state + effects
+- hot reload (S-[B]) with security
 
 [Free for DSLs, cofree for interpreters](http://dlaing.org/cofun/posts/free_and_cofree.html)
 
@@ -246,6 +247,11 @@ Mealy Machine + Synchronous Composition + Feedback
 3. Time Driver
 4. Database Driver
   ![Abstract out IO Effects by Drivers](./doc/io-eff-by-drivers.png "Abstract out IO Effects by Drivers")
+  
+### Time Driver
+1 Global Clock / n Local Clocks
+
+I guess Global Clock is better for animation.
 
 # DOM Component Library
 
