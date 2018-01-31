@@ -204,7 +204,14 @@ These composition logic will be implemented by Writer monad, Monoid, and ChainRe
 ### Monoid
 ### ChainRec
 
-### F-Algebra, Fixed-point data type (Fix), recursion
+### F-Algebra, Fixed-point data type (Fix), recursive function
+
+[Understanding F-Algebras](https://www.schoolofhaskell.com/user/bartosz/understanding-algebras)
+
+[Haskell/Fix and recursion](https://en.wikibooks.org/wiki/Haskell/Fix_and_recursion)
+The Fix data type cannot model all forms of recursion.
+
+[purescript-fixed-points](https://pursuit.purescript.org/packages/purescript-fixed-points/4.0.0)
 
 # Overall Architecture
 
@@ -250,7 +257,9 @@ Framework-independent & composable
 ## Container with different types of Draggable Components
 ## Drag-and-drop among multiple Containers
 
-# Design Choices TODO
+# Design Choice
+
+TODO
 
 ## Stateful HTML Elements handling for performance
 
