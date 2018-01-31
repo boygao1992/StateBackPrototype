@@ -402,6 +402,18 @@ DE system is a network of actors where each actor reacts to input events in time
 To execute a DE model, we can use an **event queue**, which is a list of events sorted by time stamp.
 
 e.g. Event Loop in Javascript
+[Basics of parallel programming with Swift](https://medium.com/flawless-app-stories/basics-of-parallel-programming-with-swift-93fee8425287)
+[The Android Event Loop](http://mattias.niklewski.com/2012/09/android_event_loop.html)
+
+3. Continuous-Time System
+Time continuum can only be approximated on digital computers but the continuous-time model preserves the exact dynamics which is similar to the purpose of Scalable Vector Graphics so that you can adjust the precision to match your need.
+
+The approximate execution of a continuous-time model is accomplished by a solver with static/variable step size (may take into account the slope of the curve). e.g. Forward Euler, ODE45
+
+A continuous-time model can be viewed as an **SR model** with a time step between global reaction determined by a solver.
+Specifically, a continuous-time model is a network of actors, each of which is **a cascade composition of a simple memoryless computation actor and a state machine**, and actor reactions are **simultaneous and instantaneous**.
+Thus, the mechanisms required to achieve a continuous-time model of computation are not much different from those required to achieve SR and DE.
+
 
 ## Arrowized FRP
 
