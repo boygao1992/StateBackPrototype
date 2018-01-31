@@ -27,7 +27,7 @@ e.g. TodoMVC, delete button is attached to child components (TodoItem) while the
 
 4. node-to-node communication is even worse.
   Need to find a common ancestor and all the ancestor/parent along the way to be aware of the communication.
-  
+
 5. first-order FRP and static signal graph. Separation between Container and Child Component in state management (which is essential for creating General Container Widget) while maintaining the ability to add/remove child components dynamically in runtime is not possible.
 
 ![Node-to-Node Message Passing](./doc/node-to-node_message_passing.png "Node-to-Node Message Passing")
@@ -247,7 +247,7 @@ Mealy Machine + Synchronous Composition + Feedback
 3. Time Driver
 4. Database Driver
   ![Abstract out IO Effects by Drivers](./doc/io-eff-by-drivers.png "Abstract out IO Effects by Drivers")
-  
+
 ### Time Driver
 1 Global Clock / n Local Clocks
 
@@ -437,7 +437,7 @@ FRP Variants
   First class signal functions, signals and secondary notion
 - Elerea
   First class signals and signal generators
-  
+
 ![frp-central-notions](./doc/frp-central-notions.png "Central Notions")
 
 Causality Requirement
@@ -451,33 +451,15 @@ Signal Function Purity
   if output at time *t* depends on input over the interval [0,t].
   of if *y(t)* depends on *x(t)* and *state(t)*
   where *state(t)* summarizes input history *x(t')*, *t' \in [0,t]*
-  
+
 ##### Classic FRP
 ![Signal, Time-varying value: Signal a ~~ Time -> a. Signal Generator, maps a start time to a Signal: SG a ~~ Time -> Signal a. Signal Function, maps a signal to a signal: SF a b ~~ Signal a -> Signal b](./doc/classic-frp-central-abstractions.png "Classic FRP Central Abstractions")
 Classic FRP Behavior Examples:
 ![classic-frp-behavior-examples](./doc/classic-frp-behavior-examples.png "Classic FRP Behavior Examples")
 
-7 :: B Real
-
-![cfrp-behavior-exapmle01](./doc/cfrp-behavior-example01.png "CFRP Example 01")
-
-time :: B Time
-
-![cfrp-behavior-exapmle02](./doc/cfrp-behavior-example02.png "CFRP Example 02")
-
-(+) :: B Real -> B Real -> B Real
-
-![cfrp-behavior-exapmle03](./doc/cfrp-behavior-example03.png "CFRP Example 03")
-
-lift1 :: (a -> b) -> (B a -> B b)
-
-(Real -> Real) -> (B Real -> B Real)
-
-![cfrp-behavior-exapmle04](./doc/cfrp-behavior-example04.png "CFRP Example 04")
-
-integral :: B Real -> B Real
-
-![cfrp-behavior-exapmle05](./doc/cfrp-behavior-example05.png "CFRP Example 05")
+| 7 :: B Real                              | time :: B Time                           | (+) :: B Real -> B Real -> B Real        | lift1 :: (a -> b) -> (B a -> B b)(Real -> Real) -> (B Real -> B Real) | integral :: B Real -> B Real             |
+| ---------------------------------------- | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
+| ![cfrp-behavior-exapmle01](./doc/cfrp-behavior-example01.png "CFRP Example 01") | ![cfrp-behavior-exapmle02](./doc/cfrp-behavior-example02.png "CFRP Example 02") | ![cfrp-behavior-exapmle03](./doc/cfrp-behavior-example03.png "CFRP Example 03") | ![cfrp-behavior-exapmle04](./doc/cfrp-behavior-example04.png "CFRP Example 04") | ![cfrp-behavior-exapmle05](./doc/cfrp-behavior-example05.png "CFRP Example 05") |
 
 Classic FRP Event Examples:
 ![classic-frp-event-examples](./doc/classic-frp-event-examples.png "Classic FRP Event Examples")
@@ -563,3 +545,4 @@ you simply set up calculations outside of the system that create new inputs that
 ### 11. [Higher-order functional reactive programming without spacetime leaks](https://www.cl.cam.ac.uk/~nk480/simple-frp.pdf)
 
 ### 12. [purescript-behaviors](https://github.com/paf31/purescript-behaviors/tree/v6.0.0)
+[youtube](https://www.youtube.com/watch?v=N4tSQsKZDQ8)
