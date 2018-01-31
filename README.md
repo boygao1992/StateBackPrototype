@@ -213,6 +213,28 @@ The Fix data type cannot model all forms of recursion.
 
 [purescript-fixed-points](https://pursuit.purescript.org/packages/purescript-fixed-points/4.0.0)
 
+### Free / CoFree
+[Free from Tree & Halogen VDOM](https://www.youtube.com/watch?v=eKkxmVFcd74)
+
+Core primitives to model any recursive types, which means you can build Mu/Nu (fixed-point data type) out of Free/CoFree. 
+Mathematically equivalent but may not be optimal for performance because of the structural overhead (e.g. extra wrapping which takes more memory and of course extra unwrapping**.
+It's like trading performance for generality so that you can get all the operators for free.
+
+Two different types of Trees.
+
+Substitute a Functor into Free/CoFree, you can derive a Monad/CoMonad.
+
+Used to build AST and Interpreter.
+
+**One usage is to turn side effects into data.**
+Which is exactly what I need.
+
+
+[Free for DSLs, cofree for interpreters](http://dlaing.org/cofun/posts/free_and_cofree.html)
+
+[DrBoolean/freeky](https://github.com/DrBoolean/freeky)
+
+
 # Overall Architecture
 
 Mealy Machine + Synchronous Composition + Feedback
