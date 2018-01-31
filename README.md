@@ -565,3 +565,14 @@ you simply set up calculations outside of the system that create new inputs that
 ### 13. [TimeFiles: Push-Pull Signal-Function Functional Reactive Programming](https://github.com/eamsden/pushbasedFRP/raw/master/Docs/Thesis/thesis.pdf)
 
 [briancavalier/arrow in JS](https://github.com/briancavalier/arrow)
+
+## Petri Nets
+
+[Wikipedia](https://en.wikipedia.org/wiki/Petri_net)
+
+[A Unified Frame Work for Discrete Event Systems](https://link.springer.com/article/10.1007/s12555-012-9408-6)
+
+Petri net models are normally more compact than similar automata based models and are better suited for the representation of discrete event systems.
+
+[Petri nets: properties, analysis, and applications](https://inst.eecs.berkeley.edu/~ee249/fa07/discussions/PetriNets-Murata.pdf)
+
