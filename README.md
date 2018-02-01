@@ -111,6 +111,8 @@ Higher-order combinational logic with variables
 ### General Model of event-driven programming
 
 Approach 1 and approach 2 actually commute.
+**[ pic ]**
+
 #### Approach 1
 1 State Space Definition
 
@@ -138,12 +140,6 @@ So we have a Connected and Total graph.
 
 3 Event Graph
 
-
-#### 1 -> 2 Index the 
-
-1 -> 2:
-
-2. 
 
 
 ## State Refinement
