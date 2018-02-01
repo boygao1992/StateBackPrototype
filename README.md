@@ -107,6 +107,45 @@ Higher-order combinational logic with variables
 
 **[ pic ]**
 
+## Top-down thinking of a event-driven system
+### General Model of event-driven programming
+
+Approach 1 and approach 2 actually commute.
+#### Approach 1
+1 State Space Definition
+
+Define the unified state vector to represent the entire state space of the system.
+So we have a Connected and Total graph.
+
+1 -> 2 Reshape the state space
+
+2 Multimple isolated/unconnected subgraph
+
+2 -> 3 index edges with name of the events
+
+(optional) add terminal state to the system and ( implicitly ) all the state has an edge to the terminal state by default. The edges may have different indexes.
+
+3 Event graph
+
+#### Approach 2
+1 State Space Definition
+
+1 -> 2 classify/index the graph by name of the event, get a bunch of subSTs
+
+2 Annotated Graph
+
+2 -> 3 reshape the annotated graph, add guards to subSTs in order to limit the state space each ST dealing with
+
+3 Event Graph
+
+
+#### 1 -> 2 Index the 
+
+1 -> 2:
+
+2. 
+
+
 ## State Refinement
 
 **Guard can be factored out of state transition**
