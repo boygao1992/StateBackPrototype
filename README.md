@@ -114,33 +114,49 @@ Approach 1 and approach 2 actually commute.
 **[ pic ]**
 
 #### Approach 1
-1 State Space Definition
+1 Define State Space & State Graph
 
 Define the unified state vector to represent the entire state space of the system.
-So we have a Connected and Total graph.
+We start with a total graph in which each node is connected to the other nodes.
 
-1 -> 2 Reshape the state space
+1 -> 2 Reshape the State Graph
 
-2 Multimple isolated/unconnected subgraph
+2 A single connected graph, or multiple isolated/unconnected subgraphs
 
-2 -> 3 index edges with name of the events
+2 -> 3 Index all the edges with names of the events
 
-(optional) add terminal state to the system and ( implicitly ) all the state has an edge to the terminal state by default. The edges may have different indexes.
+All the outgoing edges from a single node in the graph should be indexed/named differently, otherwise the state machine is non-deterministic.
+
+(optional) add terminal state to the system and all the state may have an edge to the terminal state. These edges to terminal state may have different indices.
 
 3 Event graph
 
 #### Approach 2
 1 State Space Definition
 
-1 -> 2 classify/index the graph by name of the event, get a bunch of subSTs
+1 -> 2 Classify/index all the edges in the graph by names of the events.
+Map each index/name to a state transformation function.
 
 2 Annotated Graph
 
-2 -> 3 reshape the annotated graph, add guards to subSTs in order to limit the state space each ST dealing with
+2 -> 3 Reshape the annotated graph by adding guards to state transformation functions to limit the state space each state transformation function dealing with (equivalent to remove edges from the state graph).
 
 3 Event Graph
 
-
+### Practical Workflow
+1. Given a collection of information to be presented in GUI.
+2. Build / Have a collection of widgets.
+3. Classify / Pack information as payloads to be injected into suitable widgets.
+Each widgets are disjoint state machine functioning independently.
+Refined the behavior of each widget by adding guards to fulfill local constraints
+4. Refine the behavior of groups of widgets by adding guards to fulfill global constraints
+5. project manager / UI designer modifies the design
+  - some information is packed differently (into different widgets than before)
+  - extra information (dispatch to widgets already existed or add new widgets)
+  - modify the appearance of some widgets (not a big deal)
+  - modify the behavior of some widgets
+  - replace some widgets entirely by other implementations
+  - extra behaviors on a group of widgets (may get packed into a new container)
 
 ## State Refinement
 
@@ -224,7 +240,7 @@ signal passing
 
 **[ pic ]**
 
-2. Synchronous Parallel Composition ( n independent tasks, n >= 2)
+2. Synchronous Parallel/Side-by-side Composition ( n independent tasks, n >= 2)
 
 signal broadcasting
 
