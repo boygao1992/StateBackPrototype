@@ -57,6 +57,9 @@ State transition function and Output function are separated into Reducer and Mid
 
 TODO
 
+## [scalable-frontend-with-elm-or-redux](https://github.com/slorber/scalable-frontend-with-elm-or-redux)
+
+
 # Tech & Design Choices
 
 ## Message-Passing / Component-Wiring Style
@@ -125,7 +128,8 @@ We start with a total graph in which each node is connected to the other nodes.
 
 2 -> 3 Index all the edges with names of the events
 
-All the outgoing edges from a single node in the graph should be indexed/named differently, otherwise the state machine is non-deterministic.
+All the outgoing edges from a single node in the graph should be indexed/named
+differently, otherwise the state machine is non-deterministic.
 
 (optional) add terminal state to the system and all the state may have an edge to the terminal state. These edges to terminal state may have different indices.
 
@@ -286,6 +290,11 @@ Which is exactly what I need.
 
 [DrBoolean/freeky](https://github.com/DrBoolean/freeky)
 
+[Free play - part 1](http://therning.org/magnus/posts/2016-01-13-000-free-play--part-one.html)
+[Free, take 2](http://therning.org/magnus/posts/2016-06-18-free--take-2.html)
+
+[A Modern Architecture for FP](http://degoes.net/articles/modern-fp)
+
 
 # Overall Architecture
 
@@ -336,9 +345,7 @@ Framework-independent & composable
 ## Container with different types of Draggable Components
 ## Drag-and-drop among multiple Containers
 
-# Design Choice
-
-TODO
+# TODO (unsettled design choices)
 
 ## Stateful HTML Elements handling for performance
 
@@ -346,6 +353,7 @@ TODO
 2. Slider
 3. Selector
 
+may represented by continuous-time model?
 
 # Reference
 
@@ -617,6 +625,35 @@ you simply set up calculations outside of the system that create new inputs that
 
 [briancavalier/arrow in JS](https://github.com/briancavalier/arrow)
 
+### 14. [Signals, Not Generators!](http://ai2-s2-pdfs.s3.amazonaws.com/519f/3860d7f719d3cf89ecf507dd01aa0e149cdf.pdf)
+
+### 15. [The Azimuth Project - Functional reactive programming summary](http://www.azimuthproject.org/azimuth/show/Functional+reactive+programming)
+
+### 16. [FrTime: Functional Reactive Programming in PLT Scheme](https://github.com/papers-we-love/papers-we-love/blob/master/paradigms/functional_reactive_programming/frp-in-plt-scheme.pdf?raw=true)
+
+[FrTime Type Specification - Racket Lang](http://docs.racket-lang.org/frtime/)
+
+### 17. [Conal Elliott - Circuits as a bicartesian closed category](http://conal.net/blog/posts/circuits-as-a-bicartesian-closed-category)
+
+### 18. [The operad of wiring diagrams: formalizing a graphical language for databases, recursion, and plug-and-play circuits](https://arxiv.org/abs/1305.0297)
+
+### 19. [Introduction to Functional Game Programming with Scala - LambdaConf 2014](https://github.com/jdegoes/lambdaconf-2014-introgame)
+
+### 20. [HaReactive - Purely functional reactive programming library for JavaScript and TypeScript](https://github.com/funkia/hareactive)
+
+stateful behaviors
+
+Behavior<Behavior<A>> : a behavior of a behavior is like a value that depends on two moments in time. This makes sense for scan because the result of accumulating depends both on when we start accumulating and where we are now.
+
+To get rid of the extra layer of nesting we often use sample. 
+It has the type (b: Behavior<A>) => Now<A>.
+``` javascript
+const count = sample(scan((acc, inc) => acc + inc, 0, incrementStream));
+```
+Here count has type Now<Behavior<A>> and it represents a Now-computation that will start accumulating from the present moment.
+
+### 21.[FRP.Elerea.Simple](https://hackage.haskell.org/package/elerea-2.9.0/docs/FRP-Elerea-Simple.html)
+
 ## Petri Nets
 
 [Wikipedia](https://en.wikipedia.org/wiki/Petri_net)
@@ -630,3 +667,90 @@ Petri net models are normally more compact than similar automata based models an
 [An Introduction to the Practical Use of Colored Petri Nets](https://pdfs.semanticscholar.org/c46a/a30cea94b734e4e653d410a3f9c2f5508434.pdf)
 
 [Petri Nets: Fundamental Models, Verification and Applications](https://books.google.com/books/about/Petri_Nets.html?id=6YRmLxXp5uQC)
+
+## Functional JS
+### 1. [Jabz - powerful and practical abstractions for JavaScript](https://funkia.github.io/jabz/)
+
+### 2. [fp-ts](https://github.com/gcanti/fp-ts)
+
+Lightweight higher-kinded polymorphism
+
+[StateIO](https://github.com/gcanti/fp-ts/blob/master/examples/StateIO.ts)
+[Free](https://github.com/gcanti/fp-ts/blob/master/examples/Free.ts)
+[Moore](https://github.com/gcanti/fp-ts/blob/master/examples/Moore.ts)
+
+### 3. [Sanctuary](https://github.com/sanctuary-js/sanctuary)
+[Sanctuary-Type-Classes](https://github.com/sanctuary-js/sanctuary-type-classes)
+
+### 4. [union-type](https://github.com/paldepind/union-type)
+
+## Algebraic Automata
+
+### 1. [Cellular Automata - Part2: PNGs and Moore](https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week/part-2)
+
+### 2. [Moore for Less](https://www.schoolofhaskell.com/user/edwardk/moore/for-less)
+
+Moore Machine can be seen as a CoFree CoMonad
+
+
+### 4. [Bartosz Milewski - Comonads](https://bartoszmilewski.com/2017/01/02/comonads/)
+
+### 5. [Sequences, streams, and segments](http://conal.net/blog/posts/sequences-streams-and-segments)
+
+### 6. [The Reader and Writer Monads and Comonads ](https://www.olivierverdier.com/posts/2014/12/31/reader-writer-monad-comonad/)
+
+### 7. [Comonads as Spaces](http://blog.functorial.com/posts/2016-08-07-Comonads-As-Spaces.html)
+
+### 9. Intro to Machines & Arrows
+[Intro to Machines & Arrows - Part 1: Stream and Auto](https://blog.jle.im/entry/intro-to-machines-arrows-part-1-stream-and.html)
+[Intro to Machines & Arrows - Part 2: Auto as Category, Applicative & Arrow](https://blog.jle.im/entry/auto-as-category-applicative-arrow-intro-to-machines.html)
+[Intro to Machines & Arrows - Part 3: Effectful, Recursive, Real-World Autos](https://blog.jle.im/entry/effectful-recursive-real-world-autos-intro-to-machine.html)
+
+### 10. [CLaSH.Prelude.Mealy](https://hackage.haskell.org/package/clash-prelude-0.11.2/docs/CLaSH-Prelude-Mealy.html)
+
+Mealy machine synchronised to the system clock
+
+### 11. [Finite State Transducers in Haskell? - Stack Overflow](https://stackoverflow.com/questions/27997155/finite-state-transducers-in-haskell)
+
+[Finite-State Transducer - Wikipedia](https://en.wikipedia.org/wiki/Finite-state_transducer)
+
+A Mealy machine alternately reads an a from a stream of inputs a and outputs a b to a stream of outputs. It reads first and then outputs once after each read.
+
+``` haskell
+newtype Mealy a b = Mealy { runMealy :: a -> (b, Mealy a b) }
+```
+
+A Moore machine alternately outputs a b to a stream of outputs and reads an input a from a stream of inputs. It starts with an output of b and then reads once after each output.
+
+``` haskell
+data Moore a b = Moore b (a -> Moore a b)
+```
+
+An FST either reads from it's input, writes to its output, or stops. It can read as many times in a row as it wants or write as many times in a row as it wants.
+
+``` haskell
+data FST a b
+    = Read  (a -> FST a b)
+    | Write (b,   FST a b)
+    | Stop
+```
+
+The equivalent of an FST from machines is Process. It's definition is a little spread out. To simplify the discussion we are going to forget about Process for now and explore it from the inside-out.
+
+### 12. [Haskell - Data.Machine.Mealy](https://hackage.haskell.org/package/machines-0.6.3/docs/Data-Machine-Mealy.html)
+
+### 13. [Purescript - Data.Machine.Mealy](https://pursuit.purescript.org/packages/purescript-machines/4.0.0/docs/Data.Machine.Mealy)
+
+### 14. [Elm-Automaton - experimental Arrowized FRP in Elm](https://github.com/evancz/automaton)
+
+
+## Algebraic Data Type
+### 1. [Monads for drummers](https://github.com/anton-k/monads-for-drummers)
+### 2. [Functors, Applicatives, And Monads In Pictures](http://adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html)
+### 3. [Three Useful Monads](http://adit.io/posts/2013-06-10-three-useful-monads.html)
+### 4. [ADT & Dependent Type](http://www.tomharding.me/)
+### 5. A functional approach to building React applications. 
+[Part 1 - Deconstructing the React Component](https://jaysoo.ca/2017/04/30/learn-fp-with-react-part-1/)
+[Part 2 - The Reader monad and read-only context](https://jaysoo.ca/2017/05/10/learn-fp-with-react-part-2/)
+[Part 3 - Functional state management with Reducer (W.I.P.)](https://jaysoo.ca/)
+
