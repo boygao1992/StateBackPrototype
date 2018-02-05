@@ -714,13 +714,13 @@ Mealy machine synchronised to the system clock
 
 [Finite-State Transducer - Wikipedia](https://en.wikipedia.org/wiki/Finite-state_transducer)
 
-A Mealy machine alternately reads an a from a stream of inputs a and outputs a b to a stream of outputs. It reads first and then outputs once after each read.
+A Mealy machine alternately reads an `a` from a stream of inputs `a` and outputs `a` b to a stream of outputs. It reads first and then outputs once after each read.
 
 ``` haskell
 newtype Mealy a b = Mealy { runMealy :: a -> (b, Mealy a b) }
 ```
 
-A Moore machine alternately outputs a b to a stream of outputs and reads an input a from a stream of inputs. It starts with an output of b and then reads once after each output.
+A Moore machine alternately outputs a `b` to a stream of outputs and reads an input `a` from a stream of inputs. It starts with an output of `b` and then reads once after each output.
 
 ``` haskell
 data Moore a b = Moore b (a -> Moore a b)
