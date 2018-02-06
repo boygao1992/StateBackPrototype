@@ -23,7 +23,7 @@ e.g. TodoMVC, delete button is attached to child components (TodoItem) while the
 2. state transition functions are directly attached to event handlers, which strongly couples model and view 
 
 3. child-parent message passing need child to expose state getter/lense function to its parent to grant parent access to its state (give it ability to interpret)
-  (in OOP, Translator Pattern**
+  (in OOP, Translator Pattern)
 
 4. node-to-node communication is even worse.
   Need to find a common ancestor and all the ancestor/parent along the way to be aware of the communication.
@@ -186,7 +186,9 @@ Refined the behavior of each widget by adding guards to fulfill local constraint
 
 Used to incrementally refine the state following some global constraints.
 
-1. Pre Censor / Interrupter
+1. Pre Censor
+
+**Remove indexed edges for the state graph**
 
 Listening to (External) Messages
 
@@ -194,11 +196,18 @@ Filtered out Messages/Inputs for components based on Global Constraints
 
 2. Regulator
 
+**
+i) pull back <=> pre-censor (so don't do it this way)
+ii) push forward <=> move the index on a outgoing edge of a given state vector $\vec{s}$ to a different outgoing edge
+**
+
 Listening to (Internal) Messages which indicate State Update in any component.
 
 Push forward / Roll back the component's state to next/last intermediate state based on Global Constraints
 
 3. Post Censor
+
+**Remove nodes and associated edges from the state graph**
 
 After the state transition in this tick/step is done ( no more Internal Messages received), Post Censor checks if the system is in a valid state.
 If not, roll back to previous valid state.
@@ -290,7 +299,7 @@ The Fix data type cannot model all forms of recursion.
 [Free from Tree & Halogen VDOM](https://www.youtube.com/watch?v=eKkxmVFcd74)
 
 Core primitives to model any recursive types, which means you can build Mu/Nu (fixed-point data type) out of Free/CoFree. 
-Mathematically equivalent but may not be optimal for performance because of the structural overhead (e.g. extra wrapping which takes more memory and of course extra unwrapping**.
+Mathematically equivalent but may not be optimal for performance because of the structural overhead (e.g. extra wrapping which takes more memory and of course extra unwrapping).
 It's like trading performance for generality so that you can get all the operators for free.
 
 Two different types of Trees.
