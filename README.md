@@ -59,11 +59,11 @@ TODO
 
 ## [scalable-frontend-with-elm-or-redux](https://github.com/slorber/scalable-frontend-with-elm-or-redux)
 
-# Comparison between State Machine, Actor, and FRP
+# Comparison between State Machine, Actor, FRP, Arrowized FRP, and OOP with Mutation
 
 ## Actor
 
-Each actor/coroutine is actually an individual state machine.
+Each actor/coroutine is actually an individual state machine (with/without feedback loop).
 (Fact: the implementation of goroutine in Clojure is just syntax sugar of state machine in Macro.)
 
 Actors communicating with each other through channels is basically saying that interconnections in the network are explicit by function calls (OOP, yet can be implemented in FP, push/pull functions (setter) have side effects and its state is not explicit nor accessible at any moment but managed by a scheduler) which is more optimal than a total graph in performance.
