@@ -59,6 +59,24 @@ TODO
 
 ## [scalable-frontend-with-elm-or-redux](https://github.com/slorber/scalable-frontend-with-elm-or-redux)
 
+# Comparison between State Machine, Actor, and FRP
+
+## Actor
+
+Each actor/coroutine is actually an individual state machine.
+(Fact: the implementation of goroutine in Clojure is just syntax sugar of state machine in Macro.)
+
+Actors communicating with each other through channels is basically saying that interconnections in the network are explicit by function calls (OOP, yet can be implemented in FP, push/pull functions (setter) have side effects and its state is not explicit nor accessible at any moment but managed by a scheduler) which is more optimal than a total graph in performance.
+
+But the network itself is not part of the program as a monolithic state machine, which means either the network is static, or the evolution of the network can not be traced by the state history.
+
+Post-censor is expressible but too hard to implement in this model because of the implicit state in all the channels with a buffer. 
+
+The benefit of channels is that the wiring between senders and receivers has less manual coordination and thus less error-prone.  
+
+Maybe only using stateless channels is a way to go.
+Basically, abstract out the state machine out of each buffer so that the state transformation is explicit and can be traced by the global state history.
+
 
 # Tech & Design Choices
 
