@@ -175,7 +175,7 @@ Refined the behavior of each widget by adding guards to fulfill local constraint
 ### Indexing / Classification Strategy
 
 #### Staged Computation / action decomposition (Hierarchical State Machines)
-Categorized by on variable/dimension
+Categorized by one variable/dimension
 
 #### Parametrization
 Index a set of edges (from a set of states to a set of states) by the same event name.
@@ -198,7 +198,8 @@ Filtered out Messages/Inputs for components based on Global Constraints
 2. Regulator
 
 i) pull back <=> pre-censor (so don't use it this way)
-ii) push forward <=> **move the index on a outgoing edge of a given state vector $\vec{s}$ to a different outgoing edge**
+
+ii) push forward <=> **move the index on a outgoing edge of a given node to a different outgoing edge**
 
 Listening to (Internal) Messages which indicate State Update in any component.
 
