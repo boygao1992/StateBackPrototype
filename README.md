@@ -120,14 +120,6 @@ composition by logic gate/operator
 
 child state machines are in a map
 
-## Guard
-
-Higher-order combinational logic with variables
-
-### AND/OR Table
-
-**[ pic ]**
-
 ## Top-down thinking of a event-driven system
 ### General Model of event-driven programming
 
@@ -179,6 +171,15 @@ Refined the behavior of each widget by adding guards to fulfill local constraint
   - modify the behavior of some widgets
   - replace some widgets entirely by other implementations
   - extra behaviors on a group of widgets (may get packed into a new container)
+  
+### Indexing / Classification Strategy
+
+#### Staged Computation / action decomposition (Hierarchical State Machines)
+Categorized by on variable/dimension
+
+#### Parametrization
+Index a set of edges (from a set of states to a set of states) by the same event name.
+
 
 ## State Refinement
 
@@ -188,7 +189,7 @@ Used to incrementally refine the state following some global constraints.
 
 1. Pre Censor
 
-**Remove indexed edges for the state graph**
+**Remove indexed edges from the state graph**
 
 Listening to (External) Messages
 
@@ -196,10 +197,8 @@ Filtered out Messages/Inputs for components based on Global Constraints
 
 2. Regulator
 
-**
-i) pull back <=> pre-censor (so don't do it this way)
-ii) push forward <=> move the index on a outgoing edge of a given state vector $\vec{s}$ to a different outgoing edge
-**
+i) pull back <=> pre-censor (so don't use it this way)
+ii) push forward <=> **move the index on a outgoing edge of a given state vector $\vec{s}$ to a different outgoing edge**
 
 Listening to (Internal) Messages which indicate State Update in any component.
 
@@ -214,9 +213,21 @@ If not, roll back to previous valid state.
 
 *All intermediate states are invalid states and should not be observed by external observers.
 
+4. Guard
+Guard are constraints on local states.
+
 ### Case Study
 #### 1. push forward
 #### 2. pull back
+
+## Guard
+
+Higher-order combinational logic with variables
+
+### AND/OR Table
+
+**[ pic ]**
+
 
 ## Separation of Internal Representation and External Representation
 This framework is ought to be general for both Frontend and Backend application.
