@@ -793,6 +793,8 @@ The equivalent of an FST from machines is Process. It's definition is a little s
 [Part 2 - The Reader monad and read-only context](https://jaysoo.ca/2017/05/10/learn-fp-with-react-part-2/)
 [Part 3 - Functional state management with Reducer (W.I.P.)](https://jaysoo.ca/)
 
-## Lambda Calculus
+## Others
 
 1. [To Dissect a Mockingbird: A Graphical Notation for the Lambda Calculus with Animated Reduction](http://dkeenan.com/Lambda/)
+
+2. [Cyclomatic Complexity - Wikipedia](https://en.wikipedia.org/wiki/Cyclomatic_complexity)
