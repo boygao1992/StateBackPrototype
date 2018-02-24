@@ -409,6 +409,9 @@ may represented by continuous-time model?
 
 # Reference
 
+## CSS
+### 1.[Modern CSS Explained For Dinosaurs](https://medium.com/actualize-network/modern-css-explained-for-dinosaurs-5226febe3525)
+
 ## Dependent Type
 
 May use dependent type to further restrict the state space so that invalid states are not representable.
@@ -738,6 +741,9 @@ Lightweight higher-kinded polymorphism
 
 ### 4. [union-type](https://github.com/paldepind/union-type)
 
+### 5. [Common combinators in JavaScript](https://gist.github.com/Avaq/1f0636ec5c8d6aed2e45)
+
+
 ## Algebraic Automata
 
 ### 1. [Cellular Automata - Part2: PNGs and Moore](https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week/part-2)
@@ -797,8 +803,6 @@ The equivalent of an FST from machines is Process. It's definition is a little s
 
 ### 14. [Elm-Automaton - experimental Arrowized FRP in Elm](https://github.com/evancz/automaton)
 
-### 15. [Common combinators in JavaScript](https://gist.github.com/Avaq/1f0636ec5c8d6aed2e45)
-
 
 ## Algebraic Data Type
 ### 1. [Monads for drummers](https://github.com/anton-k/monads-for-drummers)
@@ -809,6 +813,7 @@ The equivalent of an FST from machines is Process. It's definition is a little s
 [Part 1 - Deconstructing the React Component](https://jaysoo.ca/2017/04/30/learn-fp-with-react-part-1/)
 [Part 2 - The Reader monad and read-only context](https://jaysoo.ca/2017/05/10/learn-fp-with-react-part-2/)
 [Part 3 - Functional state management with Reducer (W.I.P.)](https://jaysoo.ca/)
+### 6. [Revisiting 'Monadic Parsing in Haskell'](http://vaibhavsagar.com/blog/2018/02/04/revisiting-monadic-parsing-haskell/)
 
 ## Others
 
