@@ -693,6 +693,8 @@ Here count has type Now<Behavior<A>> and it represents a Now-computation that wi
 
 ### 21.[FRP.Elerea.Simple](https://hackage.haskell.org/package/elerea-2.9.0/docs/FRP-Elerea-Simple.html)
 
+### 22.[Practical Principled FRP](https://github.com/beerendlauwers/haskell-papers-ereader/blob/master/papers/Practical%20Principled%20FRP%20-%20Forget%20the%20past,%20change%20the%20future,%20FRPNow!.pdf)
+
 ## Petri Nets
 
 [Wikipedia](https://en.wikipedia.org/wiki/Petri_net)
