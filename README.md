@@ -334,6 +334,10 @@ Which is exactly what I need.
 
 [A Modern Architecture for FP](http://degoes.net/articles/modern-fp)
 
+## State Store as Database
+
+1.[Using the Redux Store Like a Database](https://hackernoon.com/shape-your-redux-store-like-your-database-98faa4754fd5)
+
 
 # Overall Architecture
 
