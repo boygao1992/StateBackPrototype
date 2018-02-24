@@ -334,11 +334,6 @@ Which is exactly what I need.
 
 [A Modern Architecture for FP](http://degoes.net/articles/modern-fp)
 
-## State Store as Database
-
-1.[Using the Redux Store Like a Database](https://hackernoon.com/shape-your-redux-store-like-your-database-98faa4754fd5)
-
-
 # Overall Architecture
 
 Mealy Machine + Synchronous Composition + Feedback
@@ -397,6 +392,20 @@ Framework-independent & composable
 3. Selector
 
 may represented by continuous-time model?
+(e.g. [@funkia/turbine](https://github.com/funkia/turbine)
+[@funkia/hareactive](https://github.com/funkia/hareactive))
+
+## State Store as Database
+
+1.[Using the Redux Store Like a Database](https://hackernoon.com/shape-your-redux-store-like-your-database-98faa4754fd5)
+
+## Event Handler as Data
+
+1. [Emerging Patterns in JavaScript Event Handling](https://www.sitepoint.com/emerging-patterns-javascript-event-handling/)
+
+## Serialization of Functions
+
+1. [JavaScript's eval() and Function() constructor](http://dfkaye.github.io/2014/03/14/javascript-eval-and-function-constructor/)
 
 # Reference
 
@@ -788,6 +797,8 @@ The equivalent of an FST from machines is Process. It's definition is a little s
 
 ### 14. [Elm-Automaton - experimental Arrowized FRP in Elm](https://github.com/evancz/automaton)
 
+### 15. [Common combinators in JavaScript](https://gist.github.com/Avaq/1f0636ec5c8d6aed2e45)
+
 
 ## Algebraic Data Type
 ### 1. [Monads for drummers](https://github.com/anton-k/monads-for-drummers)
@@ -801,6 +812,6 @@ The equivalent of an FST from machines is Process. It's definition is a little s
 
 ## Others
 
-1. [To Dissect a Mockingbird: A Graphical Notation for the Lambda Calculus with Animated Reduction](http://dkeenan.com/Lambda/)
+### 1. [To Dissect a Mockingbird: A Graphical Notation for the Lambda Calculus with Animated Reduction](http://dkeenan.com/Lambda/)
 
-2. [Cyclomatic Complexity - Wikipedia](https://en.wikipedia.org/wiki/Cyclomatic_complexity)
+### 2. [Cyclomatic Complexity - Wikipedia](https://en.wikipedia.org/wiki/Cyclomatic_complexity)
