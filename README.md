@@ -814,6 +814,20 @@ The equivalent of an FST from machines is Process. It's definition is a little s
 [Part 2 - The Reader monad and read-only context](https://jaysoo.ca/2017/05/10/learn-fp-with-react-part-2/)
 [Part 3 - Functional state management with Reducer (W.I.P.)](https://jaysoo.ca/)
 ### 6. [Revisiting 'Monadic Parsing in Haskell'](http://vaibhavsagar.com/blog/2018/02/04/revisiting-monadic-parsing-haskell/)
+### 7. [HLearn](https://github.com/mikeizbicki/HLearn)
+
+| Structure     | What we get                           |
+|:--------------|:--------------------------------------|
+| Monoid        | parallel batch training               |
+| Monoid        | online training                       |
+| Monoid        | fast cross-validation                 |
+| Abelian group | "untraining" of data points           |
+| Abelian group | more fast cross-validation            |
+| R-Module      | weighted data points                  |
+| Vector space  | fractionally weighted data points     |
+| Functor       | fast simple preprocessing of data     |
+| Monad         | fast complex preprocessing of data    |
+
 
 ## Others
 
