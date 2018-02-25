@@ -57,14 +57,20 @@ State transition function and Output function are separated into Reducer and Mid
 
 TODO
 
-## [scalable-frontend-with-elm-or-redux](https://github.com/slorber/scalable-frontend-with-elm-or-redux)
+## Some Progress in the Community
+### 1. [scalable-frontend-with-elm-or-redux](https://github.com/slorber/scalable-frontend-with-elm-or-redux)
+### 2. [The Rise Of The State Machines](https://www.smashingmagazine.com/2018/01/rise-state-machines/) - [Stent | FSM in JS](https://github.com/krasimir/stent)
+Still, Scalability Issues:
+- How to divide the state space to reduce the complexity to a certain level in which an average programmer is able to reason about?
+- How to compose individual state machines? Communication with network/graph?
 
-# Comparison between State Machine, Actor, FRP, Arrowized FRP, and OOP with Mutation
+
+# Comparison between Finite State Machine, Actor, FRP, Arrowized FRP, and OOP with Mutation
 
 ## Actor
 
-Each actor/coroutine is actually an individual state machine (with/without feedback loop).
-(Fact: the implementation of goroutine in Clojure is just syntax sugar of state machine in Macro.)
+Each actor/coroutine is actually an individual finite state machine (with/without feedback loop).
+(Fact: the implementation of goroutine in Clojure is just syntax sugar of a state machine written in Clojure Macro.)
 
 Actors communicating with each other through channels is basically saying that interconnections in the network are explicit by function calls (OOP, yet can be implemented in FP, push/pull functions (setter) have side effects and its state is not explicit nor accessible at any moment but managed by a scheduler) which is more optimal than a total graph in performance.
 
@@ -72,9 +78,9 @@ But the network itself is not part of the program as a monolithic state machine,
 
 Post-censor is expressible but too hard to implement in this model because of the implicit state in all the channels with a buffer. 
 
-The benefit of channels is that the wiring between senders and receivers has less manual coordination and thus less error-prone.  
+The benefit of channels is that the wiring between senders and receivers has less manual coordination and thus less error-prone.
 
-Maybe only using stateless channels is a way to go.
+Maybe refrained from stateful channels thus only using stateless channels to build up a communication network between state machines is a way to go.
 Basically, abstract out the state machine out of each buffer so that the state transformation is explicit and can be traced by the global state history.
 
 
@@ -406,6 +412,15 @@ may represented by continuous-time model?
 ## Serialization of Functions
 
 1. [JavaScript's eval() and Function() constructor](http://dfkaye.github.io/2014/03/14/javascript-eval-and-function-constructor/)
+
+## State Transitions as Events
+
+## API Complexity
+### 1.[The MNP Problem of Distributed Computing](https://www.ebpml.org/blog2/index.php/2014/12/27/the-mnp-problem-of-distributed)
+
+MNPT Problem:
+M clients, invoking N remote operations/actions which can each have P versions and each version of each operation involves data fetching from T systems of records.
+
 
 # Reference
 
