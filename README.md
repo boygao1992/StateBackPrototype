@@ -419,7 +419,8 @@ may represented by continuous-time model?
 ### 1.[The MNP Problem of Distributed Computing](https://www.ebpml.org/blog2/index.php/2014/12/27/the-mnp-problem-of-distributed)
 
 MNPT Problem:
-M clients, invoking N remote operations/actions which can each have P versions and each version of each operation involves data fetching from T systems of records.
+An architecture with M **clients**, invoking N remote operations/**actions** which can each have P **versions** and involves data fetching from T **systems of records** / micro-services, ends up with MNPT **communication paths**.
+
 
 
 # Reference
