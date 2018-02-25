@@ -409,6 +409,18 @@ may represented by continuous-time model?
 
 # Reference
 
+## Automata
+- [Turing Machine](https://en.wikipedia.org/wiki/Turing_machine)
+- [Pushdown Automata (PDA)](https://en.wikipedia.org/wiki/Pushdown_automaton)
+- [Sequential Logic](https://en.wikipedia.org/wiki/Sequential_logic)
+/ [Finite State Machine](https://en.wikipedia.org/wiki/Finite-state_machine)
+- [Combinational Logic](https://en.wikipedia.org/wiki/Combinational_logic)
+
+### 1.[State Machines for Event-Driven Systems](https://barrgroup.com/Embedded-Systems/How-To/State-Machines-Event-Driven-Systems)
+
+### 2.[Introduction to Hierarchical State Machines (HSMs)](https://barrgroup.com/Embedded-Systems/How-To/Introduction-Hierarchical-State-Machines)
+
+
 ## CSS
 ### 1.[Modern CSS Explained For Dinosaurs](https://medium.com/actualize-network/modern-css-explained-for-dinosaurs-5226febe3525)
 
