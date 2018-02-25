@@ -421,7 +421,26 @@ may represented by continuous-time model?
 MNPT Problem:
 An architecture with M **clients**, invoking N **remote operations**/actions which can each have P **versions** and involves data fetching from T **systems of records** / micro-services, ends up with MNPT **communication paths**.
 
+I would personally support any approach where:
+- operations are explicit (machine readable contracts, generated clients)
+- an interface can change while remaining compatible (when possible) with existing consumers which are not immediately interested in consuming that change (that should limit the number of versions in production to 3 or less)
+- an architecture where operations are not hard wired to the systems of record since you want to be in the position to 
+  - control how changes from the systems of record propagate to the operation's contract
+  - add new systems of record in the future without asking your clients to change anything
 
+There are 3 approaches to distributed computing which are not interchangeable and solve different kinds of problems:
+- Consumer-System of Record (a.k.a Point-to-Point)
+- Event-Driven (this pattern is more often used in system-to-system communication than consumer-to-system of record)
+- Service Oriented
+
+All I know is that the worst way to deal with that problem is to use a point-to-point approach.
+Each time a consumer communicates directly with a system of record, you are using a "point-to-point" integration pattern, wiring consumers to the integration points of the system of record.
+That is the root of all problems in distributed computing where the number of components is greater than two.
+That is why RPC fails, that is why CORBA or EJB were too "brittle" because any change in the system impacted too many communication paths.
+And to minimize impact, you respond to change by creating more integration points (or microservices if you like that term better), hence more communication paths.
+That is the definition of a runaway system.
+
+Personally, I prefer a "Service-Oriented" approach where the consistency responsibility is given to a 3rd party component exposing an intentional and versionable interface because that logic does not belong to the consumer or the system of record.
 
 # Reference
 
