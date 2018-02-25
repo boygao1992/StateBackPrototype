@@ -725,7 +725,9 @@ Here count has type Now<Behavior<A>> and it represents a Now-computation that wi
 
 ## Petri Nets
 
-### 1.[Wikipedia](https://en.wikipedia.org/wiki/Petri_net)
+[Communicating finite-state machine](https://en.wikipedia.org/wiki/Communicating_finite-state_machine)
+
+### 1.[Petri Net](https://en.wikipedia.org/wiki/Petri_net)
 
 ### 2.[A Unified Frame Work for Discrete Event Systems](https://link.springer.com/article/10.1007/s12555-012-9408-6)
 
