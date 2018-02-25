@@ -725,17 +725,17 @@ Here count has type Now<Behavior<A>> and it represents a Now-computation that wi
 
 ## Petri Nets
 
-[Wikipedia](https://en.wikipedia.org/wiki/Petri_net)
+### 1.[Wikipedia](https://en.wikipedia.org/wiki/Petri_net)
 
-[A Unified Frame Work for Discrete Event Systems](https://link.springer.com/article/10.1007/s12555-012-9408-6)
+### 2.[A Unified Frame Work for Discrete Event Systems](https://link.springer.com/article/10.1007/s12555-012-9408-6)
 
 Petri net models are normally more compact than similar automata based models and are better suited for the representation of discrete event systems.
 
-[Petri nets: properties, analysis, and applications](https://inst.eecs.berkeley.edu/~ee249/fa07/discussions/PetriNets-Murata.pdf)
+### 3.[Petri nets: properties, analysis, and applications](https://inst.eecs.berkeley.edu/~ee249/fa07/discussions/PetriNets-Murata.pdf)
 
-[An Introduction to the Practical Use of Colored Petri Nets](https://pdfs.semanticscholar.org/c46a/a30cea94b734e4e653d410a3f9c2f5508434.pdf)
+### 4.[An Introduction to the Practical Use of Colored Petri Nets](https://pdfs.semanticscholar.org/c46a/a30cea94b734e4e653d410a3f9c2f5508434.pdf)
 
-[Petri Nets: Fundamental Models, Verification and Applications](https://books.google.com/books/about/Petri_Nets.html?id=6YRmLxXp5uQC)
+### 5.[Petri Nets: Fundamental Models, Verification and Applications](https://books.google.com/books/about/Petri_Nets.html?id=6YRmLxXp5uQC)
 
 ## Functional JS
 ### 1. [Jabz - powerful and practical abstractions for JavaScript](https://funkia.github.io/jabz/)
