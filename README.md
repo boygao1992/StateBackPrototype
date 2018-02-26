@@ -482,9 +482,9 @@ Able to modify the type rules in runtime which aligns well with hot reloading / 
 
 ## Concurrent Models of Computation
 
-[Introduction to Embedded Systems: a Cyber-Physical Systems Approach](http://leeseshia.org/releases/LeeSeshia_DigitalV1_08.pdf)
+### 1.[Introduction to Embedded Systems: a Cyber-Physical Systems Approach](http://leeseshia.org/releases/LeeSeshia_DigitalV1_08.pdf)
 
-### Event Sequence
+#### Event Sequence
 
 Only care about the sequence of ticks while the physical time at which the ticks occur is irrelevant.
 
@@ -541,7 +541,7 @@ goroutine <= Coroutine
 
 Go Channel: All operations on unbuffered channels block the execution until both sender and receiver are ready to communicate.
 
-### Timed Model of Computation
+#### Timed Model of Computation
 
 1. Time-triggered Model
 
@@ -583,6 +583,8 @@ The approximate execution of a continuous-time model is accomplished by a solver
 A continuous-time model can be viewed as an **SR model** with a time step between global reaction determined by a solver.
 Specifically, a continuous-time model is a network of actors, each of which is **a cascade composition of a simple memoryless computation actor and a state machine**, and actor reactions are **simultaneous and instantaneous**.
 Thus, the mechanisms required to achieve a continuous-time model of computation are not much different from those required to achieve SR and DE.
+
+### 2.[LuaCSP Reference Manual](http://htmlpreview.github.io/?https://github.com/loyso/LuaCSP/blob/master/doc/html/LuaCSP.html)
 
 
 ## Arrowized FRP
