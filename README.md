@@ -1004,6 +1004,9 @@ The equivalent of an FST from machines is Process. It's definition is a little s
 ### 10.[What a Monad is not](https://wiki.haskell.org/What_a_Monad_is_not)
 ### 11.[Combinator Parsing: A Short Tutorial](http://www.cs.uu.nl/research/techreps/repo/CS-2008/2008-044.pdf)
 
+from [Free monad considered harmful](https://markkarpov.com/post/free-monad-considered-harmful.html)
+Levi Pearson comments:
+Regarding "inspection", building a structure out of a free Applicative rather than Monad removes the excess "dynamism" that prevents deep inspection. I guess you were probably already aware of this too, but I figured it was worth a mention in case you weren't. You can see this in Haxl ( https://code.facebook.com/p... ), and UU-Parsinglib ( https://hackage.haskell.org... ) takes advantage of the inspectability of Applicative structure to do interesting things to parsers built with an Applicative-based DSL.
 
 ## Category Theory
 ### Theory
