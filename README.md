@@ -377,7 +377,7 @@ Which is exactly what I need.
 
 #### 5.[Redux-Cycles](https://github.com/cyclejs-community/redux-cycles)
 
-### Potential Issues
+### Potential Issues of Drivers/FreeMonads
 
 1. no helpful information from stack traces
 
@@ -431,11 +431,18 @@ input as well as output, both via async. This approach does not have
 the problems associated with stream-based IO, and is as flexible and
 modular as regular monadic I/O.
 
-#### 2.[Debugging Go Routine leaks](https://blog.minio.io/debugging-go-routine-leaks-a1220142d32c)
+#### 2.[Free monad considered harmful](https://markkarpov.com/post/free-monad-considered-harmful.html)
 
-Daily code optimization using benchmarks and profiling in Golang - Gophercon India 2016 talk - 
-[article](https://medium.com/@hackintoshrao/daily-code-optimization-using-benchmarks-and-profiling-in-golang-gophercon-india-2016-talk-874c8b4dc3c5)
-/ [youtube](https://www.youtube.com/watch?v=-KDRdz4S81U)
+1. Inspection
+2. Efficiency
+3. Composability
+
+A better solution - type classes in Haskell
+
+So we want to be able to interpret a monadic action in different ways, inspect/transform it, etc. Well, Haskell already has a mechanism for giving different concrete meanings to the same abstract (read polymorphic) thing. It’s called type classes. It’s simple, efficient, familiar, composable, and if you really want to build data structures representing your actions to do whatever you want with them, guess what… you can do that too.
+
+#### 3.[Typed Tagless Final Interpreters](http://okmij.org/ftp/tagless-final/course/lecture.pdf)
+
 
 # DOM Component Library
 
@@ -521,6 +528,15 @@ And to minimize impact, you respond to change by creating more integration point
 That is the definition of a runaway system.
 
 Personally, I prefer a "Service-Oriented" approach where the consistency responsibility is given to a 3rd party component exposing an intentional and versionable interface because that logic does not belong to the consumer or the system of record.
+
+## Debugging Complexity
+
+### 1.[Debugging Go Routine leaks](https://blog.minio.io/debugging-go-routine-leaks-a1220142d32c)
+
+Daily code optimization using benchmarks and profiling in Golang - Gophercon India 2016 talk - 
+[article](https://medium.com/@hackintoshrao/daily-code-optimization-using-benchmarks-and-profiling-in-golang-gophercon-india-2016-talk-874c8b4dc3c5)
+/ [youtube](https://www.youtube.com/watch?v=-KDRdz4S81U)
+
 
 # Reference
 
@@ -866,9 +882,9 @@ Petri net models are normally more compact than similar automata based models an
 ### 5.[Petri Nets: Fundamental Models, Verification and Applications](https://books.google.com/books/about/Petri_Nets.html?id=6YRmLxXp5uQC)
 
 ## Functional JS
-### 1. [Jabz - powerful and practical abstractions for JavaScript](https://funkia.github.io/jabz/)
+### 1.[Jabz - powerful and practical abstractions for JavaScript](https://funkia.github.io/jabz/)
 
-### 2. [fp-ts](https://github.com/gcanti/fp-ts)
+### 2.[fp-ts](https://github.com/gcanti/fp-ts)
 
 Lightweight higher-kinded polymorphism
 
@@ -883,6 +899,11 @@ Lightweight higher-kinded polymorphism
 
 ### 5. [Common combinators in JavaScript](https://gist.github.com/Avaq/1f0636ec5c8d6aed2e45)
 
+### 6.[Akh - Javascript Monad and Monad Transformer Collection](https://github.com/mattbierner/akh)
+
+### 7.[Mostly Adequate Guide to FP - Chapter 11: Transform Again, Naturally](https://mostly-adequate.gitbooks.io/mostly-adequate-guide/ch11.html)
+
+### 8.[(experimental) monad-t - Transformers for monadic algebraic structures bridging types from various monadic libraries (Fluture, monet)](https://github.com/char0n/monad-t)
 
 ## Algebraic Automata
 
