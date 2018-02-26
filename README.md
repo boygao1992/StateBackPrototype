@@ -372,8 +372,8 @@ I/O in FRP The second problem with Fran is that interaction with
 the outside world is limited to a few built-in primitives: there is no
 general way to interact with the outside world. Arrowized FRP does
 allow general interaction with the outside world, by organizing
-the FRP program as a function of type Behavior Input →
-Behavior Output 1 , where Input is a type containing all input
+the FRP program as a function of type `Behavior Input →
+Behavior Output`, where Input is a type containing all input
 values the program is interested in and Output is a type containing
 all I/O requests the program can do. This function is then passed to a
 wrapper program, which actually does the I/O , processing requests
@@ -387,8 +387,7 @@ two are taken from Peyton Jones [10] discussing stream based I/O ):
 be added by changing the Input and Output types, and then
 changing the wrapper program.
 • There is no close connection between a request and its corresponding response. For example, an FRP program may open
-multiple files simultaneously. To associate the result of open-
-ing a file to its the request, we have to resort to using unique
+multiple files simultaneously. To associate the result of opening a file to its the request, we have to resort to using unique
 identifiers.
 • All I/O must flow through the top-level function, meaning the
 programmer must manually route each input to the place in the
