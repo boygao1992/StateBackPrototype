@@ -366,7 +366,7 @@ Which is exactly what I need.
 
 1. no helpful information from stack traces
 
-### 1.[Practical Principled FRP](https://github.com/beerendlauwers/haskell-papers-ereader/blob/master/papers/Practical%20Principled%20FRP%20-%20Forget%20the%20past,%20change%20the%20future,%20FRPNow!.pdf)
+#### 1.[Practical Principled FRP](https://github.com/beerendlauwers/haskell-papers-ereader/blob/master/papers/Practical%20Principled%20FRP%20-%20Forget%20the%20past,%20change%20the%20future,%20FRPNow!.pdf)
 
 I/O in FRP The second problem with Fran is that interaction with
 the outside world is limited to a few built-in primitives: there is no
@@ -417,7 +417,7 @@ input as well as output, both via async. This approach does not have
 the problems associated with stream-based IO, and is as flexible and
 modular as regular monadic I/O.
 
-### 2.[Debugging Go Routine leaks](https://blog.minio.io/debugging-go-routine-leaks-a1220142d32c)
+#### 2.[Debugging Go Routine leaks](https://blog.minio.io/debugging-go-routine-leaks-a1220142d32c)
 
 Daily code optimization using benchmarks and profiling in Golang - Gophercon India 2016 talk - 
 [article](https://medium.com/@hackintoshrao/daily-code-optimization-using-benchmarks-and-profiling-in-golang-gophercon-india-2016-talk-874c8b4dc3c5)
