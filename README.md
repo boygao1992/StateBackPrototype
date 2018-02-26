@@ -336,7 +336,7 @@ Can be naturally implemented by Free Monad.
 I guess Global Clock is better for animation.
 
 ### Free / CoFree
-[Free from Tree & Halogen VDOM](https://www.youtube.com/watch?v=eKkxmVFcd74)
+#### 1.[Free from Tree & Halogen VDOM](https://www.youtube.com/watch?v=eKkxmVFcd74)
 
 Core primitives to model any recursive types, which means you can build Mu/Nu (fixed-point data type) out of Free/CoFree. 
 Mathematically equivalent but may not be optimal for performance because of the structural overhead (e.g. extra wrapping which takes more memory and of course extra unwrapping).
@@ -348,19 +348,34 @@ Substitute a Functor into Free/CoFree, you can derive a Monad/CoMonad.
 
 Used to build AST and Interpreter.
 
-**One usage is to turn Effects into data.**
+**One usage is to turn Effects into data/AST.**
 Which is exactly what I need.
 - time travel: state + effects
 - hot reload (S-[B]) with security
 
-[Free for DSLs, cofree for interpreters](http://dlaing.org/cofun/posts/free_and_cofree.html)
+#### 2.[Free for DSLs, cofree for interpreters](http://dlaing.org/cofun/posts/free_and_cofree.html)
 
-[DrBoolean/freeky](https://github.com/DrBoolean/freeky)
+#### 3.[DrBoolean/freeky](https://github.com/DrBoolean/freeky)
 
+#### 4. Free play
 [Free play - part 1](http://therning.org/magnus/posts/2016-01-13-000-free-play--part-one.html)
+
 [Free, take 2](http://therning.org/magnus/posts/2016-06-18-free--take-2.html)
 
-[A Modern Architecture for FP](http://degoes.net/articles/modern-fp)
+#### 5.[A Modern Architecture for FP](http://degoes.net/articles/modern-fp)
+
+### Existing Examples in JS
+#### 1.[Elm-Effects](https://guide.elm-lang.org/architecture/effects/) / [Type Reference](http://package.elm-lang.org/packages/evancz/elm-effects/2.0.1/Effects)
+
+#### 2.[Cyclejs Drivers](https://cycle.js.org/drivers.html)
+
+#### 3.[Redux-Saga](https://github.com/redux-saga/redux-saga)
+
+[Closed Issue: redux-saga is a lot like an IO monad](https://github.com/redux-saga/redux-saga/issues/505)
+
+#### 4.[Redux-Loop](https://github.com/redux-loop/redux-loop)
+
+#### 5.[Redux-Cycles](https://github.com/cyclejs-community/redux-cycles)
 
 ### Potential Issues
 
