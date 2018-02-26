@@ -441,7 +441,10 @@ A better solution - type classes in Haskell
 
 So we want to be able to interpret a monadic action in different ways, inspect/transform it, etc. Well, Haskell already has a mechanism for giving different concrete meanings to the same abstract (read polymorphic) thing. It’s called type classes. It’s simple, efficient, familiar, composable, and if you really want to build data structures representing your actions to do whatever you want with them, guess what… you can do that too.
 
-#### 3.[Typed Tagless Final Interpreters](http://okmij.org/ftp/tagless-final/course/lecture.pdf)
+[The ReaderT Design Pattern - Avoid WriterT, StateT, ExceptT](https://www.fpcomplete.com/blog/2017/06/readert-design-pattern)
+
+#### 3. [Typed final (tagless-final) style](http://okmij.org/ftp/tagless-final/index.html)
+[Typed Tagless Final Interpreters](http://okmij.org/ftp/tagless-final/course/lecture.pdf)
 
 
 # DOM Component Library
@@ -994,6 +997,12 @@ The equivalent of an FST from machines is Process. It's definition is a little s
 | Vector space  | fractionally weighted data points     |
 | Functor       | fast simple preprocessing of data     |
 | Monad         | fast complex preprocessing of data    |
+
+### 8.[The ReaderT Design Pattern - Avoid WriterT, StateT, ExceptT](https://www.fpcomplete.com/blog/2017/06/readert-design-pattern)
+
+### 9.[Typeclassopedia](https://wiki.haskell.org/Typeclassopedia)
+### 10.[What a Monad is not](https://wiki.haskell.org/What_a_Monad_is_not)
+### 11.[Combinator Parsing: A Short Tutorial](http://www.cs.uu.nl/research/techreps/repo/CS-2008/2008-044.pdf)
 
 
 ## Category Theory
