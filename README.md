@@ -283,24 +283,26 @@ general model testing/prototyping purpose view function
 In order to sustain the clear separation between Parent and Child components (state machines) where Parent manages the lifecycles of its children including their behaviors (State Transition Function is swappable dynamically during the runtime), the dependency network is no longer static which needs a second-order state machine.
 
 ## State Machine Composition
-1. Cascade Composition ( 2 sequential dependent tasks)
+1. Cascade Composition / Sequencing ( 2 sequential dependent tasks)
 
 signal passing
 
 **[ pic ]**
 
-2. Synchronous Parallel/Side-by-side Composition ( n independent tasks, n >= 2)
+2. Synchronous Parallel/Side-by-side Composition / Intersection ( n independent tasks, n >= 2)
 
 signal broadcasting
 
 **[ pic ]**
 
-3. Feedback Loop
+3. Feedback Loop / Repetition
 
-These composition logic will be implemented by Writer monad, Monoid, and ChainRec monad.
+4. Switch / Choice ( Hierarchical State Machine, add guards before each State Machine)
 
-### Reader
-### Writer
+These composition logic will be implemented by Writer Monad, Monoid, ChainRec Monad, Fixed-point Monad.
+
+### Reader Monad
+### Writer Monad
 ### Monoid
 ### ChainRec
 
@@ -312,6 +314,26 @@ These composition logic will be implemented by Writer monad, Monoid, and ChainRe
 The Fix data type cannot model all forms of recursion.
 
 [purescript-fixed-points](https://pursuit.purescript.org/packages/purescript-fixed-points/4.0.0)
+
+# Overall Architecture
+
+Mealy Machine + Synchronous Composition + Feedback + Explicit Side Effects
+
+## Driver
+Represent side effects by data, push them out of the main logic, and let the drivers to interpret the Effs.
+Like a Domain Specific Language (DSL).
+Can be naturally implemented by Free Monad.
+
+1. DOM Driver
+2. HTTP Driver (WebSocket Driver)
+3. Time Driver
+4. Database Driver
+  ![Abstract out IO Effects by Drivers](./doc/io-eff-by-drivers.png "Abstract out IO Effects by Drivers")
+
+### Time Driver
+1 Global Clock / n Local Clocks
+
+I guess Global Clock is better for animation.
 
 ### Free / CoFree
 [Free from Tree & Halogen VDOM](https://www.youtube.com/watch?v=eKkxmVFcd74)
@@ -340,22 +362,66 @@ Which is exactly what I need.
 
 [A Modern Architecture for FP](http://degoes.net/articles/modern-fp)
 
-# Overall Architecture
+### Potential Issues
 
-Mealy Machine + Synchronous Composition + Feedback
+1. no helpful information from stack traces
 
-## Driver
+### 1.[Practical Principled FRP](https://github.com/beerendlauwers/haskell-papers-ereader/blob/master/papers/Practical%20Principled%20FRP%20-%20Forget%20the%20past,%20change%20the%20future,%20FRPNow!.pdf)
 
-1. DOM Driver
-2. HTTP Driver (WebSocket Driver)
-3. Time Driver
-4. Database Driver
-  ![Abstract out IO Effects by Drivers](./doc/io-eff-by-drivers.png "Abstract out IO Effects by Drivers")
+I/O in FRP The second problem with Fran is that interaction with
+the outside world is limited to a few built-in primitives: there is no
+general way to interact with the outside world. Arrowized FRP does
+allow general interaction with the outside world, by organizing
+the FRP program as a function of type Behavior Input →
+Behavior Output 1 , where Input is a type containing all input
+values the program is interested in and Output is a type containing
+all I/O requests the program can do. This function is then passed to a
+wrapper program, which actually does the I/O , processing requests
+and feeding input to this function.
+This way of doing I/O is reminiscent of the stream based I/O
+that was used in early versions and precursors to Haskell, before
+monadic I/O was introduced. It has a number of problems (the first
+two are taken from Peyton Jones [10] discussing stream based I/O ):
 
-### Time Driver
-1 Global Clock / n Local Clocks
+• It is hard to extend: new input and output facilities can only
+be added by changing the Input and Output types, and then
+changing the wrapper program.
+• There is no close connection between a request and its corresponding response. For example, an FRP program may open
+multiple files simultaneously. To associate the result of open-
+ing a file to its the request, we have to resort to using unique
+identifiers.
+• All I/O must flow through the top-level function, meaning the
+programmer must manually route each input to the place in the
+program where it is needed, and route each output from the place
+where the request is done.
+Other FRP formulations partially remedy this situation[1, 21], but
+none overcome all of the above issues. We present a solution that is
+effectively the FRP counterpart of monadic I/O . We employ a monad,
+called the Now monad, that allows us to (1) sample behaviors at
+the current time, and (2) plan to execute Now computations in the
+future and (3) start I/O actions with the function:
 
-I guess Global Clock is better for animation.
+```haskell
+async :: IO a → Now (Event a)
+```
+
+which starts the IO action and immediately returns the event
+associated with the completion of the I/O action. The key idea
+is that all actions inside the Now monad are synchronous 2 , i.e. they
+return immediately, conceptually taking zero time, making it easier
+to reason about the sampling of behaviors in this monad. Since
+starting an I/O action takes zero time, its effects do not occur now,
+and hence async does not change the present, but “changes the
+future”. Like the I/O monad, the Now monad is used to deal with
+input as well as output, both via async. This approach does not have
+the problems associated with stream-based IO, and is as flexible and
+modular as regular monadic I/O.
+
+### 2.[Debugging Go Routine leaks](https://blog.minio.io/debugging-go-routine-leaks-a1220142d32c)
+
+Daily code optimization using benchmarks and profiling in Golang - Gophercon India 2016 talk - 
+[article](https://medium.com/@hackintoshrao/daily-code-optimization-using-benchmarks-and-profiling-in-golang-gophercon-india-2016-talk-874c8b4dc3c5)
+/ [youtube](https://www.youtube.com/watch?v=-KDRdz4S81U)
 
 # DOM Component Library
 
@@ -451,10 +517,13 @@ Personally, I prefer a "Service-Oriented" approach where the consistency respons
 / [Finite State Machine](https://en.wikipedia.org/wiki/Finite-state_machine)
 - [Combinational Logic](https://en.wikipedia.org/wiki/Combinational_logic)
 
-### 1.[State Machines for Event-Driven Systems](https://barrgroup.com/Embedded-Systems/How-To/State-Machines-Event-Driven-Systems)
+### 1.[EECS149 - Chapter 5: Composition of State Machines](https://chess.eecs.berkeley.edu/eecs149/lectures/CompositionOfStateMachines.pdf)
 
-### 2.[Introduction to Hierarchical State Machines (HSMs)](https://barrgroup.com/Embedded-Systems/How-To/Introduction-Hierarchical-State-Machines)
+### 2.[Building Finite State Machines](http://www.dcs.ed.ac.uk/home/mic/FiniteStateMachines2-slides.pdf)
 
+### 3.[State Machines for Event-Driven Systems](https://barrgroup.com/Embedded-Systems/How-To/State-Machines-Event-Driven-Systems)
+
+### 4.[Introduction to Hierarchical State Machines (HSMs)](https://barrgroup.com/Embedded-Systems/How-To/Introduction-Hierarchical-State-Machines)
 
 ## General Web Component/Container
 
