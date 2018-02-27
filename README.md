@@ -1009,8 +1009,7 @@ from ["Free monad considered harmful"](https://markkarpov.com/post/free-monad-co
 Levi Pearson comments:
 Regarding "inspection", building a structure out of a free Applicative rather than Monad removes the excess "dynamism" that prevents deep inspection. I guess you were probably already aware of this too, but I figured it was worth a mention in case you weren't. You can see this in Haxl ( https://code.facebook.com/p... ), and UU-Parsinglib ( https://hackage.haskell.org... ) takes advantage of the inspectability of Applicative structure to do interesting things to parsers built with an Applicative-based DSL.
 
-### 12.[Chart: hierarchy of the numeric type classes in Haskell
-](https://rufflewind.com/2014-08-03/haskell-numeric-type-classes-hierarchy)
+### 12.[Chart: hierarchy of the numeric type classes in Haskell](https://rufflewind.com/2014-08-03/haskell-numeric-type-classes-hierarchy)
 
 ![haskell numeric type classes](./doc/haskell-numeric-type-classes.svg)
 
