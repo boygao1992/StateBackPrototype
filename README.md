@@ -1009,6 +1009,21 @@ The equivalent of an FST from machines is Process. It's definition is a little s
 
 ### 14. [Elm-Automaton - experimental Arrowized FRP in Elm](https://github.com/evancz/automaton)
 
+## State Machine Implementations
+
+### Unity
+
+#### 1.[Unity: PlayMaker](https://assetstore.unity.com/packages/tools/visual-scripting/playmaker-368)
+
+### JS
+
+#### 1.[How I Learned to Stop Worrying and ❤️ the State Machine](http://raganwald.com/2018/02/23/forde.html)
+#### 2.[JS: xstate - Functional, Stateless JS Finite State Machines and Statecharts](https://github.com/davidkpiano/xstate)
+#### 3.[JS: statechart - A javascript implementation of a Harel Statechart](https://github.com/burrows/statechart.js)
+#### 4.[JS: royal](https://github.com/jdque/royal)
+
+[Hacker News Discussion](https://news.ycombinator.com/item?id=16468280)
+
 
 ## Algebraic Data Type
 ### 1. [Monads for drummers](https://github.com/anton-k/monads-for-drummers)
