@@ -570,6 +570,18 @@ a labeled transition system is equivalent to an abstract rewriting system with t
 
 ### 6.[Abstract rewriting system](https://en.m.wikipedia.org/wiki/Abstract_rewriting_system)
 
+### 7.[Microsoft: The Abstract State Machines Method for High-Level System Design and Analysis](http://pages.di.unipi.it/boerger/Papers/Methodology/BcsFacs07.pdf)
+
+Design
+- Ground model constuction
+- Model refinement
+- Model change
+
+Analysis
+- Mathemetical verification
+- Experimental validation
+
+
 ## General Web Component/Container
 
 ### 1.[How to Build the Ultimate Reusable Web Chat Component](https://medium.com/outsystems-engineering/how-to-build-the-ultimate-reusable-web-chat-component-c9acf3dc5f2b)
