@@ -546,6 +546,9 @@ Daily code optimization using benchmarks and profiling in Golang - Gophercon Ind
 ## Automata
 - [Turing Machine](https://en.wikipedia.org/wiki/Turing_machine)
 - [Pushdown Automata (PDA)](https://en.wikipedia.org/wiki/Pushdown_automaton)
+
+FSM with Buffer/History
+
 - [Sequential Logic](https://en.wikipedia.org/wiki/Sequential_logic)
 / [Finite State Machine](https://en.wikipedia.org/wiki/Finite-state_machine)
 - [Combinational Logic](https://en.wikipedia.org/wiki/Combinational_logic)
@@ -557,6 +560,15 @@ Daily code optimization using benchmarks and profiling in Golang - Gophercon Ind
 ### 3.[State Machines for Event-Driven Systems](https://barrgroup.com/Embedded-Systems/How-To/State-Machines-Event-Driven-Systems)
 
 ### 4.[Introduction to Hierarchical State Machines (HSMs)](https://barrgroup.com/Embedded-Systems/How-To/Introduction-Hierarchical-State-Machines)
+
+### 5.[Transition system](https://en.m.wikipedia.org/wiki/Transition_system)
+A labelled transition system is a tuple `(S, Λ, →)` where `S` is a set of states, `Λ` is a set of labels and `→` is a set of labelled transitions (i.e., a subset of `S × Λ × S`).
+
+a labeled transition system is equivalent to an abstract rewriting system with the indices being the labels
+
+[Uniform Labeled Transition Systems for Nondeterministic, Probabilistic, and Stochastic Process Calculi](https://arxiv.org/abs/1108.1865)
+
+### 6.[Abstract rewriting system](https://en.m.wikipedia.org/wiki/Abstract_rewriting_system)
 
 ## General Web Component/Container
 
@@ -868,6 +880,18 @@ Here count has type Now<Behavior<A>> and it represents a Now-computation that wi
 
 ### 22.[Practical Principled FRP](https://github.com/beerendlauwers/haskell-papers-ereader/blob/master/papers/Practical%20Principled%20FRP%20-%20Forget%20the%20past,%20change%20the%20future,%20FRPNow!.pdf)
 
+
+## Process Algebra/Calculus
+
+### 1.[A gentle introduction to Process Algebras](https://pdfs.semanticscholar.org/12d9/eae1638729aeb237b5be445ee91ecdd3c5d7.pdf)
+
+### 2.[Process Calculus - Wikipedia](https://en.wikipedia.org/wiki/Process_calculus)
+History
+
+In the first half of the 20th century, various formalisms were proposed to capture the informal concept of a computable function, with μ-recursive functions, Turing machines and the lambda calculus possibly being the best-known examples today. The surprising fact that they are essentially equivalent, in the sense that they are all encodable into each other, supports the Church-Turing thesis. Another shared feature is more rarely commented on: they all are most readily understood as **models of sequential computation**. The subsequent consolidation of computer science required a more subtle formulation of the notion of computation, in particular explicit representations of concurrency and communication.
+
+**Models of concurrency** such as the process calculi, Petri nets in 1962, and the actor model in 1973 emerged from this line of inquiry.
+
 ## Petri Nets
 
 [Communicating finite-state machine](https://en.wikipedia.org/wiki/Communicating_finite-state_machine)
@@ -883,6 +907,10 @@ Petri net models are normally more compact than similar automata based models an
 ### 4.[An Introduction to the Practical Use of Colored Petri Nets](https://pdfs.semanticscholar.org/c46a/a30cea94b734e4e653d410a3f9c2f5508434.pdf)
 
 ### 5.[Petri Nets: Fundamental Models, Verification and Applications](https://books.google.com/books/about/Petri_Nets.html?id=6YRmLxXp5uQC)
+
+### 6.[CPN Tools - A tool for editing, simulating, and analyzing Colored Petri nets](http://cpntools.org/)
+
+[Coloured Petri net](https://en.wikipedia.org/wiki/Coloured_Petri_net)
 
 ## Functional JS
 ### 1.[Jabz - powerful and practical abstractions for JavaScript](https://funkia.github.io/jabz/)
@@ -1027,8 +1055,154 @@ Regarding "inspection", building a structure out of a free Applicative rather th
 ### 1.[A Modality for Recursion](https://pdfs.semanticscholar.org/a177/47f98e5b821f03ec8be858794f2f83a683b7.pdf)
 ### 2.[A Model of Guarded Recursion with Clock Synchronisation](http://www.itu.dk/people/mogel/papers/clocks-mfps2015.pdf)
 
+## Post-OOP
+
+### 1.[Entity–component–system - Wikipedia](https://en.m.wikipedia.org/wiki/Entity–component–system)
+
+*Used in Unity
+
+Composition over Inheritance
+
+behavior of an entity can be changed at runtime by adding or removing components
+
+Common ECS approaches are highly compatible and often combined with **data oriented design** techniques.
+
+### 2.[Data-oriented design - Wikipedia](https://en.m.wikipedia.org/wiki/Data-oriented_design)
+
+The claim is that traditional object-oriented programming (OOP) design principles result in **poor data locality**, more so if runtime polymorphism (dynamic dispatch) is used (which is especially problematic on some processors[3]).[4]
+Although OOP does superficially seem to organise code around data, the practice is quite different. OOP is actually about organising source code around **data types**, rather than physically grouping individual fields and arrays in a format efficient for access by specific functions.
+It also often **hides layout details** under abstraction layers, while a data-oriented programmer wants to consider this first and foremost.
+
+### 3.[One Weird Trick to Write Better Code](http://etodd.io/2015/09/28/one-weird-trick-better-code/)
+
+Rather than inheriting functionality, Unity entities are just bags of components. 
+
+### 4.Wizards and warriors
+(?) from OOP encoding rules in Type System to Rule Engine / Function on Data
+
+*Interesting Debates in Comments
+
+[Wizards and warriors, part one](https://ericlippert.com/2015/04/27/wizards-and-warriors-part-one/)
+
+[Wizards and warriors, part two](https://ericlippert.com/2015/04/30/wizards-and-warriors-part-two/)
+
+[Wizards and warriors, part three](https://ericlippert.com/2015/05/04/wizards-and-warriors-part-three/)
+
+[Wizards and warriors, part four](https://ericlippert.com/2015/05/07/wizards-and-warriors-part-four/)
+
+[Wizards and warriors, part five](https://ericlippert.com/2015/05/11/wizards-and-warriors-part-five/)
+
+[Hacker News Comments: How I Learned to Stop Worrying and Love the State Machine](https://news.ycombinator.com/item?id=16468280)
+
+##### pinkythepig
+
+``` haskell
+data Player =
+    Player (Maybe Weapon) Class
+
+data Weapon =
+      Sword
+    | Staff
+    | Dagger
+
+data Class =
+      Warrior
+    | Wizard
+
+type Error = String
+
+mkPlayer :: Maybe Weapon -> Class -> Either Error Player
+
+mkPlayer (Just Sword) Warrior = Right (Player (Just Sword) Warrior)
+mkPlayer (Just Dagger) Warrior = Right (Player (Just Dagger) Warrior)
+mkPlayer Nothing Warrior = Right (Player Nothing Warrior)
+mkPlayer (Just Staff) Warrior = Left "A Warrior cannot equip a Staff"
+
+mkPlayer (Just Staff) Wizard = Right (Player (Just Staff) Wizard)
+mkPlayer (Just Dagger) Wizard = Right (Player (Just Dagger) Wizard)
+mkPlayer Nothing Wizard = Right (Player Nothing Wizard)
+mkPlayer (Just Sword) Wizard = Left "A Wizard cannot equip a Sword"
+```
+
+A player is always a defined class(wizard or warrior), but they may not have a weapon equipped. This solution is a bit wordy, but comes with the benefit that if you ever add a new weapon/class, the compiler will scream at you if you haven't handled the case for it properly.
+
+You would only export the mkPlayer function in the library and you could potentially have much fancier error handling, such as building a data structure that contains an 'invalid' player anyways (e.g. `Left (Player (Just Sword) Wizard)`) so you can custom build an error message at the call site ("A $class cannot equip a $weapon") or even completely ignore the error if that is a potential usecase (such as building an armor/weapon preview tool, where you don't care whether they can use the weapon/armor).
+
+Modifying it is pretty easy too. Say I wanted to allow for 2handed weapons, plus offhand weapons (shields, orbs, charms, etc.) I could encode that in a data type like:
+
+``` haskell
+data EquippedWeapon =
+      TwoHanded TwoHandWeapon
+    | OneHanded (Maybe OneHandWeapon) (Maybe Offhand)
+    | Unequipped
+```
+
+and swap it into the Player definition:
+
+``` haskell
+data Player =
+    Player EquippedWeapon Class
+```
+
+And now I wouldn't be able to compile until I fixed the mkPlayer function and any other place that uses a Player and is dependent upon the weapon portion of the data structure.
+
+e.g. This function wouldn't need to change
+
+``` haskell
+areYouAWizardHarry :: Player -> Bool
+areYouAWizardHarry (Player _ Wizard) = True
+areYouAWizardHarry (Player _ _) = False
+```
+
+##### FBT
+The answer is very much "practicality issue". Haskell's more advanced type level features (including GADTs and type families) are very much suited for this, but they're also the sort of thing that gives Haskell a reputation for being complicated. If your just using Haskell's core features the way the parent post does, Haskell is a very simple, very elegant language.
+
+But better yet, it certainly does have the big guns which you can pull out.
+
+``` haskell
+-- Just like before, we define `Class` and `Weapon`:
+data Class = Warrior | Wizard
+data Weapon = Sword | Staff | Dagger
+
+-- The one really annoying thing is that
+-- at the moment you have to use a little bit
+-- of annoying boilerplate to define singletons
+-- (not related to the OOP concept of singletons, by
+-- the way), or use the `singletons` library. In the
+-- future, with DependentHaskell, this won't be necessary:
+data SWeapon (w :: Weapon) where
+  SSword :: SWeapon 'Sword
+  SStaff :: SWeapon 'Staff
+  SDagger :: SWeapon 'Dagger
+
+-- Now we can define `Player`:
+data Player (c :: Class) where
+  WizardPlayer :: AllowedToWield 'Wizard w ~ 'True => SWeapon w -> Player 'Wizard
+  WarriorPlayer :: AllowedToWield 'Warrior w ~ 'True => SWeapon w -> Player 'Warrior
+```
+
+This last part shouldn't be to difficult to understand, if you ignore the SWeapon boilerplate: Player is parameterized over the player's class, with different constructors for warriors and wizards. Each constructor has a parameter for the weapon the player is wielding, which is constrained by the type family (read: type-level function) named AllowedToWield.
+
+AllowedToWield isn't that complicated either, it's just a (type-level) function that takes a Class and a Weapon and returns a `Bool` using pattern matching:
+
+``` haskell
+type family AllowedToWield (c :: Class) (w :: Weapon) :: Bool where
+  AllowedToWield 'Wizard 'Sword = 'False
+  AllowedToWield 'Wizard 'Dagger = 'True
+  AllowedToWield 'Wizard 'Staff = 'True
+  AllowedToWield 'Warrior 'Sword = 'True
+  AllowedToWield 'Wizard 'Dagger = 'True
+  AllowedToWield 'Wizard 'Staff = 'False
+```
+
+And there it is. What do you gain from all this? Something which it is very had to get in certain other languages: compile-time type checking that there is no code that will allow a wizard to equip a sword, or a warrior to equip a staff.
+
+Once again, I want to make it clear that you absolutely don't need to do this, even in Haskell. You're absolutely allowed to write the simple code like in the parent post. But in my opinion, this is an extremely powerful and useful tool that Haskell lets you take much further than many other languages.
+
+So long story short, the answer to your question is that it is indeed a "practicality issue", although I don't think that my code is that impracticable. It certainly is absolutely not a Haskell limitation: in fact if anything, Haskell makes it a bit too tempting to go in the other direction, and go way overboard with embedding this kind of thing in the type system.
+
 ## Others
 
-### 1. [To Dissect a Mockingbird: A Graphical Notation for the Lambda Calculus with Animated Reduction](http://dkeenan.com/Lambda/)
+### 1.[To Dissect a Mockingbird: A Graphical Notation for the Lambda Calculus with Animated Reduction](http://dkeenan.com/Lambda/)
 
-### 2. [Cyclomatic Complexity - Wikipedia](https://en.wikipedia.org/wiki/Cyclomatic_complexity)
+### 2.[Cyclomatic Complexity - Wikipedia](https://en.wikipedia.org/wiki/Cyclomatic_complexity)
