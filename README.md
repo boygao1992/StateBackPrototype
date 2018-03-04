@@ -1292,6 +1292,17 @@ Once again, I want to make it clear that you absolutely don't need to do this, e
 
 So long story short, the answer to your question is that it is indeed a "practicality issue", although I don't think that my code is that impracticable. It certainly is absolutely not a Haskell limitation: in fact if anything, Haskell makes it a bit too tempting to go in the other direction, and go way overboard with embedding this kind of thing in the type system.
 
+## Control Theory
+### 1.[Mathematical Control Theory: Deterministic Finite Dimensional Systems](http://www.math.rutgers.edu/~sontag/FTPDIR/sontag_mathematical_control_theory_springer98.pdf)
+
+> 1.4 Feedback Versus Precomputed Control
+> 1.5 State-Space and Spectrum Assignment
+> 2.1 Basic Definitions
+> 2.1.2 A **system** or **machine**
+> time, state space, input-value space, transition map
+> 2.6 Continuous-Time
+> 7 Observers and Dynamic Feedback
+
 ## Others
 
 ### 1.[To Dissect a Mockingbird: A Graphical Notation for the Lambda Calculus with Animated Reduction](http://dkeenan.com/Lambda/)
