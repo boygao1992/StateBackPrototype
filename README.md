@@ -929,7 +929,7 @@ good interpretation of Conal Elliott's original paper
 > - Feedback
 > - Cycles in state transition diagram
 
-2nd case using a `switch`as a mechanism to dynamically switch among a set of behaviors may not be a form of recusion but can be interpreted as second-order state machine whose state is composed of smaller state machines.
+2nd case using a `switch` as a mechanism to dynamically switch among a set of behaviors may not be a form of recusion but can be interpreted as second-order state machine whose state is composed of smaller state machines.
 
 > 3.3.3 Recursion in FRP
 > there is no syntactic distinction between two forms of recursion in FRP.
