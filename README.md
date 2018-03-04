@@ -543,6 +543,23 @@ Daily code optimization using benchmarks and profiling in Golang - Gophercon Ind
 / [youtube](https://www.youtube.com/watch?v=-KDRdz4S81U)
 
 
+## Continuous-time Model Representation
+
+### 1.[State-space representation - Wikipedia](https://en.wikipedia.org/wiki/State-space_representation)
+
+control engineering
+
+a mathematical model of a physical system as a set of input, output and state variables related by **first-order differential equations** or difference equations.
+
+State variables are variables whose values **evolve through time** in a way that depends on the values they have at any given time and also depends on the externally imposed values of input variables.
+
+Output variables’ values depend on the values of the state variables.
+(Moore Machine?)
+
+### 2.[Youtube - The simple essence of automatic differentiation - Conal Elliott](https://www.youtube.com/watch?v=Shl3MtWGu18&t=1083s)
+
+### 3.[Youtube - You Should Be Using Automatic Differentiation - Ryan Adams (Twitter & Harvard)](https://www.youtube.com/watch?v=sq2gPzlrM0g&t=1314s)
+
 # Reference
 
 ## Automata
@@ -893,6 +910,31 @@ Here count has type Now<Behavior<A>> and it represents a Now-computation that wi
 ### 21.[FRP.Elerea.Simple](https://hackage.haskell.org/package/elerea-2.9.0/docs/FRP-Elerea-Simple.html)
 
 ### 22.[Practical Principled FRP](https://github.com/beerendlauwers/haskell-papers-ereader/blob/master/papers/Practical%20Principled%20FRP%20-%20Forget%20the%20past,%20change%20the%20future,%20FRPNow!.pdf)
+
+### 23.[signal.js](https://github.com/yelouafi/signal)
+
+[What is Functional reactive programming (FRP)](https://github.com/yelouafi/signal/wiki/What-is-Functional-reactive-programming-(FRP))
+- Disambiguation: What vs How (Or Denotational vs Operational)
+- Classic FRP
+
+good interpretation of Conal Elliott's original paper
+
+### 24.[Fran - Functional Reactive Animation library in Haskell - Conal Elliott (Microsoft)](http://conal.net/fran/)
+
+[Composing Reactive Animations](http://conal.net/fran/tutorial.htm)
+
+### 25.[Functional Reactive Programming for Real-Time Reactive Systems - Zhanyong Wan(PhD Thesis 2002)](http://haskell.cs.yale.edu/wp-content/uploads/2011/02/wan-thesis.pdf)
+
+> **3.3 Two kinds of recursion**
+> - Feedback
+> - Cycles in state transition diagram
+
+2nd case using a `switch`as a mechanism to dynamically switch among a set of behaviors may not be a form of recusion but can be interpreted as second-order state machine whose state is composed of smaller state machines.
+
+> 3.3.3 Recursion in FRP
+> there is no syntactic distinction between two forms of recursion in FRP.
+> in practice can create confusion about the program.
+
 
 
 ## Process Algebra/Calculus
