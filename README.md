@@ -443,8 +443,10 @@ So we want to be able to interpret a monadic action in different ways, inspect/t
 
 [The ReaderT Design Pattern - Avoid WriterT, StateT, ExceptT](https://www.fpcomplete.com/blog/2017/06/readert-design-pattern)
 
-#### 3. [Typed final (tagless-final) style](http://okmij.org/ftp/tagless-final/index.html)
+#### 3.[Typed final (tagless-final) style](http://okmij.org/ftp/tagless-final/index.html)
 [Typed Tagless Final Interpreters](http://okmij.org/ftp/tagless-final/course/lecture.pdf)
+
+#### 4.[Monad transformers, free monads, mtl, laws and a new approach](https://ocharles.org.uk/blog/posts/2016-01-26-transformers-free-monads-mtl-laws.html)
 
 
 # DOM Component Library
