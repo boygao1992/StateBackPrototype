@@ -935,6 +935,20 @@ good interpretation of Conal Elliott's original paper
 > there is no syntactic distinction between two forms of recursion in FRP.
 > in practice can create confusion about the program.
 
+> 4 Hybrid FRP
+`Behaviors`, `Switchers`, `Events`
+
+> 5 Event-driven FRP
+
+There are two kinds of behaviors: *stateless* and *stateful*.
+
+A stateless behavior `e` can be viewed as a pure function whose inputs are other behaviors, or it can be a constant when there is no input.
+The value of `e` depends sorely on its current input, and is not affected by the history of the input at all.
+In this sense, `e` is like a combinatorial/combinational circuit.
+
+A stateful behavior `sf` has a state that can be updated by event occurrences.
+The value of `sf` depends on both the current input and its state.
+Therefore `sf` is analogous to a sequential circuit.
 
 
 ## Process Algebra/Calculus
