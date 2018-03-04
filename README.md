@@ -871,6 +871,12 @@ you simply set up calculations outside of the system that create new inputs that
 
 ### 10. [FRP - Dynamic Event Switching](https://apfelmus.nfshost.com/blog/2011/05/15-frp-dynamic-event-switching.html)
 
+> My first design decision for the reactive-banana library was to **remove** this function from the set of combinators. In this post
+> - I’m going to explain that the original switcher leads to **time leaks**.
+> - I will argue that removing switcher is an **acceptable loss of expressivity**,
+> - but nonetheless also **summarize two leak-free solutions** for dynamic event switching. These are relevant for future versions of reactive-banana, even though I have no immediate plans to incorporate them.
+
+
 ### 11. [Higher-order functional reactive programming without spacetime leaks](https://www.cl.cam.ac.uk/~nk480/simple-frp.pdf)
 
 ### 12. [purescript-behaviors](https://github.com/paf31/purescript-behaviors/tree/v6.0.0)
