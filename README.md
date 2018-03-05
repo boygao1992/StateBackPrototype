@@ -448,6 +448,26 @@ So we want to be able to interpret a monadic action in different ways, inspect/t
 
 #### 4.[Monad transformers, free monads, mtl, laws and a new approach](https://ocharles.org.uk/blog/posts/2016-01-26-transformers-free-monads-mtl-laws.html)
 
+#### 5.[https://making.pusher.com/3-approaches-to-monadic-api-design-in-haskell/](https://making.pusher.com/3-approaches-to-monadic-api-design-in-haskell/)
+
+- Concrete monads
+- Monad typeclasses
+
+Issues with typeclasses
+
+The types become more complicated.
+compiler errors can be much harder to understand.
+Potentially performance issue (may already be solved by inlining).
+
+- Free/operational monads
+
+This is nice because it **decouples** the **logic** from the means of performing the **effects**. Another advantage is that it allows different interpreters to be written for different purposes; this would be particular useful when writing **tests**.
+
+However this approach comes with similar problems as mtl. It also has the disadvantage of being less widely used/understood at the moment.
+
+Furthermore it means that the caller of the library will likely need to write more code because they have to implement the interpreter. For more complex libraries, this may be worth it, but for simple things like writing a client library for a web API, it is most likely overkill.
+
+#### 6.[mtl is Not a Monad Transformer Library](https://blog.jle.im/entry/mtl-is-not-a-monad-transformer-library.html)
 
 # DOM Component Library
 
