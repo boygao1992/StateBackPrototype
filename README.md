@@ -620,6 +620,7 @@ Analysis
 - Mathemetical verification
 - Experimental validation
 
+### 8.[State Space Representations of Linear Physical Systems](http://lpsa.swarthmore.edu/Representations/SysRepSS.html)
 
 ## General Web Component/Container
 
