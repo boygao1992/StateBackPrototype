@@ -622,6 +622,12 @@ Analysis
 
 ### 8.[State Space Representations of Linear Physical Systems](http://lpsa.swarthmore.edu/Representations/SysRepSS.html)
 
+## Behavior Tree
+
+### 1.[Behavior Trees in Robotics and AI: An Introduction](https://arxiv.org/abs/1709.00084)
+
+### 2.[How Behavior Trees Modularize Hybrid Control Systems and Generalize Sequential Behavior Compositions, the Subsumption Architecture and Decision Trees](http://michelecolledanchise.com/tro16colledanchise.pdf)
+
 ## General Web Component/Container
 
 ### 1.[How to Build the Ultimate Reusable Web Chat Component](https://medium.com/outsystems-engineering/how-to-build-the-ultimate-reusable-web-chat-component-c9acf3dc5f2b)
