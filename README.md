@@ -628,6 +628,10 @@ Analysis
 
 ### 2.[How Behavior Trees Modularize Hybrid Control Systems and Generalize Sequential Behavior Compositions, the Subsumption Architecture and Decision Trees](http://michelecolledanchise.com/tro16colledanchise.pdf)
 
+### 3.[Algorithmic State Machine (ASM) - Wikipedia](https://en.wikipedia.org/wiki/Algorithmic_state_machine)
+
+### 4.[DRAKON charts - Wikipedia](https://en.wikipedia.org/wiki/DRAKON)
+
 ## General Web Component/Container
 
 ### 1.[How to Build the Ultimate Reusable Web Chat Component](https://medium.com/outsystems-engineering/how-to-build-the-ultimate-reusable-web-chat-component-c9acf3dc5f2b)
