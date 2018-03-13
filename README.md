@@ -1163,6 +1163,19 @@ Regarding "inspection", building a structure out of a free Applicative rather th
 
 ![haskell numeric type classes](./doc/haskell-numeric-type-classes.svg)
 
+## Model Theory
+### 1.[Model Theory - Wikipedia](https://en.wikipedia.org/wiki/Model_theory)
+universal algebra + logic = model theory
+model theory = algebraic geometry − fields
+
+### 2.[Combinatorics - Wikipedia](https://en.wikipedia.org/wiki/Combinatorics)
+an area of mathematics primarily concerned with counting, both as a means and an end in obtaining results, and certain properties of finite structures
+> - the enumeration (counting) of specified structures, sometimes referred to as arrangements or configurations in a very general sense, associated with finite systems,
+> - the existence of such structures that satisfy certain given criteria,
+> - the construction of these structures, perhaps in many ways, and
+> - optimization, finding the "best" structure or solution among several possibilities, be it the "largest", "smallest" or satisfying some other optimality criterion.
+
+
 ## Category Theory
 ### Theory
 #### 1.[A Concise Course in Algebraic Topology](https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf)
