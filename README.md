@@ -1175,6 +1175,20 @@ an area of mathematics primarily concerned with counting, both as a means and an
 > - the construction of these structures, perhaps in many ways, and
 > - optimization, finding the "best" structure or solution among several possibilities, be it the "largest", "smallest" or satisfying some other optimality criterion.
 
+- Partition Theory
+- Graph Theory
+- Design Theory
+- Order Theory
+- Probabilistic Combinatorics
+- Algebraic Combinatorics (abstract algebra)
+- Combinatorics on words (formal languages)
+- Coding Theory (error-correcting codes, information theory)
+
+### 3.[Abstract Algebra - Wikipedia](https://en.wikipedia.org/wiki/Abstract_algebra)
+
+> **Category theory** is a formalism that allows a unified way for expressing properties and constructions that are similar for various structures.
+> **Universal algebra** is a related subject that studies types of algebraic structures as single objects. For example, the structure of groups is a single object in universal algebra, which is called variety of groups.
+
 
 ## Category Theory
 ### Theory
