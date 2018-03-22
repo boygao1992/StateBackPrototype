@@ -987,6 +987,15 @@ A stateful behavior `sf` has a state that can be updated by event occurrences.
 The value of `sf` depends on both the current input and its state.
 Therefore `sf` is analogous to a sequential circuit.
 
+### 26.[Deprecating the Observer Pattern](https://infoscience.epfl.ch/record/148043/files/DeprecatingObserversTR2010.pdf)
+
+> 7. Related Work
+> 7.1 Functional Reactive Programming
+> 7.2 Adaptive Functional Programming
+> 7.3 Dataflow Programming
+> 7.4 Complex Event Processing
+> 7.5 Actors
+
 
 ## Process Algebra/Calculus
 
@@ -1360,6 +1369,16 @@ So long story short, the answer to your question is that it is indeed a "practic
 > time, state space, input-value space, transition map
 > 2.6 Continuous-Time
 > 7 Observers and Dynamic Feedback
+
+## Computer Model
+**Correct this section after reading "Microprogrammed State Machine Design"**
+
+- discrete/continuous-time
+- discrete/continuous-value
+
+### 1.[Analog computer - Wikipedia](https://en.wikipedia.org/wiki/Analog_computer)
+### 2.[Digital electronic computer - Wikipedia](https://en.wikipedia.org/wiki/Digital_electronic_computer)
+### 3.[Hybrid computer - Wikipedia](https://en.wikipedia.org/wiki/Hybrid_computer)
 
 ## Others
 
