@@ -16,6 +16,8 @@ Parent component cannot interpret External Events from Event Listeners attached 
 To pass interpreted events as messages back to parent component, part of child's sink has to be part of parent's source while part of parent's source is already part of child's source. Thus, parent and child depend on each other.
 e.g. TodoMVC, delete button is attached to child components (TodoItem) while the lifecycles of child components are managed by parent component (TodoList). Parent need DELETE event from child to perform the state transition.
 
+[Handling lists in Cycle.js](https://github.com/cyclejs/cyclejs/issues/312)
+
 ## ELM
 
 1. state transition function without validation of state
@@ -364,6 +366,10 @@ Which is exactly what I need.
 
 #### 5.[A Modern Architecture for FP](http://degoes.net/articles/modern-fp)
 
+#### 6.[The Free Monad Interpreter Pattern](https://blog.otastech.com/2016/01/the-free-monad-interpreter-pattern/)
+
+#### 7.[Why free monads matter](http://www.haskellforall.com/2012/06/you-could-have-invented-free-monads.html?m=1)
+
 ### Existing Examples in JS
 #### 1.[Elm-Effects](https://guide.elm-lang.org/architecture/effects/) / [Type Reference](http://package.elm-lang.org/packages/evancz/elm-effects/2.0.1/Effects)
 
@@ -383,53 +389,21 @@ Which is exactly what I need.
 
 #### 1.[Practical Principled FRP](https://github.com/beerendlauwers/haskell-papers-ereader/blob/master/papers/Practical%20Principled%20FRP%20-%20Forget%20the%20past,%20change%20the%20future,%20FRPNow!.pdf)
 
-I/O in FRP The second problem with Fran is that interaction with
-the outside world is limited to a few built-in primitives: there is no
-general way to interact with the outside world. Arrowized FRP does
-allow general interaction with the outside world, by organizing
-the FRP program as a function of type `Behavior Input →
-Behavior Output`, where Input is a type containing all input
-values the program is interested in and Output is a type containing
-all I/O requests the program can do. This function is then passed to a
-wrapper program, which actually does the I/O , processing requests
-and feeding input to this function.
-This way of doing I/O is reminiscent of the stream based I/O
-that was used in early versions and precursors to Haskell, before
-monadic I/O was introduced. It has a number of problems (the first
-two are taken from Peyton Jones [10] discussing stream based I/O ):
+I/O in FRP The second problem with Fran is that interaction with the outside world is limited to a few built-in primitives: there is no general way to interact with the outside world. Arrowized FRP does allow general interaction with the outside world, by organizing the FRP program as a function of type `Behavior Input → Behavior Output`, where Input is a type containing all input values the program is interested in and Output is a type containing all I/O requests the program can do. This function is then passed to a wrapper program, which actually does the I/O , processing requests and feeding input to this function. This way of doing I/O is reminiscent of the stream based I/O that was used in early versions and precursors to Haskell, before monadic I/O was introduced. It has a number of problems (the first two are taken from Peyton Jones [10] discussing stream based I/O ):
 
-• It is hard to extend: new input and output facilities can only
-be added by changing the Input and Output types, and then
-changing the wrapper program.
-• There is no close connection between a request and its corresponding response. For example, an FRP program may open
-multiple files simultaneously. To associate the result of opening a file to its the request, we have to resort to using unique
-identifiers.
-• All I/O must flow through the top-level function, meaning the
-programmer must manually route each input to the place in the
-program where it is needed, and route each output from the place
-where the request is done.
-Other FRP formulations partially remedy this situation[1, 21], but
-none overcome all of the above issues. We present a solution that is
-effectively the FRP counterpart of monadic I/O . We employ a monad,
-called the Now monad, that allows us to (1) sample behaviors at
-the current time, and (2) plan to execute Now computations in the
-future and (3) start I/O actions with the function:
+- It is hard to extend: new input and output facilities can only be added by changing the Input and Output types, and then changing the wrapper program.
+
+- There is no close connection between a request and its corresponding response. For example, an FRP program may open multiple files simultaneously. To associate the result of opening a file to its the request, we have to resort to using unique identifiers.
+
+- All I/O must flow through the top-level function, meaning the programmer must manually route each input to the place in the program where it is needed, and route each output from the place where the request is done.
+
+Other FRP formulations partially remedy this situation[1, 21], but none overcome all of the above issues. We present a solution that is effectively the FRP counterpart of monadic I/O . We employ a monad, called the Now monad, that allows us to (1) sample behaviors at the current time, and (2) plan to execute Now computations in the future and (3) start I/O actions with the function:
 
 ```haskell
 async :: IO a → Now (Event a)
 ```
 
-which starts the IO action and immediately returns the event
-associated with the completion of the I/O action. The key idea
-is that all actions inside the Now monad are synchronous 2 , i.e. they
-return immediately, conceptually taking zero time, making it easier
-to reason about the sampling of behaviors in this monad. Since
-starting an I/O action takes zero time, its effects do not occur now,
-and hence async does not change the present, but “changes the
-future”. Like the I/O monad, the Now monad is used to deal with
-input as well as output, both via async. This approach does not have
-the problems associated with stream-based IO, and is as flexible and
-modular as regular monadic I/O.
+which starts the IO action and immediately returns the event associated with the completion of the I/O action. The key idea is that all actions inside the Now monad are synchronous 2 , i.e. they return immediately, conceptually taking zero time, making it easier to reason about the sampling of behaviors in this monad. Since starting an I/O action takes zero time, its effects do not occur now, and hence async does not change the present, but “changes the future”. Like the I/O monad, the Now monad is used to deal with input as well as output, both via async. This approach does not have the problems associated with stream-based IO, and is as flexible and modular as regular monadic I/O.
 
 #### 2.[Free monad considered harmful](https://markkarpov.com/post/free-monad-considered-harmful.html)
 
@@ -448,7 +422,7 @@ So we want to be able to interpret a monadic action in different ways, inspect/t
 
 #### 4.[Monad transformers, free monads, mtl, laws and a new approach](https://ocharles.org.uk/blog/posts/2016-01-26-transformers-free-monads-mtl-laws.html)
 
-#### 5.[https://making.pusher.com/3-approaches-to-monadic-api-design-in-haskell/](https://making.pusher.com/3-approaches-to-monadic-api-design-in-haskell/)
+#### 5.[3 approaches to monadic api design in haskell](https://making.pusher.com/3-approaches-to-monadic-api-design-in-haskell/)
 
 - Concrete monads
 - Monad typeclasses
@@ -554,6 +528,7 @@ That is the definition of a runaway system.
 
 Personally, I prefer a "Service-Oriented" approach where the consistency responsibility is given to a 3rd party component exposing an intentional and versionable interface because that logic does not belong to the consumer or the system of record.
 
+
 ## Debugging Complexity
 
 ### 1.[Debugging Go Routine leaks](https://blog.minio.io/debugging-go-routine-leaks-a1220142d32c)
@@ -561,7 +536,6 @@ Personally, I prefer a "Service-Oriented" approach where the consistency respons
 Daily code optimization using benchmarks and profiling in Golang - Gophercon India 2016 talk - 
 [article](https://medium.com/@hackintoshrao/daily-code-optimization-using-benchmarks-and-profiling-in-golang-gophercon-india-2016-talk-874c8b4dc3c5)
 / [youtube](https://www.youtube.com/watch?v=-KDRdz4S81U)
-
 
 ## Continuous-time Model Representation
 
@@ -998,6 +972,22 @@ Therefore `sf` is analogous to a sequential circuit.
 > 7.4 Complex Event Processing
 > 7.5 Actors
 
+### 27.[Testing and Debugging Functional Reactive Programming](https://dl.acm.org/citation.cfm?id=3136534.3110246)
+
+## Self-adjusting Computation (SAC)
+
+### 1.[Self-Adjusting Computation - Umut Acar - Carnegie Mellon University](http://www.umut-acar.org/self-adjusting-computation)
+
+[Self-Adjusting Computation. PhD. Thesis. 2005. Umut A. Acar.](http://www.umut-acar.org/publications/umut-thesis.pdf?attredirects=0)
+
+[Self-Adjusting Machines, Ph.D. Thesis, 2012, Matthew Hammer.](http://www.umut-acar.org/publications/matt-thesis.pdf?attredirects=0)
+
+[Functional Programming for Dynamic and Large Data with Self-Adjusting Computation.](http://www.umut-acar.org/publications/icfp2014.pdf?attredirects=0)
+
+### 2.[Introducing Incremental - a SAC library](https://blog.janestreet.com/introducing-incremental/)
+
+### 3.[Breaking down FRP](https://blog.janestreet.com/breaking-down-frp/)
+
 
 ## Process Algebra/Calculus
 
@@ -1029,6 +1019,17 @@ Petri net models are normally more compact than similar automata based models an
 ### 6.[CPN Tools - A tool for editing, simulating, and analyzing Colored Petri nets](http://cpntools.org/)
 
 [Coloured Petri net](https://en.wikipedia.org/wiki/Coloured_Petri_net)
+
+## TLA+
+
+### 1.[Hillel Wayne Blog](https://www.hillelwayne.com/tags/tla+/)
+
+[List of TLA+ Examples](https://www.hillelwayne.com/post/list-of-tla-examples/)
+
+[Modeling Redux with TLA+](https://www.hillelwayne.com/post/tla-redux/)
+
+### 2.[Learn TLA+](https://learntla.com/introduction/)
+
 
 ## Functional JS
 ### 1.[Jabz - powerful and practical abstractions for JavaScript](https://funkia.github.io/jabz/)
@@ -1361,6 +1362,10 @@ Once again, I want to make it clear that you absolutely don't need to do this, e
 
 So long story short, the answer to your question is that it is indeed a "practicality issue", although I don't think that my code is that impracticable. It certainly is absolutely not a Haskell limitation: in fact if anything, Haskell makes it a bit too tempting to go in the other direction, and go way overboard with embedding this kind of thing in the type system.
 
+### 5.[Design Patterns in Dynamic Languages](http://www.norvig.com/design-patterns/)
+
+### 6.[Are Design Patterns Missing Language Features](http://wiki.c2.com/?AreDesignPatternsMissingLanguageFeatures)
+
 ## Control Theory
 ### 1.[Mathematical Control Theory: Deterministic Finite Dimensional Systems](http://www.math.rutgers.edu/~sontag/FTPDIR/sontag_mathematical_control_theory_springer98.pdf)
 
@@ -1381,6 +1386,15 @@ So long story short, the answer to your question is that it is indeed a "practic
 ### 1.[Analog computer - Wikipedia](https://en.wikipedia.org/wiki/Analog_computer)
 ### 2.[Digital electronic computer - Wikipedia](https://en.wikipedia.org/wiki/Digital_electronic_computer)
 ### 3.[Hybrid computer - Wikipedia](https://en.wikipedia.org/wiki/Hybrid_computer)
+
+## Scalable Architecture
+
+### 1.[Functional Design and Architecture](https://github.com/graninas/Functional-Design-and-Architecture)
+
+### 2.[Message Oriented Programming](https://www.joeforshaw.com/blog/message-oriented-programming)
+
+### 3.[Event Notifier, a Pattern for Event Notification](http://www.marco.panizza.name/dispenseTM/slides/exerc/eventNotifier/eventNotifier.html)
+
 
 ## Others
 
