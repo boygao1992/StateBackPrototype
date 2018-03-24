@@ -317,6 +317,62 @@ The Fix data type cannot model all forms of recursion.
 
 [purescript-fixed-points](https://pursuit.purescript.org/packages/purescript-fixed-points/4.0.0)
 
+# State Graph Model
+
+### i. Extended Finite State Machines
+Like any other user interface, 3D modeling systems are typical event-driven systems which can be precisely described by Finite State Machines (FSM).
+States and State Transitions are denoted by unique symbols in an algebraic/formal system.
+Then we end up with a directed total graph of state space where vertices are states and directed edges between each pair of distinct vertices are state transitions.
+
+As the complexity of the system increases the number of discrete states grows exponentially so we need Extended Finite State Machines (EFSM) which allow parametrization as an effective state space compression technique.
+By parametrization, a set of states can be described by one or many variables.
+An unique combination of specific values in all variables is a unique symbol itself and can be mapped back to each unique state in the original finite state machine.
+This way we no longer need to deal with a large number of plain discrete states but a number of discrete or continuous variables which can be further abstracted by types.
+
+> Two primitive types are Integer and String, both of which can be mapped to natural number set.
+> Two famous constructs of natural number set are Von Neumann Ordinals and Church Numerals.
+> Then with Boolean Algebra, we can represent a finite subset of the natural number set using combinational logic circuits.
+
+> With higher-order abstraction, Dependent Type, from type theory, each type can be precisely crafted by ruling out a set of values using logical constraints so that a set of invalid states are irrepresentable by the combinations of these types.
+
+At this point, we can update our state space representation using a vector to denote each state with a set of variables.
+
+### ii. Event-driven System Design
+With the formal system / EFSM defined, programmers or domain experts add semantics to the system by mapping each state or state Transition to a scenario or a signal/action respectively in the real system which usually described also by a formal system.
+Because of the limitation in human's working memory, programmers and users can only deal with a small set of objects at a time.
+Therefore, before or during the process of indexing states and state transitions by comprehensible names, usually large state space needs to be preprocessed by state space partition/classification, basically indexing/naming states or state transitions with human-readable Strings.
+
+### iii. State Space Partition Techniques
+
+#### 1. Horizontal Split
+Horizontal Split of state space means grouping all the variables in the state vector into disjoint sets.
+Each subspace after the horizontal split is still a total graph with the same number of vertices as the original but with lower dimensionality.
+Then the state transition functions in each subspace can deal with lower number of variables.
+
+For a UI system, the horizontal split usually means dividing the monolith system into independent widgets/subsystems (for analytic purpose, which is likely the opposite way to construct a UI system in practice).
+Each widget embeds an extended finite state machine whose state vector only has a small number of variables.
+
+#### 2. Vertical Split
+Vertical Split of state space means grouping all the state vectors into disjoint sets based on rules each of which involves an arbitrary number of dimensions.
+The subspace left untouched by the rule set can be automatically named "Otherwise"/"Rest".
+Each subspace after the vertical split is still a total graph with the same dimensionality as the original but with lower number of vertices.
+
+In each subspace, some information may no longer be needed and can be thrown away based on some sequential ordering.
+In our formal representation, this means that the edges between two subspaces after a vertical split is directed only from one to the other, not the other way around.
+Thus, after a vertical split, each subspace can have its own state vector representation instead of using the global state vector.
+
+For example, in a transition system, after confirmation of credit card info and generation of an order number, the card info related variables (e.g. card number, address, etc.) are no longer useful.
+However, if the system requires certain degree of fault tolerance, the card info then should not be thrown right after the confirmation because the transition may fail and the card info need to be presented and modified by the user for another try.
+
+#### 3. Hierarchical Composition
+
+##### Hierarchical Finite State Machine (HFSM)
+HFSM requires a horizontal split on the state space and construct state transition functions in each subspace.
+When constructing the HFSM, a vertical split is conducted first and some of the state transition functions from the horizontal split can be reused directly or with slight modification (usually parametrized) across these vertically partitioned subspaces, which will reduce a fair amount of boilerplate in code base. 
+
+##### Behavior Tree (BT)
+State space is hierarchically classified into subspaces using vertical splits.
+
 # Overall Architecture
 
 Mealy Machine + Synchronous Composition + Feedback + Explicit Side Effects
