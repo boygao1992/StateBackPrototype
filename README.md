@@ -1231,6 +1231,8 @@ Regarding "inspection", building a structure out of a free Applicative rather th
 
 ![haskell numeric type classes](./doc/haskell-numeric-type-classes.svg)
 
+### 13.[OOP vs type classes](https://wiki.haskell.org/OOP_vs_type_classes)
+
 ## Model Theory
 ### 1.[Model Theory - Wikipedia](https://en.wikipedia.org/wiki/Model_theory)
 universal algebra + logic = model theory
@@ -1313,114 +1315,117 @@ Rather than inheriting functionality, Unity entities are just bags of components
 
 ##### pinkythepig
 
-``` haskell
-data Player =
-    Player (Maybe Weapon) Class
-
-data Weapon =
-      Sword
-    | Staff
-    | Dagger
-
-data Class =
-      Warrior
-    | Wizard
-
-type Error = String
-
-mkPlayer :: Maybe Weapon -> Class -> Either Error Player
-
-mkPlayer (Just Sword) Warrior = Right (Player (Just Sword) Warrior)
-mkPlayer (Just Dagger) Warrior = Right (Player (Just Dagger) Warrior)
-mkPlayer Nothing Warrior = Right (Player Nothing Warrior)
-mkPlayer (Just Staff) Warrior = Left "A Warrior cannot equip a Staff"
-
-mkPlayer (Just Staff) Wizard = Right (Player (Just Staff) Wizard)
-mkPlayer (Just Dagger) Wizard = Right (Player (Just Dagger) Wizard)
-mkPlayer Nothing Wizard = Right (Player Nothing Wizard)
-mkPlayer (Just Sword) Wizard = Left "A Wizard cannot equip a Sword"
-```
-
-A player is always a defined class(wizard or warrior), but they may not have a weapon equipped. This solution is a bit wordy, but comes with the benefit that if you ever add a new weapon/class, the compiler will scream at you if you haven't handled the case for it properly.
-
-You would only export the mkPlayer function in the library and you could potentially have much fancier error handling, such as building a data structure that contains an 'invalid' player anyways (e.g. `Left (Player (Just Sword) Wizard)`) so you can custom build an error message at the call site ("A $class cannot equip a $weapon") or even completely ignore the error if that is a potential usecase (such as building an armor/weapon preview tool, where you don't care whether they can use the weapon/armor).
-
-Modifying it is pretty easy too. Say I wanted to allow for 2handed weapons, plus offhand weapons (shields, orbs, charms, etc.) I could encode that in a data type like:
-
-``` haskell
-data EquippedWeapon =
-      TwoHanded TwoHandWeapon
-    | OneHanded (Maybe OneHandWeapon) (Maybe Offhand)
-    | Unequipped
-```
-
-and swap it into the Player definition:
-
-``` haskell
-data Player =
-    Player EquippedWeapon Class
-```
-
-And now I wouldn't be able to compile until I fixed the mkPlayer function and any other place that uses a Player and is dependent upon the weapon portion of the data structure.
-
-e.g. This function wouldn't need to change
-
-``` haskell
-areYouAWizardHarry :: Player -> Bool
-areYouAWizardHarry (Player _ Wizard) = True
-areYouAWizardHarry (Player _ _) = False
-```
+> ``` haskell
+> data Player =
+>     Player (Maybe Weapon) Class
+>
+> data Weapon =
+>       Sword
+>     | Staff
+>     | Dagger
+>
+> data Class =
+>       Warrior
+>     | Wizard
+>
+> type Error = String
+>
+> mkPlayer :: Maybe Weapon -> Class -> Either Error Player
+>
+> mkPlayer (Just Sword) Warrior = Right (Player (Just Sword) Warrior)
+> mkPlayer (Just Dagger) Warrior = Right (Player (Just Dagger) Warrior)
+> mkPlayer Nothing Warrior = Right (Player Nothing Warrior)
+> mkPlayer (Just Staff) Warrior = Left "A Warrior cannot equip a Staff"
+>
+> mkPlayer (Just Staff) Wizard = Right (Player (Just Staff) Wizard)
+> mkPlayer (Just Dagger) Wizard = Right (Player (Just Dagger) Wizard)
+> mkPlayer Nothing Wizard = Right (Player Nothing Wizard)
+> mkPlayer (Just Sword) Wizard = Left "A Wizard cannot equip a Sword"
+> ```
+>
+> A player is always a defined class(wizard or warrior), but they may not have a weapon equipped. This solution is a bit wordy, but comes with the benefit that if you ever add a new weapon/class, the compiler will scream at you if you haven't handled the case for it properly.
+>
+> You would only export the mkPlayer function in the library and you could potentially have much fancier error handling, such as building a data structure that contains an 'invalid' player anyways (e.g. `Left (Player (Just Sword) Wizard)`) so you can custom build an error message at the call site ("A $class cannot equip a $weapon") or even completely ignore the error if that is a potential usecase (such as building an armor/weapon preview tool, where you don't care whether they can use the weapon/armor).
+>
+> Modifying it is pretty easy too. Say I wanted to allow for 2handed weapons, plus offhand weapons (shields, orbs, charms, etc.) I could encode that in a data type like:
+>
+> ``` haskell
+> data EquippedWeapon =
+>       TwoHanded TwoHandWeapon
+>     | OneHanded (Maybe OneHandWeapon) (Maybe Offhand)
+>     | Unequipped
+> ```
+>
+> and swap it into the Player definition:
+>
+> ``` haskell
+> data Player =
+>     Player EquippedWeapon Class
+> ```
+>
+> And now I wouldn't be able to compile until I fixed the mkPlayer function and any other place that uses a Player and is dependent upon the weapon portion of the data structure.
+>
+> e.g. This function wouldn't need to change
+>
+> ``` haskell
+> areYouAWizardHarry :: Player -> Bool
+> areYouAWizardHarry (Player _ Wizard) = True
+> areYouAWizardHarry (Player _ _) = False
+> ```
 
 ##### FBT
-The answer is very much "practicality issue". Haskell's more advanced type level features (including GADTs and type families) are very much suited for this, but they're also the sort of thing that gives Haskell a reputation for being complicated. If your just using Haskell's core features the way the parent post does, Haskell is a very simple, very elegant language.
 
-But better yet, it certainly does have the big guns which you can pull out.
-
-``` haskell
--- Just like before, we define `Class` and `Weapon`:
-data Class = Warrior | Wizard
-data Weapon = Sword | Staff | Dagger
-
--- The one really annoying thing is that
--- at the moment you have to use a little bit
--- of annoying boilerplate to define singletons
--- (not related to the OOP concept of singletons, by
--- the way), or use the `singletons` library. In the
--- future, with DependentHaskell, this won't be necessary:
-data SWeapon (w :: Weapon) where
-  SSword :: SWeapon 'Sword
-  SStaff :: SWeapon 'Staff
-  SDagger :: SWeapon 'Dagger
-
--- Now we can define `Player`:
-data Player (c :: Class) where
-  WizardPlayer :: AllowedToWield 'Wizard w ~ 'True => SWeapon w -> Player 'Wizard
-  WarriorPlayer :: AllowedToWield 'Warrior w ~ 'True => SWeapon w -> Player 'Warrior
-```
-
-This last part shouldn't be to difficult to understand, if you ignore the SWeapon boilerplate: Player is parameterized over the player's class, with different constructors for warriors and wizards. Each constructor has a parameter for the weapon the player is wielding, which is constrained by the type family (read: type-level function) named AllowedToWield.
-
-AllowedToWield isn't that complicated either, it's just a (type-level) function that takes a Class and a Weapon and returns a `Bool` using pattern matching:
-
-``` haskell
-type family AllowedToWield (c :: Class) (w :: Weapon) :: Bool where
-  AllowedToWield 'Wizard 'Sword = 'False
-  AllowedToWield 'Wizard 'Dagger = 'True
-  AllowedToWield 'Wizard 'Staff = 'True
-  AllowedToWield 'Warrior 'Sword = 'True
-  AllowedToWield 'Wizard 'Dagger = 'True
-  AllowedToWield 'Wizard 'Staff = 'False
-```
-
-And there it is. What do you gain from all this? Something which it is very had to get in certain other languages: compile-time type checking that there is no code that will allow a wizard to equip a sword, or a warrior to equip a staff.
-
-Once again, I want to make it clear that you absolutely don't need to do this, even in Haskell. You're absolutely allowed to write the simple code like in the parent post. But in my opinion, this is an extremely powerful and useful tool that Haskell lets you take much further than many other languages.
-
-So long story short, the answer to your question is that it is indeed a "practicality issue", although I don't think that my code is that impracticable. It certainly is absolutely not a Haskell limitation: in fact if anything, Haskell makes it a bit too tempting to go in the other direction, and go way overboard with embedding this kind of thing in the type system.
+> The answer is very much "practicality issue". Haskell's more advanced type level features (including GADTs and type families) are very much suited for this, but they're also the sort of thing that gives Haskell a reputation for being complicated. If your just using Haskell's core features the way the parent post does, Haskell is a very simple, very elegant language.
+>
+> But better yet, it certainly does have the big guns which you can pull out.
+>
+> ``` haskell
+> -- Just like before, we define `Class` and `Weapon`:
+> data Class = Warrior | Wizard
+> data Weapon = Sword | Staff | Dagger
+>
+> -- The one really annoying thing is that
+> -- at the moment you have to use a little bit
+> -- of annoying boilerplate to define singletons
+> -- (not related to the OOP concept of singletons, by
+> -- the way), or use the `singletons` library. In the
+> -- future, with DependentHaskell, this won't be necessary:
+> data SWeapon (w :: Weapon) where
+>   SSword :: SWeapon 'Sword
+>   SStaff :: SWeapon 'Staff
+>   SDagger :: SWeapon 'Dagger
+>
+> -- Now we can define `Player`:
+> data Player (c :: Class) where
+>   WizardPlayer :: AllowedToWield 'Wizard w ~ 'True => SWeapon w -> Player 'Wizard
+>   WarriorPlayer :: AllowedToWield 'Warrior w ~ 'True => SWeapon w -> Player 'Warrior
+> ```
+>
+> This last part shouldn't be to difficult to understand, if you ignore the SWeapon boilerplate: Player is parameterized over the player's class, with different constructors for warriors and wizards. Each constructor has a parameter for the weapon the player is wielding, which is constrained by the type family (read: type-level function) named AllowedToWield.
+>
+> AllowedToWield isn't that complicated either, it's just a (type-level) function that takes a Class and a Weapon and returns a `Bool` using pattern matching:
+>
+> ``` haskell
+> type family AllowedToWield (c :: Class) (w :: Weapon) :: Bool where
+>   AllowedToWield 'Wizard 'Sword = 'False
+>   AllowedToWield 'Wizard 'Dagger = 'True
+>   AllowedToWield 'Wizard 'Staff = 'True
+>   AllowedToWield 'Warrior 'Sword = 'True
+>   AllowedToWield 'Wizard 'Dagger = 'True
+>   AllowedToWield 'Wizard 'Staff = 'False
+> ```
+>
+> And there it is. What do you gain from all this? Something which it is very had to get in certain other languages: compile-time type checking that there is no code that will allow a wizard to equip a sword, or a warrior to equip a staff.
+>
+> Once again, I want to make it clear that you absolutely don't need to do this, even in Haskell. You're absolutely allowed to write the simple code like in the parent post. But in my opinion, this is an extremely powerful and useful tool that Haskell lets you take much further than many other languages.
+>
+> So long story short, the answer to your question is that it is indeed a "practicality issue", although I don't think that my code is that impracticable. It certainly is absolutely not a Haskell limitation: in fact if anything, Haskell makes it a bit too tempting to go in the other direction, and go way overboard with embedding this kind of thing in the type system.
 
 ### 5.[Design Patterns in Dynamic Languages](http://www.norvig.com/design-patterns/)
 
 ### 6.[Are Design Patterns Missing Language Features](http://wiki.c2.com/?AreDesignPatternsMissingLanguageFeatures)
+
+### 7.[OOP vs type classes](https://wiki.haskell.org/OOP_vs_type_classes)
 
 ## Control Theory
 ### 1.[Mathematical Control Theory: Deterministic Finite Dimensional Systems](http://www.math.rutgers.edu/~sontag/FTPDIR/sontag_mathematical_control_theory_springer98.pdf)
