@@ -17,6 +17,8 @@ To pass interpreted events as messages back to parent component, part of child's
 e.g. TodoMVC, delete button is attached to child components (TodoItem) while the lifecycles of child components are managed by parent component (TodoList). Parent need DELETE event from child to perform the state transition.
 
 [Handling lists in Cycle.js](https://github.com/cyclejs/cyclejs/issues/312)
+[Solve memory leak with circular dependencies of streams](https://github.com/cyclejs/cyclejs/issues/257)
+[Exploring composition in CycleJS - circular dependencies](http://blog.krawaller.se/posts/exploring-composition-in-cyclejs/)
 
 ## ELM
 
@@ -85,6 +87,9 @@ The benefit of channels is that the wiring between senders and receivers has les
 Maybe refrained from stateful channels thus only using stateless channels to build up a communication network between state machines is a way to go.
 Basically, abstract out the state machine out of each buffer so that the state transformation is explicit and can be traced by the global state history.
 
+[What is the purpose of the state monad?](https://stackoverflow.com/questions/28224270/what-is-the-purpose-of-the-state-monad)
+
+> From what you're describing it seems to me like you're looking for something more along the lines of the **actor model of concurrency**, where state is managed in an actor and the rest of the code interfaces with it through that, retrieving (a non-mutable version of) it or telling it to be modified via messages. In immutable languages (like Erlang), actors block waiting for a message, then process one when it comes in, then loop via (tail) recursion; they pass any modified state to the recursive call, and this is how the state gets "modified".
 
 # Tech & Design Choices
 
@@ -1172,6 +1177,16 @@ The equivalent of an FST from machines is Process. It's definition is a little s
 
 ### 14. [Elm-Automaton - experimental Arrowized FRP in Elm](https://github.com/evancz/automaton)
 
+### 15. [AFSM: Arrowized functional state machines - Haskell Library](https://hackage.haskell.org/package/AFSM)
+
+> In functional reactive programming(FRP), the key concepts are the signal, Signal a :: Time -> a, and the signal function from signal to signal, SF a b :: Signal a -> Signal b.
+>
+> The model of FRP is beautiful, but one difficult thing is that the signal is continuous function, and our computers are discrete systems.
+>
+> However, what if we do not care about time, and only focus on the sequence of input. There is reason to believe that computational tasks usually are time-insensitive. For example, the parsing process. So [a] and [Event a] are the only things we expected in our system.
+>
+> For discrete system, simplifying the input type is kind of generalizing [(Time,a)] to [a]. This simplified model is still able to process the time sequences by using [(Time, a)] as the input. In conclusion, we doesn't consider time as an essential part of the input, but if the input involves time, users can add time back as a part of the input.
+
 ## State Machine Implementations
 
 ### Unity
@@ -1189,7 +1204,12 @@ The equivalent of an FST from machines is Process. It's definition is a little s
 
 
 ## Algebraic Data Type
-### 1. [Monads for drummers](https://github.com/anton-k/monads-for-drummers)
+### 1.[Typeclassopedia](https://wiki.haskell.org/Typeclassopedia)
+
+> There are two keys to an expert Haskell hacker’s wisdom:
+> - Understand the types.
+> - Gain a deep intuition for each type class and its relationship to other type classes, backed up by familiarity with many examples.
+
 ### 2. [Functors, Applicatives, And Monads In Pictures](http://adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html)
 ### 3. [Three Useful Monads](http://adit.io/posts/2013-06-10-three-useful-monads.html)
 ### 4. [ADT & Dependent Type](http://www.tomharding.me/)
@@ -1217,8 +1237,7 @@ The equivalent of an FST from machines is Process. It's definition is a little s
 | Monad         | fast complex preprocessing of data    |
 
 ### 8.[The ReaderT Design Pattern - Avoid WriterT, StateT, ExceptT](https://www.fpcomplete.com/blog/2017/06/readert-design-pattern)
-
-### 9.[Typeclassopedia](https://wiki.haskell.org/Typeclassopedia)
+### 9. [Monads for drummers](https://github.com/anton-k/monads-for-drummers)
 ### 10.[What a Monad is not](https://wiki.haskell.org/What_a_Monad_is_not)
 ### 11.[Combinator Parsing: A Short Tutorial](http://www.cs.uu.nl/research/techreps/repo/CS-2008/2008-044.pdf)
 
@@ -1232,6 +1251,36 @@ Regarding "inspection", building a structure out of a free Applicative rather th
 ![haskell numeric type classes](./doc/haskell-numeric-type-classes.svg)
 
 ### 13.[OOP vs type classes](https://wiki.haskell.org/OOP_vs_type_classes)
+
+### 14.[Type classes v.s. Java interfaces](https://www.schoolofhaskell.com/school/starting-with-haskell/introduction-to-haskell/5-type-classes)
+
+**multiple dispatch**
+
+### 15.[Monoids, Functors, Applicatives, and Monads: 10 Main Ideas](https://monadmadness.wordpress.com/2015/01/02/monoids-functors-applicatives-and-monads-10-main-ideas/)
+
+> Main Idea #1: Monoids, functors, applicatives, and monads are all different algebras
+>
+> Main Idea #2: Monoids, functors, applicatives, and monads are ideas about computation, and are not just specific to Haskell
+>
+> Main Idea #3: Functors transform values inside containers, while applicatives and monads combine values inside containers
+>
+> Main Idea #4: Things that are monads can be combined using a special type of function composition
+>
+> Main Idea #5: You can put values inside a container but you can’t always take them out
+>
+> Main Idea #6: Applicatives and monads offer an elegant way to manage side effects and state
+>
+> Main Idea #7: Applicatives and monads both model running computations in sequence, but monads are more powerful
+>
+> Main Idea #8: Applicatives and monads come with nice syntax
+>
+> Main Idea #9: Monoids are a general algebra for combining things in a certain way
+>
+> Main Idea #10: Monads are monoids in the category of endofunctors
+
+### 16.[What a Monad is not](https://wiki.haskell.org/What_a_Monad_is_not#Haskell_doesn.27t_need_Monads)
+
+### 17.[Abstract Data Types and Objects - Two fundamental approaches to data abstraction](https://medium.com/@JosephJnk/abstract-data-types-and-objects-17828bd4abdc)
 
 ## Model Theory
 ### 1.[Model Theory - Wikipedia](https://en.wikipedia.org/wiki/Model_theory)
@@ -1295,6 +1344,8 @@ It also often **hides layout details** under abstraction layers, while a data-or
 ### 3.[One Weird Trick to Write Better Code](http://etodd.io/2015/09/28/one-weird-trick-better-code/)
 
 Rather than inheriting functionality, Unity entities are just bags of components. 
+
+[Data first, not code first - Hacker News](https://news.ycombinator.com/item?id=10291688)
 
 ### 4.Wizards and warriors
 (?) from OOP encoding rules in Type System to Rule Engine / Function on Data
@@ -1427,6 +1478,23 @@ Rather than inheriting functionality, Unity entities are just bags of components
 
 ### 7.[OOP vs type classes](https://wiki.haskell.org/OOP_vs_type_classes)
 
+### 8.[Data-Oriented Design (Or Why You Might Be Shooting Yourself in The Foot With OOP)](http://gamesfromwithin.com/data-oriented-design)
+
+> When we think about objects, we immediately think of trees— inheritance trees, containment trees, or message-passing trees, and our data is naturally arranged that way. As a result, when we perform an operation on an object, it will usually result in that object in turn accessing other objects further down in the tree. Iterating over a set of objects performing the same operation generates cascading, totally different operations at each object (see Figure 1a).
+
+> To achieve the best possible data layout, it’s helpful to break down each object into the different components, and group components of the same type together in memory, regardless of what object they came from. This organization results in large blocks of homogeneous data, which allow us to process the data sequentially (see Figure 1b).
+> A key reason why data-oriented design is so powerful is because it works very well on large groups of objects. 
+>
+> OOP, by definition, works on a single object.
+>
+> OOP ignores that and deals with each object in isolation.
+>
+> Advantages of Data-Oriented Design
+> - Parallelization
+> - Cache utilization
+> - Modularity
+> - Testing
+
 ## Control Theory
 ### 1.[Mathematical Control Theory: Deterministic Finite Dimensional Systems](http://www.math.rutgers.edu/~sontag/FTPDIR/sontag_mathematical_control_theory_springer98.pdf)
 
@@ -1456,6 +1524,13 @@ Rather than inheriting functionality, Unity entities are just bags of components
 
 ### 3.[Event Notifier, a Pattern for Event Notification](http://www.marco.panizza.name/dispenseTM/slides/exerc/eventNotifier/eventNotifier.html)
 
+### 4.[Unidirectional User Interface Architectures](https://staltz.com/unidirectional-user-interface-architectures.html)
+
+### 5.[Elm Static Types to Effectively Model Application Domain](https://egghead.io/courses/elm-static-types-to-effectively-model-application-domain)
+
+## React
+
+### 1.[Simple React Patterns - Dealing With Side-Effects In React](http://lucasmreis.github.io/blog/simple-react-patterns/)
 
 ## Others
 
