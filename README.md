@@ -1091,6 +1091,16 @@ Petri net models are normally more compact than similar automata based models an
 
 ### 2.[Learn TLA+](https://learntla.com/introduction/)
 
+## Reactive JS
+### 1.[Popmotion- A functional, reactive animation library](https://github.com/Popmotion/popmotion)
+
+### 2.[RxJS 6](https://github.com/ReactiveX/rxjs)
+
+### 3.[most - Monadic streams for reactive programming](https://github.com/cujojs/most)
+
+### 4.[xstream - An extremely intuitive, small, and fast functional reactive stream library for JavaScript](http://staltz.github.io/xstream/)
+
+### 5. [HaReactive - Purely functional reactive programming library for JavaScript and TypeScript](https://github.com/funkia/hareactive)
 
 ## Functional JS
 ### 1.[Jabz - powerful and practical abstractions for JavaScript](https://funkia.github.io/jabz/)
