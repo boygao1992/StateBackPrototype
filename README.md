@@ -36,6 +36,11 @@ e.g. TodoMVC, delete button is attached to child components (TodoItem) while the
 
 ![Node-to-Node Message Passing](./doc/node-to-node_message_passing.png "Node-to-Node Message Passing")
 
+### 1. [Scaling The Elm Architecture](https://github.com/evancz/guide.elm-lang.org/tree/master/reuse)
+
+> **We do not think in terms of reusable components.** Instead, we focus on reusable functions.
+> we create **reusable views** by breaking out helper functions to display our data.
+
 ## SAM
 
 V = State( vm( Model.present( Action( data))), nap(Model))
@@ -538,6 +543,48 @@ Framework-independent & composable
 
 # TODO (unsettled design choices)
 
+## State Vector Type Construct
+
+### 1.[Structured TodoMVC example with Elm](https://github.com/rogeriochaves/structured-elm-todomvc/)
+
+> - [NoMap approach with Domain focus](https://github.com/rogeriochaves/structured-elm-todomvc/tree/nomap-domain)
+> - [NoMap approach with Technical focus](https://github.com/rogeriochaves/structured-elm-todomvc/tree/nomap-technical)
+> - [OutMsg approach](http://folkertdev.nl/blog/elm-child-parent-communication/)
+> - [Translator approach](https://medium.com/@alex.lew/the-translator-pattern-a-model-for-child-to-parent-communication-in-elm-f4bfaa1d3f98)
+
+
+## Input/Event Space Partition
+1. Event Type definition
+2. Organization of Event Indices/Names
+
+### 1.[An  Industrial  Study  of  Applying  Input  Space Partitioning to Test Financial Calculation Engines](https://cs.gmu.edu/~offutt/rsrch/papers/calcengine.pdf)
+
+> This paper presents result from an industrial study that applied input space partitioning and semi-automated requirements modeling to large-scale industrial software, specifically financial calculation engines.
+
+## Model Checking (Rule-based System / Logic Programming)
+
+### 1.[Architecture for logic programing with arrangements of finite-state machines](http://ieeexplore.ieee.org/document/7588297/)
+
+### 2.[Verification of Conflicition and Unreachability in Rule-based Expert System with Model Checking](https://arxiv.org/pdf/1404.2768.pdf)
+
+> 3.2 UPPAAL
+> UPPAAL can verify systems that can be modeled as networks of timed automata (TA) expanded with structured data types, integer variables, and channel synchronization.
+> A finite state machine expended by clock variables is a TA.
+
+> UPPAAL expands the definition of TA with extra characteristics:
+> - Templates
+> - Global Variables
+> - Expressions
+> - Edges
+>   - Select
+>   - Guard
+>   - Synchronization
+>   - Update
+
+### 3.[Rule-based Machine Learning - Wikipedia](https://en.wikipedia.org/wiki/Rule-based_machine_learning)
+
+[Where machine learning meets rule-based systems - Hacker News](https://news.ycombinator.com/item?id=14717692)
+
 ## Stateful HTML Elements handling for performance
 
 1. Text Input Box
@@ -551,6 +598,8 @@ may represented by continuous-time model?
 ## State Store as Database
 
 1.[Using the Redux Store Like a Database](https://hackernoon.com/shape-your-redux-store-like-your-database-98faa4754fd5)
+
+2.[gist - Most efficient way to store domain state in Redux (Indexed Key-Value Store)](https://gist.github.com/sikanhe/9b940ce866d78354bba3)
 
 ## Event Handler as Data
 
@@ -614,6 +663,61 @@ Output variables’ values depend on the values of the state variables.
 ### 2.[Youtube - The simple essence of automatic differentiation - Conal Elliott](https://www.youtube.com/watch?v=Shl3MtWGu18&t=1083s)
 
 ### 3.[Youtube - You Should Be Using Automatic Differentiation - Ryan Adams (Twitter & Harvard)](https://www.youtube.com/watch?v=sq2gPzlrM0g&t=1314s)
+
+## OOP missing features
+1. Multiple Dispatch
+Overloaded functions dispatch based on runtime subtypes.
+
+OOP: class-based Single Dispatch
+
+2. Unit ()
+OOP: Void, lead to functions not pure nor composable
+
+3. Type Alias
+
+> data - creates new algebraic type with value constructors
+> - Can have several value constructors
+> - Value constructors are lazy
+> - Values can have several fields
+> - Affects both compilation and runtime, have runtime overhead
+> - Created type is a distinct new type
+> - Can have its own type class instances
+> - When pattern matching against value constructors, WILL be evaluated at least to weak head normal form (WHNF) *
+> - Used to create new data type (example: Address { zip :: String, street :: String } )
+>
+> newtype - creates new “decorating” type with value constructor
+> - Can have only one value constructor
+> - Value constructor is strict
+> - Value can have only one field
+> - Affects only compilation, no runtime overhead
+> - Created type is a distinct new type
+> - Can have its own type class instances
+> - When pattern matching against value constructor, CAN be not evaluated at all *
+> - Used to create higher level concept based on existing type with distinct set of supported operations or that is not interchangeable with original type (example: Meter, Cm, Feet is Double)
+>
+> type - creates an alternative name (synonym) for a type (like typedef in C)
+> - No value constructors
+> - No fields
+> - Affects only compilation, no runtime overhead
+> - No new type is created (only a new name for existing type)
+> - Can NOT have its own type class instances
+> - When pattern matching against data constructor, behaves the same as original type
+> - Used to create higher level concept based on existing type with the same set of supported operations (example: String is [Char])
+    
+C# only supports `type` with `using`
+
+4. Advanced Pattern Matching
+
+[Match Me if you can: Swift Pattern Matching in Detail.](https://appventure.me/2015/08/20/swift-pattern-matching-in-detail/)
+
+> - Wildcard Pattern (`_`)
+> - Identifier Pattern (Concrete Value)
+> - Value-Binding Pattern (Destructuring into Variables)
+> - Tuple Pattern (Product Type)
+> - Enumeration Case Pattern (Sum Type, not strict about Totality, support recursion i.e. Recursive Enumerations)
+> - Type-Casting Patterns (Runtime/Dynamic Subtypes, Foreign data)
+> - Expression Pattern (`~=` operator, e.g. Int ranges `0..9`)
+> - Fallthrough (default break in swtich), Break, and Labels
 
 # Reference
 
