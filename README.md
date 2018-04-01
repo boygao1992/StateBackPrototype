@@ -665,13 +665,22 @@ Output variables’ values depend on the values of the state variables.
 ### 3.[Youtube - You Should Be Using Automatic Differentiation - Ryan Adams (Twitter & Harvard)](https://www.youtube.com/watch?v=sq2gPzlrM0g&t=1314s)
 
 ## OOP missing features
+
 1. Multiple Dispatch
+
 Overloaded functions dispatch based on runtime subtypes.
 
-OOP: class-based Single Dispatch
+OOP: class-based Single Dispatch (Function Dispatch doesn't enforce subtyping)
+
+Visitor Pattern: reverse caller-callee once called for a extra Single Dispatch, called Double Dispatch
+ (two calls: A call B to get subtype of A, then B call A to get subtype of B, then the end function have subtypes from both A and B)
+ 
+Strong coupling between concrete Visitor classes and subtypes of B.
+(Adding/Removing subtypes from B will cause a reimplementation of Visitor.)
 
 2. Unit ()
-OOP: Void, lead to functions not pure nor composable
+
+OOP: Void, lead to functions not pure nor composable.
 
 3. Type Alias
 
