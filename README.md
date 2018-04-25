@@ -587,7 +587,7 @@ Framework-independent & composable
 
 ## Stateful HTML Elements handling for performance
 
-1. Text Input Box
+1. Text Entry Box
 2. Slider
 3. Selector
 
