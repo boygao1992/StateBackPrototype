@@ -1,4 +1,6 @@
 # Problems in Current Frameworks
+[User interfaces as reactive systems - Technuflections Blog](https://brucou.github.io/posts/user-interfaces-as-reactive-systems/)
+
 ## CycleJS
 
 1. CycleJS claims that the Main Function is *Pure*, but not really.
@@ -794,8 +796,6 @@ FSM with Buffer/History
 
 ### 2.[Building Finite State Machines](http://www.dcs.ed.ac.uk/home/mic/FiniteStateMachines2-slides.pdf)
 
-### 3.[State Machines for Event-Driven Systems](https://barrgroup.com/Embedded-Systems/How-To/State-Machines-Event-Driven-Systems)
-
 ### 4.[Introduction to Hierarchical State Machines (HSMs)](https://barrgroup.com/Embedded-Systems/How-To/Introduction-Hierarchical-State-Machines)
 
 ### 5.[Transition system](https://en.m.wikipedia.org/wiki/Transition_system)
@@ -819,6 +819,15 @@ Analysis
 - Experimental validation
 
 ### 8.[State Space Representations of Linear Physical Systems](http://lpsa.swarthmore.edu/Representations/SysRepSS.html)
+
+## Event-driven system as Automata
+### 1.[User interfaces as reactive systems - Technuflections Blog](https://brucou.github.io/posts/user-interfaces-as-reactive-systems/)
+
+### 2.[State Machines for Event-Driven Systems](https://barrgroup.com/Embedded-Systems/How-To/State-Machines-Event-Driven-Systems)
+
+### 3.[Pure UI Control - prototyping with Statecharts](https://medium.com/@asolove/pure-ui-control-ac8d1be97a8d)
+
+### 4.[Constructing the User Interface With Statecharts - Ian Horrocks](https://dl.acm.org/citation.cfm?id=520870)
 
 ## Behavior Tree
 
@@ -1197,6 +1206,17 @@ Therefore `sf` is analogous to a sequential circuit.
 > 7.5 Actors
 
 ### 27.[Testing and Debugging Functional Reactive Programming](https://dl.acm.org/citation.cfm?id=3136534.3110246)
+
+### 28.[Lucid Synchrone manual](https://www.di.ens.fr/~pouzet/lucid-synchrone/lucid-synchrone-3.0-manual.pdf)
+
+[Lucid Synchrone Programming Language](https://www.di.ens.fr/~pouzet/lucid-synchrone/index.html)
+
+> Lucid Synchrone is an experimental language for the implementation of reactive systems. It is based on the synchronous model of time as provided by Lustre combined with some features from ML languages. The main characteristics of the language are the following:
+>
+> - It is a strongly typed, higher-order functional language managing infinite sequences or streams as primitive values. These streams are used for representing input and output signals of reactive systems and are combined through the use of synchronous data-flow primitives à la Lustre.
+> - The language is founded on several type systems (e.g., type and clock inference, causality and initialization analysis) which statically guaranty safety properties on the generated code.
+> - Programs are compiled into sequential imperative code.
+> - The language is built above Objective Caml used as the host language. Combinatorial values are imported from Objective Caml and programs are compiled into Objective Caml code. A simple module system is provided for importing values from the host language or from other synchronous modules.
 
 ## Self-adjusting Computation (SAC)
 
@@ -1668,6 +1688,8 @@ Rather than inheriting functionality, Unity entities are just bags of components
 > - Modularity
 > - Testing
 
+### 9.[Design patterns implemented in Java](http://java-design-patterns.com/)
+
 ## Control Theory
 ### 1.[Mathematical Control Theory: Deterministic Finite Dimensional Systems](http://www.math.rutgers.edu/~sontag/FTPDIR/sontag_mathematical_control_theory_springer98.pdf)
 
@@ -1701,7 +1723,6 @@ Rather than inheriting functionality, Unity entities are just bags of components
 
 ### 5.[Elm Static Types to Effectively Model Application Domain](https://egghead.io/courses/elm-static-types-to-effectively-model-application-domain)
 
-### 6.[User interfaces as reactive systems - Technuflections Blog](https://brucou.github.io/posts/user-interfaces-as-reactive-systems/)
 
 ## React
 
