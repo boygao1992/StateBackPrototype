@@ -1,6 +1,47 @@
 # Problems in Current Frameworks
 [User interfaces as reactive systems - Technuflections Blog](https://brucou.github.io/posts/user-interfaces-as-reactive-systems/)
 
+## PUX
+TODO
+
+[PUX - Build type-safe web applications with PureScript](http://purescript-pux.org/)
+
+> A Pux application consists of two types and two functions:
+> 1. A type for the app's **State**.
+>
+> A type for the application's state. For example, the state of a simple counter that can be incremented or decremented may be an integer:
+> ```purescript
+> type State = Int
+> ```
+>
+> 2. A type for **Event**s such as the user clicking a button.
+>
+> Pux listens for DOM events and reifies them using the application's event type. For example, a simple counter needs events for incrementing and decrementing in response to clicking buttons:
+> ```purescript
+> data Event = Increment | Decrement
+> ```
+>
+> 3. A function which produces a new state from events, **foldp**.
+>
+> Whenever an event occurs a new state is produced by folding it with the current state using foldp. Continuing the counter example, the previous count is combined with the current event to produce a new count:
+> ```purescript
+> foldp :: ∀ fx. Event -> State -> EffModel State Event fx
+> foldp Increment n = { state: n + 1, effects: [] }
+> foldp Decrement n = { state: n - 1, effects: [] }
+> ```
+>
+> 4. A function which produces HTML from the current state, **view**.
+>
+> The view function takes state and returns the corresponding HTML.
+> ```purescript
+> view :: State -> HTML Event
+> view count =
+>   div do
+>     button #! onClick (const Increment) $ text "Increment"
+>     span $ text (show count)
+>     button #! onClick (const Decrement) $ text "Decrement"
+> ```
+
 ## CycleJS
 
 1. CycleJS claims that the Main Function is *Pure*, but not really.
