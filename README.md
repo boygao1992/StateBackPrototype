@@ -434,6 +434,7 @@ Mapping between
 - pre-defined events in virtual input components / physical input devices
 - events in the event-driven system
 
+### 1.[A Morphological Analysis of the Design Space of Input Devices](https://dl.acm.org/citation.cfm?id=128726)
 
 # Overall Architecture
 
