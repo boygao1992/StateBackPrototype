@@ -349,6 +349,13 @@ Higher-order combinational logic with variables
 
 
 ## Separation of Internal Representation and External Representation
+
+> multi-layered processing?
+> Internal (singleton) + Externals
+> Each may have multiple layers, and dynamic & static information
+> dynamics (represented by state vector, e.g. payloads in React)
+> statics (commonly encoded in view/render function, e.g. React, but not necessary)
+
 This framework is ought to be general for both Frontend and Backend application.
 
 1. Model
@@ -627,6 +634,12 @@ Framework-independent & composable
 8. text editor (container? DOM tree inside)
 9. text area with annotation (hidden, collapse)
 
+## Alternatives?
+### 1.[Pux App Architecture](http://purescript-pux.org/docs/components/)
+
+> If you have React or Elm experience, you're taught to think of your application as self-contained, inter-locking components that encapsulate business logic and presentation. But that object-oriented perspective is unnecessary when working with a purely functional language like PureScript. Components are just one of the many ways you could organize your Pux application, because an application is really a single foldp and view function. They can be split into smaller functions however best fit your needs.
+> Instead of components, split up the foldp function into modules that are separate from your views and organized around business logic. You may have a module that handles user events like logging in and out, another for todo list events, etc. along with your top-level foldp. Views can live separately and import the events from those other foldp modules as needed. It's easier to reorganize business logic and views with this architecture. Those with Redux experience will see the similarity to actions and reducers.
+
 # Examples
 
 ## Cyclic-dependent Buttons
@@ -705,6 +718,12 @@ may represented by continuous-time model?
 
 ## State Transitions as Events
 
+A more general description of event?
+
+For example, keyboard without considering Cpas Lock is a stateless input device because the state of each key is out of the scope of OS, the way to sample the states of the keys are pre-defined by the device designer or manufacturer, i.e. sampling rate, respond time.
+
+Fundamentally, we constantly sample the continuous states of the keys and turn the discrete state transitions into pre-defined discrete events.
+
 ## API Complexity
 ### 1.[The MNP Problem of Distributed Computing](https://www.ebpml.org/blog2/index.php/2014/12/27/the-mnp-problem-of-distributed)
 
@@ -743,7 +762,9 @@ Daily code optimization using benchmarks and profiling in Golang - Gophercon Ind
 
 ## Continuous-time Model Representation
 
-### 1.[State-space representation - Wikipedia](https://en.wikipedia.org/wiki/State-space_representation)
+### Ordinary Differential Equation (ODE)
+
+#### 1.[State-space representation - Wikipedia](https://en.wikipedia.org/wiki/State-space_representation)
 
 control engineering
 
@@ -754,9 +775,28 @@ State variables are variables whose values **evolve through time** in a way that
 Output variables’ values depend on the values of the state variables.
 (Moore Machine?)
 
-### 2.[Youtube - The simple essence of automatic differentiation - Conal Elliott](https://www.youtube.com/watch?v=Shl3MtWGu18&t=1083s)
+#### 2.[Complex ODE Based Models - Stan, a Bayesian inference framework](https://github.com/stan-dev/stan/wiki/Complex-ODE-Based-Models)
 
-### 3.[Youtube - You Should Be Using Automatic Differentiation - Ryan Adams (Twitter & Harvard)](https://www.youtube.com/watch?v=sq2gPzlrM0g&t=1314s)
+### Algorithmic/Automatic Derivatives
+
+### 1.[Youtube - The simple essence of automatic differentiation - Conal Elliott](https://www.youtube.com/watch?v=Shl3MtWGu18&t=1083s)
+
+### 2.[Youtube - You Should Be Using Automatic Differentiation - Ryan Adams (Twitter & Harvard)](https://www.youtube.com/watch?v=sq2gPzlrM0g&t=1314s)
+
+
+> **System Model**: A model that describes the evolution of a system over time.
+>
+> **Event**: Either the observation of a certain quantity or a change in the state of the system:
+>
+> - Observation Event: usually specifies the time and the quantity of interest at which we want to simulate data
+> - State Changer: An (exterior) intervention that alters the state of the system
+>
+> **Evolution Operator**: Takes in the state of a system at time t0 and returns the state of that system at time t0 + t, provided that:
+>
+> - knowing the state at time t0 fully defines the state at finite times
+> - between t0 and t0 + t, the system is isolated, i.e. there is no exterior intervention that alters the state of the system
+>
+> **Event Handler**: Takes in a schedule of events and returns the quantities of interest at each event.
 
 ## OOP missing features
 
