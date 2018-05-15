@@ -777,6 +777,8 @@ Output variables’ values depend on the values of the state variables.
 
 #### 2.[Complex ODE Based Models - Stan, a Bayesian inference framework](https://github.com/stan-dev/stan/wiki/Complex-ODE-Based-Models)
 
+#### 3.[Analog computation with continuous ODEs](https://ieeexplore.ieee.org/document/363672/)
+
 ### Algorithmic/Automatic Derivatives
 
 ### 1.[Youtube - The simple essence of automatic differentiation - Conal Elliott](https://www.youtube.com/watch?v=Shl3MtWGu18&t=1083s)
