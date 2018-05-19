@@ -710,9 +710,22 @@ may represented by continuous-time model?
 
 2.[gist - Most efficient way to store domain state in Redux (Indexed Key-Value Store)](https://gist.github.com/sikanhe/9b940ce866d78354bba3)
 
-## Event Handler as Data
+## acceptable Events for a given State <-> Input Components in View Function
 
-1. [Emerging Patterns in JavaScript Event Handling](https://www.sitepoint.com/emerging-patterns-javascript-event-handling/)
+Synchronization problem:
+- Events used in current View Function
+- All the Events available in the Event/Input space/subspaces
+
+Given a state diagram, all the outgoing edges from a given state are properly indexed with distinct symbols.
+There needs to be enough physical input devices / virtual input components in the view ( and enough DOFs which takes an interpreter/translator) to be able to cover all these events associated with this state.
+
+> interpreter/translator: mapping from Primitive Events in Input Devices/Component to Internal Events in the system's Internal Representation
+
+1. When the user interaction designer are figuring out the specification of the system behaviors for a given state in Statecharts, presenting all the events used in current view function along with all the events available are useful. The designer is able to check if some events are not properly handled.
+
+2. When the user interface programmers are creating View Function based off the Statecharts specification, programmers are able to check if there are enough input components laying out in the view and their behaviors are properly defined to cover all the acceptable events after each interpreter/translator.
+
+### 1. [Emerging Patterns in JavaScript Event Handling](https://www.sitepoint.com/emerging-patterns-javascript-event-handling/)
 
 ## Serialization of Functions
 
