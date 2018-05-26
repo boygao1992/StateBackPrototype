@@ -1317,6 +1317,8 @@ Therefore `sf` is analogous to a sequential circuit.
 > - Programs are compiled into sequential imperative code.
 > - The language is built above Objective Caml used as the host language. Combinatorial values are imported from Objective Caml and programs are compiled into Objective Caml code. A simple module system is provided for importing values from the host language or from other synchronous modules.
 
+### 29.[Coursera - Functional Program Design in Scala](https://www.coursera.org/learn/progfun2/lecture/pEsTy/lecture-4-2-functional-reactive-programming)
+
 ## Self-adjusting Computation (SAC)
 
 ### 1.[Self-Adjusting Computation - Umut Acar - Carnegie Mellon University](http://www.umut-acar.org/self-adjusting-computation)
@@ -1826,6 +1828,10 @@ Rather than inheriting functionality, Unity entities are just bags of components
 ## React
 
 ### 1.[Simple React Patterns - Dealing With Side-Effects In React](http://lucasmreis.github.io/blog/simple-react-patterns/)
+
+## Scala
+
+### 1.[Scala.js for JavaScript developers](https://www.scala-js.org/doc/sjs-for-js/)
 
 ## Others
 
