@@ -1319,6 +1319,14 @@ Therefore `sf` is analogous to a sequential circuit.
 
 ### 29.[Coursera - Functional Program Design in Scala](https://www.coursera.org/learn/progfun2/lecture/pEsTy/lecture-4-2-functional-reactive-programming)
 
+[HW Solutions](https://github.com/izzyleung/Principles-Of-Reactive-Programming)
+
+### 30. Reactive Programming Tutorial in Scala + GWT. Signal. 
+
+[Part 1](http://www.kazachonak.com/2012/06/reactive-programming-tutorial-in-scala.html)
+
+[Part 2](http://www.kazachonak.com/2012/06/reactive-programming-tutorial-in-scala_11.html)
+
 ## Self-adjusting Computation (SAC)
 
 ### 1.[Self-Adjusting Computation - Umut Acar - Carnegie Mellon University](http://www.umut-acar.org/self-adjusting-computation)
