@@ -65,7 +65,10 @@ e.g. TodoMVC, delete button is attached to child components (TodoItem) while the
 
 ## ELM
 
-1. state transition function without validation of state
+~~1. state transition function without validation of state~~
+
+  - Precise construction of state space by Union type and Product type, which encapsulate the state validation logic.
+  - Further refinement of state space relies on conditionals (a set of source states) in State Transition Function.
 
 2. state transition functions are directly attached to event handlers, which strongly couples model and view 
 
