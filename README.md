@@ -1841,6 +1841,20 @@ Rather than inheriting functionality, Unity entities are just bags of components
 
 ### 1.[Scala.js for JavaScript developers](https://www.scala-js.org/doc/sjs-for-js/)
 
+## Bayesian Network & Causality
+
+### 1.[The Book of Why: The New Science of Cause and Effect](https://www.amazon.com/Book-Why-Science-Cause-Effect/dp/046509760X)
+
+> To appreciate the depth of this gap, imagine the difficulties that a scientist would face in trying to express some obvious causal relationships-says, that the barometer reading B tracks the atmospheric pressure P.
+> We can easily write down this relationship in an equation such as B = kP, where k is some constant of proportionality.
+> The rules of algebra now permit us to rewrite this same equation in a wild variety of forms, for example, P = B/k, k = B/P, or B–kP = 0.
+> They all mean the same thing—that if we know any two of the three quantities, the third is determined.
+> **None of the letters k, B, or P is in any mathematical way privileged over any of the others.**
+> How then can we express our strong conviction that it is the pressure that causes the barometer to change and not the other way around?
+> And if we cannot express even this, how can we hope to express the many other causal convictions that do not have mathematical formulas, such as that the rooster’s crow does not cause the sun to rise?
+
+A group constraint among three state variables `k, B, P`.
+
 ## Others
 
 ### 1.[To Dissect a Mockingbird: A Graphical Notation for the Lambda Calculus with Animated Reduction](http://dkeenan.com/Lambda/)
