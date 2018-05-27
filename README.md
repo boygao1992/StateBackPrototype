@@ -59,9 +59,9 @@ Parent component cannot interpret External Events from Event Listeners attached 
 To pass interpreted events as messages back to parent component, part of child's sink has to be part of parent's source while part of parent's source is already part of child's source. Thus, parent and child depend on each other.
 e.g. TodoMVC, delete button is attached to child components (TodoItem) while the lifecycles of child components are managed by parent component (TodoList). Parent need DELETE event from child to perform the state transition.
 
-[Handling lists in Cycle.js](https://github.com/cyclejs/cyclejs/issues/312)
-[Solve memory leak with circular dependencies of streams](https://github.com/cyclejs/cyclejs/issues/257)
-[Exploring composition in CycleJS - circular dependencies](http://blog.krawaller.se/posts/exploring-composition-in-cyclejs/)
+- [Handling lists in Cycle.js](https://github.com/cyclejs/cyclejs/issues/312)
+- [Solve memory leak with circular dependencies of streams](https://github.com/cyclejs/cyclejs/issues/257)
+- [Exploring composition in CycleJS - circular dependencies](http://blog.krawaller.se/posts/exploring-composition-in-cyclejs/)
 
 ## ELM
 
