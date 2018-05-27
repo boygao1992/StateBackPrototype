@@ -808,6 +808,8 @@ Daily code optimization using benchmarks and profiling in Golang - Gophercon Ind
 
 ![hybrid automaton formal definition](./doc/hybrid-automaton-formal-definition.png "Definition 3.1: hybrid automaton")
 
+#### 4.[An Introduction to Hybrid Automata](http://www.cmi.ac.in/~madhavan/courses/acts2010/Raskin_Intro_Hybrid_Automata.pdf)
+
 ### Ordinary Differential Equation (ODE)
 
 #### 1.[State-space representation - Wikipedia](https://en.wikipedia.org/wiki/State-space_representation)
