@@ -484,6 +484,18 @@ Mapping between
 
 ### 1.[A Morphological Analysis of the Design Space of Input Devices](https://dl.acm.org/citation.cfm?id=128726)
 
+## Group Constraint
+
+Conditionals on multiple variables.
+
+Hard to define manually in FRP / causal relationships.
+
+None of these variables are prioritized over the others.
+
+All of them are interconnected by causal connections, which forms a total graph.
+
+See also the `References > Bayesian Network & Causality > The Book of Why`.
+
 # Overall Architecture
 
 Mealy Machine + Synchronous Composition + Feedback + Explicit Side Effects
@@ -1854,6 +1866,10 @@ Rather than inheriting functionality, Unity entities are just bags of components
 > And if we cannot express even this, how can we hope to express the many other causal convictions that do not have mathematical formulas, such as that the rooster’s crow does not cause the sun to rise?
 
 A group constraint among three state variables `k, B, P`.
+
+### 2.[Wikipedia - Causal loop diagram](https://en.wikipedia.org/wiki/Causal_loop_diagram)
+
+> A causal loop diagram (CLD) is a causal diagram that aids in visualizing how different variables in a system are **interrelated**.
 
 ## Others
 
