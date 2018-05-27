@@ -790,7 +790,23 @@ Daily code optimization using benchmarks and profiling in Golang - Gophercon Ind
 [article](https://medium.com/@hackintoshrao/daily-code-optimization-using-benchmarks-and-profiling-in-golang-gophercon-india-2016-talk-874c8b4dc3c5)
 / [youtube](https://www.youtube.com/watch?v=-KDRdz4S81U)
 
-## Continuous-time Model Representation
+## Continuous-time/Hybrid Model Representation
+
+### Hybrid Automaton
+
+#### 1.[Wikipedia - Hybrid automaton](https://en.wikipedia.org/wiki/Hybrid_automaton)
+
+#### 2.[Foundations of Total Functional Data-Flow Programming](https://arxiv.org/abs/1406.2063)
+
+> A hybrid automaton is a finite state machine with a finite set of continuous variables whose values are described by a set of ordinary differential equations.
+> This combined specification of discrete and continuous behaviors enables dynamic systems that comprise both digital and analog components to be modeled and analyzed.
+
+1st-order (continuous variables dependency graph): ODE / Dataflow
+2st-order (discrete dependency graph transition): FSM (a finite set of control mode)
+
+#### 3.[Enclosing the behavior of a hybrid automaton up to and beyond a Zeno point](https://www.sciencedirect.com/science/article/pii/S1751570X15000606)
+
+![hybrid automaton formal definition](./doc/hybrid-automaton-formal-definition.png "Definition 3.1: hybrid automaton")
 
 ### Ordinary Differential Equation (ODE)
 
@@ -829,70 +845,6 @@ Output variables’ values depend on the values of the state variables.
 > - between t0 and t0 + t, the system is isolated, i.e. there is no exterior intervention that alters the state of the system
 >
 > **Event Handler**: Takes in a schedule of events and returns the quantities of interest at each event.
-
-## OOP missing features
-
-1. Multiple Dispatch
-
-Overloaded functions dispatch based on runtime subtypes.
-
-OOP: class-based Single Dispatch (Function Dispatch doesn't enforce subtyping)
-
-Visitor Pattern: reverse caller-callee once called for a extra Single Dispatch, called Double Dispatch
- (two calls: A call B to get subtype of A, then B call A to get subtype of B, then the end function have subtypes from both A and B)
- 
-Strong coupling between concrete Visitor classes and subtypes of B.
-(Adding/Removing subtypes from B will cause a reimplementation of Visitor.)
-
-2. Unit ()
-
-OOP: Void, lead to functions not pure nor composable.
-
-3. Type Alias
-
-> data - creates new algebraic type with value constructors
-> - Can have several value constructors
-> - Value constructors are lazy
-> - Values can have several fields
-> - Affects both compilation and runtime, have runtime overhead
-> - Created type is a distinct new type
-> - Can have its own type class instances
-> - When pattern matching against value constructors, WILL be evaluated at least to weak head normal form (WHNF) *
-> - Used to create new data type (example: Address { zip :: String, street :: String } )
->
-> newtype - creates new “decorating” type with value constructor
-> - Can have only one value constructor
-> - Value constructor is strict
-> - Value can have only one field
-> - Affects only compilation, no runtime overhead
-> - Created type is a distinct new type
-> - Can have its own type class instances
-> - When pattern matching against value constructor, CAN be not evaluated at all *
-> - Used to create higher level concept based on existing type with distinct set of supported operations or that is not interchangeable with original type (example: Meter, Cm, Feet is Double)
->
-> type - creates an alternative name (synonym) for a type (like typedef in C)
-> - No value constructors
-> - No fields
-> - Affects only compilation, no runtime overhead
-> - No new type is created (only a new name for existing type)
-> - Can NOT have its own type class instances
-> - When pattern matching against data constructor, behaves the same as original type
-> - Used to create higher level concept based on existing type with the same set of supported operations (example: String is [Char])
-    
-C# only supports `type` with `using`
-
-4. Advanced Pattern Matching
-
-[Match Me if you can: Swift Pattern Matching in Detail.](https://appventure.me/2015/08/20/swift-pattern-matching-in-detail/)
-
-> - Wildcard Pattern (`_`)
-> - Identifier Pattern (Concrete Value)
-> - Value-Binding Pattern (Destructuring into Variables)
-> - Tuple Pattern (Product Type)
-> - Enumeration Case Pattern (Sum Type, not strict about Totality, support recursion i.e. Recursive Enumerations)
-> - Type-Casting Patterns (Runtime/Dynamic Subtypes, Foreign data)
-> - Expression Pattern (`~=` operator, e.g. Int ranges `0..9`)
-> - Fallthrough (default break in swtich), Break, and Labels
 
 # Reference
 
@@ -1636,9 +1588,76 @@ an area of mathematics primarily concerned with counting, both as a means and an
 #### 1.[Memory Evolutive System (MES)](http://vbm-ehr.pagesperso-orange.fr/AnintroT.htm)
 #### 2.[Understanding Visualization: A Formal Approach using Category Theory and Semiotics](https://arxiv.org/abs/1311.4376)
 
+
 ## Guarded Recursion
 ### 1.[A Modality for Recursion](https://pdfs.semanticscholar.org/a177/47f98e5b821f03ec8be858794f2f83a683b7.pdf)
 ### 2.[A Model of Guarded Recursion with Clock Synchronisation](http://www.itu.dk/people/mogel/papers/clocks-mfps2015.pdf)
+
+
+## OOP missing features
+
+1. Multiple Dispatch
+
+Overloaded functions dispatch based on runtime subtypes.
+
+OOP: class-based Single Dispatch (Function Dispatch doesn't enforce subtyping)
+
+Visitor Pattern: reverse caller-callee once called for a extra Single Dispatch, called Double Dispatch
+ (two calls: A call B to get subtype of A, then B call A to get subtype of B, then the end function have subtypes from both A and B)
+ 
+Strong coupling between concrete Visitor classes and subtypes of B.
+(Adding/Removing subtypes from B will cause a reimplementation of Visitor.)
+
+2. Unit ()
+
+OOP: Void, lead to functions not pure nor composable.
+
+3. Type Alias
+
+> data - creates new algebraic type with value constructors
+> - Can have several value constructors
+> - Value constructors are lazy
+> - Values can have several fields
+> - Affects both compilation and runtime, have runtime overhead
+> - Created type is a distinct new type
+> - Can have its own type class instances
+> - When pattern matching against value constructors, WILL be evaluated at least to weak head normal form (WHNF) *
+> - Used to create new data type (example: Address { zip :: String, street :: String } )
+>
+> newtype - creates new “decorating” type with value constructor
+> - Can have only one value constructor
+> - Value constructor is strict
+> - Value can have only one field
+> - Affects only compilation, no runtime overhead
+> - Created type is a distinct new type
+> - Can have its own type class instances
+> - When pattern matching against value constructor, CAN be not evaluated at all *
+> - Used to create higher level concept based on existing type with distinct set of supported operations or that is not interchangeable with original type (example: Meter, Cm, Feet is Double)
+>
+> type - creates an alternative name (synonym) for a type (like typedef in C)
+> - No value constructors
+> - No fields
+> - Affects only compilation, no runtime overhead
+> - No new type is created (only a new name for existing type)
+> - Can NOT have its own type class instances
+> - When pattern matching against data constructor, behaves the same as original type
+> - Used to create higher level concept based on existing type with the same set of supported operations (example: String is [Char])
+    
+C# only supports `type` with `using`
+
+4. Advanced Pattern Matching
+
+[Match Me if you can: Swift Pattern Matching in Detail.](https://appventure.me/2015/08/20/swift-pattern-matching-in-detail/)
+
+> - Wildcard Pattern (`_`)
+> - Identifier Pattern (Concrete Value)
+> - Value-Binding Pattern (Destructuring into Variables)
+> - Tuple Pattern (Product Type)
+> - Enumeration Case Pattern (Sum Type, not strict about Totality, support recursion i.e. Recursive Enumerations)
+> - Type-Casting Patterns (Runtime/Dynamic Subtypes, Foreign data)
+> - Expression Pattern (`~=` operator, e.g. Int ranges `0..9`)
+> - Fallthrough (default break in swtich), Break, and Labels
+
 
 ## Post-OOP
 
