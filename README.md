@@ -1895,6 +1895,15 @@ A group constraint among three state variables `k, B, P`.
 
 > A causal loop diagram (CLD) is a causal diagram that aids in visualizing how different variables in a system are **interrelated**.
 
+### 3.[the Seven Pillars of Causal Reasoning with Reflections on Machine Learning](http://ftp.cs.ucla.edu/pub/stat_ser/r481.pdf)
+
+To achieve human-level intelligence, learning machines need the guidance of a model of external reality, similar to the ones used in causal inference tasks.
+
+## Purescript
+
+### 1.[purescript-base documentation](https://github.com/purescript-contrib/purescript-base/tree/master/docs)
+
+
 ## Others
 
 ### 1.[To Dissect a Mockingbird: A Graphical Notation for the Lambda Calculus with Animated Reduction](http://dkeenan.com/Lambda/)
