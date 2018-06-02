@@ -1298,6 +1298,8 @@ Therefore `sf` is analogous to a sequential circuit.
 
 ### 31.[(Arrowized) Functional Reactive Programming, Continued*](http://haskell.cs.yale.edu/wp-content/uploads/2011/02/workshop-02.pdf)
 
+### 32.[Elm: Concurrent FRP for Functional GUIs - Evan Czaplicki (2012)](https://www.seas.harvard.edu/sites/default/files/files/archived/Czaplicki.pdf)
+
 
 ## Self-adjusting Computation (SAC)
 
