@@ -1296,6 +1296,9 @@ Therefore `sf` is analogous to a sequential circuit.
 
 [Part 2](http://www.kazachonak.com/2012/06/reactive-programming-tutorial-in-scala_11.html)
 
+### 31.[(Arrowized) Functional Reactive Programming, Continued*](http://haskell.cs.yale.edu/wp-content/uploads/2011/02/workshop-02.pdf)
+
+
 ## Self-adjusting Computation (SAC)
 
 ### 1.[Self-Adjusting Computation - Umut Acar - Carnegie Mellon University](http://www.umut-acar.org/self-adjusting-computation)
