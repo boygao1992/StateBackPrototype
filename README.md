@@ -1037,6 +1037,8 @@ Thus, the mechanisms required to achieve a continuous-time model of computation 
 
 ### 2.[LuaCSP Reference Manual](http://htmlpreview.github.io/?https://github.com/loyso/LuaCSP/blob/master/doc/html/LuaCSP.html)
 
+### 3.[Concurrent Programming for Scalable Web Architectures - Diploma Thesis by Benjamin Erb](http://berb.github.io/diploma-thesis/community/index.html)
+
 
 ## Arrowized FRP
 
@@ -1300,6 +1302,21 @@ Therefore `sf` is analogous to a sequential circuit.
 
 ### 32.[Elm: Concurrent FRP for Functional GUIs - Evan Czaplicki (2012)](https://www.seas.harvard.edu/sites/default/files/files/archived/Czaplicki.pdf)
 
+> 2.1 Functional Reactive Programming
+> 2.1.1 Classical FRP
+Signal and Event
+> 2.1.2 Real-time FRP (RT-FRP)
+Event = Signal(Maybe a)
+> 2.1.2 Event-driven FRP (E-FRP)
+Only discretized Signal
+> 2.1.3 Arrowized FRP
+> **Global delays** and **unnecessary updates** both result from the **instantaneous update assumption** and the use of **continuous signals**.
+Solved in Elm by Concurrent FRP (?)
+
+> 2.2 Message-passing Concurrency
+> concurrency is necessary to create robust and responsive GUIs.
+
+### 33.[Effects, Asynchrony, and Choice in Arrowized Functional Reactive Programming](https://pdfs.semanticscholar.org/4aa5/7bbffe8d94d356237c4d974357aa27778cd3.pdf)
 
 ## Self-adjusting Computation (SAC)
 
