@@ -1929,6 +1929,11 @@ To achieve human-level intelligence, learning machines need the guidance of a mo
 
 ### 1.[Slack clone built with Elixir, Phoenix, and React Redux](https://github.com/bnhansn/sling)
 
+## Swift
+
+### 1.[An Introduction to WebObjects, in Swift](http://www.alwaysrightinstitute.com/wo-intro/)
+
+### 2.[Can Swift replace Front-End or Isomorphic JavaScript?](https://medium.com/@stawecki/can-swift-replace-front-end-or-isomorphic-javascript-2191c58f35d7)
 
 ## Others
 
