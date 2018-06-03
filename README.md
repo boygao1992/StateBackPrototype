@@ -1925,6 +1925,10 @@ To achieve human-level intelligence, learning machines need the guidance of a mo
 
 ### 1.[purescript-base documentation](https://github.com/purescript-contrib/purescript-base/tree/master/docs)
 
+## Redux
+
+### 1.[Slack clone built with Elixir, Phoenix, and React Redux](https://github.com/bnhansn/sling)
+
 
 ## Others
 
