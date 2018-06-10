@@ -709,6 +709,11 @@ Framework-independent & composable
 
 [Where machine learning meets rule-based systems - Hacker News](https://news.ycombinator.com/item?id=14717692)
 
+### 4.[Alloy - SAT-based Software Model Checking](http://alloytools.org/)
+
+[Software Abstractions - Daniel Jackson](http://softwareabstractions.org/)
+
+
 ## Stateful HTML Elements handling for performance
 
 1. Text Entry Box
@@ -915,6 +920,10 @@ Analysis
 
 ## CSS
 ### 1.[Modern CSS Explained For Dinosaurs](https://medium.com/actualize-network/modern-css-explained-for-dinosaurs-5226febe3525)
+
+### 2.[JSS - An authoring tool for CSS which uses JavaScript as a host language.](https://github.com/cssinjs/jss)
+
+[Styled-JSS - a styled-primitives interface on top of JSS.](https://github.com/cssinjs/styled-jss/)
 
 ## Dependent Type
 
@@ -1936,6 +1945,15 @@ To achieve human-level intelligence, learning machines need the guidance of a mo
 ### 1.[An Introduction to WebObjects, in Swift](http://www.alwaysrightinstitute.com/wo-intro/)
 
 ### 2.[Can Swift replace Front-End or Isomorphic JavaScript?](https://medium.com/@stawecki/can-swift-replace-front-end-or-isomorphic-javascript-2191c58f35d7)
+
+## UI Prototype Tool
+
+### 1.[sketch.systems](https://sketch.systems/)
+Minimalist State-based UI design
+
+## Combinational Logic Circuit Design
+
+### 1.[LogicEmu - a digital logic simulator and interactive tutorials](http://lodev.org/logicemu/#)
 
 ## Others
 
