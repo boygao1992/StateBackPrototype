@@ -1857,6 +1857,8 @@ Rather than inheriting functionality, Unity entities are just bags of components
 
 ### 9.[Design patterns implemented in Java](http://java-design-patterns.com/)
 
+### 10.[Classless Object Semantics - Jones, Timothy ](https://researcharchive.vuw.ac.nz/handle/10063/6681)
+
 ## Control Theory
 ### 1.[Mathematical Control Theory: Deterministic Finite Dimensional Systems](http://www.math.rutgers.edu/~sontag/FTPDIR/sontag_mathematical_control_theory_springer98.pdf)
 
