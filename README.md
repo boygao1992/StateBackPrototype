@@ -681,6 +681,67 @@ Framework-independent & composable
 1. Event Type definition
 2. Organization of Event Indices/Names
 
+
+### Deprecate Event Handler Model
+State Transition Function: State x Event/Input -> State x Output 
+
+DOM has its primitive event dispatching system for event handling which is the event handler mechanism.
+Event handlers are supposed to be part of the state transition functions that matches pre-defined events by its name in the function call.
+But this enforces the programmer to partition the event space **first** then the state space, which doesn't match our native thinking of a state graph.
+We usually organize the state space in hierarchical manner because states are easier to understand (by visualization or direct observation of the system).
+Given a specific state of the system, then we talk about the outgoing edges (state transitions) associated with that state, which presumably is a small set that human developers are able to deal with.
+
+So the first thing to do is to inverse the order of pattern matching. 
+All the event handlers registered in DOM call our singleton giant state transition function. 
+
+Event handlers are still useful but we only need the following information to be past to our state transition function:
+- where the event is created in the DOM tree/hierarchy
+- payload of the event (primitive events are usually parametrized)
+
+### Multiple instances of the same component
+Componentized UI systems ship independent parts (disjoint dimensions in the state vector) of the system as components, each of which has its own state transition function therefore comes with a set of pre-defined events.
+
+Most components are designed to have multiple instances instantiated at the runtime, for example, general containers like image viewer, or components managing a list of child components like TODOitems in a TODOlist.
+
+If we match event by its exact name, then name collision is inevitable.
+We need a way to distinguish events of the same name from different instances of the same component.
+
+The most straight forward way is to attach each instance with a unique ID and pass the ID along with the event in its payload.
+
+```elm
+type alias Payload ::
+  { id :: String
+  , ...
+  }
+
+type alias Event ::
+  { name :: String
+  , payload :: Payload
+  , domPayload :: DOMpayload
+  }
+```
+
+Then how we construct the unique IDs.
+
+A conventional way to namespacing a hierarchical finite structure is to stack the names of a instance's ancestors in a sequential order and separate them by `.` or `/`.
+e.g. `rootNode.ContainerA.Item1`
+
+In ELM, we assume the signal graph is static where the state transition function can be organized in a hierarchical way, then this solution is enough.
+
+If we assume the signal graph is not static, then this solution suffers handling the dynamics in the organization of instances in the DOM tree.
+If the structure of the DOM changes, for example, a instance is moved by drag and drop from one container to another container, the id of that instance is supposed to be updated along with the event handling logic associated with that instance in the state transition function, since the belonging of that instance shifts to a different container.
+e.g.
+`rootNode.ContainerA.Item1 -> rootNode.ContainerB.Item1`
+
+A better way invariant to the organization of instances in the DOM tree is to use unique identifier generators like UUID or GUID.
+
+In CycleJS,
+> If a channel's value is null, then that channel's sources and sinks won't be
+> isolated. If the wildcard is null and some channels are unspecified, those
+> channels won't be isolated. If you don't have a wildcard and some channels
+> are unspecified, then `isolate` will generate a random scope.
+
+
 ### 1.[An  Industrial  Study  of  Applying  Input  Space Partitioning to Test Financial Calculation Engines](https://cs.gmu.edu/~offutt/rsrch/papers/calcengine.pdf)
 
 > This paper presents result from an industrial study that applied input space partitioning and semi-automated requirements modeling to large-scale industrial software, specifically financial calculation engines.
