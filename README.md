@@ -1388,6 +1388,10 @@ Solved in Elm by Concurrent FRP (?)
 
 ### 33.[Effects, Asynchrony, and Choice in Arrowized Functional Reactive Programming](https://pdfs.semanticscholar.org/4aa5/7bbffe8d94d356237c4d974357aa27778cd3.pdf)
 
+### 34.[Modeling User Interfaces in a Functional Language - Antony Courtney PhD thesis](https://www.antonycourtney.com/pubs/ac-thesis.pdf)
+
+> [Antony Courtney](https://www.antonycourtney.com/) - coauther of Yampa
+
 ## Self-adjusting Computation (SAC)
 
 ### 1.[Self-Adjusting Computation - Umut Acar - Carnegie Mellon University](http://www.umut-acar.org/self-adjusting-computation)
