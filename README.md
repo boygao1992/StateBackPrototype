@@ -723,15 +723,14 @@ type alias Event ::
 
 Then how we construct the unique IDs.
 
-A conventional way to namespacing a hierarchical finite structure is to stack the names of a instance's ancestors in a sequential order and separate them by `.` or `/`.
+A conventional way to namespace a hierarchical finite structure is to stack the names of a instance's ancestors in a sequential order and separate them by `.` or `/`.
 e.g. `rootNode.ContainerA.Item1`
 
 In ELM, we assume the signal graph is static where the state transition function can be organized in a hierarchical way, then this solution is enough.
 
 If we assume the signal graph is not static, then this solution suffers handling the dynamics in the organization of instances in the DOM tree.
-If the structure of the DOM changes, for example, a instance is moved by drag and drop from one container to another container, the id of that instance is supposed to be updated along with the event handling logic associated with that instance in the state transition function, since the belonging of that instance shifts to a different container.
-e.g.
-`rootNode.ContainerA.Item1 -> rootNode.ContainerB.Item1`
+If the structure of the DOM changes, for example, a instance is moved by drag-and-drop from one container to another, the ID of that instance is supposed to be updated along with the event handling logic associated with that instance in the state transition function, since the belonging of that instance shifts to a different container.
+e.g. `rootNode.ContainerA.Item1 -> rootNode.ContainerB.Item1`
 
 A better way invariant to the organization of instances in the DOM tree is to use unique identifier generators like UUID or GUID.
 
