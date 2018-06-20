@@ -996,9 +996,11 @@ Able to modify the type rules in runtime which aligns well with hot reloading / 
 - ATS (with Linear Type)
 - F*(fstar)
 
-[Implementing State-aware Systems in Idris](http://docs.idris-lang.org/en/latest/st/introduction.html)
+### 1. [Implementing State-aware Systems in Idris](http://docs.idris-lang.org/en/latest/st/introduction.html)
 
-[State Machines All The Way Down: An Architecture for Dependent Typed Applications](https://www.idris-lang.org/drafts/sms.pdf)
+### 2. [State Machines All The Way Down: An Architecture for Dependent Typed Applications](https://www.idris-lang.org/drafts/sms.pdf)
+
+### 3. [Learn you an Agda](http://learnyouanagda.liamoc.net/pages/introduction.html)
 
 ## Concurrent Models of Computation
 
@@ -2018,6 +2020,10 @@ Minimalist State-based UI design
 ## Combinational Logic Circuit Design
 
 ### 1.[LogicEmu - a digital logic simulator and interactive tutorials](http://lodev.org/logicemu/#)
+
+## Widget System
+
+### 1.[MRuby-Zest: a Scriptable Audio GUI Framework](http://log.fundamental-code.com/2018/06/16/mruby-zest.html)
 
 ## Others
 
