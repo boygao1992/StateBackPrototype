@@ -1650,6 +1650,12 @@ Regarding "inspection", building a structure out of a free Applicative rather th
 
 ### 17.[Abstract Data Types and Objects - Two fundamental approaches to data abstraction](https://medium.com/@JosephJnk/abstract-data-types-and-objects-17828bd4abdc)
 
+## Functional Data Structures
+
+### 1.[Functional Data Structures - Prabhakar Ragde](https://cs.uwaterloo.ca/~plragde/flaneries/FDS/)
+
+### 2.[Purely Functional Random-Access Lists - Chris Okasaki (CMU)](https://www.westpoint.edu/eecs/SiteAssets/SitePages/Faculty%20Publication%20Documents/Okasaki/fpca95.pdf)
+
 ## Model Theory
 ### 1.[Model Theory - Wikipedia](https://en.wikipedia.org/wiki/Model_theory)
 universal algebra + logic = model theory
