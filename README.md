@@ -1716,6 +1716,29 @@ instance Category (->) where
 > - Natural Transformations
 > - Monads
 
+### 21.[I love profunctors. They're so easy.](https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week/profunctors#contravariant-functors)
+
+> - Covariant Functor
+> - Contravariant Functor
+> - Bifunctor
+> - Profunctor
+
+> A Profunctor is just a bifunctor that is contravariant in the first argument and covariant in the second.
+
+```haskell
+class Profunctor f where
+    dimap ∷ (c → a) → (b → d) → f a b → f c d
+
+      g   ∷   a    ←   c   (contravariant)
+        h ∷     b  →     d (covariant)
+dimap g h ∷ f a b  → f c d
+```
+
+> The simplest and most common Profunctor is (→). The specialised type of dimap would be:
+
+``` haskell
+dimap :: (c → a) → (b → d) → (a → b) → (c → d)
+```
 
 ## Functional Data Structures
 
@@ -2097,6 +2120,10 @@ Minimalist State-based UI design
 ## Widget System
 
 ### 1.[MRuby-Zest: a Scriptable Audio GUI Framework](http://log.fundamental-code.com/2018/06/16/mruby-zest.html)
+
+## UI Design Analysis Material
+
+### 1.[Material Dashboard](https://github.com/creativetimofficial/material-dashboard)
 
 ## Others
 
