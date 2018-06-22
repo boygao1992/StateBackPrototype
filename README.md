@@ -1708,6 +1708,14 @@ instance Category (->) where
 > - Traversing
 
 
+### 20.[Monads are just monoids in the category of endofunctors](https://blog.merovius.de/2018/01/08/monads-are-just-monoids.html)
+
+> - Categories
+> - Monoids
+> - Functors
+> - Natural Transformations
+> - Monads
+
 
 ## Functional Data Structures
 
