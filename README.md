@@ -1648,7 +1648,66 @@ Regarding "inspection", building a structure out of a free Applicative rather th
 
 ### 16.[What a Monad is not](https://wiki.haskell.org/What_a_Monad_is_not#Haskell_doesn.27t_need_Monads)
 
-### 17.[Abstract Data Types and Objects - Two fundamental approaches to data abstraction](https://medium.com/@JosephJnk/abstract-data-types-and-objects-17828bd4abdc)
+### 17.[Abstract Data Types and Objects - Two fundamental approaches to data abstraction](https://medium.com/@JosephJnk/abstract-data-types-and-objects-17828bd4ab dc)
+
+### 18.[Notions of Computation as Monoids](https://arxiv.org/abs/1406.4823)
+
+> There are different notions of computation, the most popular being monads, applicative functors, and arrows.
+> In this article we show that these three notions can be seen as monoids in a monoidal category. 
+
+### 19.[Profunctors, Arrows, & Static Analysis](https://elvishjerricco.github.io/2017/03/10/profunctors-arrows-and-static-analysis.html)
+
+#### Background - Analysis of Expressive Programs: Applicative
+> The difference between applicatives and monads is that with applicatives, you can see what those components are before you run the program.
+> You don’t know what their results will be, but you can at least see what they’re going to try to do. 
+```haskell
+(,) <$> getUsername userId1 <*> getUsername userId2
+``` 
+> It could in principle batch both calls into one SQL query.
+> the thing being analyzed is static for the duration of the analysis, so for all intents and purposes, it’s **static analysis**. 
+```haskell
+class (Functor t, Foldable t) => Traversable t where
+  traverse :: Applicative f => (a -> f b) -> t a -> f (t b)
+
+instance Traversable [] where
+  traverse _ [] = pure []
+  traverse f (a:as) = (:) <$> f a <*> traverse f as
+``` 
+> This allows you to iterate applicative effects over collections of data whose size and shape are unknown. 
+> If the applicative is capable of analyzing those components, then using `traverse` allows that applicative to analyze any arbitrary sequence of components.
+> In the case of `traverse getUsername ids`, you could imagine the applicative building one big long SQL query that gets the usernames for a bunch of IDs in one go.
+
+Applicative: coordinate results from independent computations.
+
+#### Composition: Category
+```haskell
+import Prelude hiding (id, (.))
+
+-- Laws:
+--
+-- f . id = id . f = f
+-- (f . g) . h = f . (g . h)
+class Category cat where
+  id :: cat a a
+  (.) :: cat b c -> cat a b -> cat a c
+
+(>>>) :: Category cat => cat a b -> cat b c -> cat a c
+(>>>) = flip (.)
+
+instance Category (->) where
+  id = \a -> a
+  f . g = \a -> f (g a)
+```
+> The key difference is that with a category, information is being threaded through the program.
+> Unlike applicative, where the inputs are known statically, and the outputs are computed at runtime, categories make inputs and outputs both at runtime.
+> But the structure of the computation remains static.
+
+> - Mapping
+> - Strength
+> - Choice
+> - Traversing
+
+
 
 ## Functional Data Structures
 
