@@ -1484,6 +1484,8 @@ Lightweight higher-kinded polymorphism
 
 ### 8.[(experimental) monad-t - Transformers for monadic algebraic structures bridging types from various monadic libraries (Fluture, monet)](https://github.com/char0n/monad-t)
 
+### 9.[Functional-Light JavaScript - Pragmatic, balanced FP in JavaScript.](https://github.com/getify/Functional-Light-JS)
+
 ## Algebraic Automata
 
 ### 1. [Cellular Automata - Part2: PNGs and Moore](https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week/part-2)
@@ -1739,6 +1741,23 @@ dimap g h ∷ f a b  → f c d
 ``` haskell
 dimap :: (c → a) → (b → d) → (a → b) → (c → d)
 ```
+
+
+### 22. Reader dependency injection tool Series
+
+1. [Dependency Injection for Configuring Play Framework Database Connection(s) part 1](https://coderwall.com/p/neukwa)
+
+2. [Dependency Injection for Configuring Play Framework Database Connection(s) part 2](https://coderwall.com/p/kh_z5g)
+
+3. [Curry and Cake without type indigestion -- Covariance, Contravariance and the Reader Monad](https://coderwall.com/p/pdrz7q)
+
+4. [Tooling the Reader Monad](https://coderwall.com/p/ye_s_w)
+
+5. [Generalizing the Reader Tooling, part 1](https://coderwall.com/p/-egcfq)
+
+6. [Generalizing the Reader Tooling, part 2](https://coderwall.com/p/ibrhta)
+
+### 23. [Reading Configuration with Kleisli Arrows](https://blog.ssanj.net/posts/2017-06-12-reading-configuration-with-kleisli-arrows.html)
 
 ## Functional Data Structures
 
