@@ -34,6 +34,8 @@ Automatically detect and highlight interactable/input components on the screen.
 Components will be labeled the same way as in classic mode.
 (hopefully way less number of items)
 
+The number of interactable components on screen can be further restricted to current focused window.
+
 Region/Object detection: R-CNN (supervised learning).
 Since this is a binary classification task (interactable, non-interactable), it should perform extremely well. 
 
@@ -53,6 +55,17 @@ Basic procedure:
 
 Potential problems
 - User fires mouse events too fast: the recording system may fail
+
+### Brain Computer Interface 
+
+[EMOTIV EPOC+ 14 Channel Mobile EEG](https://www.emotiv.com/product/emotiv-epoc-14-channel-mobile-eeg/)
+
+[Youtube - Brain Controlled Javascript - JSConf 2018](https://www.youtube.com/watch?v=7KhFO-qCVyg&t=252s)
+
+Cursor navigation by {Up, Down, Left, Right} is enough for component selection. 
+Control by EEG signal is possible.
+
+May narrow the focused region by gaze tracking.
 
 # Tool
 

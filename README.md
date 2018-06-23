@@ -2049,6 +2049,59 @@ Rather than inheriting functionality, Unity entities are just bags of components
 
 ### 10.[Classless Object Semantics - Jones, Timothy ](https://researcharchive.vuw.ac.nz/handle/10063/6681)
 
+### 11.[Programming Paradigms and Beyond - Brown University](http://cs.brown.edu/~sk/Publications/Papers/Published/kf-prog-paradigms-and-beyond/paper.pdf)
+
+Operational Semantics vs. Denotational Semantics
+
+> 2 Paradigms as a Classical Notion of Classification
+
+> imperative, object-oriented (OO), functional (FP), and logic
+> scripting, Web, database, reactive
+
+> in reactive languages, the program expresses dependencies but the language handles updating the values of variables in the presence of mutation
+
+> OO is a widely-used term chock-full of ambiguity.
+> FP is characterized by two more traits: the ability to pass functions as values, which creates much higher-level operations than traditional loops (an issue that manifest s in plan composition (sec. 6.3)), and tail - calls, which make loop - like recursive solutions just as efficient as loops, thus enabling recursion as a primary, and g eneralizable, form of looping.
+
+> 3 Beyond Paradigms
+
+> Put differently, while OO and FP are statements about program organization , **reactivity** is a statement about program behavior on update. These are essentially orthogonal issues, enabling reactivity to be added to existing languages.
+
+> Thus **event-driven** programming is another cross-cutting notion that is independent of and orthogonal to the program’s organization 
+> — rather, it is a statement about the program’s relationship with its operating environment.
+
+> 4 Notional Machines
+
+> 4.1 The Challenge of Mutation and State
+
+Complexity of state management
+
+> Notional machines are a useful lens through which to explore the complexities of reasoning about state (program behavior in the presence of mutation). 
+> Stateful programming has been taken by many as a sine qua non of programming education.
+> At the same time, numerous studies show that students struggle with this concept, both as novices and as upper-level students (through interactions between state and other language features), while students working in non-stateful paradigms sometimes perform well on problems that are challenging in stateful context.
+> Taken together, these observations make **comparative studies between stateful and non-stateful** features one of the most significant **understudied** topics in computing education.
+
+> If state is so challenging for students to learn, why is it so popular in introductory contexts? 
+> Purely as a language feature (setting aside pedagogy for a moment), state has many benefits:
+> - It provides cheap communication channels between different parts of a program.
+> - It trades off persistence for efficiency.
+> - It appears to have a relatively straightforward notional machine, which lends itself to familiar-looking metaphors (like “boxes”).
+> - It corresponds well to traditional control operations like looping.
+
+>However, these benefits of state become far less clear once we broaden our scope beyond very rudimentary programming. For instance:
+> - State introduces time and ordering (as Program 1 reveals) and forces students to think about them.
+> - State reveals aliasing (as Program 2 reveals). Aliasing is particularly problematic in the case of parallelism/concurrency, which is increasingly a central feature in programming.
+
+> State thus requires a complex notional machine to account for all these factors.
+> The apparent simplicity of stateful notional machines arises because most computing education literature usually just ignores some of these features (e.g., compound data with references to other compound data).
+> This results in notional machines that are not faithful to program behavior, and hence are either useless or even misleading to students.
+
+
+
+
+
+
+
 ## Control Theory
 ### 1.[Mathematical Control Theory: Deterministic Finite Dimensional Systems](http://www.math.rutgers.edu/~sontag/FTPDIR/sontag_mathematical_control_theory_springer98.pdf)
 
@@ -2143,6 +2196,10 @@ Minimalist State-based UI design
 ## UI Design Analysis Material
 
 ### 1.[Material Dashboard](https://github.com/creativetimofficial/material-dashboard)
+
+## Web Assembly
+
+### 1.[Web Assembly and Go: A look to the future](https://brianketelsen.com/web-assembly-and-go-a-look-to-the-future/)
 
 ## Others
 
