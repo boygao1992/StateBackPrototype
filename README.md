@@ -855,6 +855,8 @@ Daily code optimization using benchmarks and profiling in Golang - Gophercon Ind
 [article](https://medium.com/@hackintoshrao/daily-code-optimization-using-benchmarks-and-profiling-in-golang-gophercon-india-2016-talk-874c8b4dc3c5)
 / [youtube](https://www.youtube.com/watch?v=-KDRdz4S81U)
 
+### 2.[Debugging data flows in reactive programs](https://blog.acolyer.org/2018/06/29/debugging-data-flows-in-reactive-programs/)
+
 ## Continuous-time/Hybrid Model Representation
 
 ### Hybrid Automaton
@@ -2197,9 +2199,25 @@ Minimalist State-based UI design
 
 ### 1.[Material Dashboard](https://github.com/creativetimofficial/material-dashboard)
 
+### 2.[Behance - Johny vino | Product designer](https://www.behance.net/johnyvino)
+
+[100 Mobile App UI Interaction | Ae, Ps, Xd](https://www.behance.net/gallery/53917017/100-Mobile-App-UI-Interaction)
+
+Metric
+- Shape (Flat, Rounded)
+- Space (Flow, Density, Layout)
+- Color (Mixing, Contrast)
+- Animation (Effects, Movements, Timing)
+- Interaction
+
 ## Web Assembly
 
 ### 1.[Web Assembly and Go: A look to the future](https://brianketelsen.com/web-assembly-and-go-a-look-to-the-future/)
+
+
+## Graph Distance
+
+### 1.[The Resistance Perturbation Distance: A Metric for the Analysis of Dynamic Networks](https://arxiv.org/abs/1605.01091)
 
 ## Others
 
