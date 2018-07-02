@@ -2207,7 +2207,7 @@ Metric
 - Shape (Flat, Rounded)
 - Space (Flow, Density, Layout)
 - Color (Mixing, Contrast)
-- Animation (Effects, Movements, Timing)
+- Animation (Effects, Movements, Timing) (User Focus)
 - Interaction
 
 ## Web Assembly
