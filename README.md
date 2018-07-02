@@ -2210,6 +2210,21 @@ Metric
 - Animation (Effects, Movements, Timing) (User Focus)
 - Interaction
 
+### 3.[Atomic Design](http://atomicdesign.bradfrost.com/table-of-contents/)
+
+> Chapter 1: Designing Systems - Create design systems, not pages
+
+> # Systematic UI design
+
+[Responsive Web Design](http://alistapart.com/article/responsive-web-design)
+
+[Responsive Patterns](http://bradfrost.github.io/this-is-responsive/patterns.html)
+
+> # UI frameworks, in theory and in practice
+> pro - speed up process, tested by community
+> # Trouble in framework paradise
+> con - a specific solution, a particular look an feel
+
 ## Web Assembly
 
 ### 1.[Web Assembly and Go: A look to the future](https://brianketelsen.com/web-assembly-and-go-a-look-to-the-future/)
