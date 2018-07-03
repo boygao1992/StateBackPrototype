@@ -2225,6 +2225,31 @@ Metric
 > # Trouble in framework paradise
 > con - a specific solution, a particular look an feel
 
+## Color
+
+### 1.[Painting Vibrant Watercolors: Discover the Magic of Light, Color and Contrast](https://www.amazon.com/Painting-Vibrant-Watercolors-Discover-Contrast-ebook/dp/B0056JSLXI/)
+
+### 2.[The Designer's Guide to Color Combinations - 500+ Historic and Modern Color Formulas in CMYK (1880~2000)](https://www.amazon.com/Designers-Guide-Color-Combinations-ebook/dp/B005DIAT2S/)
+
+### 3.[Art Journal Freedom: How to Journal Creatively With Color & Composition](https://www.amazon.com/Art-Journal-Freedom-Creatively-Composition-ebook/dp/B00B9L3Y70/)
+
+> Chapter 6
+> Color Basics: Hue, Value, Tint, Shade, Color wheel, Primary colors, Secondary colors, Tertiary colors, Warm and cold
+> Color Schemes: Monochromatic, Complementary, Analogous, Analogous with complement, Triadic, Split complementary, Double complementary.
+> Cracking the Color Wheel, Make one Dominant, Limiting Your Color Palette.
+> How Color Mixes
+
+### 4.[Color and Composition for the Creative Quilter: Improve Any Quilt with Easy-to-Follow Lessons](https://www.amazon.com/Color-Composition-Creative-Quilter-Follow-ebook/dp/B00W46GY6W/)
+
+> Value and Color
+> Monochromatic and Achromatic Color Schemes
+> Analogous Color Scheme
+> Warm and Cold Color Scheme
+> Complementary Color Scheme
+> Split and Dual Complementary Color Schemes
+> Triadic Color Scheme
+> Rainbow Color Scheme
+
 ## Web Assembly
 
 ### 1.[Web Assembly and Go: A look to the future](https://brianketelsen.com/web-assembly-and-go-a-look-to-the-future/)
