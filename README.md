@@ -2259,6 +2259,17 @@ Metric
 
 ### 1.[The Resistance Perturbation Distance: A Metric for the Analysis of Dynamic Networks](https://arxiv.org/abs/1605.01091)
 
+## Readability
+
+### 1.[A Human-Readable Interactive Representation of a Code Library](http://glench.github.io/fuzzyset.js/ui/)
+
+> To convey how the library works, the document
+> - explains the mathematical foundation the library is based on,
+> - shows the high-level structure of the library, and
+> - demonstrates some of the data operations with interactive illustrated examples and live code editing.
+
+
+
 ## Others
 
 ### 1.[To Dissect a Mockingbird: A Graphical Notation for the Lambda Calculus with Animated Reduction](http://dkeenan.com/Lambda/)
