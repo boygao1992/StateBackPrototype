@@ -1004,6 +1004,8 @@ Able to modify the type rules in runtime which aligns well with hot reloading / 
 
 ### 3. [Learn you an Agda](http://learnyouanagda.liamoc.net/pages/introduction.html)
 
+### 4. [Functional Typelevel Programming in Scala](https://github.com/dotty-staging/dotty/blob/add-transparent/docs/docs/typelevel.md)
+
 ## Concurrent Models of Computation
 
 ### 1.[Introduction to Embedded Systems: a Cyber-Physical Systems Approach](http://leeseshia.org/releases/LeeSeshia_DigitalV1_08.pdf)
