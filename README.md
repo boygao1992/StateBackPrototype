@@ -1377,9 +1377,61 @@ Therefore `sf` is analogous to a sequential circuit.
 
 ### 32.[Elm: Concurrent FRP for Functional GUIs - Evan Czaplicki (2012)](https://www.seas.harvard.edu/sites/default/files/files/archived/Czaplicki.pdf)
 
-> 2.1 Functional Reactive Programming
-> 2.1.1 Classical FRP
-Signal and Event
+#### 1. Introduction
+> global delay
+synchronous composition
+> strict ordering of events is not always necessary, especially in the case of events that are not directly related
+specify independent dimensions, able to use asynchronous composition
+> needless recomputation
+> every function - when given the same inputs - always produces the same output
+pure functions, does it works for IO?
+> Therefore, there is no need to recompute a function unless its input changes.
+> A program consists of many independent functions, but changing one input to the program is unlikely to affect all of them.
+> Previously, when one of the many inputs to an FRP program changes, the whole program is recomputed even though most of the inputs have not changed.
+> Elm's ~concurrent~ runtime system avoids this with memorization
+inputs = source variables (external state variables)
+
+This is about efficiency in event propagation through the dependency/dataflow network.
+In reactive programming, local mutation on a state variable (wrapped in an Observable) by default creates a "update" event and passes it to its down-stream dependency network.
+This can be easily achieved by adding an additional logic to "update" event creation where if the up-stream event is discard, or in another word no mutation is caused by the up-stream event, then no "update" event is going to be created and passed on.
+
+#### 2. Background and Related Works
+> This chapter addresses two important approaches to introduce mutability:
+>  Functional Reactive Programming and Message-Passing Concurrency.
+> Both approaches elegantly bridge the gap between purely functional languages and mutable values such as user input.
+Here the mutable values is an internal representation of external state variables such as user input.
+These internal state variables synchronize with the corresponding external state variable by interpreting their state update events (which contains their latest values) and firing state transitions by direct state assignments.
+Delay is expected.
+
+Message-passing concurrency in FP: `MVar` (in `speechCollection/Haskell8`)
+
+#### 2.1 Functional Reactive Programming
+> FRP is a declarative programming paradigm for working with mutable values.
+> It recasts mutable values as time-varying values, called signals, better capturing the temporal aspect of mutability.
+> Signals can also be transformed and combined.
+> The original formulation of FRP was extremely expressive, giving programmers many high-level abstractions. This expressiveness came at the cost of efficiency because there was not always a clear way to implement such high-level abstractions.
+
+##### 2.1.1 Classical FRP
+> two new types of values: `Behavior`s and `Event`s
+> `Behavior`s are continuous, time-varying values. This is represented as a function from time to a value
+`Behavior a = Time -> a`
+> These time indexed functions are just like the equations of motion in Newtonian physics.
+> Behaviors help with a very common task in animation (the original intent): modeling physical phenomena.
+> Position, velocity (first derivative), acceleration (second derivative), and analog signals can all be represented quite naturally with `Behavior`s.
+
+> `Event`s represent a sequence of discrete events as time-stamped list of values.
+`Event a = [ (Time, a) ]`
+> The time values must increase monotonically.
+> Events can model any sort of discrete events, from user input to HTTP communications.
+> Originally intended for animations, events would commonly be used to model inputs such as mouse clicks and key presses.
+
+> memory usage may grow unexpectedly (space leaks), resulting in unexpectedly long computations (time leaks).
+> Fran inherits a variety of space and time leaks from its host language, Haskell. (primarily from its lazy/non-strict evaluation strategy, make it easy to create infinite data structures)
+> In FRP, the value of a behavior may be inspected infrequently, and thus, an accumulated computation can be quite large over time, taking up more and more memory (space leak).
+> When inspected, the entire accumulated computation must be evaluated all at once, potentially causing a significant delay or even a stack overflow (time leak).
+> This problem is solved by embedding FRP in a strict language.
+
+
 > 2.1.2 Real-time FRP (RT-FRP)
 Event = Signal(Maybe a)
 > 2.1.2 Event-driven FRP (E-FRP)
@@ -2226,6 +2278,16 @@ Metric
 > pro - speed up process, tested by community
 > # Trouble in framework paradise
 > con - a specific solution, a particular look an feel
+
+### 4.[Is timeless UI design a thing?](https://www.imaginarycloud.com/blog/timeless-classic-ui-design/amp/)
+> Sometimes you need your product out really quick because you know it will lose its timing very soon, so you just want to bank now.
+> In that case, you don't need to go for timeless and trendproof. 
+> In other cases, you should want your design to last long because the longer it lasts, the more established it becomes.
+
+> The Swiss Style: Functionality is timeless.
+> Typefaces
+> Colors
+> Shapes and illustration
 
 ## Color
 
