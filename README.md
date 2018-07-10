@@ -981,11 +981,86 @@ Analysis
 ### 2.[This SVG always shows today's date](https://shkspr.mobi/blog/2018/02/this-svg-always-shows-todays-date/)
 
 ## CSS
+
 ### 1.[Modern CSS Explained For Dinosaurs](https://medium.com/actualize-network/modern-css-explained-for-dinosaurs-5226febe3525)
 
 ### 2.[JSS - An authoring tool for CSS which uses JavaScript as a host language.](https://github.com/cssinjs/jss)
 
 [Styled-JSS - a styled-primitives interface on top of JSS.](https://github.com/cssinjs/styled-jss/)
+
+### 3.[CSSreference - A free visual guide to CSS](https://cssreference.io/)
+all common markups explained by examples
+
+### 4.[MaintainableCSS](https://maintainablecss.com/)
+
+### 5.[A Complete Guide to Grid | CSS-Tricks.com](https://css-tricks.com/snippets/css/complete-guide-grid/)
+
+### 6.[rscss - Reasonable System for CSS Stylesheet Structure](http://rscss.io/)
+
+### 7.[CSS Diner – Interactive gamified tutorial for learning selection with CSS](https://flukeout.github.io/)
+- Type Selector: `A`
+- ID Selector: `#id`
+- Descendant Selector: `A B`
+- Combine the Descendant & ID Selectors: `#id A`
+- Class Selector: `.className`
+- Combine the Class Selector: `A.className`
+- Comma Combinator: 'A, B'
+- The Universal Selector: `*`
+- Combine the Universal Selector: `A *`
+- Adjacent Sibling Selector: `A + B`, Select an element that directly follows another element
+- General Sibling Selector: `A ~ B`, Select elements that follows another element
+- Child Selector: `A > B`, Select direct children of an element
+- First Child Pseudo-selector: `:first-child`, Select a first child element inside of another element
+- Only Child Pseudo-selector: `:only-child`, Select an element that are the only element inside of another one.
+- Last Child Pseudo-selector: `:last-child`, Select the last element inside of another element
+- Nth Child Pseudo-selector: `:nth-child(A)`, Select an element by its order in another element
+- Nth Last Child Selector: `:nth-last-child(A)`, Select an element by its order in another element, counting from the back
+- First of Type: `:first-of-type`, Selector Select the first element of a specific type
+- Nth of Type Selector: `:nth-of-type(A)`, Selects a specific element based on its type and **order** in another element - or `even` or `odd` instances of that element.
+- Nth-of-type Selector with Formula: `:nth-of-type(An+B)`, The nth-of-type formula selects every nth element, starting the count at a specific instance of that element.
+- Only of Type Selector: `:only-of-type`, Select elements that are the only ones of their type within of their parent element
+- Last of Type Selector: `:last-of-type`, Select the last element of a specific type
+- Empty Selector: `:empty`, Select elements that don't have children
+- Negation Pseudo-class: `:not(X)`, Select all elements that don't match the negation selector
+- Attribute Selector: `[attribute]`, Select all elements that have a specific attribute
+- Attribute Selector: `A[attribute]`, Select all elements that have a specific attribute
+- Attribute Value Selector: `[attribute="value"]`, Select all elements that have a specific attribute value
+- Attribute Starts With Selector: `[attribute^="value"]`, Select all elements with an attribute value that starts with specific characters
+- Attribute Ends With Selector: `[attribute$="value"]`, Select all elements with an attribute value that ends with specific characters
+- Attribute Wildcard Selector: `[attribute*="value"]`, Select all elements with an attribute value that contains specific characters anywhere
+
+1. `plate` 
+2. `bento`
+3. `#fancy`
+4. `plate apple`
+5. `#fancy pickle`
+6. `.small`
+7. `orange.small`
+8. `bento orange.small`
+9. `plate, bento`
+10. `*`
+11. `plate *`
+12. `plate + apple`
+13. `bento ~ pickle`
+14. `plate > apple`
+15. `plate orange:first-child`
+16. `plate *:only-child`
+17. `.small:last-child`
+18. `plate:nth-child(3)`
+19. `bento:nth-last-child(3)`
+20. `apple:first-of-type`
+21. `plate:nth-of-type(even)`
+22. `plate:nth-of-type(2n+3)`
+23. `plate apple:only-of-type`
+24. `.small:last-of-type`
+25. `bento:empty`
+26. `apple:not(.small)`
+27. `[for]`
+28. `plate[for]`
+29. `[for="Vitaly"]`
+30. `[for^="S"]`
+31. `[for$="o"]`
+32. `[for*="bb"]`
 
 ## Dependent Type
 
@@ -1412,15 +1487,16 @@ Message-passing concurrency in FP: `MVar` (in `speechCollection/Haskell8`)
 > The original formulation of FRP was extremely expressive, giving programmers many high-level abstractions. This expressiveness came at the cost of efficiency because there was not always a clear way to implement such high-level abstractions.
 
 ##### 2.1.1 Classical FRP
+> Functional Reactive Animation, Paul Hudak and Conal Elliott, 1997
 > two new types of values: `Behavior`s and `Event`s
 > `Behavior`s are continuous, time-varying values. This is represented as a function from time to a value
-`Behavior a = Time -> a`
+> `Behavior a = Time -> a`
 > These time indexed functions are just like the equations of motion in Newtonian physics.
 > Behaviors help with a very common task in animation (the original intent): modeling physical phenomena.
 > Position, velocity (first derivative), acceleration (second derivative), and analog signals can all be represented quite naturally with `Behavior`s.
 
 > `Event`s represent a sequence of discrete events as time-stamped list of values.
-`Event a = [ (Time, a) ]`
+> `Event a = [ (Time, a) ]`
 > The time values must increase monotonically.
 > Events can model any sort of discrete events, from user input to HTTP communications.
 > Originally intended for animations, events would commonly be used to model inputs such as mouse clicks and key presses.
@@ -1432,16 +1508,66 @@ Message-passing concurrency in FP: `MVar` (in `speechCollection/Haskell8`)
 > This problem is solved by embedding FRP in a strict language.
 
 
-> 2.1.2 Real-time FRP (RT-FRP)
-Event = Signal(Maybe a)
-> 2.1.2 Event-driven FRP (E-FRP)
-Only discretized Signal
-> 2.1.3 Arrowized FRP
-> **Global delays** and **unnecessary updates** both result from the **instantaneous update assumption** and the use of **continuous signals**.
-Solved in Elm by Concurrent FRP (?)
+##### 2.1.2 i) Real-time FRP (RT-FRP)
+> Paul Hudak, 2001
+> RT-FRP overcame both space and time leaks, but this came at the cost of expressiveness.
+> To produce efficiency guarantees, RT-FRP introduce an isomorphism between `Behavior`s and `Event`s
+> `Event a ~= Behavior (Maybe a)`
+> where `Maybe a` is an abstract data type that can either be `Just a` (an event is occurring) or `Nothing` (an event is not occurring).
+`Behavior` and `Event` are unified into `Signal`
+> `Signal a = Time -> a`
 
-> 2.2 Message-passing Concurrency
-> concurrency is necessary to create robust and responsive GUIs.
+> an unrestricted base language and a more limited reactive language for manipulating `Signal` s.
+> The base language is a basic lambda calculus that supports recursion and higher order functions.
+> This base language is embedded in a much more restrictive reactive language that carefully controls how `Signal`s can be accessed and created.
+> The reactive language supports recursion but not higher-order functions.
+
+> less expressive than Classical FRP
+> Since the reactive language is not higher order, the connections between `Signal`s must all be explicitly defined in the source code.
+> They cannot be specified with the full power of the embedded lambda calculus.
+
+##### 2.1.2 ii) Event-driven FRP (E-FRP)
+> Event-driven FRP, Hudak et al., 2002
+> a direct descendent of RT-FRP that introduces discrete `Signal`s, `Signal`s that only change on events.
+> many potential applications of FRP are highly event-oriented.
+
+##### 2.1.3 Arrowized FRP (AFRP)
+> Henrik Nilsson, Antony Courtney, and John Peterson, 2002
+> AFRP aims to maintain the full expressiveness of Classical FRP without the difficult-to-spot space and time leaks.
+> A signal function can be thought of as a function from `Signal` to `Signal`.
+> `SF a b = Signal a -> Signal b`
+
+> To avoid time and space leaks, `Signal`s are not directly available to the programmer.
+> Because `SF`s are specified at the source level, it is possible to carefully control how recursive functions are evaluated, ensuring that intermediate computations are not kept in memory.
+> This eliminates a major source of space and time leaks.
+
+> `SF`s also ensure causality. `SF`s explicitly model input and output, so any future dependent signal function can be ruled out statically.
+
+> `SF`s belong to the category of `Arrow`s, an abstraction developed by John Hughes in 2000.
+
+> AFRP achieves the flexibility of Classical FRP with continuation-based switching and dynamic collections of `SF`s.
+
+> instant-update assumption: "as the sampling interval goes to zero, the implementation is faithful to the formal, continuous semantics"
+impossible on digital computer
+> **Global delays** and **unnecessary updates** both result from the **instantaneous update assumption** and the use of **continuous signals**.
+> Continuous `Signal`s assume that `Signal` values are always changing.
+
+#### 2.2 Message-passing Concurrency
+> John Reppy, Emden Gansner, 1987
+> Their subsequent work resulted in Concurrent ML and eXene, which together form the basis of a robust GUI framework.
+> Previous work in FRP has assumed that all events are strictly ordered and processed one at a time.
+> Concurrent ML and eXene illustrate that this is an unnecessary restriction.
+> By relaxing the event ordering restrictions, message-passing concurrency provides solutions to Arrowized FRP's two efficiency problems.
+> Conceptually, message-passing concurrency is a set of concurrent threads that communicate by sending messages.
+Channels, an implicit lock strategy, deadlocks are not avoided
+
+### 33.[A Farewell to FRP - Making signals unnecessary with The Elm Architecture](http://elm-lang.org/blog/farewell-to-frp)
+
+remove continuous `Signal`
+=> stay in the discrete `Signal` / `Event` territory
+=> no need to model `Event` as a time-varying function `Time -> Maybe a`
+=> back to extended finite state machine
+
 
 ### 33.[Effects, Asynchrony, and Choice in Arrowized Functional Reactive Programming](https://pdfs.semanticscholar.org/4aa5/7bbffe8d94d356237c4d974357aa27778cd3.pdf)
 
@@ -2288,6 +2414,8 @@ Metric
 > Typefaces
 > Colors
 > Shapes and illustration
+
+### 5.[Brutalist Web Design - Raw content true to its construction](https://brutalist-web.design/)
 
 ## Color
 
