@@ -1062,6 +1062,15 @@ all common markups explained by examples
 31. `[for$="o"]`
 32. `[for*="bb"]`
 
+### 8. [CSS World](https://www.amazon.cn/dp/B079GNPR6V/)
+Boundary knowledge
+
+### 9. [CSS Modules - Glen Maddern](https://glenmaddern.com/articles/css-modules)
+Changing the style by changing `className` so all state management can be done in JS.
+Object composition.
+
+### 10. [Scalable and Modular Architecture for CSS (SMACSS)](https://smacss.com/)
+
 ## Dependent Type
 
 May use dependent type to further restrict the state space so that invalid states are not representable.
@@ -2316,6 +2325,14 @@ Complexity of state management
 ### 4.[Unidirectional User Interface Architectures](https://staltz.com/unidirectional-user-interface-architectures.html)
 
 ### 5.[Elm Static Types to Effectively Model Application Domain](https://egghead.io/courses/elm-static-types-to-effectively-model-application-domain)
+
+### 6.[The Architecture of Open Source Applications](http://aosabook.org/en/index.html)
+
+[Dagoba: an in-memory graph database](http://aosabook.org/en/500L/dagoba-an-in-memory-graph-database.html)
+
+[Web Spreadsheet](http://aosabook.org/en/500L/web-spreadsheet.html)
+
+[ZeroMQ](http://aosabook.org/en/zeromq.html)
 
 
 ## React
