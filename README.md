@@ -2434,6 +2434,7 @@ Metric
 
 ### 5.[Brutalist Web Design - Raw content true to its construction](https://brutalist-web.design/)
 
+
 ## Color
 
 ### 1.[Painting Vibrant Watercolors: Discover the Magic of Light, Color and Contrast](https://www.amazon.com/Painting-Vibrant-Watercolors-Discover-Contrast-ebook/dp/B0056JSLXI/)
@@ -2476,6 +2477,12 @@ Metric
 > - explains the mathematical foundation the library is based on,
 > - shows the high-level structure of the library, and
 > - demonstrates some of the data operations with interactive illustrated examples and live code editing.
+
+## Layout
+
+### 1.[Building the Google Photos Web UI](https://medium.com/google-design/google-photos-45b714dfbed1)
+
+### 2.[Our Justified Layout Goes Open Source](http://code.flickr.net/2016/04/05/our-justified-layout-goes-open-source/)
 
 
 
