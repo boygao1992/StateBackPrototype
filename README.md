@@ -1096,6 +1096,25 @@ Able to modify the type rules in runtime which aligns well with hot reloading / 
 
 ### 4. [Functional Typelevel Programming in Scala](https://github.com/dotty-staging/dotty/blob/add-transparent/docs/docs/typelevel.md)
 
+### 5. Dependable Types - Tom Harding
+
+#### 1.[Full-STλC Development](http://www.tomharding.me/2018/01/09/dependable-types/)
+
+> The Untyped Lambda Calculus
+> The lambda calculus is a Turing-complete language made up of only 3 constructs:
+> variable: `x`
+> abstraction: `λx. M`
+> application: `M N`
+> De Bruijn Indices
+> `λf.λg.λx.λy.f(gx)(gy)`
+`λλ2(λ21)(λ21)`
+
+#### 2.[Correctness by Construction](http://www.tomharding.me/2018/01/27/dependable-types-2/)
+
+> GADT (Generalised ADTs)
+> A small digression: `Elem`
+Bounded Type: Construct a finite set of values as a type
+
 ## Concurrent Models of Computation
 
 ### 1.[Introduction to Embedded Systems: a Cyber-Physical Systems Approach](http://leeseshia.org/releases/LeeSeshia_DigitalV1_08.pdf)
@@ -1203,6 +1222,10 @@ Thus, the mechanisms required to achieve a continuous-time model of computation 
 ### 2.[LuaCSP Reference Manual](http://htmlpreview.github.io/?https://github.com/loyso/LuaCSP/blob/master/doc/html/LuaCSP.html)
 
 ### 3.[Concurrent Programming for Scalable Web Architectures - Diploma Thesis by Benjamin Erb](http://berb.github.io/diploma-thesis/community/index.html)
+
+### 4.[libaco - Proof of Correctness](https://github.com/hnes/libaco#proof-of-correctness)
+
+> registers' constraints in the Function Calling Convention of Intel386 Sys V ABI
 
 
 ## Arrowized FRP
