@@ -82,6 +82,12 @@ e.g. TodoMVC, delete button is attached to child components (TodoItem) while the
 
 ![Node-to-Node Message Passing](./doc/node-to-node_message_passing.png "Node-to-Node Message Passing")
 
+6. Missing Type Classes
+
+`speechCollection > Programming > 3 Code Reuse in PS`
+
+[Elm Is Wrong](http://reasonablypolymorphic.com/blog/elm-is-wrong/)
+
 ### 1. [Scaling The Elm Architecture](https://github.com/evancz/guide.elm-lang.org/tree/master/reuse)
 
 > **We do not think in terms of reusable components.** Instead, we focus on reusable functions.
@@ -1570,6 +1576,48 @@ impossible on digital computer
 > Conceptually, message-passing concurrency is a set of concurrent threads that communicate by sending messages.
 Channels, an implicit lock strategy, deadlocks are not avoided
 
+##### 2.2.1 Concurrent ML
+##### 2.2.2 eXene: Creating concurrent GUIs
+> deadlock and livelock
+
+> In ELm, prevention of event ordering is handled primarily by the compiler, not hte programmer.
+
+TODO: Elm Scheduler
+`elm-stuff/packages/elm-lang/core/5.1.1/src/Native/Scheduler.js`
+```javascript
+var MAX_STEPS = 10000; // Hard-coded?
+```
+
+#### 2.3 Existing FRP GUI Frameworks
+
+> Haskell Libraries
+> - FranTk
+> - Fruit
+> - Yampa / Animas
+> - Reactive Banana
+
+> Because Haskell-embedded FRP libraries map onto imperative backends, there is also a danger of incorporating imperative abstractions into the library.
+> e.g. FranTk included event listeners - an imperative abstraction - because they mapped more naturally onto the Tcl/Tk backend
+
+> implementations in other languages
+> - Frappe, Java, 2001
+> - Flapjax, JS, 2009
+
+#### 3 The Core Language
+
+##### 3.1.1 Transformation
+
+```Haskell
+lift :: (a -> b) -> Signal a -> Signal b
+```
+
+TODO: `Time`
+```elm
+type alias Time = 
+    Float
+```
+> Using the Time constants instead of raw numbers is very highly recommended.
+
 ### 33.[A Farewell to FRP - Making signals unnecessary with The Elm Architecture](http://elm-lang.org/blog/farewell-to-frp)
 
 remove continuous `Signal`
@@ -1774,6 +1822,20 @@ The equivalent of an FST from machines is Process. It's definition is a little s
 ### 2. [Functors, Applicatives, And Monads In Pictures](http://adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html)
 ### 3. [Three Useful Monads](http://adit.io/posts/2013-06-10-three-useful-monads.html)
 ### 4. [ADT & Dependent Type](http://www.tomharding.me/)
+
+#### 10. [Alt, Plus, and Alternative](http://www.tomharding.me/2017/04/24/fantas-eel-and-specification-10/)
+
+> `Alt`: `Functor`-level `Semigroup`
+> You can do [database connection failover](https://gist.github.com/i-am-tom/9651cd1e95443c4cbf3953429e988b07), [API/resource routing](https://github.com/slamdata/purescript-routing/blame/master/GUIDE.md#L96-L102), and, most magically of all, [text parsing](https://github.com/purescript/purescript/blob/master/src/Language/PureScript/Parser/Declarations.hs#L161-L169). 
+> The key thing all these cases have in common is that you want to try something **with a contingency plan for failure**.
+> `Plus`: `Functor`-level `Monoid`
+> `Alternative`: `Plus` and `Applicative`
+> - Distributivity: `x.ap(f.alt(g)) === x.ap(f).alt(x.ap(g))`
+> - Annihilation: `x.ap(A.zero()) === A.zero()`
+> You’ll often hear `Alternative` types described as `monoid`-shaped `applicative`s, and this is a good intuition. 
+> We talked about `of` as being the `identity` of `Applicative`, but this is only at context-level.
+> For an `Alternative` type, `zero` is the `identity` value at context- and value-level.
+
 ### 5. A functional approach to building React applications. 
 [Part 1 - Deconstructing the React Component](https://jaysoo.ca/2017/04/30/learn-fp-with-react-part-1/)
 
@@ -1949,6 +2011,23 @@ dimap :: (c → a) → (b → d) → (a → b) → (c → d)
 6. [Generalizing the Reader Tooling, part 2](https://coderwall.com/p/ibrhta)
 
 ### 23. [Reading Configuration with Kleisli Arrows](https://blog.ssanj.net/posts/2017-06-12-reading-configuration-with-kleisli-arrows.html)
+
+### 24. [Applicative Programming with Effects](http://www.staff.city.ac.uk/~ross/papers/Applicative.html)
+
+> 4 Monoids are phantom Applicative functors
+
+> 5 Applicative versus Monad?
+> One situation where the full power of monads is not always required is parsing,
+> although only certain pairs of monads are composable, the Applicative class is closed under composition
+> For example, both `Maybe ◦ IO` and `IO ◦ Maybe` are applicative: 
+> `IO ◦ Maybe` is an applicative functor in which computations have a notion of ‘failure’ and ‘prioritised choice’, even if their ‘real world’ side-effects cannot be undone. 
+> Note that `IO` and `Maybe` may also be composed as monads (**though not vice versa**), but the applicative functor determined by the composed monad differs from the composed applicative functor: the binding power of the monad allows the second `IO` action to be aborted if the first returns a failure.
+
+> 6 Applicative functors and Arrows
+
+> 7 Applicative functors, categorically
+> applicative functors are **strong lax monoidal functors**
+
 
 ## Functional Data Structures
 
