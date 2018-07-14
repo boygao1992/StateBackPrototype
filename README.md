@@ -1134,6 +1134,8 @@ Able to modify the type rules in runtime which aligns well with hot reloading / 
 > `λf.λg.λx.λy.f(gx)(gy)`
 `λλ2(λ21)(λ21)`
 
+![de Bruijn index](./doc/de_bruijn_index.png "De Bruijn Index")
+
 #### 2.[Correctness by Construction](http://www.tomharding.me/2018/01/27/dependable-types-2/)
 
 > GADT (Generalised ADTs)
