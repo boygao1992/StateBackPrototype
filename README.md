@@ -1077,6 +1077,31 @@ Object composition.
 
 ### 10. [Scalable and Modular Architecture for CSS (SMACSS)](https://smacss.com/)
 
+## Combinatory Logic
+
+### 1.[Can any function be reduced to a point-free form?](https://stackoverflow.com/questions/13184294/can-any-function-be-reduced-to-a-point-free-form)
+
+> **Logical combinators** (i.e. the S, K, I combinators) are essentially **point-free forms of functions**, and the lambda-calculus is equivalent to combinatory logic, so I think this suggests that the answer is yes.
+
+### 2.[Combinator Birds](http://www.angelfire.com/tx4/cus/combinator/birds.html)
+
+### 3.[Are lambda calculus and combinatory logic the same?](https://cstheory.stackexchange.com/questions/267/are-lambda-calculus-and-combinatory-logic-the-same)
+
+> What distinguishes combinatory logic is that it is **variable free**.
+> Combinators and variants were used to implement graph reduction for lazy languages 
+> Be careful: Haskell and ghc aren't the same, and the literature contains several supercombinator-based Haskells. But it's true, the state-of-the art in functional programming has found the efficiency advantages of handling environments that outweigh its complexity. You still see supercombinators used, e.g., in higher-order logic programming, where this is not true. Supercombinators remain part of the inventory of techniques used in implementing higher-order programming.
+
+### 4.[Free variables and bound variables - Wikipedia](https://en.wikipedia.org/wiki/Free_variables_and_bound_variables)
+
+> a **free variable** is a notation that specifies places in an expression where substitution may take place.
+> a placeholder (a symbol that will later be replaced by some literal string), or a wildcard character that stands for an unspecified symbol.
+
+> A **bound variable** is a variable that was previously free, but has been bound to a specific value or set of values called domain of discourse or universe. 
+
+> In *computer programming*, the term free variable refers to variables used in a function that are **neither local variables nor parameters** of that function.
+
+### 5.[Super-combinators: A new implementation method for applicative languages](https://dl.acm.org/citation.cfm?id=802129)
+
 ## Dependent Type
 
 May use dependent type to further restrict the state space so that invalid states are not representable.
@@ -1113,7 +1138,8 @@ Able to modify the type rules in runtime which aligns well with hot reloading / 
 
 > GADT (Generalised ADTs)
 > A small digression: `Elem`
-Bounded Type: Construct a finite set of values as a type
+Bound variable: construct a finite set of values as a type (?)
+
 
 ## Concurrent Models of Computation
 
