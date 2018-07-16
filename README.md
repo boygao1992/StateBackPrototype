@@ -1077,6 +1077,17 @@ Object composition.
 
 ### 10. [Scalable and Modular Architecture for CSS (SMACSS)](https://smacss.com/)
 
+### 11. [An Introduction to Style Elements for Elm](https://mdgriffith.gitbooks.io/style-elements/content/)
+
+> HTML and CSS make this difficult because there's **no central place that represents your layout**.
+
+> **Separating Layout and Style**
+> The Style Elements library makes layout a first class idea, which makes working with style and layout a breeze.
+> It also makes refactoring your style feel similarly invincible as refactoring in Elm! 
+> The main idea is that layout should live in your view, and your stylesheet should deal with all properties except those relating to layout, position, sizing, and spacing. 
+> The `Element` module contains all the components that go in your view. 
+> The `Style` module is the base for creating your stylesheet.
+
 ## Combinatory Logic
 
 ### 1.[Can any function be reduced to a point-free form?](https://stackoverflow.com/questions/13184294/can-any-function-be-reduced-to-a-point-free-form)
@@ -2079,6 +2090,29 @@ dimap :: (c → a) → (b → d) → (a → b) → (c → d)
 > 7 Applicative functors, categorically
 > applicative functors are **strong lax monoidal functors**
 
+### 25.[The Monad.Reader - a electronic magazine about all things Haskell](https://themonadreader.wordpress.com/)
+
+### 26.[Bidirectional Programming Languages - John Nathan Foster, PhD dissertation](http://www.cs.cornell.edu/~jnfoster/papers/jnfoster-dissertation.pdf)
+
+> 2 Basic Lenses
+> 3 Quotient Lenses
+> 4 Resourceful Lenses
+> 5 Secure Lenses
+
+### 27.[elm arturopala/elm-monocle](http://package.elm-lang.org/packages/arturopala/elm-monocle/latest)
+
+> Iso: An Iso is a tool which converts elements of type A into elements of type B and back without loss.
+
+> Prism: A Prism is a tool which optionally converts elements of type A into elements of type B and back.
+
+> Lens: A Lens is a functional concept which solves a very common problem: how to easily update a complex immutable structure, for this purpose Lens acts as a zoom into a record. 
+
+> Optional: A Optional is a weaker Lens and a weaker Prism.
+
+### 28.[elm evancz/focus](https://github.com/evancz/focus)
+
+[Lenses: compositional data access and manipulation](https://www.youtube.com/watch?v=wguYuQwjTtI)
+
 
 ## Functional Data Structures
 
@@ -2564,6 +2598,7 @@ Metric
 
 ### 5.[Brutalist Web Design - Raw content true to its construction](https://brutalist-web.design/)
 
+### 6.[Martian Chronicles - Evil Martians’ team blog ](https://evilmartians.com/chronicles)
 
 ## Color
 
@@ -2614,7 +2649,16 @@ Metric
 
 ### 2.[Our Justified Layout Goes Open Source](http://code.flickr.net/2016/04/05/our-justified-layout-goes-open-source/)
 
+## Virtual DOM
 
+### 1.[Differential Synchronization](https://neil.fraser.name/writing/sync/)
+
+> 2 Differential Synchronization
+> 3 Dual Shadow Method
+> 4 Guaranteed Delivery Method
+> 6 Diff and Patch
+
+### 2.[Diff Strategies](https://neil.fraser.name/writing/diff/)
 
 ## Others
 
