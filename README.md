@@ -2057,24 +2057,9 @@ dimap g h ∷ f a b  → f c d
 dimap :: (c → a) → (b → d) → (a → b) → (c → d)
 ```
 
+### 22. [Reading Configuration with Kleisli Arrows](https://blog.ssanj.net/posts/2017-06-12-reading-configuration-with-kleisli-arrows.html)
 
-### 22. Reader dependency injection tool Series
-
-1. [Dependency Injection for Configuring Play Framework Database Connection(s) part 1](https://coderwall.com/p/neukwa)
-
-2. [Dependency Injection for Configuring Play Framework Database Connection(s) part 2](https://coderwall.com/p/kh_z5g)
-
-3. [Curry and Cake without type indigestion -- Covariance, Contravariance and the Reader Monad](https://coderwall.com/p/pdrz7q)
-
-4. [Tooling the Reader Monad](https://coderwall.com/p/ye_s_w)
-
-5. [Generalizing the Reader Tooling, part 1](https://coderwall.com/p/-egcfq)
-
-6. [Generalizing the Reader Tooling, part 2](https://coderwall.com/p/ibrhta)
-
-### 23. [Reading Configuration with Kleisli Arrows](https://blog.ssanj.net/posts/2017-06-12-reading-configuration-with-kleisli-arrows.html)
-
-### 24. [Applicative Programming with Effects](http://www.staff.city.ac.uk/~ross/papers/Applicative.html)
+### 23. [Applicative Programming with Effects](http://www.staff.city.ac.uk/~ross/papers/Applicative.html)
 
 > 4 Monoids are phantom Applicative functors
 
@@ -2090,16 +2075,16 @@ dimap :: (c → a) → (b → d) → (a → b) → (c → d)
 > 7 Applicative functors, categorically
 > applicative functors are **strong lax monoidal functors**
 
-### 25.[The Monad.Reader - a electronic magazine about all things Haskell](https://themonadreader.wordpress.com/)
+### 24.[The Monad.Reader - a electronic magazine about all things Haskell](https://themonadreader.wordpress.com/)
 
-### 26.[Bidirectional Programming Languages - John Nathan Foster, PhD dissertation](http://www.cs.cornell.edu/~jnfoster/papers/jnfoster-dissertation.pdf)
+### 25.[Bidirectional Programming Languages - John Nathan Foster, PhD dissertation](http://www.cs.cornell.edu/~jnfoster/papers/jnfoster-dissertation.pdf)
 
 > 2 Basic Lenses
 > 3 Quotient Lenses
 > 4 Resourceful Lenses
 > 5 Secure Lenses
 
-### 27.[elm arturopala/elm-monocle](http://package.elm-lang.org/packages/arturopala/elm-monocle/latest)
+### 26.[elm arturopala/elm-monocle](http://package.elm-lang.org/packages/arturopala/elm-monocle/latest)
 
 > Iso: An Iso is a tool which converts elements of type A into elements of type B and back without loss.
 
@@ -2109,7 +2094,7 @@ dimap :: (c → a) → (b → d) → (a → b) → (c → d)
 
 > Optional: A Optional is a weaker Lens and a weaker Prism.
 
-### 28.[elm evancz/focus](https://github.com/evancz/focus)
+### 27.[elm evancz/focus](https://github.com/evancz/focus)
 
 [Lenses: compositional data access and manipulation](https://www.youtube.com/watch?v=wguYuQwjTtI)
 
@@ -2659,6 +2644,56 @@ Metric
 > 6 Diff and Patch
 
 ### 2.[Diff Strategies](https://neil.fraser.name/writing/diff/)
+
+## Functional Dependency Injection
+
+### 1.[Functional approaches to dependency injection - Part one of a series, starting with partial application.](https://fsharpforfunandprofit.com/posts/dependency-injection-1/)
+
+### 2. Reader dependency injection tool Series
+
+1. [Dependency Injection for Configuring Play Framework Database Connection(s) part 1](https://coderwall.com/p/neukwa)
+
+2. [Dependency Injection for Configuring Play Framework Database Connection(s) part 2](https://coderwall.com/p/kh_z5g)
+
+3. [Curry and Cake without type indigestion -- Covariance, Contravariance and the Reader Monad](https://coderwall.com/p/pdrz7q)
+
+4. [Tooling the Reader Monad](https://coderwall.com/p/ye_s_w)
+
+5. [Generalizing the Reader Tooling, part 1](https://coderwall.com/p/-egcfq)
+
+6. [Generalizing the Reader Tooling, part 2](https://coderwall.com/p/ibrhta)
+
+### 3.[PS Unscripted - Code Reuse in PS: Fns, Classes, and Interpreters](https://www.youtube.com/watch?v=GlUcCPmH8wI)
+
+A bottom-up way of explaining `Functor` and Type Classes.
+Show their power of generalization by examples.
+Also, the pain without compiler's auto dispatch.
+Inconsistency is inevitable when manually injecting implementations especially facing "diamond problem" (multiple inheritance).
+
+"Dependency injection" in FP.
+> P.77
+
+Independent reusable functionality in Type Classes.
+
+Comparison of reusability by type signatures.
+
+Abstract out assumptions by introducing wild card type signature.
+
+- initial encoding (inject implementation, Factory?)
+- final encoding
+
+``` purescript
+data RealCode a
+  = ReadFile String (Maybe String -> a)
+  | Done a
+```
+
+`a` abstracts the way you want to inspect the return type
+e.g. `Identity`(debug), `Aff`(real implementation)
+
+This operator-like data structure is a tree / `Free`.
+
+`realCodeToAff`, interpreter, `CoFree`?
 
 ## Others
 
