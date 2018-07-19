@@ -1113,6 +1113,109 @@ Object composition.
 
 ### 5.[Super-combinators: A new implementation method for applicative languages](https://dl.acm.org/citation.cfm?id=802129)
 
+### 6.[Deriving the Y Combinator in Javascript](https://enlight.nyc/y-combinator/)
+
+> The Y combinator bestows the power of self-referential recursion unto languages which don’t support it.
+
+> The Y combinator is a function which applies another function infinite times
+
+> `y(f) = f(f(f(f(f(f(f(f(f(f(f(f(f(...)))))))))))))` => `y(f) = f(y(x))`
+
+> `y(f) = x(x)(f)`, for some other function `x`. 
+> In simpler terms, `y = x(x)` — `y` is `x` applied to itself.
+
+> ```javascript
+> // Here's our current, recursively-defined y
+> function y(f) {
+>   return function thunk(n) {
+>     return f(y(f))(n);
+>   };
+> }
+>
+> // Apply the substitution y = x(x)
+> // Call the parameter otherX since we don't want
+> // to confuse the outer x and inner x and to avoid
+> // variable shadowing
+> function x(otherX) {
+>   return function y(f) {
+>     return function thunk(n) {
+>       return f(otherX(otherX)(f))(n);
+>     };
+>   };
+> }
+>
+> const newY = x(x);
+>
+> // Our factorialFactory, in JavaScript for reference
+> function factorialFactory(f) {
+>   return function factorial(x) {
+>     if (x === 0) {
+>       return 1;
+>     }
+>     return x * f(x - 1);
+>   };
+> }
+>
+> // x(x)(factorialFactory)
+> const newFactorial = newY(factorialFactory);
+>
+> newFactorial(10);
+> // => 3628800
+>
+> ```
+
+> By applying `x` to itself, we avoid self-reference in the function body. 
+> Everything the function needs to run comes from its parameters.
+
+> ```javascript
+> // substitute x by its definition
+> const y = (function(otherX) {
+>   return function(f) {
+>     return function thunk(...args) {
+>       return f(otherX(otherX)(f))(...args);
+>     };
+>   };
+> })(function(otherX) {
+>   return function(f) {
+>     return function thunk(...args) {
+>       return f(otherX(otherX)(f))(...args);
+>     };
+>   };
+> });
+>
+> // We can shorten it even more with ES6 arrow functions
+> const y = (x => f => (...a) => f(x(x)(f))(...a))(x => f => (...a) =>
+>   f(x(x)(f))(...a)
+> );
+>
+> ```
+
+```javascript
+const y = (
+  x => 
+    f => 
+      f(x(x)(f)) 
+)(
+  x =>
+    f =>
+      f(x(x)(f))
+)
+```
+
+`Y := λf.(λx.f (x x)) (λx.f (x x))`
+
+```javascript
+const y = 
+  f =>
+    (
+      x => 
+        f(x(x))
+    )(
+      x =>
+        f(x(x))
+    )
+```
+
 ## Dependent Type
 
 May use dependent type to further restrict the state space so that invalid states are not representable.
