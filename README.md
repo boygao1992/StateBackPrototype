@@ -1190,6 +1190,9 @@ Object composition.
 >
 > ```
 
+`(...args)` to manually bring in lazy evaluation for such a infinite structure.
+
+Without worrying about the strict evaluation, make it point-free:
 ```javascript
 const y = (
   x => 
@@ -1202,6 +1205,7 @@ const y = (
 )
 ```
 
+Original definition by Haskell B. Curry:
 `Y := λf.(λx.f (x x)) (λx.f (x x))`
 
 ```javascript
@@ -1215,6 +1219,40 @@ const y =
         f(x(x))
     )
 ```
+
+By beta-reduction,
+```
+Y g
+= (λf.(λx.f (x x)) (λx.f (x x))) g
+= (λx.g (x x)) (λx.g (x x))
+= g((λx.g (x x)) (λx.g (x x)))
+= g(Y g)
+```
+
+### 7.[Tacit Programming - Wikipedia](https://en.m.wikipedia.org/wiki/Tacit_programming)
+
+> also called **point-free style**
+> The lack of argument naming gives point-free style a reputation of being unnecessarily obscure, hence the epithet "pointless style."
+
+> ```haskell
+> p = \x -> \y -> \z -> f (g x y) z
+>   = \x -> \y -> f (g x y)
+>   = \x -> \y -> (f . (g x)) y
+>   = \x -> f . (g x)
+>   = \x -> ((.) f) (g x)
+>   = ((.) f) . g
+> ```
+
+Point-free style works fine for sequential data transformation (without branching).
+
+### 8.[The Unlambda Programming Language: Your Functional Programming Language Nightmares Come True](http://www.madore.org/~david/programs/unlambda/)
+
+> Obfuscated programming languages (see below for links) are typically made nasty by either strongly restricting the set of allowed operations in the language, or making them very different from what programmers are used to, or both. (Of course, the goal is to do that while still being Turing-complete.)
+
+> Despite Unlambda being a form of the lambda calculus, it does not have a lambda (abstraction) operation. 
+> Rather, this operation must be replaced by the use of the S, K and I combinators — this can be done mechanically using abstraction elimination. 
+> Because there is no abstraction, functions are not named in Unlambda (except the builtin ones): there are no variables or such thing. 
+
 
 ## Dependent Type
 
