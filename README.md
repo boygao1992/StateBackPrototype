@@ -2698,6 +2698,12 @@ Complexity of state management
 
 ### 1.[Simple React Patterns - Dealing With Side-Effects In React](http://lucasmreis.github.io/blog/simple-react-patterns/)
 
+### 2.[React in Patterns - A free book that talks about design patterns/techniques used while developing with React.](https://github.com/dtinth/react-in-patterns)
+
+> 2.3 Composition
+> 4.1 Dependency injection
+> 4.2 Styling
+
 ## Scala
 
 ### 1.[Scala.js for JavaScript developers](https://www.scala-js.org/doc/sjs-for-js/)
