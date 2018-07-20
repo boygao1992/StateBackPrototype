@@ -1835,6 +1835,75 @@ remove continuous `Signal`
 
 > [Antony Courtney](https://www.antonycourtney.com/) - coauther of Yampa
 
+
+### 35.[Sirea - Simply Reactive! Declarative orchestration in Haskell using RDP](https://github.com/dmbarbour/Sirea)
+
+> Reactive Demand Programming (RDP)
+> an RDP application is a complex symphony of signals and declarative effects orchestrated in space and time
+> RDP is stateless logic on a stateful grid
+
+> declarative effects
+> For a small subset of effects, 
+> that have nice properties - e.g. **idempotence, commutativity, monotonicity**
+> one can achieve equational reasoning and refactoring on par with the very best pure, law abiding programming models.
+> This includes state, video, music, sensor networks, control systems, user interface.
+
+> In RDP, the only effect is observing of the active set of **demands** by a resource.
+> RDP's effect model was inspired from a symmetric observer effect in physics and psychology: one cannot observe a system without influencing its behavior.
+> Demands are represented as long-lived signals. Signal processing is local, modular, and composable. Treating the signals as a set is essential for RDP's spatial idempotence and commutativity.
+
+> RDP is a **bidirectional dataflow** model. 
+> In addition to receiving values, every downstream client is also pushing values upstream: parameters. 
+> The cost of supporting bidirectional dataflow and effects on externals is RDP must abandon the illusion of "instantaneous" dataflow. 
+Asynchronous/Concurrent dataflow
+
+> weaknesses
+> - must use a point-free style for RDP behaviors
+> - ideally need robust, monotonic, well synchronized clocks 
+why, if concurrent already? For built-in scheduler?
+> - Performance of dynamic behaviors is poor
+>   designed with an assumption of having very few, relatively stable 'layers' of dynamic behavior, e.g. for staged metaprogramming
+
+#### Domain Model
+
+
+> - Resources 
+> might broadly be classed into sensors, actuators, state, and services. 
+> Specific examples include keyboard, mouse, joystick, webcam, microphone, monitor, speaker, filesystem, databases, network, printers. By nature, resources are external to RDP, but may be accessed by RDP behaviors. 
+> Resources cannot be created in RDP: there is no equivalent to OOP new. 
+> However, resources may be dynamically discovered at runtime, and clever manipulations of stateful resources (such as a filesystem) can model creation in terms of discovery (e.g. by computing a unique filename).
+
+Drivers, IO handling
+
+> - Behaviors 
+> describe computation-rich data plumbing between resources. 
+> Some behaviors will represent access to a resource, providing a capability to observe or influence it. 
+> But the majority of behaviors in an RDP application are often simple data plumbing and pure transforms (cf. Sirea.Behavior). 
+> RDP behaviors cannot accumulate state; all state is kept in external resources. 
+> A simple, linear behavior might gain a joystick signal from GLFW, transform that signal into controls for a robotic arm, bcross over to a partition representing the robot resource, then push the signal to the robotic arm. (getJoyData >>> bfmap joyToRobotArmCtrl >>> bcross >>> controlArm). 
+> RDP can express many independently concurrent behaviors, e.g. using |*|. Behaviors can be dynamic, i.e. there is a behavior to evaluate behaviors (beval).
+
+internal representation of external state
+
+> - Signals 
+> describe values as they change over time. 
+> Those values typically represent states - e.g. the position of a mouse, frames from a webcam, content for a video display. 
+> Future states are not entirely predictable, so signals must be updated over time. 
+> Propagating those updates and transforming the signals are the primary roles of behaviors. 
+> It is not possible to observe a signal's history, and consequently signals are constrained by durations of explicit, active observation. 
+> For example, a signal describing the position of a joystick is only active while a behavior is actively observing it. 
+> Behaviors cannot create or destroy signals, but can manipulate existing signals in flexible ways.
+
+internal state
+
+> Signals and resources are not programmable abstractions within RDP. They are not first class. However, signals and resources are useful concepts for motivating, understanding, and explaining behaviors.
+
+### 36.[Awelon Blue - RDP author's blog](https://awelonblue.wordpress.com/)
+
+[awelon -  Awelon project is a new UI model with a new language.](https://github.com/dmbarbour/awelon)
+
+a DSL for RDP
+
 ## Self-adjusting Computation (SAC)
 
 ### 1.[Self-Adjusting Computation - Umut Acar - Carnegie Mellon University](http://www.umut-acar.org/self-adjusting-computation)
@@ -2673,6 +2742,9 @@ To achieve human-level intelligence, learning machines need the guidance of a mo
 
 ### 1.[sketch.systems](https://sketch.systems/)
 Minimalist State-based UI design
+
+### 2.[pagedraw](https://pagedraw.io/)
+Draw your React components, but use them like components coded manually.
 
 ## Combinational Logic Circuit Design
 
