@@ -88,11 +88,6 @@ e.g. TodoMVC, delete button is attached to child components (TodoItem) while the
 
 [Elm Is Wrong](http://reasonablypolymorphic.com/blog/elm-is-wrong/)
 
-### 1. [Scaling The Elm Architecture](https://github.com/evancz/guide.elm-lang.org/tree/master/reuse)
-
-> **We do not think in terms of reusable components.** Instead, we focus on reusable functions.
-> we create **reusable views** by breaking out helper functions to display our data.
-
 ### Potential Fix
 
 Elm support synchronous and asynchronous recursive Update on Model.
@@ -2772,7 +2767,12 @@ can be improved by caching and diffing (I assume they did in the real library)
 
 ## Elm
 
-### Advanced Types in Elm - Charlie Koster
+### 1. [Scaling The Elm Architecture](https://github.com/evancz/guide.elm-lang.org/tree/master/reuse)
+
+> **We do not think in terms of reusable components.** Instead, we focus on reusable functions.
+> we create **reusable views** by breaking out helper functions to display our data.
+
+### 2. Advanced Types in Elm - Charlie Koster
 
 [Part I: Opaque Types](https://medium.com/@ckoster22/advanced-types-in-elm-opaque-types-ec5ec3b84ed2)
 
@@ -2791,6 +2791,9 @@ one or more parameters in the Type constructor than in the Data constructor
 > ```
 
 > Phantom types are useful for restricting function arguments
+
+### 3. [How to turn a Msg into a Cmd Msg in Elm? - You can, but you probably shouldn’t](https://medium.com/elm-shorts/how-to-turn-a-msg-into-a-cmd-msg-in-elm-5dd095175d84)
+
 
 ## Swift
 
