@@ -2794,6 +2794,11 @@ one or more parameters in the Type constructor than in the Data constructor
 
 ### 3. [How to turn a Msg into a Cmd Msg in Elm? - You can, but you probably shouldn’t](https://medium.com/elm-shorts/how-to-turn-a-msg-into-a-cmd-msg-in-elm-5dd095175d84)
 
+### 4. [elm-visualization - A visualization package for Elm (D3-like)](https://github.com/gampleman/elm-visualization)
+
+Denotational visualization: from data, to positions on screen, to geometries that connect these positions.
+
+[Elm Europe 2017 - Jakub Hampl - Visualizing data with elm](https://www.youtube.com/watch?v=Pf1xQ76JgmQ)
 
 ## Swift
 
@@ -2970,6 +2975,34 @@ e.g. `Identity`(debug), `Aff`(real implementation)
 This operator-like data structure is a tree / `Free`.
 
 `realCodeToAff`, interpreter, `CoFree`?
+
+## Visualization
+
+### 1.[The Visual Display of Quantitative Information -  Edward R. Tufte](https://www.amazon.com/Visual-Display-Quantitative-Information/dp/1930824130)
+
+## Domain Modeling
+
+### 1.[The Wrong Abstraction](https://www.sandimetz.com/blog/2016/1/20/the-wrong-abstraction)
+
+> duplication is far cheaper than the wrong abstraction
+> prefer duplication over the wrong abstraction
+
+> Programmer B feels honor-bound to retain the existing abstraction, but since isn't exactly the same for every case, they alter the code to take a parameter, and then add logic to conditionally do the right thing based on the value of that parameter.
+> What was once a universal abstraction now behaves differently for different cases.
+> Another new requirement arrives.
+> Programmer X. Another additional parameter. Another new conditional.
+> Loop until code becomes incomprehensible.
+
+> Existing code exerts a powerful influence. 
+> Its very presence argues that it is both correct and necessary.
+> We know that code represents effort expended, and we are very motivated to preserve the value of this effort. 
+> And, unfortunately, the sad truth is that the more complicated and incomprehensible the code, i.e. the deeper the investment in creating it, the more we feel pressure to retain it (the "sunk cost fallacy").
+
+> If you find yourself in this situation, resist being driven by sunk costs. When dealing with the wrong abstraction, the fastest way forward is back. Do the following:
+> 1. Re-introduce duplication by inlining the abstracted code back into every caller.
+> 2. Within each caller, use the parameters being passed to determine the subset of the inlined code that this specific caller executes.
+> 3. Delete the bits that aren't needed for this particular caller.
+
 
 ## Others
 
