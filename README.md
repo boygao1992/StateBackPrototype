@@ -93,6 +93,14 @@ e.g. TodoMVC, delete button is attached to child components (TodoItem) while the
 > **We do not think in terms of reusable components.** Instead, we focus on reusable functions.
 > we create **reusable views** by breaking out helper functions to display our data.
 
+### Potential Fix
+
+Elm support synchronous and asynchronous recursive Update on Model.
+- Sync: directly call the `Update` function with the `Msg` (sequential)
+- Async: pack the `Msg` in `Cmd` (branching is possible, but ordering not guaranteed)
+
+Able to implement `Regulator` and `PostCensor`
+
 ## SAM
 
 V = State( vm( Model.present( Action( data))), nap(Model))
@@ -112,7 +120,23 @@ State transition function and Output function are separated into Reducer and Mid
 
 1. Middlewares don't compose. Functional specification needed.
 
-2. Reducer can be modulized based on DOM tree's hierarchical structure but then suffer from the same communication problem as ELM. If reducer tree is flattened into a single layer hash map, then global constraints are easy to implement but cyclic dependency are still not properly handled (some parent components know too much).
+2. Reducer can be modulized based on DOM tree's hierarchical structure but then suffer from the same communication problem as ELM. 
+If reducer tree is flattened into a single layer hash map (all components directly subscribing dimensions of interest from the store by react-redux `connect`), then global constraints are easy to implement but cyclic dependency are still not properly handled (some parent components know too much).
+
+### React VDOM
+
+Functionality
+- inject content
+- inject event handlers
+- inject view functions
+- different view/visualization based on state
+
+`React.Component` can be parametrized by data, event handlers, and view/render functions (officially called Render Props).
+
+If the Component is parametrized by view functions, then it focuses on **view state** handling logic.
+
+Component without any view state handling logic is pure template.
+
 
 ## Angular2 / Vue
 
@@ -2694,16 +2718,6 @@ Complexity of state management
 [ZeroMQ](http://aosabook.org/en/zeromq.html)
 
 
-## React
-
-### 1.[Simple React Patterns - Dealing With Side-Effects In React](http://lucasmreis.github.io/blog/simple-react-patterns/)
-
-### 2.[React in Patterns - A free book that talks about design patterns/techniques used while developing with React.](https://github.com/dtinth/react-in-patterns)
-
-> 2.3 Composition
-> 4.1 Dependency injection
-> 4.2 Styling
-
 ## Scala
 
 ### 1.[Scala.js for JavaScript developers](https://www.scala-js.org/doc/sjs-for-js/)
@@ -2734,9 +2748,49 @@ To achieve human-level intelligence, learning machines need the guidance of a mo
 
 ### 1.[purescript-base documentation](https://github.com/purescript-contrib/purescript-base/tree/master/docs)
 
+## React
+
+### 1.[Simple React Patterns - Dealing With Side-Effects In React](http://lucasmreis.github.io/blog/simple-react-patterns/)
+
+### 2.[React in Patterns - A free book that talks about design patterns/techniques used while developing with React.](https://github.com/dtinth/react-in-patterns)
+
+> 2.3 Composition
+> 4.1 Dependency injection
+> 4.2 Styling
+
 ## Redux
 
 ### 1.[Slack clone built with Elixir, Phoenix, and React Redux](https://github.com/bnhansn/sling)
+
+### 2.[markerikson/react-redux-links - article collections](https://github.com/markerikson/react-redux-links)
+
+### 3.[gaearon/connect.js - simplified for concept](https://gist.github.com/gaearon/1d19088790e70ac32ea636c025ba424e)
+
+> re-render whenever the store state changes
+
+can be improved by caching and diffing (I assume they did in the real library)
+
+## Elm
+
+### Advanced Types in Elm - Charlie Koster
+
+[Part I: Opaque Types](https://medium.com/@ckoster22/advanced-types-in-elm-opaque-types-ec5ec3b84ed2)
+
+[Part II: Extensible Records](https://medium.com/@ckoster22/advanced-types-in-elm-extensible-records-67e9d804030d)
+
+[Part III: The Never Type](https://medium.com/@ckoster22/advanced-types-in-elm-the-never-type-ca9b3297bbd4)
+
+[Part IV: Phantom Types](https://medium.com/@ckoster22/advanced-types-in-elm-phantom-types-808044c5946d?source=user_profile---------5-------------------)
+
+one or more parameters in the Type constructor than in the Data constructor
+
+> ```elm
+> type APhantomType a
+>     = Tag1 String
+>     | Tag2
+> ```
+
+> Phantom types are useful for restricting function arguments
 
 ## Swift
 
