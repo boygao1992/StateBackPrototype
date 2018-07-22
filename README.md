@@ -1583,6 +1583,40 @@ you simply set up calculations outside of the system that create new inputs that
 
 [briancavalier/arrow in JS](https://github.com/briancavalier/arrow)
 
+> 2.1.2 Current Classic FRP Systems
+
+> However, Elm does not provide a notion of switching or continuous time behaviors, though an approximation is given using discrete-time events which are actuated at repeated intervals specified during the event definition.
+> This thesis asserts that Arrowized FRP can be embedded in Elm, but provides little support for this assertion
+
+> The reactive-banana library is a push-based FRP system designed for use with Haskell GUI frameworks.
+> using a dependency graph to update the network on event occurences.
+> eschews generalized switching in favor of branching functions on behavior values
+> Rather than a generalized switching combinator which allows the replacement of arbitrary behaviors, reactive-banana provides a step combinator which creates a stepwise behavior from the values of an event stream.
+
+> 3.3.1 Signal Vectors
+
+> 3.4 Combinators
+
+> 3.4.4 Reactivity
+> `switch` combinator
+
+> 3.4.5 Feedback
+> This combinator provides decoupling for signals but not events.
+> This means that the programmer has the responsibility to ensure that feedback does not generate an infinite sequence of events in a single time-step.
+
+> 3.4.6 Event-Specific Combinators
+> 3.4.7 Joining
+> 3.4.8 Time Dependence
+
+> 3.5 Evaluation
+> `signalHandler`, `eventHandler`, `emptyHandler`, `combineHandlers`
+> `SFEvalState m svIn svOut`
+> `initSFEval`, create the initial state for evaluating a signal function
+> `SVSample sv`
+> `sampe`, `sampleEvt`, `sampleNothing`, `combineSamples`
+
+> 4 Implementation
+
 ### 14. [Signals, Not Generators!](http://ai2-s2-pdfs.s3.amazonaws.com/519f/3860d7f719d3cf89ecf507dd01aa0e149cdf.pdf)
 
 ### 15. [The Azimuth Project - Functional reactive programming summary](http://www.azimuthproject.org/azimuth/show/Functional+reactive+programming)
