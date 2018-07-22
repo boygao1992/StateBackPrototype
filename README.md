@@ -2716,6 +2716,10 @@ Complexity of state management
 > 2.6 Continuous-Time
 > 7 Observers and Dynamic Feedback
 
+### 2.[An Introduction to Mathematical Optimal Control Theory](https://math.berkeley.edu/~evans/control.course.pdf)
+
+> Chapter 7: Introduction to stochastic control theory
+
 ## Computer Model
 **Correct this section after reading "Microprogrammed State Machine Design"**
 
