@@ -2401,10 +2401,50 @@ an area of mathematics primarily concerned with counting, both as a means and an
 #### 2.[Abstract and Concrete Categories](http://katmat.math.uni-bremen.de/acc/acc.pdf)
 #### 3.[Toposes, Triples and Theories](http://www.tac.mta.ca/tac/reprints/articles/12/tr12.pdf)
 
+#### 4.[The collected works of F. W. Lawvere - Github](https://github.com/mattearnshaw/lawvere)
+
 ### Application
 #### 1.[Memory Evolutive System (MES)](http://vbm-ehr.pagesperso-orange.fr/AnintroT.htm)
 #### 2.[Understanding Visualization: A Formal Approach using Category Theory and Semiotics](https://arxiv.org/abs/1311.4376)
 
+### connection to Dialectics
+
+#### 1.[Unity and identity of opposites in calculus and physics - F. William Lawvere](https://link.springer.com/article/10.1007/BF00122250)
+
+> The dialectical philosophy, developed 150 years ago by Hegal, Schleiermacher, Grassmann, Marx, and others, may provide significant insights to guide the learning and development of mathematics, while categorical precision may dispel some of the mystery in the philosophy.
+
+[Stack Exchange - David Myers](https://math.stackexchange.com/questions/2357569/can-you-explain-lawveres-work-on-hegel-to-someone-who-knows-basic-category-theo)
+> Lawvere is concerned with objective logic in this more mathematical sense as the logic of objects in a category.
+> The logic takes the form of tools we can use to make and understand objects using others.
+> In turn, the existence of these tools can be seen as axioms for a suitable category.
+
+> Lawvere had noticed before his Hegelian turn (I think) that these axioms can be encoded using adjunctions. 
+> The cartesian product is right adjoint to the diagonal functor which duplicates each object and arrow, and the coproduct is the corresponding left adjoint. 
+> The internal hom is defined as a right adjoint to the functor which takes a fixed cartesian product. 
+
+> The basic idea of a unity of opposites is that in order to entertain any idea, you need to be able to entertain its opposite; otherwise, your idea is vacuous in the sense that it could apply to anything. 
+
+> In fact, Hegel's first unity of opposites is just that: the unity of the opposition between vacuity (applying to nothing) and tautology (applying to anything). 
+> This is his unity between Nothing and Being. 
+> He explains this as something like: to even talk of Nothing is to consider it as a thing, and to make it be. 
+> But it is a thing with no characteristics, a pure Being. 
+> On the other hand, pure Being has no characteristics either, it simply is; thus it is contentless, and therefore Nothing.
+
+> Lawvere's interpretation of this opposition is to see Nothing as the initial object ∅ and Being as the terminal object 1 since in a category of spaces -- e.g. a topos or at least an extensive category -- ∅ is an empty space and 1 is a single point. These are opposite in the sense that they are distinct (and intuitively, very distinct), but are unified in that they are the left and right adjoints of the same functor. 
+
+#### 2.[Hegel's "Logic" as Modal Type Theory - nLab, Urs Schreiber](https://ncatlab.org/nlab/show/Hegel's+"Logic"+as+Modal+Type+Theory)
+> While analytic philosophy famously rejected the speculative metaphysics of Hegel in favor of the analysis of concepts by means of mathematical logic, in particular predicate logic,
+> recent developments in the foundations of mathematics via **homotopy type theory** offer a way to re-read Hegel as having useful formal meaning not in predicate logic, but in ‘modal type theory’.
+
+#### 3.[Science of Logic- nLab, Urs Schreiber](https://ncatlab.org/nlab/show/Science+of+Logic)
+> Formalization in Categorical logic / in Modal homotopy type theory
+> 3. Die Lehre vom Sein / The Doctrine of Being
+> 4. Die Lehre vom Wesen / The doctrine of essence
+> 5. Die Lehre vom Begriff / The doctrine of the notion
+> 6. Die Philosophie der Natur / Philosophy of Nature
+> 7. Die Philosophie des Geistes / Philosophy of Spirit
+
+[Hegel’s Science of Logic](https://www.marxists.org/reference/archive/hegel/works/hl/hl000.htm)
 
 ## Guarded Recursion
 ### 1.[A Modality for Recursion](https://pdfs.semanticscholar.org/a177/47f98e5b821f03ec8be858794f2f83a683b7.pdf)
@@ -2838,6 +2878,23 @@ Denotational visualization: from data, to positions on screen, to geometries tha
 
 [Elm Europe 2017 - Jakub Hampl - Visualizing data with elm](https://www.youtube.com/watch?v=Pf1xQ76JgmQ)
 
+### 5. [Elm Europe 2017 - Richard Feldman - Scaling Elm Apps](https://www.youtube.com/watch?v=DoA4Txr4GUs&t=986s)
+Refactoring into smaller pieces
+
+### 6. [Compilers as Assistants - Making Elm faster and friendlier in 0.16](http://elm-lang.org/blog/compilers-as-assistants)
+
+> Simplified Records
+
+> Elm uses a very cool record system. It is based on an excellent paper by Daan Leijen that lets you add and remove fields from records, all while keeping the types simple. I really love this mix of power and simplicity!
+
+[Extensible records with scoped labels](https://www.microsoft.com/en-us/research/publication/extensible-records-with-scoped-labels/)
+
+> I added support for this back in 0.7, and at the time, I had never seen a language (with a real working compiler) that allowed field addition and deletion like this. So I had intuition, but no way to get real experience. I worried that it could encourage overly complex code, so from the start I was very conservative, knowing that we could expand or contract the features as we got more data.
+>
+> Well it has been more than two years since then, and the results are in. Pretty much no one ever used field addition or deletion. In the few cases where people did use it, it got pretty crazy pretty quickly. The one real-world case I know of is recorded here if you want to see, and the code could be rewritten with union types, which turned out nicer anyway.
+
+### 7.[jvoigtlaender/circuits - exploring elm interactive graphics (and also teaching my son some basic circuitry)](https://github.com/jvoigtlaender/circuits)
+
 ## Swift
 
 ### 1.[An Introduction to WebObjects, in Swift](http://www.alwaysrightinstitute.com/wo-intro/)
@@ -3040,7 +3097,6 @@ This operator-like data structure is a tree / `Free`.
 > 1. Re-introduce duplication by inlining the abstracted code back into every caller.
 > 2. Within each caller, use the parameters being passed to determine the subset of the inlined code that this specific caller executes.
 > 3. Delete the bits that aren't needed for this particular caller.
-
 
 ## Others
 
