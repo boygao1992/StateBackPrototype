@@ -1836,7 +1836,7 @@ Channels, an implicit lock strategy, deadlocks are not avoided
 ##### 2.2.2 eXene: Creating concurrent GUIs
 > deadlock and livelock
 
-> In ELm, prevention of event ordering is handled primarily by the compiler, not hte programmer.
+> In Elm, prevention of event ordering is handled primarily by the compiler, not hte programmer.
 
 TODO: Elm Scheduler
 `elm-stuff/packages/elm-lang/core/5.1.1/src/Native/Scheduler.js`
@@ -2894,6 +2894,18 @@ Refactoring into smaller pieces
 > Well it has been more than two years since then, and the results are in. Pretty much no one ever used field addition or deletion. In the few cases where people did use it, it got pretty crazy pretty quickly. The one real-world case I know of is recorded here if you want to see, and the code could be rewritten with union types, which turned out nicer anyway.
 
 ### 7.[jvoigtlaender/circuits - exploring elm interactive graphics (and also teaching my son some basic circuitry)](https://github.com/jvoigtlaender/circuits)
+
+### 8.[Elm, preventDefault, and onWithOptions](https://medium.com/@ckoster22/elm-preventdefault-and-onwithoptions-99a6a56e6638)
+
+### 9.[elm-sortable-table](https://github.com/evancz/elm-sortable-table)
+
+### 10.[elm-autocomplete](https://github.com/thebritican/elm-autocomplete)
+
+[The API Design Session video w/ Evan Czaplicki (@evancz)](https://www.youtube.com/watch?v=KSuCYUqY058)
+
+### 11.[abadi199/datetimepicker](https://github.com/abadi199/datetimepicker)
+
+### 12.[abadi199/elm-input-extra](https://github.com/abadi199/elm-input-extra)
 
 ## Swift
 
