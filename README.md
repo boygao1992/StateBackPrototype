@@ -1953,9 +1953,14 @@ internal state
 
 ### 36.[Awelon Blue - RDP author's blog](https://awelonblue.wordpress.com/)
 
+
 [awelon -  Awelon project is a new UI model with a new language.](https://github.com/dmbarbour/awelon)
 
 a DSL for RDP
+
+### 37.[ajnsit/concur - An unusual Web UI Framework for Haskell](https://github.com/ajnsit/concur)
+
+[purescript-concur](https://github.com/ajnsit/purescript-concur)
 
 ## Self-adjusting Computation (SAC)
 
