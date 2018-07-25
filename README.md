@@ -694,13 +694,6 @@ Framework-independent & composable
 
 ## State Vector Type Construct
 
-### 1.[Structured TodoMVC example with Elm](https://github.com/rogeriochaves/structured-elm-todomvc/)
-
-> - [NoMap approach with Domain focus](https://github.com/rogeriochaves/structured-elm-todomvc/tree/nomap-domain)
-> - [NoMap approach with Technical focus](https://github.com/rogeriochaves/structured-elm-todomvc/tree/nomap-technical)
-> - [OutMsg approach](http://folkertdev.nl/blog/elm-child-parent-communication/)
-> - [Translator approach](https://medium.com/@alex.lew/the-translator-pattern-a-model-for-child-to-parent-communication-in-elm-f4bfaa1d3f98)
-
 
 ## Input/Event Space Partition
 1. Event Type definition
@@ -2912,6 +2905,27 @@ Refactoring into smaller pieces
 
 ### 12.[abadi199/elm-input-extra](https://github.com/abadi199/elm-input-extra)
 
+### 13.[folkertdev/outmessage - Streamlining parent-child communication with The Elm Architecture](https://github.com/folkertdev/outmessage/)
+
+### 14.[imbybio/outmessage-nested - Extension to folkertdev/outmessage for nested components](https://github.com/imbybio/outmessage-nested/)
+
+> Health warning
+
+> Having nested child modules is a sign that your Elm application is complex and potentially over-engineered. 
+> There are perfectly valid reasons for doing so and this package will help you when this is the case.
+> However, you may also consider re-factoring your application to get rid of the nesting and simplify your design.
+
+
+### 15.[vipentti/elm-dispatch - Dispatch multiple messages in response to a single Html.Event](https://github.com/vipentti/elm-dispatch/tree)
+
+### 16.[Structured TodoMVC example with Elm](https://github.com/rogeriochaves/structured-elm-todomvc/)
+
+> - [NoMap approach with Domain focus](https://github.com/rogeriochaves/structured-elm-todomvc/tree/nomap-domain)
+> - [NoMap approach with Technical focus](https://github.com/rogeriochaves/structured-elm-todomvc/tree/nomap-technical)
+> - [OutMsg approach](http://folkertdev.nl/blog/elm-child-parent-communication/)
+> - [Translator approach](https://medium.com/@alex.lew/the-translator-pattern-a-model-for-child-to-parent-communication-in-elm-f4bfaa1d3f98)
+
+
 ## Swift
 
 ### 1.[An Introduction to WebObjects, in Swift](http://www.alwaysrightinstitute.com/wo-intro/)
@@ -3120,3 +3134,9 @@ This operator-like data structure is a tree / `Free`.
 ### 1.[To Dissect a Mockingbird: A Graphical Notation for the Lambda Calculus with Animated Reduction](http://dkeenan.com/Lambda/)
 
 ### 2.[Cyclomatic Complexity - Wikipedia](https://en.wikipedia.org/wiki/Cyclomatic_complexity)
+
+### 3.[A Very Gentle Introduction To Relational & Functional Programming](https://github.com/swannodette/logic-tutorial)
+
+### 4.[tapeinosyne/elm-microkanren - Elm implementation of the eponymous relational programming language μKanren](https://github.com/tapeinosyne/elm-microkanren/)
+
+[µKanren: A Minimal Functional Core for Relational Programming](http://webyrd.net/scheme-2013/papers/HemannMuKanren2013.pdf)
