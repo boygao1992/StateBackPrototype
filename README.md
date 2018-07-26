@@ -2925,6 +2925,17 @@ Refactoring into smaller pieces
 > - [OutMsg approach](http://folkertdev.nl/blog/elm-child-parent-communication/)
 > - [Translator approach](https://medium.com/@alex.lew/the-translator-pattern-a-model-for-child-to-parent-communication-in-elm-f4bfaa1d3f98)
 
+### 17.[elm-generic-dict](http://package.elm-lang.org/packages/robertjlooby/elm-generic-dict/latest)
+
+> The core Dict/Set implementations only allows keys of `comparable` type. (This includes `Int`, `Float`, `Time`, `Char`, `String`, and `Tuple`s or `List`s of `comparable` types.)
+> This implementation builds off the core implementation but allows the user to provide their own comparer function for ordering the keys.
+
+> 
+```elm
+{-| Convert an association list into a dictionary using the given comparer.
+-}
+fromList : (k -> k -> Order) -> List (k, v) -> GenericDict k v
+```
 
 ## Swift
 
@@ -3128,6 +3139,18 @@ This operator-like data structure is a tree / `Free`.
 > 1. Re-introduce duplication by inlining the abstracted code back into every caller.
 > 2. Within each caller, use the parameters being passed to determine the subset of the inlined code that this specific caller executes.
 > 3. Delete the bits that aren't needed for this particular caller.
+
+## Lenses
+
+### 1.[Haskell/Lenses and functional references](https://en.wikibooks.org/wiki/Haskell/Lenses_and_functional_references)
+
+### 2.[The Lens Library - Haskell](http://lens.github.io/tutorial.html)
+
+### 3.[purescript-profunctor-lenses](https://github.com/purescript-contrib/purescript-profunctor-lenses)
+
+[Lenses for the Mere Mortal: PureScript Edition](https://leanpub.com/lenses)
+
+### 4. [arturopala / elm-monocle](http://package.elm-lang.org/packages/arturopala/elm-monocle/1.7.0/)
 
 ## Others
 
