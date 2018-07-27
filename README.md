@@ -3162,6 +3162,58 @@ This operator-like data structure is a tree / `Free`.
 
 ### 4. [arturopala / elm-monocle](http://package.elm-lang.org/packages/arturopala/elm-monocle/1.7.0/)
 
+## Synchronous Functional Programming
+
+### 1.[Synchronous Functional Programming: The Lucid Synchrone Experiment](https://pdfs.semanticscholar.org/6051/faeabeb33efad129390d9be81dd2969f7f2a.pdf)
+
+> 2.1 An ML Dataflow Language
+> 2.1.1 Infinite Streams as Basic Objects
+> 2.1.2 Temporal Operations: Delay and Initialization
+> 2.2 Stream Functions
+> 2.3 Multi-sampled Systems
+> 2.3.1 The Sampling Operator `when`
+> 2.3.2 The Combination Operator `merge`
+> 2.3.3 Oversampling
+> 2.3.4 Clock Constraints and Synchrony
+> 2.4 Static Values
+> 2.5 Higher-order Features
+> 2.7 A Programming Construct to Share the Memory
+> 2.8 Signals and Signal Patterns
+> 2.8.1 Signals as Clock Abstractions
+
+> 2.9 State Machines and Mixed Designs
+> These state machines can be composed with dataflow equations as well as other state machines and can be arbitrarily nested.
+
+> An automaton is a set of states and transitions.
+> A state is made of a set of equations and transitions.
+> Two types of transitions, weak and strong can be fired in a state and for each of them, the target state can be either entered by history or simply reset
+
+Automaton
+- State
+  - equations (constraints?)
+  - transitions
+- Transitions
+  - types
+    - weak
+    - strong
+  - target state
+    - history
+    - reset
+
+> 2.9.1 Weak and Strong Preemption
+> a transition is 
+> - weak when it is inspected at the end of the reaction
+>   - the condition determines the active state of the next reaction
+> - strong when it is made immediately, at the beginning of the reaction
+>   - it (the condition) determines the current active set of equations to be executed
+
+
+> 2.9.4 Communication between States and Shared Memory
+
+> 2.11 Combining State Machines and Signals
+
+> 2.12 Recursion and non Real-time Features
+
 ## Others
 
 ### 1.[To Dissect a Mockingbird: A Graphical Notation for the Lambda Calculus with Animated Reduction](http://dkeenan.com/Lambda/)
