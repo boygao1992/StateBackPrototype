@@ -767,6 +767,14 @@ In CycleJS,
 
 ### 1.[Architecture for logic programing with arrangements of finite-state machines](http://ieeexplore.ieee.org/document/7588297/)
 
+> Logic-Labeled Finite-State Machines (LLFSMs)
+> LLFSMs are composed of states and transitions between states.
+> transitions are not labeled by events.
+> transitions are labeled by logic expressions (in a sense analogy to the guard conditions in UML's labels for transitions).
+> State activity occurs in sections named OnEntry, OnExit, and Internal.
+> If none of them evaluate to true (that is, none of them fires), then the Internal activity is executed.
+> Only when a transition evaluates to true and the target state T is a different state from the current state, the OnExit section of the current state is executed and, in the next ringlet, the OnEntry of the target state is executed.
+
 ### 2.[Verification of Conflicition and Unreachability in Rule-based Expert System with Model Checking](https://arxiv.org/pdf/1404.2768.pdf)
 
 > 3.2 UPPAAL
@@ -790,6 +798,8 @@ In CycleJS,
 ### 4.[Alloy - SAT-based Software Model Checking](http://alloytools.org/)
 
 [Software Abstractions - Daniel Jackson](http://softwareabstractions.org/)
+
+### 5.[Entity-Based State Management for Complex Event Processing Applications](https://link.springer.com/chapter/10.1007/978-3-642-22546-8_13)
 
 
 ## Stateful HTML Elements handling for performance
