@@ -1755,8 +1755,119 @@ Therefore `sf` is analogous to a sequential circuit.
 > 2 Arrowized Functional Reactive Programming
 
 > 2.1 Basic Concepts
+> emphasizing the signal function aspect of the behavior abstraction (through combinators which allow e.g. the composition of such functions or computing some form of **fixed point**), while relegating signals to second class status, appeared to have a number of significant **operational** advantages and clarify **semantical** issues.
+> Taking this approach allows us to recast FRP as an instance of John Hughes's Arrow framework, which directly gave us firm theoretical underpinnings and allowed us to leverage Ross Patterson's work on arrow syntax.
 
+> `SF a b = Signal a -> Signal b`
+> where
+> `Signal a = Time -> a`
+> for real-valued time.
 
+> only signal functions are first class entities; signals only exist indirectly, through the signal functions.
+
+> Signal functions are not curried: multiple input or output signals are tupled together.
+
+> In order to ensure that signal functions are properly executable, we require them to be **causal**:
+> the output of a signal function at time `t` is uniquely determined by the input signal on the interval `[0,t]`.
+> All primitive signal functions in AFRP are causal and all signal function transformations preserve causality.
+
+> 2.2 Discrete and Continuous Time
+
+> Many systems use discrete time semantics in which time is advanced in user-visible increments (stpes).
+
+`elm-automaton` completely removed `continous time` semantics,
+which therefore is under event-driven FRP (E-FRP).
+```elm
+type Automaton a b
+    = Step (a -> ( Automaton a b, b ))
+
+```
+
+> Here it is possible to reason precisely about program semantics and computational resources, but the program becomes less abstract.
+
+directly fits current Elm runtime
+
+> 2.3 Core Primitives
+
+> `arr` is point-wise application:
+> ``` haskell
+> arr :: (a -> b) -> SF a b
+> --                 Signal a  ->   Signal b
+> --               (Time -> a) -> (Time -> b)
+> arr f =
+>   -- s :: Time -> a, signal function
+>   \s ->
+>     -- t :: Time, real-valued time
+>     \t ->
+>       -- (s t) :: a
+>       -- f :: a -> b
+>       -- f (s t) :: b
+>       f (s t)
+> ```
+
+similar to `pure` in `elm-automaton`
+```elm
+pure : (a -> b) -> Automaton a b
+pure f =
+    Step <|
+      \x ->
+        ( pure f, f x )
+```
+
+> `(>>>)` is just reverse function composition
+> ```haskell
+> (>>>) :: SF a b -> SF b c -> SF a c
+> sf1 >>> sf2 
+>   =
+>     \s ->
+>       \t ->
+>         (sf2 (sf1 s)) t
+>{- = \s ->
+>       (sf2 (sf1 s))
+>   = \s ->
+>       (sf2 . sf1) s -}
+>   = sf2 . sf1
+> ```
+
+> The other three primitives provide mechanisms for specifying arbitrary wiring structures, using pairing to group signals
+> We have omitted the definitions, since they follow naturally from the above wiring diagrams, but the type signatures are as follows:
+> ```haskell
+> first :: SF a b -> SF (a,c) (b,c)
+> (&&&) :: SF a b -> SF a c -> SF a (b,c)
+> loop :: SF (a,c) (b,c) -> SF a b
+> ```
+
+```haskell
+first :: SF a b -> SF (a,c) (b,c)
+-- (Signal a -> Signal b) -> (Signal (a,c) -> Signal (b,c))
+-- ((Time -> a) -> (Time -> b)) -> ((Time -> (a,c)) -> (Time -> (b,c)))
+first sf =
+  -- s :: Signal (a,c) = Time -> (a,c)
+  \s ->
+    -- t :: Time
+    \t ->
+      let
+        (a,c) = s t
+             -- sf :: Signal a -> Signal b = (Time -> a) -> (Time -> b)
+        b = (sf 
+              -- supply sf with a constant signal :: Time -> a
+              (\_ -> a)) t
+      in
+        (b,c)
+
+(&&&) :: SF a b -> SF a c -> SF a (b,c)
+-- (Signal a -> Signal b) -> (Signal a -> Signal c) -> (Signal a -> Signal (b,c))
+sf1 &&& sf2 =
+  \s ->
+    \t ->
+      let
+        b = (sf1 s) t
+        c = (sf2 s) t
+      in
+        (b,c)
+  
+loop :: SF (a,c) (b,c) -> SF a b
+```
 
 ### 32.[Elm: Concurrent FRP for Functional GUIs - Evan Czaplicki (2012)](https://www.seas.harvard.edu/sites/default/files/files/archived/Czaplicki.pdf)
 
