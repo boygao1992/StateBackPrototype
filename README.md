@@ -1275,6 +1275,21 @@ Point-free style works fine for sequential data transformation (without branchin
 > Rather, this operation must be replaced by the use of the S, K and I combinators — this can be done mechanically using abstraction elimination. 
 > Because there is no abstraction, functions are not named in Unlambda (except the builtin ones): there are no variables or such thing. 
 
+### 9.[Combinatory Logic - Stanford Encyclopedia of Philosophy](https://plato.stanford.edu/entries/logic-combinatory/#ExisFixePoinCombComp)
+
+> 2.3 The existence of fixed points and combinatorial completeness
+
+> Schönfinkel proved that 𝖲 and 𝖪 suffice to define the other combinators he introduced, and we mentioned in the definition of CL▹ that the set of constants is limited to 𝖲 and 𝖪, because other combinators could be defined from those.
+
+> Fixed point theorem. For any function M, there is a term N such that MN=N. 
+
+> Both **Haskell B. Curry** and **Alan Turing** defined fixed point combinators (in CL or in the λ-calculus).
+> If we consider the definitions
+> - `𝖸1=𝖡𝖬(𝖡𝖶𝖡)`
+> - `𝖸2=𝖶(𝖡(𝖡𝖶(𝖡𝖳)))(𝖶(𝖡(𝖡𝖶(𝖡𝖳))))`
+> we can see that `𝖸1M=M(𝖸1M)`, but for `𝖸2`, `𝖸2M▹M(𝖸2M)` holds too. 
+> In this respect, `𝖸1` is similar to **Curry**'s fixed point combinator (and really, to any fixed point combinator),
+> whereas `𝖸2` is like **Turing**'s fixed point combinator.
 
 ## Dependent Type
 
@@ -1723,6 +1738,25 @@ Therefore `sf` is analogous to a sequential circuit.
 [Part 2](http://www.kazachonak.com/2012/06/reactive-programming-tutorial-in-scala_11.html)
 
 ### 31.[(Arrowized) Functional Reactive Programming, Continued*](http://haskell.cs.yale.edu/wp-content/uploads/2011/02/workshop-02.pdf)
+
+> 1 Introduction
+> AFRP gives Haskell programmers some, if not most, of the expressive capabilities of **synchronous dataflow** languages, as well as basic **hybrid modeling** functionality.
+> Unlike most dataflow languages, *signal functions*, the AFRP analogue to a dataflow processing element, are first class objects.
+> AFRP thus supports **higher-order network** descriptions, allowing an unusual flexibility in describing **structurally dynamic** systems.
+
+> This paper mainly examines two recent additions to AFRP:
+> - continuation-based switching
+>   - allows stateful signal functions to be started (i.e., connected to an input singal), stopped (disconnected), and then resumed again
+> - dynamic collections of signal functions
+>   - allows varying number of signal functions to be connected into a network
+
+> without loss of the internal signal function state when the network structure is changed
+
+> 2 Arrowized Functional Reactive Programming
+
+> 2.1 Basic Concepts
+
+
 
 ### 32.[Elm: Concurrent FRP for Functional GUIs - Evan Czaplicki (2012)](https://www.seas.harvard.edu/sites/default/files/files/archived/Czaplicki.pdf)
 
