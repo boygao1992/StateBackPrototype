@@ -2747,10 +2747,9 @@ Complexity of state management
 > The apparent simplicity of stateful notional machines arises because most computing education literature usually just ignores some of these features (e.g., compound data with references to other compound data).
 > This results in notional machines that are not faithful to program behavior, and hence are either useless or even misleading to students.
 
+### 12.[What is an Entity Component System architecture for game development?](http://www.richardlord.net/blog/ecs/what-is-an-entity-framework.html)
 
-
-
-
+a step-by-step derivation of an entity component system
 
 
 ## Control Theory
