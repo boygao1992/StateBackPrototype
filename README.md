@@ -3028,6 +3028,30 @@ Metric
 
 ### 6.[Martian Chronicles - Evil Martians’ team blog ](https://evilmartians.com/chronicles)
 
+### 7.[The Encyclopedia of Human-Computer Interaction, 2nd Ed.](https://www.interaction-design.org/literature/book/the-encyclopedia-of-human-computer-interaction-2nd-ed)
+
+> 6.3.2 Ecological perception theory
+> Two important concepts within Gibson's theory are affordances and effectivities. 
+> This approach, and more specifically affordances, has been introduced to design by Donald Norman (1988) and the present authors (Smets et al, 1988; Smets and Overbeeke, 1994). 
+
+> 6.4 Accumulated principles of industrial design
+
+> 1. Being in the world
+> 2. The primacy of action
+> 3. Reflection on action
+> 4. Design methods
+> 5. Intuition and common sense
+> 6. First / third person perspective
+> 7. Creating opportunities for transformation through subtlety
+
+> 6.4.1 Principle 1. Being in the world
+> 6.4.1.2 Related themes and research: 'being in the world'
+> 6.4.1.2.1 Transformation of human action
+> 6.4.1.2.2 Transformation of experience
+> 6.4.1.2.3 Sensible Alternative
+> 6.4.1.2.4 Frogger and interactive materiality
+
+
 ## Color
 
 ### 1.[Painting Vibrant Watercolors: Discover the Magic of Light, Color and Contrast](https://www.amazon.com/Painting-Vibrant-Watercolors-Discover-Contrast-ebook/dp/B0056JSLXI/)
