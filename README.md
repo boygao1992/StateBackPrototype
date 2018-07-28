@@ -2953,6 +2953,22 @@ fromList : (k -> k -> Order) -> List (k, v) -> GenericDict k v
 
 ### 2.[Can Swift replace Front-End or Isomorphic JavaScript?](https://medium.com/@stawecki/can-swift-replace-front-end-or-isomorphic-javascript-2191c58f35d7)
 
+### 3.[Swift in Depth](https://www.manning.com/books/swift-in-depth)
+
+> Chapter 8
+> Protocals -- similar to typeclasses in Haskell or traits in Rust
+No exact, missing typeclass instance auto dispatch
+
+> 8.1.5
+> generics live in the compile-time world (static dispatch)
+> "regular" protocols live in the runtime world (dynamic dispatch)
+
+
+### 4.[typelift/Swiftz -  Functional programming in Swift](https://github.com/typelift/Swiftz)
+
+
+
+
 ## UI Prototype Tool
 
 ### 1.[sketch.systems](https://sketch.systems/)
