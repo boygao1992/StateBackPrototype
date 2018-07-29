@@ -1291,6 +1291,34 @@ Point-free style works fine for sequential data transformation (without branchin
 > In this respect, `𝖸1` is similar to **Curry**'s fixed point combinator (and really, to any fixed point combinator),
 > whereas `𝖸2` is like **Turing**'s fixed point combinator.
 
+### 10.[Domain theory - Wikipedia](https://en.wikipedia.org/wiki/Domain_theory)
+
+> Domain theory is a branch of mathematics that studies **special kinds of partially ordered sets (posets)** commonly called **domains**.
+> Consequently, domain theory can be considered as a branch of order theory.
+> The field has major applications in computer science, where it is used to specify **denotational semantics**, especially for functional programming languages.
+> Domain theory formalizes the intuitive ideas of approximation and convergence in a very general way and has close relations to **topology**.
+> An alternative important approach to denotational semantics in computer science is that of metric spaces. 
+
+> Using again just the syntactic transformations available in this formalism, one can obtain so called fixed-point combinators (the best-known of which is the Y combinator);
+> these, by definition, have the property that f(Y(f)) = Y(f) for all functions f. 
+### 11.[Brouwer fixed-point theorem](https://en.wikipedia.org/wiki/Brouwer_fixed-point_theorem)
+
+> It states that for any continuous function f mapping a compact convex set to itself there is a point x0 such that f ( x0 ) = x0. 
+
+### 12.[Haskell / Denotational Semantics](https://en.wikibooks.org/wiki/Haskell/Denotational_semantics)
+
+> 2 Bottom and Partial Functions
+> 2.1 ⊥ Bottom
+
+> 3 Recursive Definitions as Fixed Point Iterations
+> 3.1 Approximations of the Factorial Function
+> 3.2 Convergence
+> 3.3 Bottom includes Non-Termination
+> 3.4 Interpretation as Least Fixed Point
+
+> 5.3 Recursive Data Types and Infinite Lists
+
+
 ## Dependent Type
 
 May use dependent type to further restrict the state space so that invalid states are not representable.
@@ -1596,6 +1624,13 @@ you simply set up calculations outside of the system that create new inputs that
 
 ### 12. [purescript-behaviors](https://github.com/paf31/purescript-behaviors/tree/v6.0.0)
 [youtube](https://www.youtube.com/watch?v=N4tSQsKZDQ8)
+
+[purescript-event](https://github.com/paf31/purescript-event/blob/v1.2.4/generated-docs/FRP/Event.md)
+
+> ``` purescript
+> fix :: forall i o. (Event i -> { input :: Event i, output :: Event o }) -> Event o
+> ```
+> compute a fixed point
 
 ### 13. [TimeFiles: Push-Pull Signal-Function Functional Reactive Programming](https://github.com/eamsden/pushbasedFRP/raw/master/Docs/Thesis/thesis.pdf)
 
