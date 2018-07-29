@@ -1318,6 +1318,41 @@ Point-free style works fine for sequential data transformation (without branchin
 
 > 5.3 Recursive Data Types and Infinite Lists
 
+### 13.[Grokking Fix - To Overcome](http://www.parsonsmatt.org/2016/10/26/grokking_fix.html)
+> A fixed point of a function is some value where applying the function to the value returns the same value.
+> for some function f, the fix point c is: `f(c)=c`
+
+> ``` haskell
+> fix :: (a -> a) -> a
+> fix f = 
+>     let x = f x 
+>      in x
+> ```
+
+> ```haskell
+> fix :: (a        -> a       ) -> a        [1]
+> fix :: ((b -> c) -> (b -> c)) -> (b -> c) [2]
+> fix :: ((b -> c) ->  b -> c ) -> b -> c   [3]
+> ```
+> - Give me a function that takes two arguments: the first being a function from `b` to `c`, and the second being a value of type `b`.
+> - Then, if you give me a `b`, then, I’ll give you a `c`.
+
+> ```haskell
+> cosFixpoint x =
+>     fix (\f b -> 
+>             if cos b == b 
+>                then b
+>                else f (cos b)
+>          ) x
+> ```
+
+> We could rewrite this as an explicit recursion with a very similar structure:
+> ```haskell
+> cosFixpointExplicit x =
+>     if cos x == x
+>        then x
+>        else cosFixpointExplicit (cos x)
+> ```
 
 ## Dependent Type
 
@@ -3013,6 +3048,54 @@ To achieve human-level intelligence, learning machines need the guidance of a mo
 ## Purescript
 
 ### 1.[purescript-base documentation](https://github.com/purescript-contrib/purescript-base/tree/master/docs)
+
+### 2. Elm Architecture in PureScript - To Overcome
+
+[Elm vs PureScript I: War of the Hello, Worlds](http://www.parsonsmatt.org/2015/10/03/elm_vs_purescript.html)
+
+[Elm vs PureScript II: The Elm Architecture, in PureScript](http://www.parsonsmatt.org/2015/10/05/elm_vs_purescript_ii.html)
+
+[Elm Architecture in PureScript III: Dynamic Lists of Counters](http://www.parsonsmatt.org/2015/10/10/elm_architecture_in_purescript_iii.html)
+
+[Elm Architecture in PureScript IV: Effects](http://www.parsonsmatt.org/2015/10/11/elm_architecture_in_purescript_iv_effects.html)
+
+## Haskell
+
+### 1.[Three Layer Haskell Cake - To Overcome](http://www.parsonsmatt.org/2018/03/22/three_layer_haskell_cake.html)
+
+> Layer 1:
+```haskell
+newtype AppT m a 
+    = AppT 
+    { unAppT :: ReaderT YourStuff m a 
+    } deriving (Functor, Applicative, Monad, etc)
+```
+
+> The ReaderT Design Pattern, essentially.
+
+injecting dependencies/environment and configuration
+
+> This is what everything gets boiled down to, and what everything eventually gets interpreted in.
+> This type is the backbone of your app.
+> For some components, you carry around some info/state (consider MonadMetrics or katip’s logging state/data); for others, you can carry an explicit effect interpreter.
+> This layer is for defining how the upper layers work, and for handling operational concerns like performance, concurrency, etc.
+
+> Layer 2:
+> This layer provides a bridge between the first and third layer.
+> Here, we’re mostly interested in mocking out external services and dependencies.
+> The most convenient way I’ve found to do this are mtl style classes, implemented in terms of domain resources or effects.
+
+simple dependency injection with mocking, for unit tests
+
+> Layer 3:
+> Business logic.
+> This should be entirely pure, with no IO component at all.
+> This should almost always just be pure functions and relatively simple data types.
+> Reach for only as much power as you need – and you need much less than you think!
+
+
+
+
 
 ## React
 
