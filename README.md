@@ -1771,6 +1771,8 @@ Therefore `sf` is analogous to a sequential circuit.
 > the output of a signal function at time `t` is uniquely determined by the input signal on the interval `[0,t]`.
 > All primitive signal functions in AFRP are causal and all signal function transformations preserve causality.
 
+in Yampa, `SF` is an instance of `Arrow` and `ArrowLoop`
+
 > 2.2 Discrete and Continuous Time
 
 > Many systems use discrete time semantics in which time is advanced in user-visible increments (stpes).
@@ -1868,6 +1870,9 @@ sf1 &&& sf2 =
   
 loop :: SF (a,c) (b,c) -> SF a b
 ```
+
+`loop` uses definition from `ArrowLoop`
+
 
 ### 32.[Elm: Concurrent FRP for Functional GUIs - Evan Czaplicki (2012)](https://www.seas.harvard.edu/sites/default/files/files/archived/Czaplicki.pdf)
 
@@ -2101,7 +2106,6 @@ internal state
 
 ### 36.[Awelon Blue - RDP author's blog](https://awelonblue.wordpress.com/)
 
-
 [awelon -  Awelon project is a new UI model with a new language.](https://github.com/dmbarbour/awelon)
 
 a DSL for RDP
@@ -2109,6 +2113,8 @@ a DSL for RDP
 ### 37.[ajnsit/concur - An unusual Web UI Framework for Haskell](https://github.com/ajnsit/concur)
 
 [purescript-concur](https://github.com/ajnsit/purescript-concur)
+
+### 38.[John Hughes: Generalising monads to arrows](https://www.sciencedirect.com/science/article/pii/S0167642399000234)
 
 ## Self-adjusting Computation (SAC)
 
