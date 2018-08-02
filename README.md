@@ -3023,6 +3023,53 @@ a step-by-step derivation of an entity component system
 
 ### 1.[Scala.js for JavaScript developers](https://www.scala-js.org/doc/sjs-for-js/)
 
+### 2.[The Limitations of Type Classes as Subtyped Implicits by Adelbert Chang](https://adelbertc.github.io/publications/typeclasses-scala17.pdf)
+
+> The natural encoding of type classes combines subtyping and implicits, both central features of Scala.
+
+> limitations:
+> If the type class hierarchy branches, seemingly valid programs can hit **implicit resolution failures**.
+> These failures must then be solved by explicitly passing the implicit arguments which is cumbersome and negates the advantages of type classes.
+
+> 3 Type Class Coherency
+> One critical difference is the restriction that type class resolution must be coherent.
+> This means for a given superclass (e.g. Functor[F]), the resolution through any of its subclasses (e.g. Traverse[F] or Monad[F]) must return a semantically equal instance.
+> Both Haskell and Rust achieve coherency by restricting where type class instances can be defined.
+> To define an instance of a type class TC for a type A, the instance must either be defined with the code for TC or with the code for A.
+> (type class, type) pair is globally unique
+
+interface inheritance with instance carried
+
+> Implicits in Scala has no restriction on where or how many implicits can be defined.
+> the implicit resolver has no promise of coherency when picking implicits as it is possible for different parameters of the same supertype to have different semantics as subtypes.
+
+diamond problem / multiple inheritance in type class hierarchy
+
+Both `Traversable` and `Monad` are `Functor`.
+When defining `Traversable-and-Monad` 
+Using subtyped implicits to encode type classes in Scala does not enforce one unique `Functor` instance for both `Traversable` and `Monad`
+`ambiguous implicit values`: implicit resolver does not know which `Functor` instance to choose
+
+> 4 Potential Scala Solutions
+
+> 4.1 The Scato Encoding
+
+still possible to have multiple instances for the same superclass but enforce one resolution path at library level which needs to be documented as design choices
+
+> 4.2 Making Scala Type Class-aware
+
+> introduces a new marker trait which would be used to distinguish between type classes (implicits with coherency constraint) and regular implicits
+
+### 3. Implicits, type classes, and extension methods
+
+1. [with type classes in mind](https://kubuszok.com/2018/implicits-type-classes-and-extension-methods-part-1/)
+
+2. [implicit derivation](https://kubuszok.com/2018/implicits-type-classes-and-extension-methods-part-2/)
+
+3. [conversions and implicit-based patterns](https://kubuszok.com/2018/implicits-type-classes-and-extension-methods-part-3/)
+
+4. [understanding implicits](https://kubuszok.com/2018/implicits-type-classes-and-extension-methods-part-4/)
+
 ## Bayesian Network & Causality
 
 ### 1.[The Book of Why: The New Science of Cause and Effect](https://www.amazon.com/Book-Why-Science-Cause-Effect/dp/046509760X)
@@ -3521,6 +3568,7 @@ Automaton
 > 2.11 Combining State Machines and Signals
 
 > 2.12 Recursion and non Real-time Features
+
 
 ## Others
 
