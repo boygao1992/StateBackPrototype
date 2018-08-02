@@ -2375,7 +2375,15 @@ The equivalent of an FST from machines is Process. It's definition is a little s
 
 ### 2. [Functors, Applicatives, And Monads In Pictures](http://adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html)
 ### 3. [Three Useful Monads](http://adit.io/posts/2013-06-10-three-useful-monads.html)
-### 4. [ADT & Dependent Type](http://www.tomharding.me/)
+### 4. [ADT & Dependent Type - Tom Harding](http://www.tomharding.me/)
+
+#### [Functions as Functors](http://www.tomharding.me/2017/04/15/functions-as-functors/)
+
+> Reader Monad
+
+lead me to the idea of unifying `Monoid`, `Category`(<= `Semigroupoid`), `Monad`(<= `Functor`, `Apply`, `Applicative`, `Bind`)
+
+[Monads, Monoids, and Categories - Bartosz Milewski](https://bartoszmilewski.com/2017/09/06/monads-monoids-and-categories/)
 
 #### 10. [Alt, Plus, and Alternative](http://www.tomharding.me/2017/04/24/fantas-eel-and-specification-10/)
 
