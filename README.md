@@ -3401,6 +3401,68 @@ Metric
 > Triadic Color Scheme
 > Rainbow Color Scheme
 
+### 5.[Your Friendly Guide to Colors in Data Visualisation - An overview of color tools](https://blog.datawrapper.de/colorguide/)
+
+> - distinctive colors
+>   - categorical data
+> - color gradient
+>   - continuous data
+
+> 1. Color gradients for data visualisation
+>   - [ColorBrewer 2.0](http://colorbrewer2.org/)
+>   - [Colorpicker for data](http://tristen.ca/hcl-picker/#/hlc/6/1.05/CAF270/453B52)
+>   - [Chroma.js Color scale helper](http://gka.github.io/palettes/#diverging%7Cc0=darkred,deeppink,lightyellow%7Cc1=lightyellow,lightgreen,teal%7Csteps=13%7Cbez0=1%7Cbez1=1%7CcoL0=1%7CcoL1=1)
+[Mastering Multi-hued Color Scales with Chroma.js](https://www.vis4.net/blog/2013/09/mastering-multi-hued-color-scales/)
+
+> 2a. Color combinations: Make sure they work
+>   - [Viz Palette](http://projects.susielu.com/viz-palette?colors=%5B%22#1DABE6%22,%22#1C366A%22,%22#C3CED0%22,%22#E43034%22,%22#FC4E51%22,%22#AF060F%22%5D&backgroundColor=%22white%22&fontColor=%22black%22)
+>   - colorblind check
+>     - [Spectrum](https://chrome.google.com/webstore/detail/spectrum/ofclemegkcmilinpcimpjkfhjfgmhieb?hl=en)
+>     - [Coblis](https://www.color-blindness.com/coblis-color-blindness-simulator/)
+>     - [Sim Daltonism](https://michelf.ca/projects/mac/sim-daltonism/)
+>     - [Datawrapper](https://blog.datawrapper.de/colorblind-check/)
+
+> 2b. Color compositions: Learn from the masters
+> [Goethe’s Theory of Color](https://en.wikipedia.org/wiki/Theory_of_Colours)
+> the color hero: the American painter Mark Rothko, who is famous for his huge portraits of colors.
+> [Google - Art Palette experiment](https://artsexperiments.withgoogle.com/artpalette/colors/0723d5-e72d2d-ff4c4c)
+
+> 2c. Color compositions: Learn from the movies
+> [Movies in color](http://moviesincolor.com/)
+> [The Color of Motion](http://thecolorsofmotion.com/)
+> [Wes Anderson Palettes](http://wesandersonpalettes.tumblr.com/)
+> [karthik/wesanderson - A Wes Anderson color palette for R (for data visualization)](https://github.com/karthik/wesanderson)
+> [Color Palette Generator (from photos)](https://www.degraeve.com/color-palette/)
+
+> 2d. Color compositions: Learn from others 
+>   - Color Palette Libraries/Communities
+>     - [Color Hunt](https://www.datawrapper.de/privacy)
+>     - [Color Drop](https://colordrop.io/)
+>     - [ColourLovers](http://www.colourlovers.com/palettes)
+>     - [Coolors](https://coolors.co/browser)
+>     - [LOLcolors](http://www.lolcolors.com/)
+>     - [Adobe Color CC](https://color.adobe.com/explore/most-popular/?time=all)
+>     - [Material Design by Google](https://material.io/design/color/#tools-for-picking-colors)
+>   - search artwork by color
+>     - [Designspiration](https://www.designspiration.net/)
+>     - [Dribble](https://dribbble.com/colors/c71f16?percent=60)
+>   - museums, gallery, blog
+>     - [Kantar Information is Beautiful Awards](https://www.informationisbeautifulawards.com/showcase?action=index&award=2015&controller=showcase&page=1&pcategory=winner&type=awards)
+>     - [Plenty of Colour](http://plentyofcolour.com/)
+
+> 2e. Color compositions: Create them yourself
+> [Smashing Magazine](https://www.smashingmagazine.com/category/colors)
+>   - [A Simple Web Developer's Color Guide](https://www.smashingmagazine.com/2016/04/web-developer-guide-color/)
+> [Paletton](http://paletton.com/)
+
+> 3. Fuuuuuuun with Colors
+> [Color - A color matching game](http://color.method.ac/)
+
+### 6.[The Elements of Color - Johannes Itten](https://monoskop.org/images/4/46/Itten_Johannes_The_Elements_of_Color.pdf)
+
+### 7. [Smashing Magazine](https://www.smashingmagazine.com/category/colors)
+
+
 ## Web Assembly
 
 ### 1.[Web Assembly and Go: A look to the future](https://brianketelsen.com/web-assembly-and-go-a-look-to-the-future/)
