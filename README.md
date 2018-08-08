@@ -3552,6 +3552,10 @@ This operator-like data structure is a tree / `Free`.
 
 ### 1.[The Visual Display of Quantitative Information -  Edward R. Tufte](https://www.amazon.com/Visual-Display-Quantitative-Information/dp/1930824130)
 
+### 2.[Scrollytelling with D3.js, Flexbox, Scrollama.js - The Pudding](https://pudding.cool/#how)
+
+### 3.[Pts.js – A library for visualization and creative coding](https://ptsjs.org/)
+
 ## Domain Modeling
 
 ### 1.[The Wrong Abstraction](https://www.sandimetz.com/blog/2016/1/20/the-wrong-abstraction)
@@ -3639,6 +3643,12 @@ Automaton
 
 > 2.12 Recursion and non Real-time Features
 
+
+## System Programming
+
+### 1.[Introduction to Computer Organization with x86-64 Assembly Language \& GNU/Linux - Robert G. Plantz](http://bob.cs.sonoma.edu/IntroCompOrg-x64/book.html)
+
+### 2.[Reverse Engineering for Beginners](https://beginners.re/)
 
 ## Others
 
