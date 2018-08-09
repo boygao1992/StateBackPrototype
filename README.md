@@ -3650,6 +3650,42 @@ Automaton
 
 ### 2.[Reverse Engineering for Beginners](https://beginners.re/)
 
+## Recursion Scheme & F-algebra
+
+Fixed-point of a functor
+
+### 1. [Functional Programming with Bananas, Lenses, Envelopes and Barbed Wire](http://maartenfokkinga.github.io/utwente/mmf91m.pdf)
+
+original paper
+
+### 2. Recursion Schemes in Haskell - sumtypeofway
+
+[Part I: An Introduction to Recursion Schemes](https://blog.sumtypeofway.com/an-introduction-to-recursion-schemes/)
+
+[Part II: A Mob of Morphisms](https://blog.sumtypeofway.com/recursion-schemes-part-2/)
+
+[Part III: Folds in Context](https://blog.sumtypeofway.com/recursion-schemes-part-iii-folds-in-context/)
+
+[Part IV: Time is of the Essence](https://blog.sumtypeofway.com/recursion-schemes-part-iv-time-is-of-the-essence/)
+
+[Part 4½: Better Living Through Base Functors](https://blog.sumtypeofway.com/recursion-schemes-part-41-2-better-living-through-base-functors/)
+
+[Part V: Hello, Hylomorphisms](https://blog.sumtypeofway.com/recursion-schemes-part-v/)
+
+### 3. Recursion Schemes in JS and Flow - Joseph Junker
+
+[A Brief Introduction to Recursion Schemes](https://medium.com/p/6192e55758be)
+
+[Recursion Schemes in JavaScript and Flow with static-land-recursision-schemes](https://medium.com/p/97cf10599fb7)
+
+[Catamorphisms - Tearing down functors, recursively](https://medium.com/p/8637f3d45383)
+
+[Anamorphisms - Building up functors, recursively](https://medium.com/p/9a85466c9d59)
+
+[Hylomorphisms - Composing catamorphisms and anamorphisms](https://medium.com/p/43a5494729b7)
+
+### 4. [Understanding F-Algebras](https://www.schoolofhaskell.com/user/bartosz/understanding-algebras)
+
 ## Others
 
 ### 1.[To Dissect a Mockingbird: A Graphical Notation for the Lambda Calculus with Animated Reduction](http://dkeenan.com/Lambda/)
