@@ -1507,6 +1507,12 @@ Thus, the mechanisms required to achieve a continuous-time model of computation 
 
 > registers' constraints in the Function Calling Convention of Intel386 Sys V ABI
 
+### 5.[Locks, Actors, And Stm In Pictures](http://adit.io/posts/2013-05-15-Locks,-Actors,-And-STM-In-Pictures.html)
+
+the actor solution in the article makes an ad-hoc partition on the global state vector, which might not be practical.
+
+### 6.[Beautiful Concurrency - an introduction to STM in Haskell](https://www.schoolofhaskell.com/school/advanced-haskell/beautiful-concurrency)
+
 
 ## Arrowized FRP
 
@@ -3685,6 +3691,13 @@ original paper
 [Hylomorphisms - Composing catamorphisms and anamorphisms](https://medium.com/p/43a5494729b7)
 
 ### 4. [Understanding F-Algebras](https://www.schoolofhaskell.com/user/bartosz/understanding-algebras)
+
+## Actor Model
+
+### 1.[Inconsistency Robustness - Carl Hewitt, John Woods](https://www.amazon.com/Inconsistency-Robustness-Studies-Logic-Hewitt/dp/1848901593)
+
+Direct Logic Reasoning and Actor Model
+
 
 ## Others
 
