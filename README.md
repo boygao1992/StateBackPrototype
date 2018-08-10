@@ -2294,13 +2294,8 @@ Lightweight higher-kinded polymorphism
 Moore Machine can be seen as a CoFree CoMonad
 
 
-### 4. [Bartosz Milewski - Comonads](https://bartoszmilewski.com/2017/01/02/comonads/)
-
 ### 5. [Sequences, streams, and segments](http://conal.net/blog/posts/sequences-streams-and-segments)
 
-### 6. [The Reader and Writer Monads and Comonads ](https://www.olivierverdier.com/posts/2014/12/31/reader-writer-monad-comonad/)
-
-### 7. [Comonads as Spaces](http://blog.functorial.com/posts/2016-08-07-Comonads-As-Spaces.html)
 
 ### 9. Intro to Machines & Arrows
 [Intro to Machines & Arrows - Part 1: Stream and Auto](https://blog.jle.im/entry/intro-to-machines-arrows-part-1-stream-and.html)
@@ -2688,6 +2683,7 @@ an area of mathematics primarily concerned with counting, both as a means and an
 > 7. Die Philosophie des Geistes / Philosophy of Spirit
 
 [Hegel’s Science of Logic](https://www.marxists.org/reference/archive/hegel/works/hl/hl000.htm)
+
 
 ## Guarded Recursion
 ### 1.[A Modality for Recursion](https://pdfs.semanticscholar.org/a177/47f98e5b821f03ec8be858794f2f83a683b7.pdf)
@@ -3691,6 +3687,29 @@ original paper
 [Hylomorphisms - Composing catamorphisms and anamorphisms](https://medium.com/p/43a5494729b7)
 
 ### 4. [Understanding F-Algebras](https://www.schoolofhaskell.com/user/bartosz/understanding-algebras)
+
+## Comonad
+
+### 1. [The Reader and Writer Monads and Comonads ](https://www.olivierverdier.com/posts/2014/12/31/reader-writer-monad-comonad/)
+
+### 2. [Comonads as Spaces](http://blog.functorial.com/posts/2016-08-07-Comonads-As-Spaces.html)
+
+### 3. [Bartosz Milewski - Comonads](https://bartoszmilewski.com/2017/01/02/comonads/)
+
+### 4. Scala Comonad Tutorial - Rúnar Bjarnason blog
+
+[Part 1](http://blog.higher-order.com/blog/2015/06/23/a-scala-comonad-tutorial/)
+
+[Part 2](http://blog.higher-order.com/blog/2015/10/04/scala-comonad-tutorial-part-2/)
+> Rose Tree
+
+> Cofree Comonad
+
+> While the free monad is either an A or a recursive step suspended in an F, the cofree comonad is both an A and a recursive step suspended in an F.
+> They really are duals of each other in the sense that the monad is a coproduct and the comonad is a product.
+
+[Part 3: A Comonad of Graph Decompositions](http://blog.higher-order.com/blog/2016/04/02/a-comonad-of-graph-decompositions/)
+
 
 ## Actor Model
 
