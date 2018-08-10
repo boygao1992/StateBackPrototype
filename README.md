@@ -3718,6 +3718,20 @@ original paper
 Direct Logic Reasoning and Actor Model
 
 
+#### Preface
+
+> large software systems are shipped to customers with thousands of known inconsistencies of varying severity where
+> - Even relatively simple subsystems can be subtly inconsistent.
+> - There is no practical way to test for inconsistency.
+> - Even though a system is inconsistent, it is not meaningless.
+
+> Classical logic can be safely used only for theories for which there is a strong evidence of consistency.
+
+> A fundamental goal of Inconsistency Robustness is to effectively reason about large amounts of information at high degrees of abstraction
+
+> Direct Logic is an improvement over Classical Logic with respect to Feferman's desideratum above for today's information systems that are perpetually, pervasively inconsistent.
+
+
 ## Others
 
 ### 1.[To Dissect a Mockingbird: A Graphical Notation for the Lambda Calculus with Animated Reduction](http://dkeenan.com/Lambda/)
