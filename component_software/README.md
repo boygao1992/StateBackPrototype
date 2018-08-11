@@ -57,7 +57,8 @@ A software with dynamic signal graph can extend the programming process (of the 
 Some meta-models should be laid out in the DNA to establish a minimal contract between the program and the user for initialization of the communication.
 
 A most straight forward example is REPL, for example CodePen.
-Users are presumably programmers and programs at the runtime.
+Users are presumably programmers who write and execute code at the runtime of this software.
+The shared knowledge between the user and the software is the syntax and other specifics of the programming language.
 
 Another typical example is editor, such as 3D modeling software, text editors, IDEs, etc.
 
