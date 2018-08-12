@@ -801,6 +801,18 @@ In CycleJS,
 
 ### 5.[Entity-Based State Management for Complex Event Processing Applications](https://link.springer.com/chapter/10.1007/978-3-642-22546-8_13)
 
+### 6.[Software Foundations series](https://softwarefoundations.cis.upenn.edu/current/index.html)
+
+[Volume1: Logical Foundations](https://softwarefoundations.cis.upenn.edu/current/lf-current/index.html)
+> covers functional programming, basic concepts of logic, computer-assisted theorem proving,and Coq.
+
+[Programming Language Foundations](https://softwarefoundations.cis.upenn.edu/current/plf-current/index.html)
+> surveys the theory of programming languages, including operational semantics, Hoare logic, and static type systems.
+
+
+[Verified Functional Algorithms](https://softwarefoundations.cis.upenn.edu/current/vfa-current/index.html)
+> shows how a variety of fundamental data structures can be mechanically verified.
+
 
 ## Stateful HTML Elements handling for performance
 
