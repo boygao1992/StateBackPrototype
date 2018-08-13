@@ -127,3 +127,97 @@ Not sure what this emphasizes, will see.
 > Finally, overdesign and the C++ template facilities led to massive code bloat.
 
 > For components to be independently deployable, their granularity and mutual dependencies have to be carefully controlled from the outset.
+
+# Chapter Four - What a component is and is not
+
+## 4.1 Terms and concepts
+
+### 4.1.1 Components
+
+> - unit of independent deployment
+>   - well separated from its environment and other components
+>   - will never be deployed partially (otherwise, not a unit)
+> - unit of third-party composition
+>   - encapsulate its implementation and interact with its environment by means of well-defined interfaces
+>   - third party cannot be expected to have access to the construction details of all the components involved
+> - has no (externally) observable state
+>   - the component cannot be functionally distinguished from copies of its own
+>     - otherwise, no two installations of the "same" component would have the same properties
+>   - due to the stateless nature of components, in any given process, there will be at most one copy of a particular component
+>   
+> This separation of the immutable "plan" from the mutable "instances" is essential to avoid massive maintenance problems.
+
+### 4.1.2 Objects
+
+> - unit of instantiation, it has a unique identity over its lifetime
+>   - a construction plan that describes the state space, initial state, and behavior of a new object
+>   - or a pre-existing prototype object that can be cloned
+> - may have state and this can be externally observable
+> - encapsulates its state and behavior
+
+### 4.1.3 Components and objects
+
+> a component is likely to act through objects and therefore would normally 
+> - consist of one or more classes or immutable prototype objects
+> - might contain a set of immutable objects that capture default initial state and other component resources
+> - objects created in a component can leave the component and become visible to the component's clients, usually other components
+
+> Whether or not inheritance of implementations across components is a good thing is the focus of a heated debate between two schools of thought.
+
+> However, there is no need for a component to contain classes only, or even to contain classes at all
+> - could contain traditional procedures and even have global (static) variables (as long as the resulting state remains unobservable)
+> - may be realized in its entirety using a functional programming approach or using assembly languages, or any other approach
+
+### 4.1.4 Modules
+
+> - can be used to package multiple entities such as ADTs or classes
+> - do not have a concept of instantiation
+> - unlike classes, modules can be used to form minimal components
+>   - example: traditional math libraries, a package of functions
+> - no persistent immutable resources that come with a module, beyond what has been hardwired as constants in the code
+>   - replacing these resources allows the component to be configured without the need to rebuild the code
+
+> The configuration of resources seems to assign mutable state to a component.
+> However, as components are not supposed to modify their own resources, resources fall into the same category as the compiled code that also forms part of a component.
+
+> Adopting component technology requires adoption of principles of independence and controlled explicit dependencies.
+> Component technology unavoidably leads to modular solutions.
+
+### 4.1.5 Whitebox versus blackbox abstractions and reuse
+
+> In an ideal blackbox abstraction, clients know no details beyond the interface and its specification.
+>
+> In a whitebox abstraction, the interface may still enforce encapsuation and limit what clients can do, although implementation inheritance allows for substantial inference.
+> However, the implementation of a whitebox is fully available and can thus be studied to enhance the understanding of what the abstraction does.
+>
+> Grayboxes are those that reveal a controlled part of their implementation.
+>
+> Blackbox reuse refers to the concept of reusing implementations without relying on anything but their interfaces and specifications.
+>
+> Whitebox reuse refers to using a software fragment, through its interfaces, while relying on the understanding gained from studying the actual implementation.
+>
+> Whitebox reuse renders it unlikely that the reuse software can be replaced by a new release since a replacement will probably break some of the reusing clients which directly depend on implementation details that may have changed in the new release.
+
+> A software component is a unit of computation with contractually specified interfaces and explicit context dependencies only.
+> A software component can be deployed independently and is subject to composition by third parties.
+
+### 4.1.6 Interfaces
+
+> non-technical aspects
+> - the economy of scale has to be kept in mind
+> - undue fragmentation of the market has to be avoided as it threatens the viability of components.
+> - maximize the reach of an interface specification and components implements this interface
+
+### 4.1.7 Explicit context dependencies
+
+### 4.1.8 Component "weight"
+
+> Instead of constructing a self-sufficient component with everything built in, a component designer may have opted for "maximum reuse".
+
+> Maximizing reuse minimizes use.
+
+## 4.2 Standardization and normalization
+
+### 4.2.1 Horizontal versus vertical markets
+
+### 4.2.2 Standard component world and normalization
