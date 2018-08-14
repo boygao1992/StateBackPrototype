@@ -3722,6 +3722,141 @@ original paper
 
 [Part 3: A Comonad of Graph Decompositions](http://blog.higher-order.com/blog/2016/04/02/a-comonad-of-graph-decompositions/)
 
+### 5.[Declarative UIs are the Future — And the Future is Comonadic!](https://functorial.com/the-future-is-comonadic/main.pdf)
+
+> Comonad
+```purescript
+class Functor w <= Extract w where
+  extend :: forall b a. (w a -> b) -> w a -> w b
+
+class Extract w <= Comonad w where
+  extract :: forall a. w a -> a
+
+duplicate :: forall a. Comonad w => w a -> w (w a)
+duplicate = extend identity
+```
+
+> Store comonad
+```purescript
+data Store s a
+  = Store
+    { here :: s
+    , view :: s -> a
+    }
+```
+> A comonad represents a (lazy) unfolding of **all possible future states** of our user interfaces, as well as the transitions allowed between those states.
+```purescript
+instance Comonad (Store s) where
+  -- extract :: Store s a -> a
+  extract (Store { here, view }) = view here
+
+  -- duplicate :: Store s a -> Store s ( Store s a )
+  duplicate (Store { here, view }) =
+    Store
+      { here: here
+      , view: \next -> Store { here: next, view: view }
+      }
+
+move :: s -> Store s a -> Store s a
+move s store = view (duplicate store) s
+```
+
+> Kmett (2011) defines a monad `Co w` which is constructed from a comonad `w`.
+> selecting some possible future state from a collection of future states described by `w`
+```purescript
+-- (Co w) Monad for a Comonad w
+newtype Co w a
+  = Co
+    { runCo :: forall r. w (a -> r) -> r }
+
+instance coMonad :: Comonad w => Monad (Co w)
+
+select :: Comonad w => Co w (a -> b) -> w a -> w b
+select co w = runCo co (extend dist w)
+  where
+    dist fs f = map (f $) fs
+```
+
+> `select` function selects a future state.
+
+> 3.1 The Store Comonad
+
+> `Co (Store s)` monad is isomorphic to the usual `State s` monad
+> providing full read/write access to the current state.
+```haskell
+moveT :: s -> Co (Store s) ()
+moveT s = Co (\w -> view w s ()) -- `view` is a lens that unwrap `view :: ` from `w`
+```
+
+```purescript
+moveT :: s -> Co (Store s) Unit
+moveT s = Co { runCo : \(State { view }) -> view s unit }
+```
+
+> 3.2 Moore Machines
+
+> Moore machines form a comonad:
+```purescript
+data Moore i s = Step s (i -> Moore i s) -- state Type s, input Type i
+```
+> Transitions are restricted:
+> in order to change state, the user must provide an input of Type `i`
+
+> This approach is similar to the Elm architecture.
+
+(?) it's certainly a Mealy machine
+
+> 3.3 The Cofree Comonad
+
+> Moore machines are a special case of a cofree comonad:
+```purescript
+data Cofree f a
+  = Tuple a (f (Cofree f a))
+```
+> transitions can be precisely described as the choice of some functor `f`
+> It is possible to allow transitions limited read/write access to the current state.
+
+> under certain conditions on Functor `f`,
+> the `Co (Cofree f)` Monad is isomorphic to a Free Monad which is determined by Functor `f`
+
+> This approach is reminiscent of the approach taken in the Halogen user interface library.
+
+> 4. Composing Specifications
+
+> 4.1 Sums
+> Given two user interfaces, a common pattern is to display one or the other at a time, and to allow the user to switch between them.
+> need to store all future states of both user interfaces, and an additional bit of information to indicate which user interface is currently visible.
+
+this reminds me of the Surreal Number abstraction from John Conway in combinatorial game theory, which is used to describe the **disjunctive sum** of two small games with independent states
+
+
+```purescript
+data Sum f g a
+  = Sum Bool (f a) (g a)
+```
+
+> Theorem 1: The Sum of two comonads is itself a comonad.
+
+> 4.2 Day Convolution
+
+> Another common pattern is to display two user interfaces side-by-side, with their states evolving independently.
+
+> This data is captured by the Day convolution of the two functors,
+> expressed as an existential data type:
+```purescript
+data Day f g a
+  = forall x y. Day (x -> y -> a) (f x) (g y)
+```
+
+> Theorem 2: The Day convolution of two comonads is itself a comonad.
+
+> there exists a natural transformation from `Co f` and `Co g` to `Co (Day f g)`
+> which embed transitions for the individual components as transitions for the composition.
+
+> 4.3 Discussion
+
+> The Day convolution gives the category of comonads the structure of **a symmetric monoidal category**.
+
 
 ## Actor Model
 
