@@ -1122,249 +1122,6 @@ Object composition.
 > The `Element` module contains all the components that go in your view. 
 > The `Style` module is the base for creating your stylesheet.
 
-## Combinatory Logic
-
-### 1.[Can any function be reduced to a point-free form?](https://stackoverflow.com/questions/13184294/can-any-function-be-reduced-to-a-point-free-form)
-
-> **Logical combinators** (i.e. the S, K, I combinators) are essentially **point-free forms of functions**, and the lambda-calculus is equivalent to combinatory logic, so I think this suggests that the answer is yes.
-
-### 2.[Combinator Birds](http://www.angelfire.com/tx4/cus/combinator/birds.html)
-
-### 3.[Are lambda calculus and combinatory logic the same?](https://cstheory.stackexchange.com/questions/267/are-lambda-calculus-and-combinatory-logic-the-same)
-
-> What distinguishes combinatory logic is that it is **variable free**.
-> Combinators and variants were used to implement graph reduction for lazy languages 
-> Be careful: Haskell and ghc aren't the same, and the literature contains several supercombinator-based Haskells. But it's true, the state-of-the art in functional programming has found the efficiency advantages of handling environments that outweigh its complexity. You still see supercombinators used, e.g., in higher-order logic programming, where this is not true. Supercombinators remain part of the inventory of techniques used in implementing higher-order programming.
-
-### 4.[Free variables and bound variables - Wikipedia](https://en.wikipedia.org/wiki/Free_variables_and_bound_variables)
-
-> a **free variable** is a notation that specifies places in an expression where substitution may take place.
-> a placeholder (a symbol that will later be replaced by some literal string), or a wildcard character that stands for an unspecified symbol.
-
-> A **bound variable** is a variable that was previously free, but has been bound to a specific value or set of values called domain of discourse or universe. 
-
-> In *computer programming*, the term free variable refers to variables used in a function that are **neither local variables nor parameters** of that function.
-
-### 5.[Super-combinators: A new implementation method for applicative languages](https://dl.acm.org/citation.cfm?id=802129)
-
-### 6.[Deriving the Y Combinator in Javascript](https://enlight.nyc/y-combinator/)
-
-> The Y combinator bestows the power of self-referential recursion unto languages which don’t support it.
-
-> The Y combinator is a function which applies another function infinite times
-
-> `y(f) = f(f(f(f(f(f(f(f(f(f(f(f(f(...)))))))))))))` => `y(f) = f(y(x))`
-
-> `y(f) = x(x)(f)`, for some other function `x`. 
-> In simpler terms, `y = x(x)` — `y` is `x` applied to itself.
-
-> ```javascript
-> // Here's our current, recursively-defined y
-> function y(f) {
->   return function thunk(n) {
->     return f(y(f))(n);
->   };
-> }
->
-> // Apply the substitution y = x(x)
-> // Call the parameter otherX since we don't want
-> // to confuse the outer x and inner x and to avoid
-> // variable shadowing
-> function x(otherX) {
->   return function y(f) {
->     return function thunk(n) {
->       return f(otherX(otherX)(f))(n);
->     };
->   };
-> }
->
-> const newY = x(x);
->
-> // Our factorialFactory, in JavaScript for reference
-> function factorialFactory(f) {
->   return function factorial(x) {
->     if (x === 0) {
->       return 1;
->     }
->     return x * f(x - 1);
->   };
-> }
->
-> // x(x)(factorialFactory)
-> const newFactorial = newY(factorialFactory);
->
-> newFactorial(10);
-> // => 3628800
->
-> ```
-
-> By applying `x` to itself, we avoid self-reference in the function body. 
-> Everything the function needs to run comes from its parameters.
-
-> ```javascript
-> // substitute x by its definition
-> const y = (function(otherX) {
->   return function(f) {
->     return function thunk(...args) {
->       return f(otherX(otherX)(f))(...args);
->     };
->   };
-> })(function(otherX) {
->   return function(f) {
->     return function thunk(...args) {
->       return f(otherX(otherX)(f))(...args);
->     };
->   };
-> });
->
-> // We can shorten it even more with ES6 arrow functions
-> const y = (x => f => (...a) => f(x(x)(f))(...a))(x => f => (...a) =>
->   f(x(x)(f))(...a)
-> );
->
-> ```
-
-`(...args)` to manually bring in lazy evaluation for such a infinite structure.
-
-Without worrying about the strict evaluation, make it point-free:
-```javascript
-const y = (
-  x => 
-    f => 
-      f(x(x)(f)) 
-)(
-  x =>
-    f =>
-      f(x(x)(f))
-)
-```
-
-Original definition by Haskell B. Curry:
-`Y := λf.(λx.f (x x)) (λx.f (x x))`
-
-```javascript
-const y = 
-  f =>
-    (
-      x => 
-        f(x(x))
-    )(
-      x =>
-        f(x(x))
-    )
-```
-
-By beta-reduction,
-```
-Y g
-= (λf.(λx.f (x x)) (λx.f (x x))) g
-= (λx.g (x x)) (λx.g (x x))
-= g((λx.g (x x)) (λx.g (x x)))
-= g(Y g)
-```
-
-### 7.[Tacit Programming - Wikipedia](https://en.m.wikipedia.org/wiki/Tacit_programming)
-
-> also called **point-free style**
-> The lack of argument naming gives point-free style a reputation of being unnecessarily obscure, hence the epithet "pointless style."
-
-> ```haskell
-> p = \x -> \y -> \z -> f (g x y) z
->   = \x -> \y -> f (g x y)
->   = \x -> \y -> (f . (g x)) y
->   = \x -> f . (g x)
->   = \x -> ((.) f) (g x)
->   = ((.) f) . g
-> ```
-
-Point-free style works fine for sequential data transformation (without branching).
-
-### 8.[The Unlambda Programming Language: Your Functional Programming Language Nightmares Come True](http://www.madore.org/~david/programs/unlambda/)
-
-> Obfuscated programming languages (see below for links) are typically made nasty by either strongly restricting the set of allowed operations in the language, or making them very different from what programmers are used to, or both. (Of course, the goal is to do that while still being Turing-complete.)
-
-> Despite Unlambda being a form of the lambda calculus, it does not have a lambda (abstraction) operation. 
-> Rather, this operation must be replaced by the use of the S, K and I combinators — this can be done mechanically using abstraction elimination. 
-> Because there is no abstraction, functions are not named in Unlambda (except the builtin ones): there are no variables or such thing. 
-
-### 9.[Combinatory Logic - Stanford Encyclopedia of Philosophy](https://plato.stanford.edu/entries/logic-combinatory/#ExisFixePoinCombComp)
-
-> 2.3 The existence of fixed points and combinatorial completeness
-
-> Schönfinkel proved that 𝖲 and 𝖪 suffice to define the other combinators he introduced, and we mentioned in the definition of CL▹ that the set of constants is limited to 𝖲 and 𝖪, because other combinators could be defined from those.
-
-> Fixed point theorem. For any function M, there is a term N such that MN=N. 
-
-> Both **Haskell B. Curry** and **Alan Turing** defined fixed point combinators (in CL or in the λ-calculus).
-> If we consider the definitions
-> - `𝖸1=𝖡𝖬(𝖡𝖶𝖡)`
-> - `𝖸2=𝖶(𝖡(𝖡𝖶(𝖡𝖳)))(𝖶(𝖡(𝖡𝖶(𝖡𝖳))))`
-> we can see that `𝖸1M=M(𝖸1M)`, but for `𝖸2`, `𝖸2M▹M(𝖸2M)` holds too. 
-> In this respect, `𝖸1` is similar to **Curry**'s fixed point combinator (and really, to any fixed point combinator),
-> whereas `𝖸2` is like **Turing**'s fixed point combinator.
-
-### 10.[Domain theory - Wikipedia](https://en.wikipedia.org/wiki/Domain_theory)
-
-> Domain theory is a branch of mathematics that studies **special kinds of partially ordered sets (posets)** commonly called **domains**.
-> Consequently, domain theory can be considered as a branch of order theory.
-> The field has major applications in computer science, where it is used to specify **denotational semantics**, especially for functional programming languages.
-> Domain theory formalizes the intuitive ideas of approximation and convergence in a very general way and has close relations to **topology**.
-> An alternative important approach to denotational semantics in computer science is that of metric spaces. 
-
-> Using again just the syntactic transformations available in this formalism, one can obtain so called fixed-point combinators (the best-known of which is the Y combinator);
-> these, by definition, have the property that f(Y(f)) = Y(f) for all functions f. 
-### 11.[Brouwer fixed-point theorem](https://en.wikipedia.org/wiki/Brouwer_fixed-point_theorem)
-
-> It states that for any continuous function f mapping a compact convex set to itself there is a point x0 such that f ( x0 ) = x0. 
-
-### 12.[Haskell / Denotational Semantics](https://en.wikibooks.org/wiki/Haskell/Denotational_semantics)
-
-> 2 Bottom and Partial Functions
-> 2.1 ⊥ Bottom
-
-> 3 Recursive Definitions as Fixed Point Iterations
-> 3.1 Approximations of the Factorial Function
-> 3.2 Convergence
-> 3.3 Bottom includes Non-Termination
-> 3.4 Interpretation as Least Fixed Point
-
-> 5.3 Recursive Data Types and Infinite Lists
-
-### 13.[Grokking Fix - To Overcome](http://www.parsonsmatt.org/2016/10/26/grokking_fix.html)
-> A fixed point of a function is some value where applying the function to the value returns the same value.
-> for some function f, the fix point c is: `f(c)=c`
-
-> ``` haskell
-> fix :: (a -> a) -> a
-> fix f = 
->     let x = f x 
->      in x
-> ```
-
-> ```haskell
-> fix :: (a        -> a       ) -> a        [1]
-> fix :: ((b -> c) -> (b -> c)) -> (b -> c) [2]
-> fix :: ((b -> c) ->  b -> c ) -> b -> c   [3]
-> ```
-> - Give me a function that takes two arguments: the first being a function from `b` to `c`, and the second being a value of type `b`.
-> - Then, if you give me a `b`, then, I’ll give you a `c`.
-
-> ```haskell
-> cosFixpoint x =
->     fix (\f b -> 
->             if cos b == b 
->                then b
->                else f (cos b)
->          ) x
-> ```
-
-> We could rewrite this as an explicit recursion with a very similar structure:
-> ```haskell
-> cosFixpointExplicit x =
->     if cos x == x
->        then x
->        else cosFixpointExplicit (cos x)
-> ```
 
 ## Dependent Type
 
@@ -3674,7 +3431,252 @@ Automaton
 
 ### 2.[Reverse Engineering for Beginners](https://beginners.re/)
 
-## Recursion Scheme & F-algebra
+
+## Combinatory Logic
+
+### 1.[Can any function be reduced to a point-free form?](https://stackoverflow.com/questions/13184294/can-any-function-be-reduced-to-a-point-free-form)
+
+> **Logical combinators** (i.e. the S, K, I combinators) are essentially **point-free forms of functions**, and the lambda-calculus is equivalent to combinatory logic, so I think this suggests that the answer is yes.
+
+### 2.[Combinator Birds](http://www.angelfire.com/tx4/cus/combinator/birds.html)
+
+### 3.[Are lambda calculus and combinatory logic the same?](https://cstheory.stackexchange.com/questions/267/are-lambda-calculus-and-combinatory-logic-the-same)
+
+> What distinguishes combinatory logic is that it is **variable free**.
+> Combinators and variants were used to implement graph reduction for lazy languages 
+> Be careful: Haskell and ghc aren't the same, and the literature contains several supercombinator-based Haskells. But it's true, the state-of-the art in functional programming has found the efficiency advantages of handling environments that outweigh its complexity. You still see supercombinators used, e.g., in higher-order logic programming, where this is not true. Supercombinators remain part of the inventory of techniques used in implementing higher-order programming.
+
+### 4.[Free variables and bound variables - Wikipedia](https://en.wikipedia.org/wiki/Free_variables_and_bound_variables)
+
+> a **free variable** is a notation that specifies places in an expression where substitution may take place.
+> a placeholder (a symbol that will later be replaced by some literal string), or a wildcard character that stands for an unspecified symbol.
+
+> A **bound variable** is a variable that was previously free, but has been bound to a specific value or set of values called domain of discourse or universe. 
+
+> In *computer programming*, the term free variable refers to variables used in a function that are **neither local variables nor parameters** of that function.
+
+### 5.[Super-combinators: A new implementation method for applicative languages](https://dl.acm.org/citation.cfm?id=802129)
+
+### 6.[Deriving the Y Combinator in Javascript](https://enlight.nyc/y-combinator/)
+
+> The Y combinator bestows the power of self-referential recursion unto languages which don’t support it.
+
+> The Y combinator is a function which applies another function infinite times
+
+> `y(f) = f(f(f(f(f(f(f(f(f(f(f(f(f(...)))))))))))))` => `y(f) = f(y(x))`
+
+> `y(f) = x(x)(f)`, for some other function `x`. 
+> In simpler terms, `y = x(x)` — `y` is `x` applied to itself.
+
+> ```javascript
+> // Here's our current, recursively-defined y
+> function y(f) {
+>   return function thunk(n) {
+>     return f(y(f))(n);
+>   };
+> }
+>
+> // Apply the substitution y = x(x)
+> // Call the parameter otherX since we don't want
+> // to confuse the outer x and inner x and to avoid
+> // variable shadowing
+> function x(otherX) {
+>   return function y(f) {
+>     return function thunk(n) {
+>       return f(otherX(otherX)(f))(n);
+>     };
+>   };
+> }
+>
+> const newY = x(x);
+>
+> // Our factorialFactory, in JavaScript for reference
+> function factorialFactory(f) {
+>   return function factorial(x) {
+>     if (x === 0) {
+>       return 1;
+>     }
+>     return x * f(x - 1);
+>   };
+> }
+>
+> // x(x)(factorialFactory)
+> const newFactorial = newY(factorialFactory);
+>
+> newFactorial(10);
+> // => 3628800
+>
+> ```
+
+> By applying `x` to itself, we avoid self-reference in the function body. 
+> Everything the function needs to run comes from its parameters.
+
+> ```javascript
+> // substitute x by its definition
+> const y = (function(otherX) {
+>   return function(f) {
+>     return function thunk(...args) {
+>       return f(otherX(otherX)(f))(...args);
+>     };
+>   };
+> })(function(otherX) {
+>   return function(f) {
+>     return function thunk(...args) {
+>       return f(otherX(otherX)(f))(...args);
+>     };
+>   };
+> });
+>
+> // We can shorten it even more with ES6 arrow functions
+> const y = (x => f => (...a) => f(x(x)(f))(...a))(x => f => (...a) =>
+>   f(x(x)(f))(...a)
+> );
+>
+> ```
+
+`(...args)` to manually bring in lazy evaluation for such a infinite structure.
+
+Without worrying about the strict evaluation, make it point-free:
+```javascript
+const y = (
+  x => 
+    f => 
+      f(x(x)(f)) 
+)(
+  x =>
+    f =>
+      f(x(x)(f))
+)
+```
+
+Original definition by Haskell B. Curry:
+`Y := λf.(λx.f (x x)) (λx.f (x x))`
+
+```javascript
+const y = 
+  f =>
+    (
+      x => 
+        f(x(x))
+    )(
+      x =>
+        f(x(x))
+    )
+```
+
+By beta-reduction,
+```
+Y g
+= (λf.(λx.f (x x)) (λx.f (x x))) g
+= (λx.g (x x)) (λx.g (x x))
+= g((λx.g (x x)) (λx.g (x x)))
+= g(Y g)
+```
+
+### 7.[Tacit Programming - Wikipedia](https://en.m.wikipedia.org/wiki/Tacit_programming)
+
+> also called **point-free style**
+> The lack of argument naming gives point-free style a reputation of being unnecessarily obscure, hence the epithet "pointless style."
+
+> ```haskell
+> p = \x -> \y -> \z -> f (g x y) z
+>   = \x -> \y -> f (g x y)
+>   = \x -> \y -> (f . (g x)) y
+>   = \x -> f . (g x)
+>   = \x -> ((.) f) (g x)
+>   = ((.) f) . g
+> ```
+
+Point-free style works fine for sequential data transformation (without branching).
+
+### 8.[The Unlambda Programming Language: Your Functional Programming Language Nightmares Come True](http://www.madore.org/~david/programs/unlambda/)
+
+> Obfuscated programming languages (see below for links) are typically made nasty by either strongly restricting the set of allowed operations in the language, or making them very different from what programmers are used to, or both. (Of course, the goal is to do that while still being Turing-complete.)
+
+> Despite Unlambda being a form of the lambda calculus, it does not have a lambda (abstraction) operation. 
+> Rather, this operation must be replaced by the use of the S, K and I combinators — this can be done mechanically using abstraction elimination. 
+> Because there is no abstraction, functions are not named in Unlambda (except the builtin ones): there are no variables or such thing. 
+
+### 9.[Combinatory Logic - Stanford Encyclopedia of Philosophy](https://plato.stanford.edu/entries/logic-combinatory/#ExisFixePoinCombComp)
+
+> 2.3 The existence of fixed points and combinatorial completeness
+
+> Schönfinkel proved that 𝖲 and 𝖪 suffice to define the other combinators he introduced, and we mentioned in the definition of CL▹ that the set of constants is limited to 𝖲 and 𝖪, because other combinators could be defined from those.
+
+> Fixed point theorem. For any function M, there is a term N such that MN=N. 
+
+> Both **Haskell B. Curry** and **Alan Turing** defined fixed point combinators (in CL or in the λ-calculus).
+> If we consider the definitions
+> - `𝖸1=𝖡𝖬(𝖡𝖶𝖡)`
+> - `𝖸2=𝖶(𝖡(𝖡𝖶(𝖡𝖳)))(𝖶(𝖡(𝖡𝖶(𝖡𝖳))))`
+> we can see that `𝖸1M=M(𝖸1M)`, but for `𝖸2`, `𝖸2M▹M(𝖸2M)` holds too. 
+> In this respect, `𝖸1` is similar to **Curry**'s fixed point combinator (and really, to any fixed point combinator),
+> whereas `𝖸2` is like **Turing**'s fixed point combinator.
+
+### 10.[Domain theory - Wikipedia](https://en.wikipedia.org/wiki/Domain_theory)
+
+> Domain theory is a branch of mathematics that studies **special kinds of partially ordered sets (posets)** commonly called **domains**.
+> Consequently, domain theory can be considered as a branch of order theory.
+> The field has major applications in computer science, where it is used to specify **denotational semantics**, especially for functional programming languages.
+> Domain theory formalizes the intuitive ideas of approximation and convergence in a very general way and has close relations to **topology**.
+> An alternative important approach to denotational semantics in computer science is that of metric spaces. 
+
+> Using again just the syntactic transformations available in this formalism, one can obtain so called fixed-point combinators (the best-known of which is the Y combinator);
+> these, by definition, have the property that f(Y(f)) = Y(f) for all functions f. 
+### 11.[Brouwer fixed-point theorem](https://en.wikipedia.org/wiki/Brouwer_fixed-point_theorem)
+
+> It states that for any continuous function f mapping a compact convex set to itself there is a point x0 such that f ( x0 ) = x0. 
+
+### 12.[Haskell / Denotational Semantics](https://en.wikibooks.org/wiki/Haskell/Denotational_semantics)
+
+> 2 Bottom and Partial Functions
+> 2.1 ⊥ Bottom
+
+> 3 Recursive Definitions as Fixed Point Iterations
+> 3.1 Approximations of the Factorial Function
+> 3.2 Convergence
+> 3.3 Bottom includes Non-Termination
+> 3.4 Interpretation as Least Fixed Point
+
+> 5.3 Recursive Data Types and Infinite Lists
+
+### 13.[Grokking Fix - To Overcome](http://www.parsonsmatt.org/2016/10/26/grokking_fix.html)
+> A fixed point of a function is some value where applying the function to the value returns the same value.
+> for some function f, the fix point c is: `f(c)=c`
+
+> ``` haskell
+> fix :: (a -> a) -> a
+> fix f = 
+>     let x = f x 
+>      in x
+> ```
+
+> ```haskell
+> fix :: (a        -> a       ) -> a        [1]
+> fix :: ((b -> c) -> (b -> c)) -> (b -> c) [2]
+> fix :: ((b -> c) ->  b -> c ) -> b -> c   [3]
+> ```
+> - Give me a function that takes two arguments: the first being a function from `b` to `c`, and the second being a value of type `b`.
+> - Then, if you give me a `b`, then, I’ll give you a `c`.
+
+> ```haskell
+> cosFixpoint x =
+>     fix (\f b -> 
+>             if cos b == b 
+>                then b
+>                else f (cos b)
+>          ) x
+> ```
+
+> We could rewrite this as an explicit recursion with a very similar structure:
+> ```haskell
+> cosFixpointExplicit x =
+>     if cos x == x
+>        then x
+>        else cosFixpointExplicit (cos x)
+> ```
+
+## Data/Codata & Recursion Scheme & F-algebra
 
 Fixed-point of a functor
 
@@ -3709,6 +3711,185 @@ original paper
 [Hylomorphisms - Composing catamorphisms and anamorphisms](https://medium.com/p/43a5494729b7)
 
 ### 4. [Understanding F-Algebras](https://www.schoolofhaskell.com/user/bartosz/understanding-algebras)
+
+### 5.[A neighborhood of Infinity: Data and Codata](http://blog.sigfpe.com/2007/07/data-and-codata.html)
+
+> By ensuring that a function expecting codata never receives data, and vice versa, we can ensure that even programs with open-ended loops always produce a well defined output.
+
+> structural recursion, applied to finite datastructures, always terminates
+
+factorial in structural recursion:
+```haskell
+data Nat
+  = Zero
+  | Succ Nat
+
+iter :: Nat -> (Nat -> Nat) -> Nat -> Nat
+-- iter base succ 0 = base
+iter base succ  Zero    = base
+-- iter base succ (n+1) = succ (iter base succ n)
+iter base succ (Succ n) = succ (iter base succ n)
+
+plus :: Nat -> Nat
+plus n = iter n Succ
+
+mult :: Nat -> Nat
+mult n = iter Zero (plus n)
+
+one :: Nat
+one = Succ Zero
+
+fact :: Nat -> Nat
+-- fact 0 = 1
+fact Zero = one
+-- fact (n+1) = (n+1) * (fact n)
+fact (Succ n) = mult (Succ n) (fact n)
+```
+
+> Fibonacci sequence
+```haskell
+fib :: Number a => [a]
+fib = 1 : 1 : zipWith (+) fib (tail fib)
+```
+
+> From the point of view of using infinite lists, 
+> it's `sum` that's badly behaved, and `sumSoFar` that's well behaved.
+```haskell
+sum :: Number a => [a] -> a
+sum [] = 0
+sum (a : as) = a + sum as
+
+sumSoFar' :: Number a => a -> [a] -> [a]
+sumSoFar' acc [] = [acc]
+sumSoFar' acc (x : xs) = acc : sumSoFar' (acc + x) xs
+
+sumSoFar :: Number a => [a] -> [a]
+-- scanl :: forall a b f. Traversable f => (b -> a -> b) -> b -> f a -> f b
+-- sumSoFar = scanl (+) 0
+sumSoFar = sumSoFar' 0
+```
+
+> `sumSoFar` is well behaved because when we recursively call `sumSoFar` on the right hand side we do so from inside a list constructor.
+> (Remember that `:` is the list constructor.)
+
+each call to the constructor defines the minimum discrete step of guarded recursion which deconstructs this infinite construction
+
+> This is known as **guarded recursion** and it guarantees that even though our programs don't terminate, they still define a unique mathematical function and result in a well behaved program.
+
+> How can we ensure that an infinite list (codata, unbounded but an algorithmically described generative process) is never handed to sum (which takes bounded data)?
+
+```haskell
+data [a] -- data List a
+  = []      -- Nil
+  | a : [a] -- Cons a (List a)
+```
+> There is an ambiguity: a possibly infinite list is either an empty list, or an element followed by a possibly infinite list.
+> - Finite lists form the **smallest** possible solution to this equation.
+> - The possibly infinite lists form the **largest** possible solution.
+
+> We could use the keyword
+> - data to mean the smallest solution 
+> - codata to mean the largest solution
+
+> The rule is: you're only allowed to use 
+> - **structural recursion** with **data** 
+> - **guarded recursion** with **codata**
+
+> to prove that a **structurally recursive** program terminates we use **induction**.
+> This doesn't work straightforwardly for **corecursion**, so instead we use a principle called **coinduction**.
+> Recursive programs typically terminate.
+> Corecursive programs don't necessarily terminate, but they're still well-behaved as long as they keep on going whenever we give them input.
+> We can call this **cotermination**.
+
+> **bisimulation**
+
+[Bisimulation - Wikipedia](https://en.wikipedia.org/wiki/Bisimulation)
+> In theoretical computer science a bisimulation is a binary relation between **state transition systems**, associating systems that behave in the same way in the sense that one system simulates the other and vice versa.
+> Intuitively two systems are bisimilar if they match each other's moves. In this sense, each of the systems cannot be distinguished from the other by an observer. 
+
+Axiom of Foundation in Set theory makes it impossible to construct infinitely-nested set thus induction (structural recursion) works fine.
+
+> But if we decide to use a non-standard variation of set theory where the Axiom of Foundation doesn't hold we can no longer use recursion. 
+> For example the **Axiom of Extension** says that two sets are equal if their elements are equal.
+> This is a recursive definition, but it's useless in the presence of a set a such that `a ∈ a`. At this point mathematicians need a principle of coinduction.
+
+### 6.[Codata - Thorsten Altenkirch, University of Nottingham](http://types2004.lri.fr/SLIDES/altenkirch.pdf)
+
+> Haskell doesn't distinguish codata from data
+> but in Type theory, data != codata
+
+> Data - the producer contract
+> The producer of data promises that it will construct data only using the agreed constructors.
+> Consequences:
+> - pattern matching
+> - structural recursion
+> - induction as structural recursion on proofs
+
+> Codata - the consumer contract
+> The consumer of codata promises that it will only analyze codata using patterns induced by the agreed constructors.
+> Consequences:
+> - constructors
+> - guarded recursion
+> - coinduction as guarded recursion on proofs
+
+| data                 | codata              |
+|----------------------|---------------------|
+| inductive            | coinductive         |
+| finite objects       | infinite objects    |
+| structural recursion | guarded corecursion |
+| structural induction | guarded coinduction |
+
+> Functions are codata.
+> Consumer contract: you may only apply a function.
+
+> Observational Type Theory -> intensional Type Theory
+> Leibniz
+> - data: subset types
+> - codata: quotient types
+
+### 7.[Copatterns: Programming Infinite Structures by Observations](http://www2.tcs.ifi.lmu.de/~abel/popl13.pdf)
+
+[jonsterling/Coinduction.hs - Idea for codata syntax in Haskell](https://gist.github.com/jonsterling/3886482)
+
+### 8. [A couple of quick questions about recursion-schemes](https://www.reddit.com/r/haskell/comments/3q0w7a/a_couple_of_quick_questions_about_recursionschemes/)
+
+catamorphism <-> structural recursion <-> data
+anamorphism 
+
+### 9.[Codata and Comonads in Haskell - Richard B. Kieburtz](https://pdfs.semanticscholar.org/cbbc/1323b634101208dbaf84c5660e305784a4b7.pdf)
+
+> `glaebhoerl`:
+> 1. `Mu` and `Nu` are supposed to be the least and greatest fixed points, respectively, yet they both have both `Foldable` and `Unfoldable` instances.
+> 2. Is it the case that if you wanted to consistently distinguish between **data** and **codata**, that you would then only have `Foldable (Mu f)` and `Unfoldable (Nu f)`, but not vice versa?
+
+> `byorgey`:
+> In Haskell, because of **laziness**, least and greatest fixed points **coincide**.
+> `Fix` is the "standard" way to encode a fixed point;
+> `Mu` and `Nu` directly encode the idea of least and greatest fixed points corresponding to **initial algebras** / **final coalgebras** respectively (ie. `Mu` contains a `fold`, and `Nu` contains an `unfold`).
+> However, since greatest and least fixed points coincide, everything can have both Foldable and Unfoldable instances.
+> The reason to have all three is presumably just because sometimes it's more convenient to think in terms of one or the other.
+> I don't know of any word denoting data/codata-ness.
+
+> `gelisam`:
+> To help intuition, let's use `ListF` for `f`. The type `Mu (ListF a)` is thus the type of finite lists, and `Nu (ListF a)` is the type of possibly-infinite lists. 
+> **Agda** distinguishes data and codata
+> allowing recursion on data but not on codata because the recursion must be on a value which is considered smaller
+
+> The brilliance of `Mu` is that a value of type `Mu (ListF a)` is itself a recursion principle.
+> Suppose you want to write a function which recursively examines all the elements of a finite list in order to produce a value of type r. You'll have to write a case for `Nil`, returning an `r`, and a case for `Cons`, combining the head with the r you have recursively computed for the tail. In other words, you need to write a function `f` of type `ListF a r -> r`. The value of type `Mu (ListF a)` is itself represented by a polymorphic function of type `forall r. (ListF a r -> r) -> r`, to which you can pass `f`, and the polymorphic function will recursively apply your `f` to all the elements of the list it represents. 
+> This is brilliant, because it solves two problems at once!
+> 1. by hiding the recursion inside a function, it solves the problem of convincing Agda to allow recursive calls on `Mu (ListF a)`,
+> because even though the polymorphic function behaves like a recursive function, a call to this function is not itself considered a recursive call.
+> 2. it also solves the problem of making sure that `Mu (ListF a)` can only represent finite lists,
+> because when the polymorphic function was defined, it must have convinced the type checker that it was terminating, and it can only do that if it calls f on a finite number of Cons nodes and then terminates with a `Nil`.
+
+> `Nu` is also brilliant.
+> A value of type `Nu (ListF a)` does not store an infinite list.
+> Instead, it stores a **procedure** for producing as many elements as needed:
+> a starting state of type `s`, and a function `s -> ListF a s` which produces a single constructor, `Nil` or `Cons`, and in the `Cons` case it also produces a new state from which the next constructor can be obtained.
+
+> So `Mu` and `Nu` are clever representations which allow us to reason about **finite recursive datatypes** (data) and **possibly-infinite recursive datatypes** (codata), by representing both via **total functions**.
+> `Fix`, on the other hand, is the real deal, a recursive definition which can either represent finite recursive datatypes in a strict language, or possibly-infinite recursive datatypes in an lazy language.
 
 ## Comonad
 
