@@ -2611,6 +2611,16 @@ dimap :: (c → a) → (b → d) → (a → b) → (c → d)
 
 [Lenses: compositional data access and manipulation](https://www.youtube.com/watch?v=wguYuQwjTtI)
 
+### 28.lens over tea series - W.I.P.
+
+1. [lenses 101, traversals 101, and some implementation details](https://artyom.me/lens-over-tea-1)
+2. [composition, laws, getters/actions/setters](https://artyom.me/lens-over-tea-2)
+3. [folds](https://artyom.me/lens-over-tea-3)
+4. [isomorphisms, some profunctors, lens families](https://artyom.me/lens-over-tea-4)
+5. [prisms](https://artyom.me/lens-over-tea-5)
+6. [Template Haskell](https://artyom.me/lens-over-tea-6)
+7. [indexed traversals](https://artyom.me/lens-over-tea-7)
+
 
 ## Functional Data Structures
 
