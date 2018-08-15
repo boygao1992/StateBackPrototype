@@ -3891,6 +3891,12 @@ anamorphism
 > So `Mu` and `Nu` are clever representations which allow us to reason about **finite recursive datatypes** (data) and **possibly-infinite recursive datatypes** (codata), by representing both via **total functions**.
 > `Fix`, on the other hand, is the real deal, a recursive definition which can either represent finite recursive datatypes in a strict language, or possibly-infinite recursive datatypes in an lazy language.
 
+### 10. [Total functional programming review - Kwang Yul Seo ](https://kseo.github.io/posts/2015-06-18-total-functional-programming.html)
+
+[original paper: Total Functional Programming - D.A. Turner](https://uf-ias-2012.wikispaces.com/file/view/turner.pdf)
+
+> In total functional programming, `⊥` does not exist.
+
 ## Comonad
 
 ### 1. [The Reader and Writer Monads and Comonads ](https://www.olivierverdier.com/posts/2014/12/31/reader-writer-monad-comonad/)
