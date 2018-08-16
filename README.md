@@ -3897,6 +3897,12 @@ anamorphism
 
 > In total functional programming, `⊥` does not exist.
 
+### 11. [slamdata/matryoshka - Generalized recursion schemes and traversals for Scala](https://github.com/slamdata/matryoshka)
+
+### 12. [slamdata/purescript-matryoshka - Generalized folds, unfolds, and traversals for fixed point data structures in PureScript. (A port of Matryoshka)](https://pursuit.purescript.org/packages/purescript-matryoshka/0.3.0)
+
+### 13. [JosephJNK/static-land-recursion-schemes - Javascript recursion schemes compatible with flow-static-land](https://github.com/JosephJNK/static-land-recursion-schemes)
+
 ## Comonad
 
 ### 1. [The Reader and Writer Monads and Comonads ](https://www.olivierverdier.com/posts/2014/12/31/reader-writer-monad-comonad/)
