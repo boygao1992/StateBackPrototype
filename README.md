@@ -1622,7 +1622,7 @@ in Yampa, `SF` is an instance of `Arrow` and `ArrowLoop`
 
 > Many systems use discrete time semantics in which time is advanced in user-visible increments (stpes).
 
-`elm-automaton` completely removed `continous time` semantics,
+`elm-automaton` completely removed `continuous time` semantics,
 which therefore is under event-driven FRP (E-FRP).
 ```elm
 type Automaton a b
@@ -2347,36 +2347,6 @@ dimap :: (c → a) → (b → d) → (a → b) → (c → d)
 
 ### 24.[The Monad.Reader - a electronic magazine about all things Haskell](https://themonadreader.wordpress.com/)
 
-### 25.[Bidirectional Programming Languages - John Nathan Foster, PhD dissertation](http://www.cs.cornell.edu/~jnfoster/papers/jnfoster-dissertation.pdf)
-
-> 2 Basic Lenses
-> 3 Quotient Lenses
-> 4 Resourceful Lenses
-> 5 Secure Lenses
-
-### 26.[elm arturopala/elm-monocle](http://package.elm-lang.org/packages/arturopala/elm-monocle/latest)
-
-> Iso: An Iso is a tool which converts elements of type A into elements of type B and back without loss.
-
-> Prism: A Prism is a tool which optionally converts elements of type A into elements of type B and back.
-
-> Lens: A Lens is a functional concept which solves a very common problem: how to easily update a complex immutable structure, for this purpose Lens acts as a zoom into a record. 
-
-> Optional: A Optional is a weaker Lens and a weaker Prism.
-
-### 27.[elm evancz/focus](https://github.com/evancz/focus)
-
-[Lenses: compositional data access and manipulation](https://www.youtube.com/watch?v=wguYuQwjTtI)
-
-### 28.lens over tea series - W.I.P.
-
-1. [lenses 101, traversals 101, and some implementation details](https://artyom.me/lens-over-tea-1)
-2. [composition, laws, getters/actions/setters](https://artyom.me/lens-over-tea-2)
-3. [folds](https://artyom.me/lens-over-tea-3)
-4. [isomorphisms, some profunctors, lens families](https://artyom.me/lens-over-tea-4)
-5. [prisms](https://artyom.me/lens-over-tea-5)
-6. [Template Haskell](https://artyom.me/lens-over-tea-6)
-7. [indexed traversals](https://artyom.me/lens-over-tea-7)
 
 
 ## Functional Data Structures
@@ -2419,6 +2389,10 @@ an area of mathematics primarily concerned with counting, both as a means and an
 #### 3.[Toposes, Triples and Theories](http://www.tac.mta.ca/tac/reprints/articles/12/tr12.pdf)
 
 #### 4.[The collected works of F. W. Lawvere - Github](https://github.com/mattearnshaw/lawvere)
+
+#### 5.[Basic Category Theory](https://arxiv.org/abs/1612.09375)
+
+#### 6.[Seven Sketches in Compositionality: An Invitation to Applied Category Theory](https://arxiv.org/abs/1803.05316)
 
 ### Application
 #### 1.[Memory Evolutive System (MES)](http://vbm-ehr.pagesperso-orange.fr/AnintroT.htm)
@@ -3360,18 +3334,6 @@ This operator-like data structure is a tree / `Free`.
 > 2. Within each caller, use the parameters being passed to determine the subset of the inlined code that this specific caller executes.
 > 3. Delete the bits that aren't needed for this particular caller.
 
-## Lenses
-
-### 1.[Haskell/Lenses and functional references](https://en.wikibooks.org/wiki/Haskell/Lenses_and_functional_references)
-
-### 2.[The Lens Library - Haskell](http://lens.github.io/tutorial.html)
-
-### 3.[purescript-profunctor-lenses](https://github.com/purescript-contrib/purescript-profunctor-lenses)
-
-[Lenses for the Mere Mortal: PureScript Edition](https://leanpub.com/lenses)
-
-### 4. [arturopala / elm-monocle](http://package.elm-lang.org/packages/arturopala/elm-monocle/1.7.0/)
-
 ## Synchronous Functional Programming
 
 ### 1.[Synchronous Functional Programming: The Lucid Synchrone Experiment](https://pdfs.semanticscholar.org/6051/faeabeb33efad129390d9be81dd2969f7f2a.pdf)
@@ -4061,6 +4023,106 @@ data Day f g a
 > The Day convolution gives the category of comonads the structure of **a symmetric monoidal category**.
 
 
+## Lenses
+
+### 1.[Haskell/Lenses and functional references](https://en.wikibooks.org/wiki/Haskell/Lenses_and_functional_references)
+
+### 2.[The Lens Library - Haskell](http://lens.github.io/tutorial.html)
+
+### 3.[purescript-profunctor-lenses](https://github.com/purescript-contrib/purescript-profunctor-lenses)
+
+[Lenses for the Mere Mortal: PureScript Edition](https://leanpub.com/lenses)
+
+### 4. [arturopala / elm-monocle](http://package.elm-lang.org/packages/arturopala/elm-monocle/1.7.0/)
+
+### 5.lens over tea series - W.I.P.
+
+1. [lenses 101, traversals 101, and some implementation details](https://artyom.me/lens-over-tea-1)
+2. [composition, laws, getters/actions/setters](https://artyom.me/lens-over-tea-2)
+3. [folds](https://artyom.me/lens-over-tea-3)
+4. [isomorphisms, some profunctors, lens families](https://artyom.me/lens-over-tea-4)
+5. [prisms](https://artyom.me/lens-over-tea-5)
+6. [Template Haskell](https://artyom.me/lens-over-tea-6)
+7. [indexed traversals](https://artyom.me/lens-over-tea-7)
+
+### 6.[Bidirectional Programming Languages - John Nathan Foster, PhD dissertation](http://www.cs.cornell.edu/~jnfoster/papers/jnfoster-dissertation.pdf)
+
+> 2 Basic Lenses
+> 3 Quotient Lenses
+> 4 Resourceful Lenses
+> 5 Secure Lenses
+
+### 7.[elm arturopala/elm-monocle](http://package.elm-lang.org/packages/arturopala/elm-monocle/latest)
+
+> Iso: An Iso is a tool which converts elements of type A into elements of type B and back without loss.
+
+> Prism: A Prism is a tool which optionally converts elements of type A into elements of type B and back.
+
+> Lens: A Lens is a functional concept which solves a very common problem: how to easily update a complex immutable structure, for this purpose Lens acts as a zoom into a record. 
+
+> Optional: A Optional is a weaker Lens and a weaker Prism.
+
+### 8.[elm evancz/focus](https://github.com/evancz/focus)
+
+[Lenses: compositional data access and manipulation](https://www.youtube.com/watch?v=wguYuQwjTtI)
+
+### 9.[History of Lenses - Haskell-Lens](https://github.com/ekmett/lens/wiki/History-of-Lenses)
+
+### 10.[Lenses for Philosophers](https://julesh.com/2018/08/16/lenses-for-philosophers/)
+> history of lenses includes at least 9 independent rediscoveries.
+> - 1958, Kurt Godel, [dialectica interpretation](https://www.andrew.cmu.edu/user/avigad/Papers/dialect.pdf)
+> - 1982, Frank J. Oles, [a Category-Theoretic Approach to the Semantics of Programming Languages](https://www.andrew.cmu.edu/user/avigad/Papers/dialect.pdf)
+>   - 3 lens law
+>   - bidirectional transformations of datatypes
+> - 1995, Martin Hoffmann & Benjamin Pierce, [Positive Subtyping](https://www.sciencedirect.com/science/article/pii/S0890540196900310/)
+> - 2005, Foster & Greenwald & Moore & Pierce & Schmitt, [Combinators for Bi-directional Tree Transformations](http://www.cis.upenn.edu/~bcpierce/papers/lenses-toplas-final.pdf)
+> - 2015, Jules Hedges, [Towards compositional game theory](https://julesh.com/2018/01/16/towards-compositional-game-theory/)
+>   - category of open games
+>   - play and coplay
+> - 2017, Brenda Fong & David Spivak & Remy Tuyeras, [Backprop as Functor](https://arxiv.org/abs/1711.10455)
+>   - category of open learners
+> - [Robert Rosebrugh](https://www.mta.ca/~rrosebru/)
+
+
+> Then lens laws are undoubtedly important, and not just because they're true in the case of updates.
+> Very behaved lenses are equivalent to the much simpler constant-complement lenses,
+> and are also equivalently **coalgebra of a comonad**.
+
+[Lenses Are Exactly the Coalgebras for the Store Comonad](https://r6research.livejournal.com/23705.html)
+
+> Around the same time as the FGMPS paper in the mid-2000s, Haskell programmers started talking about **functional references**,
+> based on **getters** and **setters** from object oriented programming.
+> The motivation is that Haskell's encapsulation of effects, while important, is quite awkward when working with an inherently state-heavy application such as videogames.
+
+> foundations:
+> - vanLaarhoven lenses
+> - profunctor lenses
+
+>For a fixed strategy, an open game’s play function takes an observation to an action;
+> and its coplay function takes an observation and the payoffs resulting from an action, and gives the payoffs associated to the observation.
+> The delicate interaction between play and coplay is a crucial component of how game theory is made compositional.
+
+[Compositional game theory](https://arxiv.org/abs/1603.04641)
+
+[Doubles for monoidal categories](https://arxiv.org/abs/0711.1859)
+
+[What You Needa Know about Yoneda](https://www.cs.ox.ac.uk/jeremy.gibbons/publications/proyo.pdf)
+
+[Backprop as Functor: A compositional perspective on supervised learning](https://arxiv.org/abs/1711.10455)
+> We define a category where these update rules may be composed, and show that gradient descent---with respect to a fixed step size and an error function satisfying a certain property---defines a monoidal functor from a category of parametrised functions to this category of update rules.
+
+[dreaming](https://www.iflscience.com/technology/artificial-intelligence-dreams/)
+
+
+### 11.[Profunctor Optics: Modular Data Accessors](https://arxiv.org/abs/1703.10857)
+
+### 12.[Lenses are the coalgebras for the costate comonad](https://patternsinfp.wordpress.com/2011/01/31/lenses-are-the-coalgebras-for-the-costate-comonad/)
+
+### 13.[Lenses Are Exactly the Coalgebras for the Store Comonad](https://r6research.livejournal.com/23705.html)
+
+### 14.[Backprop as Functor: A compositional perspective on supervised learning](https://arxiv.org/abs/1711.10455)
+
+
 ## Actor Model
 
 ### 1.[Inconsistency Robustness - Carl Hewitt, John Woods](https://www.amazon.com/Inconsistency-Robustness-Studies-Logic-Hewitt/dp/1848901593)
@@ -4080,6 +4142,65 @@ Direct Logic Reasoning and Actor Model
 > A fundamental goal of Inconsistency Robustness is to effectively reason about large amounts of information at high degrees of abstraction
 
 > Direct Logic is an improvement over Classical Logic with respect to Feferman's desideratum above for today's information systems that are perpetually, pervasively inconsistent.
+
+## Synthetic Differential Geometry / Infinitesimal Analysis
+
+### 1. definitions of basic concepts in nLab
+[synthetic differential geometry](https://ncatlab.org/nlab/show/synthetic+differential+geometry)
+
+[differentiation](https://ncatlab.org/nlab/show/differentiation)
+> Theorem 2.1. Differentiation is a product-preserving functor.
+
+[manifold](https://ncatlab.org/nlab/show/manifold)
+
+[smooth manifold](https://ncatlab.org/nlab/show/smooth+manifold)
+
+### 2.[Synthetic Differential Geometry - Anders Kock](http://home.math.au.dk/kock/sdg99.pdf)
+
+### 3.[A Primer of Infinitesimal Analysis](https://www.amazon.com/dp/0521887186/)
+
+#### introduction
+
+> in the 1960s, Abraham Robinson created nonstandard analysis, in which
+> Leibniz's infinitesimals, conceived essentially as infinitely small but nonzero real numbers,
+> were finally incorporated into the real number system without violating any of the usual rules of arithmetic.
+
+> in the 1970s
+> new developments in the category theory led to the creation of 
+> **smooth infinitesimal analysis**, a rigorous axiomatic theory of nilsquare and non-punctiform infinitesimals.
+
+> all functions in $\mathbb{S}$ are continuous
+
+> in order to achieve **universal continuity of maps** within smooth worlds,
+> one is forced to acknowledge that the so-callded
+> **law of excluded middle**, every statement is either definitely true or definitely false,
+> cannot be generally affirmed within the smooth world.
+
+> because unconstrained use of law of the excluded middle legitimizes the construction of **discontinuous functions**
+
+Dirac delta function (?)
+
+> for any real number `x`, either `x = 0` or `not x = 0`
+> is false in smooth world $\mathbb{S}$.
+
+by the law of the excluded middle, this statement is true, always
+
+> If `X` is a connected continuum (e.g. the real line), it presumably does have proper nonempty parts but certainly no nonconstant continuous functions to the two element set `{true, false}`.
+
+```
+ y
+ ^
+1|    --
+0| ---||---
+ ----------> x
+      ^
+      |
+  non-differentiable
+```
+not able to construct a nonconstant continuous function with two possible outcomes
+
+> It follows that, in $\mathbb{S}$, the set of truth values cannot reduce to `{true, false}`.
+> Thus logic in smooth worlds is many-valued or polyvalent.
 
 
 ## Others
