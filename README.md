@@ -2396,7 +2396,15 @@ an area of mathematics primarily concerned with counting, both as a means and an
 
 ### Application
 #### 1.[Memory Evolutive System (MES)](http://vbm-ehr.pagesperso-orange.fr/AnintroT.htm)
+
 #### 2.[Understanding Visualization: A Formal Approach using Category Theory and Semiotics](https://arxiv.org/abs/1311.4376)
+
+#### 3.[The Topos of Music: Geometric Logic of Concepts, Theory, and Performance - Guerino Mazzola](https://www.amazon.com/Topos-Music-Geometric-Concepts-Performance/dp/3764357312/)
+
+#### 4.[Categorical Informatics - MIT](http://catinf.com/)
+
+> an improved data model over current-generation data models (Relational, RDF/OWL, Graph, Key-Value, LINQ)
+> AQL: an algebraic query language
 
 ### connection to Dialectics
 
