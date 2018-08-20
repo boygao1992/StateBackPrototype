@@ -74,6 +74,23 @@ genericTail :: forall stream element. Stream stream element => stream -> Maybe s
 genericTail xs = map _.tail (uncons xs) -- a generic function that only transforms the structure of the Stream
 ```
 
+instance dependencies
+
+```haskell
+-- an example of polymorphic recursion
+instance Show a => Show ([a]) where
+  show [] = "nil"
+  show (x: xs) = show x ++ " : " ++ show xs
+-- substitute a by [a], we have Show [a] => Show ([[a]])
+-- then possibly, Show ([[[...[a]...]]])
+-- thus, this type class works for an infinite number of types
+-- {[a], [[a]], [[[a]]], ...}
+
+show [[[[[1]]]]] :: String -- 1 : nil : nil : nil : nil : nil
+```
+
+
+
 
 
 type class
@@ -285,9 +302,15 @@ read :: Read a => String -> a
 2.0 + "2" -- illegal
         (++) :: [a] -> [a] -> [a] -- List concatenation
 show 2.0 ++ "2" :: String -- "2.02", or ['2', '.', '0', '2']
+-- 2.0 is inferred as Fractional a, which is not an instance of Show a, how?
+-- Monomorphism restriction (default type narrowing rules), Fractional a is filled by Double, which is an instance of Show a
+show (2.0::Double) ++ "2"
 ```
 
-
+> [Monomorphism restriction](https://wiki.haskell.org/Monomorphism_restriction)
+>
+> a counter-intuitive rule in Haskell type inference
+> If you forget to provide a type signature, sometimes this rule will fill the free type variables with specific types using "type defaulting"  rules.
 
 >   - ad hoc
 >     - **Overloading:** a single identifier denotes several abstractions
