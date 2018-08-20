@@ -13,6 +13,69 @@ interface
 - open world assumption on instances (single type)
 - close world assumption on structure (data-types and functions)
 
+```typescript
+interface IType {
+    x : Type1
+    y : Type2
+    z : Type3
+    
+    method1(_this : IType, args: Type4): Type5 {}
+    method2(_this : IType): Type6 {}
+}
+```
+
+```haskell
+newtype IType = IType
+  { x :: Type1
+  , y :: Type2
+  , z :: Type3
+  }
+
+class ITypeClass a where
+  method1 :: a -> Type4 -> Type5 -- polymorphism only at the first argument
+  method2 :: a -> Type6
+
+instance ITypeClass IType where
+  method1 :: IType -> Type4 -> Type5
+  method1 i args = ...
+  method2 :: IType -> Type6
+  method2 i = ...
+```
+
+interface only allows subtype polymorphism on the initial vertex of a set of edges
+(by default, the encapsulated variables are accessible through `this`, which can be treated as the first argument to all methods in that interface)
+
+FP focus on edges, where type class allows subtype polymorphism on all vertices along the edge (a high-order function is an edge in hypergraph that connects multiple vertices)
+
+```haskell
+class ITypeClass a b where -- a :: *, b :: *
+  method1 :: a -> Type
+  method2 :: Type -> a
+  method3 :: Type -> a -> Type
+  method4 :: b -> a -> b
+```
+
+type class further supports polymorphism on (higher-order) Type Functions
+
+```haskell
+class Transform f t a b where -- f :: * -> *, t :: * -> * -> *
+  transform :: t a (f a) -> f b
+```
+
+functional dependency: assert a functional relationship between type arguments of a multi-parameter type class
+
+```haskell
+class Stream stream element
+  | stream -> element -- there is a function from a `stream` type to a unique `element` type (uncons, in this case), thus `element` type can be inferred by the compiler
+  where
+    uncons :: stream -> Maybe { head :: element, tail :: stream }
+
+genericTail :: forall stream element. Stream stream element => stream -> Maybe stream
+genericTail xs = map _.tail (uncons xs) -- a generic function that only transforms the structure of the Stream
+```
+
+
+
 type class
 
 - open world assumption on instances (multiple types or type functions)
@@ -226,10 +289,12 @@ show 2.0 ++ "2" :: String -- "2.02", or ['2', '.', '0', '2']
 
 
 
->   - **Overloading:** a single identifier denotes several abstractions
+>   - ad hoc
+>     - **Overloading:** a single identifier denotes several abstractions
 >   - universal
->   - **Parametric:** an abstraction operates uniformly across different types
->   - **Inclusion:** an abstraction operates through an inclusion relation
+>     - **Parametric:** an abstraction operates uniformly across different types
+>   - universal
+>     - **Inclusion:** an abstraction operates through an inclusion relation
 
 
 
