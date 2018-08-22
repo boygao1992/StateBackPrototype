@@ -2841,6 +2841,9 @@ still possible to have multiple instances for the same superclass but enforce on
 
 4. [understanding implicits](https://kubuszok.com/2018/implicits-type-classes-and-extension-methods-part-4/)
 
+### 4. [Applied Functional Programming with Scala - Fantasyland Institute of Learning.](https://gist.github.com/jdegoes/97459c0045f373f4eaf126998d8f65dc)
+
+
 ## Bayesian Network & Causality
 
 ### 1.[The Book of Why: The New Science of Cause and Effect](https://www.amazon.com/Book-Why-Science-Cause-Effect/dp/046509760X)
@@ -3869,9 +3872,28 @@ anamorphism
 
 ### 11. [slamdata/matryoshka - Generalized recursion schemes and traversals for Scala](https://github.com/slamdata/matryoshka)
 
+[Recursion Schemes in one pic](https://github.com/slamdata/matryoshka/blob/master/resources/recursion-schemes.pdf)
+
 ### 12. [slamdata/purescript-matryoshka - Generalized folds, unfolds, and traversals for fixed point data structures in PureScript. (A port of Matryoshka)](https://pursuit.purescript.org/packages/purescript-matryoshka/0.3.0)
 
 ### 13. [JosephJNK/static-land-recursion-schemes - Javascript recursion schemes compatible with flow-static-land](https://github.com/JosephJNK/static-land-recursion-schemes)
+
+### 14. [Compositional Data Types in Haskell](https://github.com/pa-ba/compdata)
+
+[Modular Tree Automata - Patrick Bahr](http://bahr.io/modularity/pubs/entries/bahr12mpc.html)
+
+[Programming Macro Tree Transducers - Patrick Bahr](http://bahr.io/pubs/talks/bahr13wgp.html)
+
+> - `compdata-param`: a parametric variant of compositional data types to deal with variable binders in a systematic way.
+> - `compdata-automata`: advanced recursion schemes derived from tree automata that allow for a higher degree of modularity and make it possible to apply fusion.
+> - `compdata-dags`: recursion schemes on directed acyclic graphs.
+
+### 15. [Recursion Schemes Cookbook](https://github.com/vil1/recursion-schemes-cookbook)
+
+### 16. [Fix Haskell (by eliminating recursion) - Greg Pfeil](https://github.com/sellout/recursion-scheme-talk/blob/master/recursion-scheme-talk.org)
+
+### 17. [Controlling Fusion In Haskell](https://jyp.github.io/posts/controlled-fusion.html)
+
 
 ## Comonad
 
