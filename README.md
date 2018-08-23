@@ -4249,3 +4249,7 @@ not able to construct a nonconstant continuous function with two possible outcom
 ### 4.[tapeinosyne/elm-microkanren - Elm implementation of the eponymous relational programming language μKanren](https://github.com/tapeinosyne/elm-microkanren/)
 
 [µKanren: A Minimal Functional Core for Relational Programming](http://webyrd.net/scheme-2013/papers/HemannMuKanren2013.pdf)
+
+### 5.[A Study of Scales](https://ianring.com/musictheory/scales/)
+
+### 6.[Modes of Limited Transposition](http://welliam.github.io/molts/)
