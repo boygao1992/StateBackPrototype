@@ -2355,6 +2355,9 @@ dimap :: (c → a) → (b → d) → (a → b) → (c → d)
 
 ### 2.[Purely Functional Random-Access Lists - Chris Okasaki (CMU)](https://www.westpoint.edu/eecs/SiteAssets/SitePages/Faculty%20Publication%20Documents/Okasaki/fpca95.pdf)
 
+### 3.[MonadReader - issue 16](https://themonadreader.files.wordpress.com/2010/05/issue16.pdf)
+> Playing with Priority Queues - Louis Wasserman
+
 ## Model Theory
 ### 1.[Model Theory - Wikipedia](https://en.wikipedia.org/wiki/Model_theory)
 universal algebra + logic = model theory
