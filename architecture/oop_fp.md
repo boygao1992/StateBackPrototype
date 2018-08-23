@@ -143,6 +143,83 @@ class Shape s where
   -- 
 ```
 
+Union type in OOP
+
+```Java
+abstract class List<A> {
+    public abstract <B> B accept(ListVisitor<A,B> that);
+}
+interface ListVisitor<A, B> {
+    public B _case(Empty<A> that);
+    public B _case(Cons<A> that);
+}
+class Empty<A> extends List<A> {
+    public <B> B accept(ListVisitor<A,B> that) {
+      return that._case(this);
+    }
+}
+class Cons<A> extends List<A> {
+    private A head;
+    private List<A> tail;
+    
+    Cons(A _head, List<A> _tail) {
+      first = _head;
+      tail = _tail;
+    }
+    public A head() {return head;}
+    public List<A> tail() {return tail;}
+    
+    public <B> B accept(ListVisitor<A,B> that) {
+      return that._case(this);
+    }
+}
+```
+
+[JavaSealedUnions](https://github.com/pakoito/JavaSealedUnions)
+
+```Java
+interface Union2<T1, T2> {
+    <A> A case(Function<T1, A> f, Function<T2, A> g);
+}
+interface Constructor2<T1, T2> {
+    Union2<T1, T2> first(T1 x);
+    Union2<T1, T2> second(T2 x);
+}
+```
+
+
+
+```scala
+sealed trait List[A]
+final case class Cons[A](x: A, xs: List[A]) extends List[A]
+final case class Nil[A]() extends List[A]
+
+val sum: List[Double] => Double = {
+    case Cons(x , xs) => x + sum(xs)
+    case Nil() => 0
+}
+```
+
+[learning Scalaz — Coproducts](http://eed3si9n.com/learning-scalaz/Coproducts.html)
+
+
+# Higher-Kinded Polymorphism
+
+[Higher-rank and higher-kinded types](https://www.stephanboyer.com/post/115/higher-rank-and-higher-kinded-types)
+
+> There is one possibility we haven’t explored: functions from values to types. These are called “[dependent types](https://en.wikipedia.org/wiki/Dependent_type)” and open up a mind-blowing world of [programming with proofs](https://en.wikipedia.org/wiki/Curry%E2%80%93Howard_correspondence).
+
+higher-kinded type (type-level functions)
+higher-rank type (type-level functions that have type-level functions as its arguments)
+
+
+[Multi-parameter type class](https://wiki.haskell.org/Multi-parameter_type_class)
+
+> If you think of a single-parameter type class as a set of types,
+> then a multi-parameter type class is a relation between types. 
+
+
+
 # Multiple Dispatch
 
 [Reflection-based implementation of Java extensions: the double-dispatch use-case](http://www.jot.fm/issues/issue_2005_12/article3/)
@@ -314,12 +391,33 @@ show (2.0::Double) ++ "2"
 
 >   - ad hoc
 >     - **Overloading:** a single identifier denotes several abstractions
+
+type class
+
 >   - universal
 >     - **Parametric:** an abstraction operates uniformly across different types
+
+[Polymorphism](https://wiki.haskell.org/Polymorphism)
+> Parametric polymorphism refers to when the type of a value contains one or more (unconstrained) type variables, so that the value may adopt any type that results from substituting those variables with concrete types. 
+> Since a parametrically polymorphic value does not "know" anything about the unconstrained type variables, it must behave the same regardless of its type.
+
+examples: `id`, `const`, `flip`, `apply`
+```haskell
+id :: forall a. a -> a
+id x = x
+
+const :: forall a b. a -> b -> a
+const x _ = x
+
+flip :: forall a b c. (a -> b -> c) -> b -> a -> c
+flip f y x = f x y
+```
+
 >   - universal
 >     - **Inclusion:** an abstraction operates through an inclusion relation
 
-
+ad-hoc actually, a limited type class mechanism
+a finite number of subtypes are settled at the compile time
 
 ```typescript
 // type predicates

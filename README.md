@@ -2843,6 +2843,8 @@ still possible to have multiple instances for the same superclass but enforce on
 
 ### 4. [Applied Functional Programming with Scala - Fantasyland Institute of Learning.](https://gist.github.com/jdegoes/97459c0045f373f4eaf126998d8f65dc)
 
+### 5. [learning Scalaz](http://eed3si9n.com/learning-scalaz/index.html)
+
 
 ## Bayesian Network & Causality
 
