@@ -4258,8 +4258,52 @@ FP
 
 ### 3. [Microservices vs. SOA](https://dzone.com/articles/microservices-vs-soa-is-there-any-difference-at-al)
 
+#### overview
 > Service Oriented Architecture is a software architecture where distinct components of the application provide services to other components via a **communications protocol** over a network.
 > The communication can involve either simple data passing, or two or more services coordinating connecting services to each other.
+> Service Oriented Architecture is less about how to modularize an application, and more about how to compose an application by integration of distributed, separately-maintained and deployed software components.
+> two main roles in SOA: a service provider, and a service consumer.
+
+> Microservices
+> independent services are created to serve only one specific business function,
+> such as User Management, User Roles, E-commerce Cart, Search Engine, Social Media Logins, etc.
+> can be written in different programming languages
+> and use different databases
+
+
+#### Bounded Context
+> SOA encourages sharing of components
+> microservices try to minimize on sharing through “bounded context.”
+
+SOA's components and microservices are at two different abstraction levels
+
+components are supposed to be stateless thus able to be shared across multiple "bounded contexts" / tasks
+
+microservices are designed around "bounded contexts" / tasks thus may utilize stateless components under the hood but may not be stateless itself
+
+#### Communication
+> - In SOA, the ESB could become a single point of failure which impacts the entire system.
+
+ESB as a centralized message queue
+
+> - Microservices
+
+decentralized message queue (?)
+
+not a distinction at conceptual level but an implementation detail, dubious
+
+#### Interoperability
+> SOA promotes the use of multiple heterogeneous protocols through its messaging middleware component.
+> Microservices attempt to simplify the architecture pattern by reducing the number of choices for integration.
+> If all your services could be accessed through the same remote access protocol, then microservices are a better option for you.
+
+heterogeneous (coordinated by middleware) vs unified message protocol
+
+unification/generalization takes engineering effort and brittle to modification which would infects all subsystems because they all rely on the same specification
+
+middlewares are more decentralized in this case
+
+dubious
 
 ### 4. [Hexagonal Architecture](https://apiumhub.com/tech-blog-barcelona/hexagonal-architecture/)
 
