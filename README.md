@@ -4238,6 +4238,33 @@ not able to construct a nonconstant continuous function with two possible outcom
 > Thus logic in smooth worlds is many-valued or polyvalent.
 
 
+## Modulization / Component-oriented Architecture
+
+basic idea: isolate independent logic as unit of functionality
+
+OOP
+- Hexagonal Architecture
+- Service-oriented architecture (SOA)
+- Microservices
+
+FP
+- The Service Pattern (FP)
+
+### 1. [Component Software: Beyond Object-Oriented Programming -  Clemens Szyperski](https://www.amazon.com/gp/product/0201745720/)
+
+### 2. [Composite Software Construction - Jean-Jacques Dubray](https://www.infoq.com/minibooks/composite-software-construction)
+
+[WSPER - the specification of an abstract SOA framework](https://www.ebpml.org/wsper/wsper/index.html)
+
+### 3. [Microservices vs. SOA](https://dzone.com/articles/microservices-vs-soa-is-there-any-difference-at-al)
+
+> Service Oriented Architecture is a software architecture where distinct components of the application provide services to other components via a **communications protocol** over a network.
+> The communication can involve either simple data passing, or two or more services coordinating connecting services to each other.
+
+### 4. [Hexagonal Architecture](https://apiumhub.com/tech-blog-barcelona/hexagonal-architecture/)
+
+### 5. [Simon Meier / The Service Pattern](https://www.schoolofhaskell.com/user/meiersi/the-service-pattern)
+
 ## Others
 
 ### 1.[To Dissect a Mockingbird: A Graphical Notation for the Lambda Calculus with Animated Reduction](http://dkeenan.com/Lambda/)
