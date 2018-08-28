@@ -104,7 +104,7 @@ construction of object graph
 
 
 
-the only upside (not sure if it is of practical usage in FP) of class/object model over sole function composition so far is being able to supply the same set of arguments to multiple functions at once, and later able to dispatch any of these argument fulfilled functions by name
+the only upside (not sure if it is of any practical usage in FP) of class/object model over sole function composition so far is being able to supply the same set of arguments to multiple functions at once, and later able to dispatch any of these argument fulfilled functions by name
 
 inject "environment" => Reader Monad
 
@@ -128,6 +128,9 @@ instance Monad (Reader e) where
                   -- \e -> runReader ( k ( runReader m e ) ) e :: e -> b
          -- Reader e b
   m >>= k = Reader ( \e -> runReader ( k ( runReader m e ) ) e
+
+ask :: Reader e e
+ask = Reader id
 ```
 
 if `a` is a `Record` of functions
