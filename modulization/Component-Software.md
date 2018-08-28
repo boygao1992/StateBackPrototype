@@ -221,3 +221,37 @@ Not sure what this emphasizes, will see.
 ### 4.2.1 Horizontal versus vertical markets
 
 ### 4.2.2 Standard component world and normalization
+
+
+# 14 The Sun way - Java, JavaBeans, EJB, and Java 2 editions
+
+## 14.2 Java language
+### 14.2.1 Interfaces versus classes
+> Java offers no complete solution to the name conflict problem.
+> If two interfaces introduce methods of the same name and signature but of different return type, then no class can simultaneously implement both interfaces.
+> Clashes of method names among independently defined interfaces are difficult to avoid entirely
+> Where unresolvable naming conflicts occur, a Java compiler rejects a class trying to implement conflicting interfaces.
+
+> As pointed in 5.1.2, it is essential that components support sliding windows of versions - that is, that they support the interfaces of multiple version generations.
+> In Java, doing so requires us to change the name of an interface for a new version and change the name of all methods logically retained in the new version.
+> Java classes are thus not normally able to simultaneously support multiple versions of their contracts.
+
+> ```Java
+> interface Blue {}
+> interface Green {}
+> class FunThing implements Blue, Green {}
+>
+> Blue thing = new FunThing();
+> Green part = null;
+> if (thing instanceof Green)
+>   part = (Green) thing;
+> ```
+
+> It is not possible to statically state that a variable refers to an object implementing both `Blue` and `Green` without introducing a common subtype of these two interfaces.
+> Java provides a type-test operator `instanceof` that can be used to query at runtime
+> Java also check type casts that can be used to cast the reference to another class or interface.
+
+
+OOP requires Object with multiple interfaces to be cast to one interface to use corresponding set of methods. (it's like querying a database of functions with first argument's type class fixed, without specifying the name of the function)
+
+FP's type class is more flexible because functions are directly available where for a given function, an argument type can be in multiple type classes (/ be cast to multiple interfaces simultaneously) and every argument type can have type class constraints. (querying a database of functions with multiple type class constraints and the name of the function.)

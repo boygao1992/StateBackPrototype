@@ -4309,6 +4309,8 @@ dubious
 
 ### 5. [Simon Meier / The Service Pattern](https://www.schoolofhaskell.com/user/meiersi/the-service-pattern)
 
+### 6. [Command Query Responsibility Segregation (CQRS)](https://martinfowler.com/bliki/CQRS.html)
+
 ## Others
 
 ### 1.[To Dissect a Mockingbird: A Graphical Notation for the Lambda Calculus with Animated Reduction](http://dkeenan.com/Lambda/)
