@@ -30,7 +30,7 @@ ultimate form:
 
 Statement: Dependency Injection in OOP is to retrieve some of the Referential Transparency back so that programmers can follow equational reasoning locally.
 
-Proof
+~~Proof~~
 
 Assumption: IO effects are properly handled (pushed to the boundary of the app, IO layer)
 
@@ -66,3 +66,4 @@ In OOP, thing's a bit hairy because currying has to be done by hand. Either need
 the latter approach is more common because it takes less code to realize,
 but it entangles the currying logic (noise) with domain logic (real meat) so that it's harder to read and error-prone if the number of arguments are huge (the number of variants grows fast).
 
+Builder Pattern is the generalization of this solution which further allows setters to late bind arguments/dependencies, but it forces the variables holding dependencies to be mutable and need runtime logic to guarantee each dependency is supplied only once to regain some determinism.
