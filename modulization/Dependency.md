@@ -1,7 +1,5 @@
 As long as the structure of the object graph is available at compile time (Static Signal Graph), the dependencies (edges in the object graph) can be encoded as Type thus can be guarded by the Type system (through logical proof under the hood).
 
-
-
 [javax-intent - JSR-330 Dependency Injection standard for Java](https://github.com/javax-inject/javax-inject)
 
 utilize type annotation system for static analysis and code generation (meta-programming / template programming)
@@ -18,14 +16,39 @@ but type annotation system doesn't have a type checking system which is left to 
 
 
 with type classes, by switching one type at the entry of the application, able to switch to a different configuration of dependencies
+```haskell
+realCode :: forall m. MonadCache m => MonadRequest String m => m String
+realCode = requestWithCache "/cache" "https://purescript.org"
 
+class Monad m => MonadCache m where
+  read :: String -> m (Maybe String)
+  write :: String -> m Unit
+
+class Monad m => MonadRequest req m | m -> req where
+  request :: req -> m String
+
+instance appMonadMonadCache :: MonadCache AppMonad where ...
+instance appMonadMonadRequest :: MonadRequest AppMonad where ...
+
+realCodeApp :: AppMonad String -- "dependency injection" by Type signature
+realCodeApp = realCode -- the same
+
+instance testMonadMonadCache :: MonadCache TestMonad where ...
+instance testMonadMonadRequest :: MonadRequest TestMonad where ...
+
+realCodeTest :: TestMonad String -- "dependecy injection" by Type signature
+realCodeTest = realCode -- the same
+```
+by narrowing Types in the Type signature, compiler has enough knowledge to infer the correct implementation to use.
 
 
 ultimate form:
 
 - DSL by Free Monad ~ type-level Command
-- interpreter functions ~ Command Handlers
+- interpreter functions ~ Command Handlers with Type guarantee
 
+comparing to runtime-construct Command
+- coordination by identity, usually `String`
 
 
 Statement: Dependency Injection in OOP is to retrieve some of the Referential Transparency back so that programmers can follow equational reasoning locally.
@@ -67,3 +90,52 @@ the latter approach is more common because it takes less code to realize,
 but it entangles the currying logic (noise) with domain logic (real meat) so that it's harder to read and error-prone if the number of arguments are huge (the number of variants grows fast).
 
 Builder Pattern is the generalization of this solution which further allows setters to late bind arguments/dependencies, but it forces the variables holding dependencies to be mutable and need runtime logic to guarantee each dependency is supplied only once to regain some determinism.
+
+in summary
+1. direct referencing classes in scope as dependencies (terrible, similar to functions referencing variables in the global scope)
+2. configure dependencies through constructors (better, referential transparency at class level)
+3. late configuration through setters (more flexible and less code to suit all currying variants but less maintainable and more noise around domain logic)
+
+
+construction of object graph
+1. manually `new` correct concrete object and supply to a polymorphic interface
+2. concrete factories to pack common configurations
+3. configure DI framework to generate factories through annotation post-processing engine.
+
+
+
+the only upside (not sure if it is of practical usage in FP) of class/object model over sole function composition so far is being able to supply the same set of arguments to multiple functions at once, and later able to dispatch any of these argument fulfilled functions by name
+
+inject "environment" => Reader Monad
+
+```haskell
+newtype Reader e a = Reader { runReader :: e -> a }
+
+instance Monad (Reader e) where
+  return :: a -> Reader e a
+  return a = Reader ( \_ -> a )
+
+  (>>=) :: Reader e a -> (a -> Reader e b) -> Reader e b
+                   -- postpone supplying the environment e ("lazyness"), like a placeholder
+                                        -- assume you have the environment e in hand
+                                                  -- m :: Reader e a
+                                        -- runReader m :: e -> a
+                                        -- runReader m e :: a
+                                    -- k :: a -> Reader e b
+                                    -- k ( runReader m e) :: Reader e b
+                        -- runReader ( k ( runReader m e ) ) :: e -> b
+                        -- runReader ( k ( runReader m e ) ) e :: b
+                  -- \e -> runReader ( k ( runReader m e ) ) e :: e -> b
+         -- Reader e b
+  m >>= k = Reader ( \e -> runReader ( k ( runReader m e ) ) e
+```
+
+if `a` is a `Record` of functions
+```haskell
+data Methods = Methods
+  { method1 :: b -> c
+  , method2 :: d -> e
+  , ...
+  }
+type Object e = Reader e Methods
+```
