@@ -131,8 +131,8 @@ type alias Validator a b = -- `Result` is a Monad
 
 [Peano numbers](https://wiki.haskell.org/Peano_numbers)
 
-> **Peano numbers** are a simple way of representing the natural  numbers using only a zero value and a successor function. 
-> In Haskell it  is easy to create a type of Peano number values, but since unary  representation is inefficient, they are more often used to do [type arithmetic](https://wiki.haskell.org/Type_arithmetic) due to their simplicity. 
+> **Peano numbers** are a simple way of representing the natural numbers using only a zero value and a successor function. 
+> In Haskell it  is easy to create a type of Peano number values, but since unary representation is inefficient, they are more often used to do [type arithmetic](https://wiki.haskell.org/Type_arithmetic) due to their simplicity. 
 
 [Type arithmetic](https://wiki.haskell.org/Type_arithmetic)
 
@@ -193,12 +193,11 @@ a more practical example from [Phantom Type](https://wiki.haskell.org/Phantom_ty
 > -- Nothing if the data doesn't validate
 > validate :: FormData Unvalidated -> Maybe (FormData Validated)
 > validate (FormData str) = ...
->  
+>
 > -- can only be fed the result of a call to validate!
 > useData :: FormData Validated -> IO ()
 > useData (FormData str) = ...
 > ```
-
 
 
 ```Java

@@ -18,3 +18,12 @@ common purposes of an Information System
 - take over user's job (automation)
 - education (representations, symbolic manipulation / computation in general)
 
+Domain Model
+- state space, state transitions
+- constraints
+
+IO
+
+Application Architecture
+
+Dependency
