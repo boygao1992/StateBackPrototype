@@ -199,6 +199,14 @@ a more practical example from [Phantom Type](https://wiki.haskell.org/Phantom_ty
 > useData (FormData str) = ...
 > ```
 
+may use `unsafeCoerce :: a -> b` to save unnecessary unwrapping and wrapping computation.
+
+[Unsafe.Coerce - Haskell](http://hackage.haskell.org/package/base-4.11.1.0/docs/Unsafe-Coerce.html)
+> The highly unsafe primitive unsafeCoerce converts a value from any type to any other type.
+
+[Unsafe.Coerce - purescript](https://pursuit.purescript.org/packages/purescript-unsafe-coerce/4.0.0/docs/Unsafe.Coerce#v:unsafeCoerce)
+
+a deliberate loophole in the Type system
 
 ```Java
 interface ValidationStatus {} // marker interface for type-level namespacing
