@@ -255,3 +255,5 @@ Not sure what this emphasizes, will see.
 OOP requires Object with multiple interfaces to be cast to one interface to use corresponding set of methods. (it's like querying a database of functions with first argument's type class fixed, without specifying the name of the function)
 
 FP's type class is more flexible because functions are directly available where for a given function, an argument type can be in multiple type classes (/ be cast to multiple interfaces simultaneously) and every argument type can have type class constraints. (querying a database of functions with multiple type class constraints and the name of the function.)
+
+[Casting is a Polymorphism Fail](https://daedtech.com/casting-is-a-polymorphism-fail/)

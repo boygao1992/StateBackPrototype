@@ -125,6 +125,8 @@ type alias Validator a b = -- `Result` is a Monad
 
 > "make illegal states unrepresentable"
 
+## Type Arithmetic
+
 [Smart Constructors](https://wiki.haskell.org/Smart_constructors)
 
 [Peano numbers](https://wiki.haskell.org/Peano_numbers)
@@ -156,4 +158,75 @@ type alias Validator a b = -- `Result` is a Monad
 >
 > `FixedList0` ~ `FixedList32`
 
-Union Type
+## Union Type (Coproduct)
+
+
+
+## Phantom Type
+
+encode finite states in Type
+
+```haskell
+data Plane a = Plane { name :: String } -- `a` is in the Type constructor but not part of the Data constructor, so it only has meaning at compile-time which is to annotate data of the same shape with additional state
+-- flying status
+data Landed
+data Flying
+
+createPlane :: String -> Plane Landed -- new planes are always landed
+createPlane name = Plane name
+
+takeOff :: Plane Landed -> Plane Flying -- this guarantees no plane can take off twice
+takeOff (Plane name) = Plane name
+```
+
+a more practical example from [Phantom Type](https://wiki.haskell.org/Phantom_type)
+
+> ```haskell
+> data FormData a = FormData String
+> 
+> data Validated
+> data Unvalidated
+> 
+> formData :: String -> FormData Unvalidated
+> formData str = FormData str
+> 
+> -- Nothing if the data doesn't validate
+> validate :: FormData Unvalidated -> Maybe (FormData Validated)
+> validate (FormData str) = ...
+>  
+> -- can only be fed the result of a call to validate!
+> useData :: FormData Validated -> IO ()
+> useData (FormData str) = ...
+> ```
+
+
+
+```Java
+interface ValidationStatus {} // marker interface for type-level namespacing
+interface Unvalidated extends ValidationStatus {}
+interface Validated extends ValidationStatus {}
+
+class FormData<A extends ValidationStatus> {
+    string field;
+    private FormData(string field) {
+        this.field = field;
+    }
+    
+    public string getField() {
+        return field;
+    }
+    
+    public static FormData<Unvalidated> create(string field) {
+        return new FormData(field);
+    }
+
+    private boolean isValid(FormData<Unvalidated> form) {
+        return form.getField().equals("whatever");
+    }
+        
+    public static Optional<FormData<Validated>> validate(FormData<Unvalidated> form) {
+        return isValid(form) ? Optional.of(form) : Optional.empty();
+    }
+}
+```
+
