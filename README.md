@@ -4057,6 +4057,7 @@ data Day f g a
 
 > The Day convolution gives the category of comonads the structure of **a symmetric monoidal category**.
 
+### 6.[Comonads are objects](http://www.haskellforall.com/2013/02/you-could-have-invented-comonads.html)
 
 ## Lenses
 

@@ -142,3 +142,16 @@ data Methods = Methods
   }
 type Object e = Reader e Methods
 ```
+
+# Objects are Comonads
+
+[Comonads are objects](http://www.haskellforall.com/2013/02/you-could-have-invented-comonads.html)
+
+> Builder
+> Iterator
+> Command
+
+> the reader monad is isomorphic to the product comonad 
+> [proof](http://www.cs.ioc.ee/~tarmo/papers/cmcs08.pdf)
+
+reader monad is lazy (request the environment after composing all the computations), while product comonad is eager (provide the environment at the very beginning, so we can `extract` the environment from the comonad)
