@@ -125,39 +125,6 @@ type alias Validator a b = -- `Result` is a Monad
 
 > "make illegal states unrepresentable"
 
-## Type Arithmetic
-
-[Smart Constructors](https://wiki.haskell.org/Smart_constructors)
-
-[Peano numbers](https://wiki.haskell.org/Peano_numbers)
-
-> **Peano numbers** are a simple way of representing the natural numbers using only a zero value and a successor function. 
-> In Haskell it  is easy to create a type of Peano number values, but since unary representation is inefficient, they are more often used to do [type arithmetic](https://wiki.haskell.org/Type_arithmetic) due to their simplicity. 
-
-[Type arithmetic](https://wiki.haskell.org/Type_arithmetic)
-
-[Data.FixedList](http://hackage.haskell.org/package/fixed-list-0.1.6/docs/Data-FixedList.html)
-
-> The length of a list is encoded into its type in a natural way.
->
-> ```haskell
-> data FixedList f =>
->   Cons f a = (:.) {
->     head :: a,
->     tail :: (f a)
->   }  deriving (Eq, Ord)
-> 
-> data Nil a = Nil
->   deriving (Eq, Ord)
-> 
-> type FixedList0 = Nil
-> type FixedList1 = Cons FixedList0
-> -- ...
-> type FixedList32 = Cons FixedList31
-> ```
->
-> `FixedList0` ~ `FixedList32`
-
 ## Union Type (Coproduct)
 
 
@@ -237,3 +204,47 @@ class FormData<A extends ValidationStatus> {
 }
 ```
 
+## Type Arithmetic
+
+[Smart Constructors](https://wiki.haskell.org/Smart_constructors)
+
+[Peano numbers](https://wiki.haskell.org/Peano_numbers)
+
+> **Peano numbers** are a simple way of representing the natural numbers using only a zero value and a successor function. 
+> In Haskell it  is easy to create a type of Peano number values, but since unary representation is inefficient, they are more often used to do [type arithmetic](https://wiki.haskell.org/Type_arithmetic) due to their simplicity. 
+
+[Type arithmetic](https://wiki.haskell.org/Type_arithmetic)
+
+[Data.FixedList](http://hackage.haskell.org/package/fixed-list-0.1.6/docs/Data-FixedList.html)
+
+> The length of a list is encoded into its type in a natural way.
+>
+> ```haskell
+> data FixedList f =>
+>   Cons f a = (:.) {
+>     head :: a,
+>     tail :: (f a)
+>   }  deriving (Eq, Ord)
+> 
+> data Nil a = Nil
+>   deriving (Eq, Ord)
+> 
+> type FixedList0 = Nil
+> type FixedList1 = Cons FixedList0
+> -- ...
+> type FixedList32 = Cons FixedList31
+> ```
+>
+> `FixedList0` ~ `FixedList32`
+
+## Type-level programming, (value) Dependent types
+
+#### [Basic Type Level Programming in Haskell](http://www.parsonsmatt.org/2017/04/26/basic_type_level_programming_in_haskell.html)
+
+> GADTs
+> example: length indexed vector
+> Type families
+> Heterogenous Lists (HList), type-level list
+> Extensible Records
+
+#### [Part I: Dependent Types in Haskell](https://www.schoolofhaskell.com/user/konn/prove-your-haskell-for-great-safety/dependent-types-in-haskell)
