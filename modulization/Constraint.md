@@ -125,9 +125,7 @@ type alias Validator a b = -- `Result` is a Monad
 
 > "make illegal states unrepresentable"
 
-## Union Type (Coproduct)
-
-
+## Union Type
 
 ## Phantom Type
 
@@ -204,7 +202,9 @@ class FormData<A extends ValidationStatus> {
 }
 ```
 
-## Type Arithmetic
+## Type-level programming
+
+### Type Arithmetic
 
 [Smart Constructors](https://wiki.haskell.org/Smart_constructors)
 
@@ -237,9 +237,24 @@ class FormData<A extends ValidationStatus> {
 >
 > `FixedList0` ~ `FixedList32`
 
-## Type-level programming, (value) Dependent types
 
-#### [Basic Type Level Programming in Haskell](http://www.parsonsmatt.org/2017/04/26/basic_type_level_programming_in_haskell.html)
+### Generalized Algebraic Data-Types (GADTs)
+
+- Record/Product Type (Product/Limit of Types)
+- Union/Sum Type or Variant (Coproduct/Colimit of Types)
+- Row Kind (Product/Limit of Kinds)
+- Sum Kind or Polymorphic Variant (Coproduct/Colimit of Kinds)
+
+usages: extensible effects
+
+[purescript-variant](https://github.com/natefaubion/purescript-variant)
+
+[purescript-checked-exceptions](https://github.com/natefaubion/purescript-checked-exceptions)
+
+[LambdaConf 2015 - A Practical Introduction to Haskell GADTs Richard Eisenberg](https://www.youtube.com/watch?v=6snteFntvjM)
+
+
+[Basic Type Level Programming in Haskell](http://www.parsonsmatt.org/2017/04/26/basic_type_level_programming_in_haskell.html)
 
 > GADTs
 > example: length indexed vector
@@ -247,4 +262,8 @@ class FormData<A extends ValidationStatus> {
 > Heterogenous Lists (HList), type-level list
 > Extensible Records
 
-#### [Part I: Dependent Types in Haskell](https://www.schoolofhaskell.com/user/konn/prove-your-haskell-for-great-safety/dependent-types-in-haskell)
+[Part I: Dependent Types in Haskell](https://www.schoolofhaskell.com/user/konn/prove-your-haskell-for-great-safety/dependent-types-in-haskell)
+
+[A Theory of Changes for Higher-Order Languages - Incrementalizing λ-Calculi by Static Differentiation](https://arxiv.org/abs/1312.0658)
+[paf31/purescript-incremental-functions](https://github.com/paf31/purescript-incremental-functions)
+[mbid/purescript-incremental-dom - Incremental DOM binding for Purescript](https://github.com/mbid/purescript-incremental-dom)

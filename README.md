@@ -6,6 +6,8 @@ TODO
 
 [PUX - Build type-safe web applications with PureScript](http://purescript-pux.org/)
 
+[purescript/panda - Elm TEA without VDOM](https://github.com/i-am-tom/purescript-panda)
+
 > A Pux application consists of two types and two functions:
 > 1. A type for the app's **State**.
 >
