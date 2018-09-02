@@ -482,3 +482,66 @@ class Functor f where
   map :: forall a b. (a -> b) -> f a -> f b
 ```
 
+# Row Polymorphism
+
+extensible records in Purescript
+- rows are association list from labels to types
+- rows can have duplicate labels
+- unification of rows ignores order of different labels,
+but preserves order of duplicates
+- `row` of `k` is a new kind for every kind `k`
+```haskell
+add :: forall r. Int -> { count :: Int | r } -> { count :: Int | r }
+add x r@{ count } = r { count = count + x }
+```
+
+extensible effects in Purescript
+```haskell
+main
+  :: forall e
+   . Eff
+      ( console :: CONSOLE
+      , http :: HTTP
+      , fs :: FS
+      , buffer :: BUFFER
+      , avar :: AVAR
+      , redex :: ReduxStore
+        ( read :: ReadRedux
+        , write :: WriteRedux
+        , subscribe :: SubscribeRedux
+        , create :: CreateRedux )
+      | e )
+   Unit
+main = do
+  log "starting ..."
+  store <- mkStore initialState
+  runServer defaultOptionsWithLogging {} (app store)
+```
+
+functional dependency
+
+[purescript-conveyor](https://github.com/oreshinya/purescript-conveyor)
+```haskell
+class RowToList
+        (row :: # Type)
+        (list :: RowList)
+        | row -> list
+
+rowToList :: forall proxy r l. RowToList r l => proxy r -> LProxy l
+```
+type level prolog
+```haskell
+-- Peano numbers
+data Z
+data S n
+
+class Succ n m | m -> n
+instance succInst :: Succ x (S x)
+
+class Pred n m | m -> n
+instance predInst :: (Succ x y) => Pred y x
+
+class Gt x y
+instance gt1 :: (Pred x xp, Pred y yp, Gt xp yp) => Gt x y
+instance gt2 :: Gt (S x) Z -- base case
+```
