@@ -5,6 +5,44 @@ attention
 - current package version: `4.0.0`
 - current documentation version on Pursuit: `3.1.3`
 
+# Halogen Component Philosophy
+
+- Each component is both a State Monad (read access, `get`) and a Store Comonad (write access, `put` / `modify_`) thus essentially close to Object in OOP.
+
+- External read and write access (e.g. by parent component) through explicit event (`Query`) passing. (like calling methods attached on an Object)
+
+- Each component can function on its own (once called by `Halogen.runUI` in the `main` function).
+
+- Testing by setting up a sequence of `Query`s in the `main` function, and behavior can be observed through browser.
+(potentially an open-box solution for story telling on top of this mechanism)
+not sure how to swap out the IO executors/drivers to test the logic in different settings and most importantly to mock external environment.
+not ideal if forced to test everything on browser, even the execution of behaviors is automatic.
+
+- a separate type of events called `Input` is defined for render-time downstream passing (which is kind of unnecessary) but it's still handled by regular `Query` once captured by a child component
+In order to pass supplement state to child components, the child need an unnecessary state synchronization step (by copying from parent component).
+Ideally, the supplement state should be passed to the `render` (or `view` in Elm) function directly.
+I guess they want to keep the shape of all `render` functions unified (`render :: State -> Halogen.ComponentHTML Query`).
+Another reason, for performance aspect, might be that direct passing doesn't actually save memory consumption because automatic currying for higher-order functions will cache the state any way. (need further investigation)
+
+- basically following the Elm architecture to encode event cascading pathways in Type but different approach
+  - Elm: use nested Union Type to structure the event space as the pathways
+  essentially a tree, so downstream from parent to children
+  upstream pathways are omitted thus child-parent event passing has couple of solutions but best practice is unsettled yet in community
+    - `OutMsg` from child to parent: parent has knowledge about this event Type (import from child), and the child's `update` function needs an additional argument in its return Type to carry this event Type
+    - event-handler/translator pattern:
+    parent is required to configure child's `update` function by supplying a translator function for each output event
+    child's `update` function is also irregular which doesn't handle IO Effect (`Cmd` in Elm) directly but only the translated event
+  - Halogen: use Free Monad to encode the tree
+  no essential difference conceptually except all the convenience from the Monad interface
+  upstream passing has explicit `Output` event from child to parent so basically committed to one common solution in Elm community (not saying the idea is from Elm)
+
+- Parent/Container component has all types of child components encoded in its Type (`Halogen.ParentHTML Query ChildQuery ChildSlot m`), i.e.
+  - `ChildQuery`: a coproduct of all `Query` algebra functors (through `Coproduct :: (Type -> Type) -> (Type -> Type) -> Type`) from child components,
+  - `ChildSlot`: a coproduct of all `Slot` types (through `Either :: Type -> Type -> Type` or by a tagged union) of child components.
+  
+
+
+
 # Web technology
 
 [The Web platform: Browser technologies](https://platform.html5.org/)
@@ -76,11 +114,107 @@ attention
 ## Events
 [8.1.5 Events](https://html.spec.whatwg.org/multipage/webappapis.html#events)
 
-##### EventSource
+### KeyboardEvent
+
+[Keyboard Event Polyfill Demo from inexorabletash/polyfill](https://inexorabletash.github.io/polyfill/demos/keyboard.html)
+
+[Key Values](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values)
+> Special values
+> - "Unidentified"
+
+> Modifier keys
+> - "Alt"
+> - "AltGraph"
+> - "CapsLock"
+> - "Control"
+> - "Fn"
+> - "FnLock"
+> - "Hyper"
+> - "Meta"
+> - "NumLock"
+> - "ScollLock"
+> - "Shift"
+> - "Super"
+> - "Symbol"
+> - "SymbolLock"
+
+> Whitespace keys
+> - "Enter"
+> - "Tab"
+> - " "
+
+> Navigation keys
+> - "ArrowDown"
+> - "ArrowLeft"
+> - "ArrowRight"
+> - "ArrowUp"
+> - "End"
+> - "Home"
+> - "PageDown"
+> - "PageUp"
+
+> Editing keys
+> - "Backspace"
+> - "Clear"
+> - "Copy"
+> - "CrSel"
+> - "Cut"
+> - "Delete"
+> - "EraseEof"
+> - "ExSel"
+> - "Insert"
+> - "Paste"
+> - "Redo"
+> - "Undo"
+
+> UI keys
+> - "Accept"
+> - "Again"
+> - "Attn"
+> - "Cancel"
+> - "ContextMenu"
+> - "Escape"
+> - "Exectue"
+> - "Find"
+> - "Finish"
+> - "Help"
+> - "Pause"
+> - "Play"
+> - "Props"
+> - "Select"
+> - "ZoomIn"
+> - "ZoomOut"
+
+> Browser control keys
+> - "BrowserBack"
+> - "BrowserFavorites"
+> - "BrowserForward"
+> - "BrowserHome"
+> - "BrowserRefresh"
+> - "BrowserSearch"
+> - "BrowserStop"
+
+> Numeric keypad keys
+> - "Decimal"
+> - "Multiply"
+> - "Add"
+> - "Clear"
+> - "Divide"
+> - "Subtract"
+> - "Separator"
+> - "0" through "9"
+> - "Key11"
+> - "Key12"
+
+> Function keys
+> - "F1" through "F20"
+> - "Soft1" through "Soft4"
+
+### EventSource
 
 [9.2.2 The EventSource interface](https://html.spec.whatwg.org/multipage/server-sent-events.html#event-stream-interpretation)
 
-##### EventTarget
+### EventTarget
 
 [EventTarget](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget)
 > `EventTarget` is an interface implemented by objects that can receive events
