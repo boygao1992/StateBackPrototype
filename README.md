@@ -8,6 +8,8 @@ TODO
 
 [purescript/panda - Elm TEA without VDOM](https://github.com/i-am-tom/purescript-panda)
 
+[grmble/purescript-bonsai - Elm TEA with VDOM](https://github.com/grmble/purescript-bonsai)
+
 > A Pux application consists of two types and two functions:
 > 1. A type for the app's **State**.
 >
