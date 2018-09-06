@@ -1,17 +1,5 @@
 [purscript-web-socket](https://pursuit.purescript.org/packages/purescript-web-socket)
 
-[Stackless Coroutines in Purescript](https://blog.functorial.com/posts/2015-07-31-Stackless-PureScript.html)
-
-> stack-free implementation of the free monad transformer for a functor
->
-> Free Monads and Coroutines
->
-> Tail Recursive Monads
->
-> Stack-Safe Free Monad Transformers
->
-> Stackless Coroutines
-
 ```haskell
 import Data.Foldable (for_)
 
