@@ -3903,6 +3903,53 @@ anamorphism
 
 ### 17. [Controlling Fusion In Haskell](https://jyp.github.io/posts/controlled-fusion.html)
 
+### 18.[Coyoneda and fmap fusion](https://alpmestan.com/posts/2017-08-17-coyoneda-fmap-fusion.html)
+
+> ```haskell
+> data Coyoneda f b where
+>   Coyoneda :: (a -> b) -> f a -> Coyoneda f b
+>
+> instance Functor (Coyoneda f) where
+>   fmap b2c (Coyoneda a2b fa) = Coyoneda (b2c . a2b) fa
+> ```
+
+> Instead of going from `f a` to `f b` with `fmap f` (`f :: a -> b`) and then to `f c` with `fmap g` (`g :: b -> c`), the `Coyoneda` representation keeps hold of the original `f a`, which is left untouched by the Functor instance from above, and instead simply composes `f` and `g` in that first field.
+
+> ```haskell
+> coyo :: f a -> Coyoneda f a
+> coyo = Coyoneda id
+>
+> uncoyo :: Functor f => Coyoneda f a -> f a
+> uncoyo (Coyoneda b2a fb) = fmap b2a fb
+> ```
+
+in `purscript-free > Data.Coyoneda`
+```haskell
+data Coyoneda f a i = CoyonedaF (i -> a) (f i)
+newtype Coyoneda f a = Coyoneda (Exists (CoyonedaF f a))
+                    -- Coyoneda (forall i. CoyonedaF f a i)
+
+coyoneda :: forall f a b. (a -> b) -> f a -> Coyoneda f b -- constructor
+coyoneda k fi = Coyoneda $ mkExists $ CoyonedaF k ki
+
+unCoyoneda :: forall f a r. (forall i. (i -> a) -> f i -> r) -> Coyoneda f a -> r
+unCoyoneda f (Coyoneda ex) = runExists (\(CoyonedaF i2a fi) -> f i2a fi) ex
+
+liftCoyoneda :: forall f. f ~> (Coyoneda f) -- coyo
+liftCoyoneda = coyoneda identity
+
+lowerCoyoneda :: forall f. Functor f => (Coyoneda f) ~> f -- uncoyo
+                           map :: (i -> a) -> f i -> f a
+                unCoyoneda :: forall f a. (forall i. (i -> a) -> f i -> f a) -> Coyoneda f a -> f a
+lowerCoyoneda = unCoyoneda map
+
+hoistCoyoneda :: forall f g. (f ~> g) -> (Coyoneda f) ~> (Coyoneda g) -- perform a natural transformation on functor f, leaving function to be mapped untouched
+hoistCoyoneda nat (Coyoneda ex) =
+  runExists (\(CoyonedaF func fi) -> coyoneda func (nat fi)) ex
+```
+
+
+
 
 ## Comonad
 
