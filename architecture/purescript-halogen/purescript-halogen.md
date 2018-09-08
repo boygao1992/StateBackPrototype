@@ -41,6 +41,22 @@ Another reason, for performance aspect, might be that direct passing doesn't act
   - `ChildSlot`: a coproduct of all `Slot` types (through `Either :: Type -> Type -> Type` or by a tagged union) of child components.
   
 
+# Halogen Component Algebra
+
+## Coyoneda
+`purescript-halogen/src/Halogen/Query/HalogenM.purs`
+
+```haskell
+mkQuery
+  :: forall s f g p o m a
+   . Eq p
+  => p -- p is the slot type for addressing child components
+  -> g a -- g is the query algebra for child components
+  -> HalogenM s f g p o m a
+mkQuery p = HalogenM <<< liftF <<< ChildQuery p <<< coyoneda identity
+```
+
+lift `Query` functor algebra into coyoneda to utilize `fmap` fusion optimization.
 
 
 # Web technology

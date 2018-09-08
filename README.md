@@ -3925,7 +3925,7 @@ anamorphism
 
 in `purscript-free > Data.Coyoneda`
 ```haskell
-data Coyoneda f a i = CoyonedaF (i -> a) (f i)
+data CoyonedaF f a i = CoyonedaF (i -> a) (f i)
 newtype Coyoneda f a = Coyoneda (Exists (CoyonedaF f a))
                     -- Coyoneda (forall i. CoyonedaF f a i)
 
