@@ -1,6 +1,20 @@
 # Problems in Current Frameworks
 [User interfaces as reactive systems - Technuflections Blog](https://brucou.github.io/posts/user-interfaces-as-reactive-systems/)
 
+## Halogen
+[Reading TEA leaves](https://github.com/benkolera/ylj-reading-the-tea-leaves)
+[Slides](http://lambdajam.yowconference.com.au/slides/yowlambdajam2017/Kolera-ReadingTEALeaves.pdf)
+
+> Elm/TEA makes a very deliberate design choice to avoid thinking of building UIs in terms of components.
+> It places the focus on building separate, reusable functions/types for each of the model, view and update (event processing) parts rather than thinking in the traditional OO component style.
+> However, the design doesn't really bake in an idea of separating the public and private events/state of a UI element and it can get a little messy.
+
+> Halogen, on the other hand is a similar Model-View-Intent framework but works in terms of composable components each with their own internal state and clearly defined input and output events.
+> This is more complicated at first, but allows composition of UI elements in a much more modular way since the lines between internal state/actions and public API are not as blurred.
+> Even better, it makes the state/events/any effects obvious in the component type, so you can reason about the component based on type.
+
+[`architecture > purescript-halogen`](architecture/purescript-halogen/purescript-halogen.md)
+
 ## PUX
 TODO
 

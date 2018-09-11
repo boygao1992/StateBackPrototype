@@ -35,6 +35,12 @@ Another reason, for performance aspect, might be that direct passing doesn't act
   - Halogen: use Free Monad to encode the tree
   no essential difference conceptually except all the convenience from the Monad interface
   upstream passing has explicit `Output` event from child to parent so basically committed to one common solution in Elm community (not saying the idea is from Elm)
+    - `Output` from a child component doesn't directly return to where parent component made the `Query`, which means it lose the context.
+    Potentially, the same effect will get executed twice at two different places in parent's `eval` function. Solution:
+      1. carry the context to the child component. but the child component will need to be augmented for all its `Query` (bad)
+      2. instead of `Query` the child component as a sealed state machine, use the child's state transition function (which is stateless) as a service. but then the parent need to make extra `Query`s to get child components' states, and the child components' should have their state transition functions factored out of `eval` function like in Elm
+      3. stop using `Output` mechanism. Instead, augment child component's `Query` if there is a clear `Output` to the parent, similar to how parent `Query` for child's state: `data Query next = Query1 Input (Output -> next)` where `Output -> next` is an event handler (all of them are hacky, but this might be the best solution so far)
+    
 
 - Parent/Container component has all types of child components encoded in its Type (`Halogen.ParentHTML Query ChildQuery ChildSlot m`), i.e.
   - `ChildQuery`: a coproduct of all `Query` algebra functors (through `Coproduct :: (Type -> Type) -> (Type -> Type) -> Type`) from child components,
