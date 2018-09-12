@@ -4377,6 +4377,14 @@ dubious
 
 ### 6. [Command Query Responsibility Segregation (CQRS)](https://martinfowler.com/bliki/CQRS.html)
 
+## Algebraic Graph
+
+### 1.[Algebraic Graphs with Class](https://github.com/snowleopard/alga-paper)
+
+[Haskell eXchange 2017 slides](https://github.com/snowleopard/alga-paper/releases/download/final/algebraic-graphs-haskellx.pdf)
+
+### 2.[algebraic-graphs - A library for algebraic graph construction and transformation](http://hackage.haskell.org/package/algebraic-graphs)
+
 ## Others
 
 ### 1.[To Dissect a Mockingbird: A Graphical Notation for the Lambda Calculus with Animated Reduction](http://dkeenan.com/Lambda/)
