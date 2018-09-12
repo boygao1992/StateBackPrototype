@@ -6,7 +6,7 @@ purpose anonymous functions and data / objects:
 ontology / taxonomy that group similar constructs together into a class / named data-type (with data constructor function) is for reuse purpose.
 Roughly, if an object is never used more than 3 times in a code base, then it doesn't worth to be generalized into a class.
 
-# Interface, Type class vs. Discriminated/Tagged Union
+# Bounded Polymorphism (Interface, Type class vs. Discriminated/Tagged Union)
 
 interface
 
@@ -224,7 +224,7 @@ higher-rank type (type-level functions that have type-level functions as its arg
 
 [Reflection-based implementation of Java extensions: the double-dispatch use-case](http://www.jot.fm/issues/issue_2005_12/article3/)
 
-# Ad-hoc Polymorphism vs. Universal Polymorphism
+# Ad-hoc Polymorphism
 
 [subtype polymorphism](https://www.javaworld.com/article/2075223/core-java/reveal-the-magic-behind-subtype-polymorphism.html)
 > *Universal polymorphism* refers to a uniformity of type  structure, in which the polymorphism acts over an infinite number of  types that have a common feature. The less structured *ad hoc polymorphism* acts over a finite number of possibly unrelated types.
@@ -393,6 +393,8 @@ show (2.0::Double) ++ "2"
 >     - **Overloading:** a single identifier denotes several abstractions
 
 type class
+
+# Parametric Polymorphism
 
 >   - universal
 >     - **Parametric:** an abstraction operates uniformly across different types

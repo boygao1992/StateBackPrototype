@@ -15,8 +15,10 @@
 
 [`architecture > purescript-halogen`](architecture/purescript-halogen/purescript-halogen.md)
 
-## PUX
+## Elm-like purescript (PUX, Spork, Bonsai, Panda)
 TODO
+
+[Spork - Elm-like for PureScript](https://github.com/natefaubion/purescript-spork)
 
 [PUX - Build type-safe web applications with PureScript](http://purescript-pux.org/)
 
@@ -2903,6 +2905,10 @@ To achieve human-level intelligence, learning machines need the guidance of a mo
 
 [Elm Architecture in PureScript IV: Effects](http://www.parsonsmatt.org/2015/10/11/elm_architecture_in_purescript_iv_effects.html)
 
+### 3.[PureScript Resources - Justin Woo](https://purescript-resources.readthedocs.io/en/latest/)
+
+> "Why did Purescript go from Eff to Effect?"
+
 ## Haskell
 
 ### 1.[Three Layer Haskell Cake - To Overcome](http://www.parsonsmatt.org/2018/03/22/three_layer_haskell_cake.html)
@@ -4384,6 +4390,14 @@ dubious
 [Haskell eXchange 2017 slides](https://github.com/snowleopard/alga-paper/releases/download/final/algebraic-graphs-haskellx.pdf)
 
 ### 2.[algebraic-graphs - A library for algebraic graph construction and transformation](http://hackage.haskell.org/package/algebraic-graphs)
+
+## Tagless Final
+
+### 1.[Typed final (tagless-final) style](http://okmij.org/ftp/tagless-final/)
+
+### 2.[Optimizing Tagless Final - Science of Code blog](https://lukajcb.github.io/blog/functional/2018/01/03/optimizing-tagless-final.html)
+
+### 3.[LukaJCB/Algebra.purs - Alternative Tagless Final encoding in Purescript](https://gist.github.com/LukaJCB/c59b9e7b41bd1b12e5d4d3de683f6a5f)
 
 ## Others
 
