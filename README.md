@@ -2909,6 +2909,8 @@ To achieve human-level intelligence, learning machines need the guidance of a mo
 
 > "Why did Purescript go from Eff to Effect?"
 
+### 4.[Concurrency support for Purescript - Jan Dupal, master thesis](https://is.muni.cz/th/waapo/purescript_concurrency.pdf)
+
 ## Haskell
 
 ### 1.[Three Layer Haskell Cake - To Overcome](http://www.parsonsmatt.org/2018/03/22/three_layer_haskell_cake.html)
