@@ -644,6 +644,13 @@ So we want to be able to interpret a monadic action in different ways, inspect/t
 
 [The ReaderT Design Pattern - Avoid WriterT, StateT, ExceptT](https://www.fpcomplete.com/blog/2017/06/readert-design-pattern)
 
+> Similarly, there are other efforts to improve the situation, for example in the paper “Freer monads, more extensible effects” the authors introduce freer monads which further lighten prerequisites on the type f, so it doesn’t even need to be a Functor.
+> The solution involves storing the function (a Kleisli arrow) to apply to some initial value and just composing functions on the right hand side of (>>=) with that using Kleisli composition in a fashion that is quite similar to the approach based on coyoneda lemma for functors.
+
+[“Freer monads, more extensible effects”](http://okmij.org/ftp/Haskell/extensible/more.pdf)
+
+`bind` fusion similar to `fmap` fusion using coyoneda lemma
+
 #### 3.[Typed final (tagless-final) style](http://okmij.org/ftp/tagless-final/index.html)
 [Typed Tagless Final Interpreters](http://okmij.org/ftp/tagless-final/course/lecture.pdf)
 
@@ -832,6 +839,8 @@ In CycleJS,
 
 [Verified Functional Algorithms](https://softwarefoundations.cis.upenn.edu/current/vfa-current/index.html)
 > shows how a variety of fundamental data structures can be mechanically verified.
+
+### 7.[Spin - software verification tool](http://spinroot.com/spin/whatispin.html)
 
 
 ## Stateful HTML Elements handling for performance
@@ -2416,6 +2425,8 @@ an area of mathematics primarily concerned with counting, both as a means and an
 #### 5.[Basic Category Theory](https://arxiv.org/abs/1612.09375)
 
 #### 6.[Seven Sketches in Compositionality: An Invitation to Applied Category Theory](https://arxiv.org/abs/1803.05316)
+
+#### 7.[What is Applied Category Theory? - Tai-Danae Bradley](https://arxiv.org/abs/1809.05923)
 
 ### Application
 #### 1.[Memory Evolutive System (MES)](http://vbm-ehr.pagesperso-orange.fr/AnintroT.htm)
