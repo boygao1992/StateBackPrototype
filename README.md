@@ -3364,6 +3364,10 @@ This operator-like data structure is a tree / `Free`.
 
 ### 3.[Pts.js – A library for visualization and creative coding](https://ptsjs.org/)
 
+## Animation
+
+### 1.[The ultimate guide to proper use of animation in UX](https://uxdesign.cc/the-ultimate-guide-to-proper-use-of-animation-in-ux-10bd98614fa9)
+
 ## Domain Modeling
 
 ### 1.[The Wrong Abstraction](https://www.sandimetz.com/blog/2016/1/20/the-wrong-abstraction)
