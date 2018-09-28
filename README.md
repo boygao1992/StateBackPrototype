@@ -15,6 +15,115 @@
 
 [`architecture > purescript-halogen`](architecture/purescript-halogen/purescript-halogen.md)
 
+### Halogen Component Philosophy
+
+- Each component is both a State Monad (read access, `get`) and a Store Comonad (write access, `put` / `modify_`) thus essentially close to Object in OOP.
+
+- External read and write access (e.g. by parent component) through explicit event (`Query`) passing. (like calling methods attached on an Object)
+
+- Each component can function on its own (once called by `Halogen.runUI` in the `main` function).
+
+- Testing by setting up a sequence of `Query`s in the `main` function, and behavior can be observed through browser.
+(potentially an open-box solution for story telling on top of this mechanism)
+not sure how to swap out the IO executors/drivers to test the logic in different settings and most importantly to mock external environment.
+not ideal if forced to test everything on browser, even the execution of behaviors is automatic.
+
+- a separate type of events called `Input` is defined for render-time downstream passing (which is kind of unnecessary) but it's still handled by regular `Query` once captured by a child component
+In order to pass supplement state to child components, the child need an unnecessary state synchronization step (by copying from parent component).
+Ideally, the supplement state should be passed to the `render` (or `view` in Elm) function directly.
+I guess they want to keep the shape of all `render` functions unified (`render :: State -> Halogen.ComponentHTML Query`).
+Another reason, for performance aspect, might be that direct passing doesn't actually save memory consumption because automatic currying for higher-order functions will cache the state any way. (need further investigation)
+
+- basically following the Elm architecture to encode event cascading pathways in Type but different approach
+  - Elm: use nested Union Type to structure the event space as the pathways
+  essentially a tree, so downstream from parent to children
+  upstream pathways are omitted thus child-parent event passing has couple of solutions but best practice is unsettled yet in community
+    - `OutMsg` from child to parent: parent has knowledge about this event Type (import from child), and the child's `update` function needs an additional argument in its return Type to carry this event Type
+    - event-handler/translator pattern:
+    parent is required to configure child's `update` function by supplying a translator function for each output event
+    child's `update` function is also irregular which doesn't handle IO Effect (`Cmd` in Elm) directly but only the translated event
+  - Halogen: use Free Monad to encode the tree
+  no essential difference conceptually except all the convenience from the Monad interface
+  upstream passing has explicit `Output` event from child to parent so basically committed to one common solution in Elm community (not saying the idea is from Elm)
+    - `Output` from a child component doesn't directly return to where parent component made the `Query`, which means it lose the context.
+    Potentially, the same effect will get executed twice at two different places in parent's `eval` function. Solution:
+      1. carry the context to the child component. but the child component will need to be augmented for all its `Query` (bad)
+      2. instead of `Query` the child component as a sealed state machine, use the child's state transition function (which is stateless) as a service. but then the parent need to make extra `Query`s to get child components' states, and the child components' should have their state transition functions factored out of `eval` function like in Elm
+      3. stop using `Output` mechanism. Instead, augment child component's `Query` if there is a clear `Output` to the parent, similar to how parent `Query` for child's state: `data Query next = Query1 Input (Output -> next)` where `Output -> next` is an event handler (all of them are hacky, but this might be the best solution so far)
+    
+
+- Parent/Container component has all types of child components encoded in its Type (`Halogen.ParentHTML Query ChildQuery ChildSlot m`), i.e.
+  - `ChildQuery`: a coproduct of all `Query` algebra functors (through `Coproduct :: (Type -> Type) -> (Type -> Type) -> Type`) from child components,
+  - `ChildSlot`: a coproduct of all `Slot` types (through `Either :: Type -> Type -> Type` or by a tagged union) of child components.
+  
+
+## CycleJS
+
+1. CycleJS claims that the Main Function is *Pure*, but not really.
+  Still need mocking for testing.
+  - event listener attach/removal is side effect which is not abstracted away from Main.
+  - RxJS Observable has many stateful operators which are declarative (named)  but encapsulate/hide state.
+    - MemoryStream / operators with buffers
+    - time-related operators
+
+2. Cyclic dependency is painful to handle which destroys scalability.
+
+Why cyclic?
+
+Parent component cannot interpret External Events from Event Listeners attached by its child components which is a reasonable design choice.
+To pass interpreted events as messages back to parent component, part of child's sink has to be part of parent's source while part of parent's source is already part of child's source. Thus, parent and child depend on each other.
+e.g. TodoMVC, delete button is attached to child components (TodoItem) while the lifecycles of child components are managed by parent component (TodoList). Parent need DELETE event from child to perform the state transition.
+
+- [Handling lists in Cycle.js](https://github.com/cyclejs/cyclejs/issues/312)
+- [Solve memory leak with circular dependencies of streams](https://github.com/cyclejs/cyclejs/issues/257)
+- [Exploring composition in CycleJS - circular dependencies](http://blog.krawaller.se/posts/exploring-composition-in-cyclejs/)
+
+## ELM
+
+1. ~~state transition function without validation of state~~
+
+  - Precise construction of state space by Union type and Product type, which encapsulate the state validation logic.
+  - Further refinement of state space relies on runtime conditionals.
+
+2. no pleasant way to access information in the pixel space (because VDOM is an incomplete communication protocol between DOM and the application internal)
+
+3. child-parent message passing need child to expose state getter/lense function to its parent to grant parent access to its state (give it ability to interpret)
+  (in OOP, Translator Pattern)
+
+4. node-to-node communication is even worse.
+  Need to find a common ancestor and all the ancestor/parent along the way to be aware of the communication.
+
+5. first-order FRP and static signal graph. Separation between Container and Child Component in state management (which is essential for creating General Container Widget) while maintaining the ability to add/remove child components dynamically in runtime is not possible.
+
+![Node-to-Node Message Passing](./doc/node-to-node_message_passing.png "Node-to-Node Message Passing")
+
+6. Missing Type Classes
+
+`speechCollection > Programming > 3 Code Reuse in PS`
+
+[Elm Is Wrong](http://reasonablypolymorphic.com/blog/elm-is-wrong/)
+
+### Potential Fix
+
+Elm support synchronous and asynchronous recursive Update on Model.
+- Sync: directly call the `Update` function with the `Msg` (sequential)
+- Async: pack the `Msg` in `Cmd` (branching is possible, but ordering not guaranteed)
+
+Able to implement `Regulator` and `PostCensor`
+
+## SAM
+
+V = State( vm( Model.present( Action( data))), nap(Model))
+
+Moore Machine(?)
+
+1. If nap(next-action predicate, push machine out of intermediate state) is rejected by Model.present, then the entire system gets stuck in an invalid state.
+  This means nap() function has to be consistent with Model.present but this type of coordination is error-prone if managed manually.
+
+2. nap() function has to guarantee global validness which is not planned to be componentized. Scalability issue.
+
+3. Modulization pattern in this framework is not clearly stated or ever designed.
+
 ## Elm-like purescript (PUX, Spork, Bonsai, Panda)
 TODO
 
@@ -61,73 +170,6 @@ TODO
 >     span $ text (show count)
 >     button #! onClick (const Decrement) $ text "Decrement"
 > ```
-
-## CycleJS
-
-1. CycleJS claims that the Main Function is *Pure*, but not really.
-  Still need mocking for testing.
-  - event listener attach/removal is side effect which is not abstracted away from Main.
-  - RxJS Observable has many stateful operators which are declarative (named)  but encapsulate/hide state.
-    - MemoryStream / operators with buffers
-    - time-related operators
-
-2. Cyclic dependency is painful to handle which destroys scalability.
-
-Why cyclic?
-
-Parent component cannot interpret External Events from Event Listeners attached by its child components which is a reasonable design choice.
-To pass interpreted events as messages back to parent component, part of child's sink has to be part of parent's source while part of parent's source is already part of child's source. Thus, parent and child depend on each other.
-e.g. TodoMVC, delete button is attached to child components (TodoItem) while the lifecycles of child components are managed by parent component (TodoList). Parent need DELETE event from child to perform the state transition.
-
-- [Handling lists in Cycle.js](https://github.com/cyclejs/cyclejs/issues/312)
-- [Solve memory leak with circular dependencies of streams](https://github.com/cyclejs/cyclejs/issues/257)
-- [Exploring composition in CycleJS - circular dependencies](http://blog.krawaller.se/posts/exploring-composition-in-cyclejs/)
-
-## ELM
-
-1. ~~state transition function without validation of state~~
-
-  - Precise construction of state space by Union type and Product type, which encapsulate the state validation logic.
-  - Further refinement of state space relies on conditionals (a set of source states) in State Transition Function.
-
-2. state transition functions are directly attached to event handlers, which strongly couples model and view 
-
-3. child-parent message passing need child to expose state getter/lense function to its parent to grant parent access to its state (give it ability to interpret)
-  (in OOP, Translator Pattern)
-
-4. node-to-node communication is even worse.
-  Need to find a common ancestor and all the ancestor/parent along the way to be aware of the communication.
-
-5. first-order FRP and static signal graph. Separation between Container and Child Component in state management (which is essential for creating General Container Widget) while maintaining the ability to add/remove child components dynamically in runtime is not possible.
-
-![Node-to-Node Message Passing](./doc/node-to-node_message_passing.png "Node-to-Node Message Passing")
-
-6. Missing Type Classes
-
-`speechCollection > Programming > 3 Code Reuse in PS`
-
-[Elm Is Wrong](http://reasonablypolymorphic.com/blog/elm-is-wrong/)
-
-### Potential Fix
-
-Elm support synchronous and asynchronous recursive Update on Model.
-- Sync: directly call the `Update` function with the `Msg` (sequential)
-- Async: pack the `Msg` in `Cmd` (branching is possible, but ordering not guaranteed)
-
-Able to implement `Regulator` and `PostCensor`
-
-## SAM
-
-V = State( vm( Model.present( Action( data))), nap(Model))
-
-Moore Machine(?)
-
-1. If nap(next-action predicate, push machine out of intermediate state) is rejected by Model.present, then the entire system gets stuck in an invalid state.
-  This means nap() function has to be consistent with Model.present but this type of coordination is error-prone if managed manually.
-
-2. nap() function has to guarantee global validness which is not planned to be componentized. Scalability issue.
-
-3. Modulization pattern in this framework is not clearly stated or ever designed.
 
 ## React + Redux
 
@@ -596,6 +638,8 @@ Which is exactly what I need.
 #### 6.[The Free Monad Interpreter Pattern](https://blog.otastech.com/2016/01/the-free-monad-interpreter-pattern/)
 
 #### 7.[Why free monads matter](http://www.haskellforall.com/2012/06/you-could-have-invented-free-monads.html?m=1)
+
+#### 8.[Free Applicative and Free Monad](https://functionaltechramblings.wordpress.com/2017/06/25/free-applicative-and-free-monad/)
 
 ### Existing Examples in JS
 #### 1.[Elm-Effects](https://guide.elm-lang.org/architecture/effects/) / [Type Reference](http://package.elm-lang.org/packages/evancz/elm-effects/2.0.1/Effects)
