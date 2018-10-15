@@ -1,22 +1,11 @@
-module LearnCSSLayout where
+module ViewComponent where
 
 import Prelude
 
+import CSSModule (root) as CSSModule
 import Data.Array (filter)
 import Data.Tuple (Tuple(..), fst, snd)
-import CSS.Selector (element) as CSS
-import CSS.Stylesheet (CSS)
-import CSS.Stylesheet (select) as CSS
-import CSS.Background (backgroundColor)
-import CSS.Border (solid, border) as CSS
-import CSS.Common (auto) as CSS
-import CSS.Display (position, absolute, relative) as CSS
-import CSS.Font (color) as CSS
-import CSS.Geometry (width, maxWidth, margin, top, left, padding, lineHeight) as CSS
-import CSS.Size (nil, px, em) as CSS
-import Color (Color)
-import Color as Color
-import Data.Maybe (Maybe(..), fromMaybe)
+import Data.Maybe (Maybe(..))
 import Halogen as H
 import Halogen.HTML as HH
 import Halogen.HTML.CSS as HC
@@ -34,57 +23,6 @@ type Output = Void
 
 -- type IO = Aff
 
--- | Color
-bgColor :: Color
-bgColor = (fromMaybe Color.white) <<< Color.fromHexString $ "#ECECEC"
-
-color_green :: Color
-color_green = (fromMaybe Color.white) <<< Color.fromHexString $ "#6AC5AC"
-
-color_dark :: Color
-color_dark = (fromMaybe Color.white) <<< Color.fromHexString $ "#414142"
-
--- | CSS
-style_main :: CSS
-style_main = do
-  CSS.width $ CSS.px 600.0
-  CSS.margin CSS.nil CSS.auto CSS.nil CSS.auto
-
-style_main2 :: CSS
-style_main2 = do
-  CSS.maxWidth $ CSS.px 600.0
-  CSS.margin CSS.nil CSS.auto CSS.nil CSS.auto
-
-style_elem :: CSS
-style_elem = do
-  CSS.border CSS.solid (CSS.px 3.0) color_green
-  CSS.position CSS.relative
-
-style_code :: CSS
-style_code = backgroundColor bgColor
-
-style_label :: CSS
-style_label = do
-  CSS.top CSS.nil
-  CSS.left CSS.nil
-  CSS.padding CSS.nil (CSS.px 3.0) (CSS.px 3.0) CSS.nil
-
-style_endlabel :: CSS
-style_endlabel = do
-  style_label
-  CSS.position CSS.absolute
-  backgroundColor color_green
-  CSS.color color_dark
-  CSS.lineHeight $ CSS.em 1.0
-
-style_select :: CSS
-style_select = do
-  CSS.select (CSS.element "code") style_code
-  CSS.select (CSS.element ".main") style_main
-  CSS.select (CSS.element ".elem") style_elem
-  CSS.select (CSS.element ".label") style_endlabel
-  CSS.select (CSS.element ".main2") style_main2
-
 -- | Utils
 classList
   :: forall r i
@@ -95,9 +33,8 @@ classList = HP.classes <<< map (H.ClassName <<< fst) <<< filter snd
 -- | HTML
 marginAuto :: forall q. H.ComponentHTML q
 marginAuto =
-  HH.div [ classList [ Tuple "main" true
-                     , Tuple "elem" true
-                     ]
+  HH.div [ classList [ Tuple "elem" true ]
+         , HP.id_ "main"
          ]
   [ HH.span [ HP.class_ $ H.ClassName "label"]
     [ HH.text "<div id=\"main\">"]
@@ -148,7 +85,7 @@ render _ =
   HH.div_
   [ marginAuto
   , maxWidth
-  , HC.stylesheet style_select
+  , HC.stylesheet CSSModule.root
   ]
 
 eval :: forall m. Query ~> H.ComponentDSL State Query Output m
