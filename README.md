@@ -127,6 +127,8 @@ Moore Machine(?)
 ## Elm-like purescript (PUX, Spork, Bonsai, Panda)
 TODO
 
+[ehrenmurdick/purescript-oak](https://github.com/ehrenmurdick/purescript-oak)
+
 [Spork - Elm-like for PureScript](https://github.com/natefaubion/purescript-spork)
 
 [PUX - Build type-safe web applications with PureScript](http://purescript-pux.org/)

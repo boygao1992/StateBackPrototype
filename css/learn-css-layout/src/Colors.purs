@@ -22,3 +22,6 @@ dark = safeFromHexString "#414142"
 
 red :: Color
 red = safeFromHexString "#D64078"
+
+blue :: Color
+blue = safeFromHexString "#0000FF"

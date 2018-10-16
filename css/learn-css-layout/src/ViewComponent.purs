@@ -4,8 +4,8 @@ import Prelude
 
 import CSSModule (root) as CSSModule
 import Data.Array (filter)
-import Data.Tuple (Tuple(..), fst, snd)
 import Data.Maybe (Maybe(..))
+import Data.Tuple (Tuple(..), fst, snd)
 import Halogen as H
 import Halogen.HTML as HH
 import Halogen.HTML.CSS as HC
@@ -53,9 +53,8 @@ marginAuto =
 
 maxWidth :: forall q. H.ComponentHTML q
 maxWidth =
-  HH.div [ classList [ Tuple "main2" true
-                     , Tuple "elem" true
-                     ]
+  HH.div [ classList [ Tuple "elem" true ]
+         , HP.id_ "main2"
          ]
   [ HH.span [ HP.class_ $ H.ClassName "label"]
     [ HH.text "<div id=\"main2\">"]
@@ -79,13 +78,57 @@ maxWidth =
     ]
   ]
 
+theBoxModel :: forall q. H.ComponentHTML q
+theBoxModel =
+  HH.div_
+  [ HH.div [ classList [ Tuple "elem" true ]
+           , HP.id_ "simple"
+           ]
+    [ HH.span [ HP.class_ $ H.ClassName "label"]
+      [ HH.text "<div id=\"simple\">"]
+    , HH.p_
+      [ HH.text " I'm smaller..."]
+    ]
+  , HH.div [ classList [ Tuple "elem" true ]
+           , HP.id_ "fancy"
+           ]
+    [ HH.span [ HP.class_ $ H.ClassName "label"]
+      [ HH.text "<div id=\"fancy\">"]
+    , HH.p_
+      [ HH.text "And I'm bigger!"]
+    ]
+  ]
+
+boxSizing :: forall q. H.ComponentHTML q
+boxSizing =
+  HH.div_
+  [ HH.div [ classList [ Tuple "elem" true ]
+           , HP.id_ "simple2"
+           ]
+    [ HH.span [ HP.class_ $ H.ClassName "label"]
+      [ HH.text "<div id=\"simple2\">"]
+    , HH.p_
+      [ HH.text "We're the same size now!"]
+    ]
+  , HH.div [ classList [ Tuple "elem" true ]
+           , HP.id_ "fancy2"
+           ]
+    [ HH.span [ HP.class_ $ H.ClassName "label"]
+      [ HH.text "<div id=\"fancy2\">"]
+    , HH.p_
+      [ HH.text "Hooray!"]
+    ]
+  ]
+
 -- | Component
 render :: State -> H.ComponentHTML Query
 render _ =
   HH.div_
-  [ marginAuto
+  [ HC.stylesheet CSSModule.root
+  , marginAuto
   , maxWidth
-  , HC.stylesheet CSSModule.root
+  , theBoxModel
+  , boxSizing
   ]
 
 eval :: forall m. Query ~> H.ComponentDSL State Query Output m
