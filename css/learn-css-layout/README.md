@@ -16,6 +16,9 @@ a type-safe and modular way to compose inline CSS using purescript-css
 - current package version: `4.0.0`
 - the API is incomplete in current version, missing a lot of constructors, check out [`master` branch](https://github.com/slamdata/purescript-css/blob/master/src/CSS/Selector.purs)
 
+- `Combined` seems to be a leftover of the legacy design
+  - use `with`/`&` to compose `Refinement`
+
 ```haskell
 -- | see also purescript-css/src/CSS/Render.purs/predicate (line 177)
 data Predicate

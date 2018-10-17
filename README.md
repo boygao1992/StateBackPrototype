@@ -3316,6 +3316,8 @@ Metric
 
 ### 7. [Smashing Magazine](https://www.smashingmagazine.com/category/colors)
 
+### 8. [HTML Color Codes - color name lookup](https://htmlcolorcodes.com/)
+
 
 ## Web Assembly
 
