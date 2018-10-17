@@ -12,6 +12,10 @@ a type-safe and modular way to compose inline CSS using purescript-css
 
 `purescript-css/src/CSS/Selector.purs`
 
+- latest documentation version: `3.4.0`
+- current package version: `4.0.0`
+- the API is incomplete in current version, missing a lot of constructors, check out [`master` branch](https://github.com/slamdata/purescript-css/blob/master/src/CSS/Selector.purs)
+
 ```haskell
 -- | see also purescript-css/src/CSS/Render.purs/predicate (line 177)
 data Predicate
@@ -36,6 +40,7 @@ data Path f
   | Adjacent f f -- A + B
   | Combined f f -- AB (no space in-between), e.g. A.classB, 'p.small'
 ```
+
 
 # Organization
 

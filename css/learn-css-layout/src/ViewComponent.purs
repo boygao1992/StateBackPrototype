@@ -49,6 +49,8 @@ marginAuto =
     ]
   , HH.p_
     [ HH.text "The only problem occurs when the browser window is narrower than the width of your element. The browser resolves this by creating a horizontal scrollbar on the page. Let's improve the situation..."]
+  , HH.span [ HP.class_ $ H.ClassName "endLabel"]
+    [ HH.text "</div>"]
   ]
 
 maxWidth :: forall q. H.ComponentHTML q
@@ -76,6 +78,8 @@ maxWidth =
       [ HH.text "supported by all major browsers"]
     , HH.text " including IE7+ so you shouldn't be afraid of using it."
     ]
+  , HH.span [ HP.class_ $ H.ClassName "endLabel"]
+    [ HH.text "</div>"]
   ]
 
 theBoxModel :: forall q. H.ComponentHTML q
@@ -88,6 +92,8 @@ theBoxModel =
       [ HH.text "<div id=\"simple\">"]
     , HH.p_
       [ HH.text " I'm smaller..."]
+    , HH.span [ HP.class_ $ H.ClassName "endLabel"]
+      [ HH.text "</div>"]
     ]
   , HH.div [ classList [ Tuple "elem" true ]
            , HP.id_ "fancy"
@@ -96,6 +102,8 @@ theBoxModel =
       [ HH.text "<div id=\"fancy\">"]
     , HH.p_
       [ HH.text "And I'm bigger!"]
+    , HH.span [ HP.class_ $ H.ClassName "endLabel"]
+      [ HH.text "</div>"]
     ]
   ]
 
@@ -109,6 +117,8 @@ boxSizing =
       [ HH.text "<div id=\"simple2\">"]
     , HH.p_
       [ HH.text "We're the same size now!"]
+    , HH.span [ HP.class_ $ H.ClassName "endLabel"]
+      [ HH.text "</div>"]
     ]
   , HH.div [ classList [ Tuple "elem" true ]
            , HP.id_ "fancy2"
@@ -117,6 +127,71 @@ boxSizing =
       [ HH.text "<div id=\"fancy2\">"]
     , HH.p_
       [ HH.text "Hooray!"]
+    , HH.span [ HP.class_ $ H.ClassName "endLabel"]
+      [ HH.text "</div>"]
+    ]
+  ]
+
+position :: forall q. H.ComponentHTML q
+position =
+  HH.div_
+  [ HH.div [ HP.class_ $ H.ClassName "elem"]
+    [ HH.span [ HP.class_ $ H.ClassName "label"]
+      [ HH.text "<div id=\"static\">"]
+    , HH.p [ HP.class_ $ H.ClassName "static"]
+      [ HH.code_
+        [ HH.text "static"]
+      , HH.text " is the default value. An element with "
+      , HH.code_
+        [ HH.text "position: static"]
+      , HH.text "; is not positioned in any special way. A static element is said to be not positioned and an element with its position set to anything else is said to be "
+      , HH.i_
+        [ HH.text "positioned"]
+      , HH.text "."
+      ]
+    , HH.span [ HP.class_ $ H.ClassName "endLabel"]
+      [ HH.text "</div>"]
+    ]
+  , HH.div [ classList [ Tuple "elem" true
+                       , Tuple "relative1" true
+                       ]
+           ]
+    [ HH.span [ HP.class_ $ H.ClassName "label"]
+      [ HH.text "<div id=\"relative1\">"]
+    , HH.p_
+      [ HH.code_
+        [ HH.text "relative"]
+      , HH.text " behaves the same as "
+      , HH.code_
+        [ HH.text "static"]
+      , HH.text " unless you add some extra properties."
+      ]
+    , HH.span [ HP.class_ $ H.ClassName "endLabel"]
+      [ HH.text "</div>"]
+    ]
+  , HH.div [ classList [ Tuple "elem-red" true
+                       , Tuple "relative2" true
+                       ]
+           ]
+    [ HH.span [ HP.class_ $ H.ClassName "label"]
+      [ HH.text "<div id=\"relative1\">"]
+    , HH.p_
+      [ HH.text "Setting the "
+      , HH.code_
+        [ HH.text "top"]
+      , HH.text ", "
+      , HH.code_
+        [ HH.text "right"]
+      , HH.text ", "
+      , HH.code_
+        [ HH.text "bottom"]
+      , HH.text ", and "
+      , HH.code_
+        [ HH.text "left"]
+      , HH.text " properties of a relatively-positioned element will cause it to be adjusted away from its normal position. Other content will not be adjusted to fit into any gap left by the element."
+      ]
+    , HH.span [ HP.class_ $ H.ClassName "endLabel"]
+      [ HH.text "</div>"]
     ]
   ]
 
@@ -129,6 +204,7 @@ render _ =
   , maxWidth
   , theBoxModel
   , boxSizing
+  , position
   ]
 
 eval :: forall m. Query ~> H.ComponentDSL State Query Output m
