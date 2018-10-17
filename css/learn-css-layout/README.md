@@ -47,7 +47,11 @@ data Path f
 
 # Organization
 
+- ClassNames : `src/ClassNames.purs`
 - Colors : `src/Colors.purs`
 - Styles : `src/Styles.purs`
 - CSS : `src/CSSModule.purs`
-completed missing API (constructors for id selector and class selector)
+
+completed missing API
+- constructors basic selectors
+- common combinators for selectors
