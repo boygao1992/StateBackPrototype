@@ -1,0 +1,20 @@
+code { background-color: hsl(0.0, 0.0%, 92.55%) }
+#main { width: 600.0px; margin: 0 auto 0 auto  }
+#main2 { max-width: 600.0px; margin: 0 auto 0 auto  }
+#simple { width: 500.0px; margin: 20.0px auto 20.0px auto  }
+#simple2 { width: 500.0px; margin: 20.0px auto 20.0px auto ; box-sizing: border-box }
+#fancy { width: 500.0px; margin: 20.0px auto 20.0px auto ; padding: 50.0px 50.0px 50.0px 50.0px ; border-width: 10.0px }
+#fancy2 { width: 500.0px; margin: 20.0px auto 20.0px auto ; padding: 50.0px 50.0px 50.0px 50.0px ; border-width: 10.0px; box-sizing: border-box }
+.elem { border: solid 3.0px hsl(163.52, 43.96%, 59.41%) ; position: relative }
+.elem-red { border: solid 3.0px hsl(337.6, 64.66%, 54.51%)  }
+.label { top: 0; left: 0; padding: 0 3.0px 3.0px 0  }
+.endLabel { right: 0; bottom: 0; padding: 3.0px 0 0 3.0px  }
+.label { position: absolute; background-color: hsl(163.52, 43.96%, 59.41%); color: hsl(240.0, 0.76%, 25.69%); line-height: 1.0em }
+.endLabel { position: absolute; background-color: hsl(163.52, 43.96%, 59.41%); color: hsl(240.0, 0.76%, 25.69%); line-height: 1.0em }
+.elem-red > .label { color: hsl(0.0, 0.0%, 100.0%); background-color: hsl(337.6, 64.66%, 54.51%) }
+.elem-red > .endLabel { color: hsl(0.0, 0.0%, 100.0%); background-color: hsl(337.6, 64.66%, 54.51%) }
+a:link { color: hsl(337.6, 64.66%, 54.51%); text-decoration: none }
+a:hover { text-decoration: underline }
+.static { position: static }
+.relative1 { position: relative }
+.relative2 { position: relative; top: -20.0px; left: 20.0px; background-color: hsl(0.0, 0.0%, 100.0%); width: 500.0px }

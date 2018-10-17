@@ -2,19 +2,13 @@ module CSSModule where
 
 import Prelude
 
-import CSS.Selector
-  ( Predicate(Class, Id, Pseudo)
-  , Refinement(Refinement)
-  , Selector
-  , (|>)
-  )
-import CSS.Pseudo (hover) as CSS
-import CSS.Selector (star, with) as CSS
 import CSS.Elements (a, code) as CSS
+import CSS.Pseudo (hover) as CSS
+import CSS.Selector (Predicate(Class, Id, Pseudo), Refinement(Refinement), Selector, (|>))
+import CSS.Selector (star, with) as CSS
 import CSS.Stylesheet (CSS)
 import CSS.Stylesheet (select) as CSS
 import Styles as Styles
-
 
 -- | Util
 infix 0 CSS.with as ## -- bug fix for 3.4.0
