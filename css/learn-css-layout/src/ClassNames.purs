@@ -17,3 +17,6 @@ label = "label"
 
 endLabel :: String
 endLabel = "endLabel"
+
+section :: String
+section = "section"

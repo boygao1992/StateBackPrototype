@@ -6,9 +6,10 @@ import CSS.Background (backgroundColor) as CSS
 import CSS.Border (solid, border) as CSS
 import CSS.Box (borderBox, boxSizing) as CSS
 import CSS.Common (auto) as CSS
-import CSS.Display (position, absolute, relative, static, fixed, zIndex, float, Float(FloatRight)) as CSS
+import CSS.Display (position, absolute, relative, static, fixed, zIndex, float, floatLeft, floatRight, clear, clearLeft) as CSS
 import CSS.Font (color) as CSS
 import CSS.Geometry (width, maxWidth, height, margin, marginLeft, top, right, bottom, left, padding, lineHeight) as CSS
+import CSS.Overflow (overflow, overflowAuto) as CSS
 import CSS.Size (Size)
 import CSS.Size (nil, px, em, pct) as CSS
 import CSS.String (fromString)
@@ -209,5 +210,30 @@ footer_elem = do
 
 img_ :: CSS
 img_ = do
-  CSS.float CSS.FloatRight
+  CSS.float CSS.floatRight
   CSS.margin CSS.nil CSS.nil (CSS.em 1.0) (CSS.em 1.0)
+
+box :: CSS
+box = do
+  CSS.float CSS.floatLeft
+  CSS.width (CSS.px 200.0)
+  CSS.height (CSS.px 100.0)
+  margin1 (CSS.em 1.0)
+
+after_box :: CSS
+after_box = do
+  CSS.clear CSS.clearLeft
+
+nav_ :: CSS
+nav_ = do
+  CSS.float CSS.floatLeft
+  CSS.width (CSS.px 200.0)
+
+clearfix :: CSS
+clearfix = do
+  CSS.overflow CSS.overflowAuto
+
+article_img :: CSS
+article_img = do
+  CSS.float CSS.floatRight
+  CSS.width (CSS.pct 50.0)

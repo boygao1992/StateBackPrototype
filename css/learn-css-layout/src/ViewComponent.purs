@@ -253,8 +253,6 @@ positionExample =
   , positionExampleSection2
   , positionExampleSection3
   -- , positionExampleFooter
-  , HH.span [ HP.class_ $ H.ClassName ClassNames.endLabel]
-    [ HH.text "</div>"]
   ]
   where
     positionExampleNav :: H.ComponentHTML q
@@ -301,6 +299,7 @@ positionExample =
       HH.section [ classList
                    [ ClassNames.elem
                    , ClassNames.elemYellow
+                   , ClassNames.section
                    ]
                  ]
       [ HH.span [ classList [ ClassNames.label ] ]
@@ -326,6 +325,7 @@ positionExample =
       HH.section [ classList
                    [ ClassNames.elem
                    , ClassNames.elemYellow
+                   , ClassNames.section
                    , "ipsum"
                    ]
                  ]
@@ -343,6 +343,7 @@ positionExample =
       HH.section [ classList
                    [ ClassNames.elem
                    , ClassNames.elemYellow
+                   , ClassNames.section
                    ]
                  ]
       [ HH.span [ classList [ ClassNames.label ] ]
@@ -385,6 +386,242 @@ float_ =
     ]
   ]
 
+clear_ :: forall q. H.ComponentHTML q
+clear_ =
+  HH.div_
+  [ withoutClear
+  , withClear
+  ]
+
+  where
+    withoutClear :: H.ComponentHTML q
+    withoutClear =
+      HH.div_
+      [ HH.div [ classList [ "box", ClassNames.elem]]
+        [ HH.span [ classList [ ClassNames.label]]
+          [ HH.text "<div class=\"box\">"]
+        , HH.p_
+          [ HH.text "I feel like I'm floating!"]
+        , HH.span [ classList [ ClassNames.endLabel]]
+          [ HH.text "</div>"]
+        ]
+      , HH.section [ classList [ ClassNames.elem, ClassNames.elemYellow]]
+        [ HH.span [ classList [ ClassNames.label]]
+          [ HH.text "<section>"]
+        , HH.p_
+          [ HH.text "In this case, the "
+          , HH.code_
+            [ HH.text "section"]
+          , HH.text " element is actually after the "
+          , HH.code_
+            [ HH.text "div"]
+          , HH.text ". However, since the "
+          , HH.code_
+            [ HH.text "div"]
+          , HH.text " is floated to the left, this is what happens: the text in the section is floated around the "
+          , HH.code_
+            [ HH.text "div"]
+          , HH.text " and the "
+          , HH.code_
+            [ HH.text "section"]
+          , HH.text " surrounds the whole thing. What if we wanted the section to actually appear after the floated element?"
+          ]
+        , HH.span [ classList [ ClassNames.endLabel]]
+          [ HH.text "</section>"]
+        ]
+      ]
+
+    withClear :: H.ComponentHTML q
+    withClear =
+      HH.div_
+      [ HH.div [ classList [ "box", ClassNames.elem]]
+        [ HH.span [ classList [ ClassNames.label]]
+          [ HH.text "<div class=\"box\">"]
+        , HH.p_
+          [ HH.text "I feel like I'm floating!"]
+        , HH.span [ classList [ ClassNames.endLabel]]
+          [ HH.text "</div>"]
+        ]
+      , HH.section [ classList [ ClassNames.elem
+                               , ClassNames.elemYellow
+                               , "after-box"
+                               ]
+                   ]
+        [ HH.span [ classList [ ClassNames.label]]
+          [ HH.text "<section class=\"after-box\">"]
+        , HH.p_
+          [ HH.text "Using "
+          , HH.code_
+            [ HH.text "clear"]
+          , HH.text " we have now moved this section down below the floated "
+          , HH.code_
+            [ HH.text "div"]
+          , HH.text ". You use the value "
+          , HH.code_
+            [ HH.text "left"]
+          , HH.text " to clear elements floated to the left. You can also clear "
+          , HH.code_
+            [ HH.text "right"]
+          , HH.text " and "
+          , HH.code_
+            [ HH.text "both"]
+          , HH.text "."
+          ]
+        , HH.span [ classList [ ClassNames.endLabel]]
+          [ HH.text "</section>"]
+        ]
+      ]
+
+clearfix :: forall q. H.ComponentHTML q
+clearfix =
+  HH.div_
+  [ withoutClearfix
+  , withClearfix
+  ]
+  where
+    withoutClearfix :: H.ComponentHTML q
+    withoutClearfix =
+      HH.div [classList [ ClassNames.elem]]
+      [ HH.span [ classList [ ClassNames.label]]
+        [ HH.text "<div>"]
+      , HH.img [ HP.src "./images/ilta.png" ]
+      , HH.p_
+        [ HH.text "Uh oh... this image is taller than the element containing it, and it's floated, so it's overflowing outside of its container!"]
+      ]
+
+    withClearfix :: H.ComponentHTML q
+    withClearfix =
+      HH.div [classList [ ClassNames.elem, "clearfix"]]
+      [ HH.span [ classList [ ClassNames.label]]
+        [ HH.text "<div class=\"clearfix\">"]
+      , HH.img [ HP.src "./images/ilta.png" ]
+      , HH.p_
+        [ HH.text "Much better!"]
+      , HH.span [ classList [ ClassNames.endLabel]]
+        [ HH.text "</div>"]
+      ]
+
+floatLayoutExample :: forall q. H.ComponentHTML q
+floatLayoutExample =
+  HH.div [ classList
+           [ ClassNames.elem
+           , "container"
+           ]
+         ]
+  [ HH.span [ classList [ ClassNames.label ] ]
+    [ HH.text "<div class=\"container\">"]
+  , floatLayoutExampleNav
+  , floatLayoutExampleSection1
+  , floatLayoutExampleSection2
+  ]
+  where
+    floatLayoutExampleNav :: H.ComponentHTML q
+    floatLayoutExampleNav =
+      HH.nav [ classList
+               [ ClassNames.elem
+               , ClassNames.elemRed
+               , "nav"
+               ]
+             ]
+      [ HH.span [ classList [ ClassNames.label ] ]
+        [ HH.text "<nav>"]
+      , HH.ul_
+        [ HH.li_
+          [ HH.a [ HP.href "."]
+            [ HH.text "Home"]
+          ]
+        , HH.li_
+          [ HH.a [ HP.href "."]
+            [ HH.text "Taco Menu"]
+          ]
+        , HH.li_
+          [ HH.a [ HP.href "."]
+            [ HH.text "Draft List"]
+          ]
+        , HH.li_
+          [ HH.a [ HP.href "."]
+            [ HH.text "Hours"]
+          ]
+        , HH.li_
+          [ HH.a [ HP.href "."]
+            [ HH.text "Directions"]
+          ]
+        , HH.li_
+          [ HH.a [ HP.href "."]
+            [ HH.text "Contact"]
+          ]
+        ]
+      , HH.span [ HP.class_ $ H.ClassName ClassNames.endLabel]
+        [ HH.text "</nav>"]
+      ]
+
+    floatLayoutExampleSection1 :: H.ComponentHTML q
+    floatLayoutExampleSection1 =
+      HH.section [ classList
+                   [ ClassNames.elem
+                   , ClassNames.elemYellow
+                   , ClassNames.section
+                   ]
+                 ]
+      [ HH.span [ classList [ ClassNames.label ] ]
+        [ HH.text "<section>"]
+      , HH.p_
+        [ HH.text "The "
+        , HH.code_
+          [ HH.text "margin-left"]
+        , HH.text " style for "
+        , HH.code_
+          [ HH.text "section"]
+        , HH.text "s makes sure there is room for the "
+        , HH.code_
+          [ HH.text "nav"]
+        , HH.text ". Otherwise, the absolute and static elements would overlap"
+        ]
+      , HH.span [ HP.class_ $ H.ClassName ClassNames.endLabel]
+        [ HH.text "</section>"]
+      ]
+
+    floatLayoutExampleSection2 :: H.ComponentHTML q
+    floatLayoutExampleSection2 =
+      HH.section [ classList
+                   [ ClassNames.elem
+                   , ClassNames.elemYellow
+                   , ClassNames.section
+                   , "ipsum"
+                   ]
+                 ]
+      [ HH.span [ classList [ ClassNames.label ] ]
+        [ HH.text "<section>"]
+      , HH.p_
+        [ HH.text "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi lorem egestas odio, vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue eget, auctor vitae massa. Fusce luctus vestibulum augue ut aliquet. Mauris ante ligula, facilisis sed ornare eu, lobortis in odio. Praesent convallis urna a lacus interdum ut hendrerit risus congue. Nunc sagittis dictum nisi, sed ullamcorper ipsum dignissim ac. In at libero sed nunc venenatis imperdiet sed ornare turpis. Donec vitae dui eget tellus gravida venenatis. Integer fringilla congue eros non fermentum. Sed dapibus pulvinar nibh tempor porta. Cras ac leo purus. Mauris quis diam velit."
+        ]
+      , HH.span [ HP.class_ $ H.ClassName ClassNames.endLabel]
+        [ HH.text "</section>"]
+      ]
+
+percentWidth :: forall q. H.ComponentHTML q
+percentWidth =
+  HH.article [ classList
+               [ ClassNames.elem
+               , ClassNames.elemYellow
+               , "clearfix"]
+             ]
+  [ HH.span [ classList [ ClassNames.label]]
+    [ HH.text "<article class=\"clearfix\">"]
+  , HH.img [ HP.src "./images/ilta.png" ]
+  , HH.p_
+    [ HH.text "You could even use "
+    , HH.code_
+      [ HH.text "min-width"]
+    , HH.text " and "
+    , HH.code_
+      [ HH.text "max-width"]
+    , HH.text " to limit how big or small the image can get!"
+    ]
+  , HH.span [ classList [ ClassNames.endLabel]]
+    [ HH.text "</article>"]
+  ]
+
 -- | Component
 render :: State -> H.ComponentHTML Query
 render _ =
@@ -397,6 +634,10 @@ render _ =
   , position
   , positionExample
   , float_
+  , clear_
+  , clearfix
+  , floatLayoutExample
+  , percentWidth
   ]
 
 eval :: forall m. Query ~> H.ComponentDSL State Query Output m

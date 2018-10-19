@@ -3318,6 +3318,10 @@ Metric
 
 ### 8. [HTML Color Codes - color name lookup](https://htmlcolorcodes.com/)
 
+## Typography
+
+### 1. [Rhythm in Web Typography](https://betterwebtype.com/rhythm-in-web-typography)
+
 
 ## Web Assembly
 

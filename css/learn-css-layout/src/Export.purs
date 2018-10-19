@@ -12,4 +12,4 @@ import Node.FS.Sync (writeTextFile)
 export :: Effect Unit
 export = do
   let css = fromMaybe "" <<< renderedSheet <<< render $ root
-  writeTextFile UTF8 "./app.css" css
+  writeTextFile UTF8 "dist/app.css" css

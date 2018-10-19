@@ -2,7 +2,7 @@ module CSSModule where
 
 import Prelude
 
-import CSS.Elements (a, code, section, nav, p, footer, img) as CSS
+import CSS.Elements (a, code, footer, img, nav, p, article) as CSS
 import CSS.Pseudo (hover) as CSS
 import CSS.Selector (Predicate(Class, Id, Pseudo), Refinement(Refinement), Selector, (|>))
 import CSS.Selector (star, with, deep) as CSS
@@ -80,10 +80,15 @@ root = do
   CSS.select (class_ "fixed") Styles.fixed_
   CSS.select (class_ "relative") Styles.relative_
   CSS.select (class_ "absolute") Styles.absolute_
-  CSS.select CSS.section Styles.section_
+  CSS.select (class_ ClassNames.section) Styles.section_
   CSS.select (CSS.nav & byClass ClassNames.elem) Styles.nav_elem
   CSS.select (class_ ClassNames.elem |* CSS.p) Styles.elem_p
   CSS.select (class_ "ipsum") Styles.ipsum
   CSS.select CSS.footer Styles.footer_
   CSS.select (CSS.footer & byClass ClassNames.elem) Styles.footer_elem
   CSS.select CSS.img Styles.img_
+  CSS.select (class_ "box") Styles.box
+  CSS.select (class_ "after-box") Styles.after_box
+  CSS.select (class_ "nav") Styles.nav_
+  CSS.select (class_ "clearfix") Styles.clearfix
+  CSS.select (CSS.article |* CSS.img) Styles.article_img

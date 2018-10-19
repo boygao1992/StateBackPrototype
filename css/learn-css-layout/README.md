@@ -2,7 +2,7 @@
 
 [purescript-css | A type-safe library for describing, manipulating, and rendering CSS.](https://pursuit.purescript.org/packages/purescript-css/)
 
-a type-safe and modular way to compose inline CSS using purescript-css
+a type-safe and modular way to compose CSS using purescript-css
 
 `./dist/index.html`
 
@@ -55,3 +55,5 @@ data Path f
 completed missing API
 - constructors basic selectors
 - common combinators for selectors
+
+export to CSS file: `src/Export.purs`
