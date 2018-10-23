@@ -1,0 +1,82 @@
+* {
+  box-sizing: border-box;
+}
+
+code {
+  background-color: "#ECECEC";
+}
+
+#main {
+  width: 600px;
+  margin: 0 auto;
+}
+
+#main2 {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+#simple {
+  width: 500px;
+  margin: 20px auto;
+}
+
+#simple2 {
+  width: 500px;
+  margin: 20px auto;
+  box-sizing: border-box;
+}
+
+#fancy {
+  width: 500px;
+  margin: 20px auto;
+  padding: 50px;
+  border-width: 10px;
+}
+
+#fancy2 {
+  width: 500px;
+  margin: 20px auto;
+  padding: 50px;
+  border-width: 10px;
+  box-sizing: border-box;
+}
+
+.elem {
+  border: solid 3px "#6AC5AC";
+  position: relative;
+}
+
+.elem-red {
+  border: solid 3px "#D64078";
+}
+.elem-red > .label {
+  color: "#FFFFFF";
+  background-color: "#D64078";
+}
+.elem-red > .end-label {
+  color: "#FFFFFF";
+  background-color: "#D64078";
+}
+
+.elem-yellow {
+  border: solid 3px "#FDC72F";
+}
+.elem-yellow > .label {
+  background-color: "#FDC72F";
+}
+.elem-yellow > .end-label {
+  background-color: "#FDC72F";
+}
+
+.elem-green {
+  border: solid 3px "#96C02E";
+}
+.elem-green > .label {
+  background-color: "#96C02E";
+}
+.elem-green > .end-label {
+  background-color: "#96C02E";
+}
+
+/*# sourceMappingURL=scss-app.css.map */

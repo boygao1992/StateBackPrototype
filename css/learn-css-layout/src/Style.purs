@@ -50,12 +50,12 @@ elem_p = do
 main :: CSS
 main = do
   CSS.width $ CSS.px 600.0
-  CSS.margin CSS.nil CSS.auto CSS.nil CSS.auto
+  margin2 CSS.nil CSS.auto
 
 main2 :: CSS
 main2 = do
   CSS.maxWidth $ CSS.px 600.0
-  CSS.margin CSS.nil CSS.auto CSS.nil CSS.auto
+  margin2 CSS.nil CSS.auto
 
 elem :: CSS
 elem = do

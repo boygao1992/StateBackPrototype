@@ -1,0 +1,206 @@
+@import 'colors';
+
+@mixin star {
+  box-sizing: border-box;
+}
+
+@mixin p {
+  margin: 1em 0;
+}
+
+@mixin elem-p {
+  padding: 0 1em;
+}
+
+@mixin main {
+  width: 600px;
+  margin: 0 auto;
+}
+
+@mixin main2 {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+@mixin elem {
+  border: solid 3px $colors-green;
+  position: relative;
+}
+
+@mixin elem-red {
+  border: solid 3px $colors-red;
+}
+
+@mixin elem-yellow {
+  border: solid 3px $colors-yellow;
+}
+
+@mixin elem-green {
+  border: solid 3px $colors-light-green;
+}
+
+@mixin code {
+  background-color: $colors-gray;
+}
+
+@mixin link-normal {
+  color: $colors-red;
+  text-decoration: none;
+}
+
+@mixin link-hover {
+  text-decoration: underline;
+}
+
+@mixin label {
+  top: 0;
+  left: 0;
+  padding: 0 3px 3px 0;
+}
+
+@mixin end-label {
+  right: 0;
+  bottom: 0;
+  padding: 3px 0 0 3px;
+}
+
+@mixin all-label {
+  position: absolute;
+  background-color: $colors-green;
+  color: $dark;
+  line-height: 1em;
+}
+
+@mixin all-label-red {
+  color: $colors-white;
+  background-color: $colors-red;
+}
+
+@mixin all-label-yellow {
+  background-color: $colors-yellow;
+}
+
+@mixin all-label-green {
+  background-color: $colors-light-green;
+}
+
+@mixin simple {
+  width: 500px;
+  margin: 20px auto;
+}
+
+@mixin fancy {
+  @include simple;
+  padding: 50px;
+  border-width: 10px;
+}
+
+@mixin simple2 {
+  @include simple;
+  box-sizing: border-box;
+}
+
+@mixin fancy2 {
+  @include fancy;
+  box-sizing: border-box;
+}
+
+@mixin static {
+  position: static;
+}
+
+@mixin relative1 {
+  position: relative;
+}
+
+@mixin relative2 {
+  @include relative1;
+  top: -20px;
+  left: 20px;
+  background-color: $colors-white;
+  width: 500px;
+}
+
+@mixin fixed {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 200px;
+  background-color: $colors-white;
+  z-index: 1;
+}
+
+@mixin relative {
+  position: relative;
+  width: 600px;
+  height: 400px;
+}
+
+@mixin absolute {
+  position: absolute;
+  top: 120px;
+  right: 0;
+  width: 300px;
+  height: 200px;
+}
+
+@mixin section {
+  margin-left: 200px;
+}
+
+@mixin nav-elem {
+  position: absolute;
+  left: 0;
+  width: 200px;
+}
+
+@mixin ipsum {
+  color: $dark-red;
+  background-color: $colors-white-smoke;
+}
+
+@mixin footer {
+  text-align: center;
+}
+
+@mixin footer-elem {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 75px;
+  background-color: $colors-white;
+  width: 100%;
+  margin: 0;
+  z-index: 1;
+}
+
+@mixin img {
+  float: right;
+  margin: 0 0 1em 1em;
+}
+
+@mixin box {
+  float: left;
+  width: 200px;
+  height: 100px;
+  margin: 1em;
+}
+
+@mixin after-box {
+  clear: left;
+}
+
+@mixin nav {
+  float: left;
+  width: 200px;
+}
+
+@mixin clearfix {
+  overflow: auto;
+}
+
+@mixin article-img {
+  float: right;
+  width: 50%;
+}
+

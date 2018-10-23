@@ -1,0 +1,74 @@
+@import 'styles';
+
+* {
+  @include star;
+}
+
+code {
+  @include code;
+}
+
+#main {
+  @include main;
+}
+
+#main2 {
+  @include main2;
+}
+
+#simple {
+  @include simple;
+}
+
+#simple2 {
+  @include simple2;
+}
+
+#fancy {
+  @include fancy;
+}
+
+#fancy2 {
+  @include fancy2;
+}
+
+.elem {
+  @include elem;
+}
+
+.elem-red {
+  @include elem-red;
+
+  > .label {
+    @include all-label-red;
+  }
+
+  > .end-label {
+    @include all-label-red;
+  }
+}
+
+.elem-yellow {
+  @include elem-yellow;
+
+  > .label {
+    @include all-label-yellow;
+  }
+
+  > .end-label {
+    @include all-label-yellow;
+  }
+}
+
+.elem-green {
+  @include elem-green;
+
+  > .label {
+    @include all-label-green;
+  }
+
+  > .end-label {
+    @include all-label-green;
+  }
+}
+
