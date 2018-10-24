@@ -10,29 +10,12 @@ import CSS.Display (position, absolute, relative, static, fixed, zIndex, float, 
 import CSS.Font (color) as CSS
 import CSS.Geometry (width, maxWidth, height, margin, marginLeft, top, right, bottom, left, padding, lineHeight) as CSS
 import CSS.Overflow (overflow, overflowAuto) as CSS
-import CSS.Size (Size)
 import CSS.Size (nil, px, em, pct) as CSS
-import CSS.String (fromString)
-import CSS.Stylesheet (CSS, key)
+import CSS.Stylesheet (CSS)
 import CSS.Text (textDecoration, noneTextDecoration, underline) as CSS
 import CSS.TextAlign (textAlign, center) as CSS
 import Colors as Colors
-
--- | Util
-margin1 :: forall a. Size a -> CSS
-margin1 s = CSS.margin s s s s
-
-margin2 :: forall a. Size a -> Size a -> CSS
-margin2 s1 s2 = CSS.margin s1 s2 s1 s2
-
-padding1 :: forall a. Size a -> CSS
-padding1 s = CSS.padding s s s s
-
-padding2 :: forall a. Size a -> Size a -> CSS
-padding2 s1 s2 = CSS.padding s1 s2 s1 s2
-
-borderWidth :: forall a. Size a -> CSS
-borderWidth = key $ fromString "border-width"
+import CSSUtils (borderWidth, margin1, margin2, padding1, padding2) as CSS
 
 -- | CSS
 star_ :: CSS
@@ -41,21 +24,21 @@ star_ = do
 
 p_ :: CSS
 p_ = do
-  margin2 (CSS.em 1.0) CSS.nil
+  CSS.margin2 (CSS.em 1.0) CSS.nil
 
 elem_p :: CSS
 elem_p = do
-  padding2 CSS.nil (CSS.em 1.0)
+  CSS.padding2 CSS.nil (CSS.em 1.0)
 
 main :: CSS
 main = do
   CSS.width $ CSS.px 600.0
-  margin2 CSS.nil CSS.auto
+  CSS.margin2 CSS.nil CSS.auto
 
 main2 :: CSS
 main2 = do
   CSS.maxWidth $ CSS.px 600.0
-  margin2 CSS.nil CSS.auto
+  CSS.margin2 CSS.nil CSS.auto
 
 elem :: CSS
 elem = do
@@ -121,13 +104,13 @@ allLabel_green = do
 simple :: CSS
 simple = do
   CSS.width (CSS.px 500.0)
-  margin2 (CSS.px 20.0) CSS.auto
+  CSS.margin2 (CSS.px 20.0) CSS.auto
 
 fancy :: CSS
 fancy = do
   simple
-  padding1 (CSS.px 50.0)
-  borderWidth (CSS.px 10.0)
+  CSS.padding1 (CSS.px 50.0)
+  CSS.borderWidth (CSS.px 10.0)
 
 simple2 :: CSS
 simple2 = do
@@ -205,7 +188,7 @@ footer_elem = do
   CSS.height (CSS.px 75.0)
   CSS.backgroundColor Colors.white
   CSS.width (CSS.pct 100.0)
-  margin1 CSS.nil
+  CSS.margin1 CSS.nil
   CSS.zIndex 1
 
 img_ :: CSS
@@ -218,7 +201,7 @@ box = do
   CSS.float CSS.floatLeft
   CSS.width (CSS.px 200.0)
   CSS.height (CSS.px 100.0)
-  margin1 (CSS.em 1.0)
+  CSS.margin1 (CSS.em 1.0)
 
 after_box :: CSS
 after_box = do

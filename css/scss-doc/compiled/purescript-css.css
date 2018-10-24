@@ -1,0 +1,29 @@
+#main p { color: hsl(65.52, 69.96%, 54.31%); width: 97.0% }
+#main p .redbox { background-color: hsl(4.11, 89.62%, 58.43%); color: hsl(0.0, 0.0%, 0.0%) }
+#main { width: 97.0% }
+#main p, #main div { font-size: 2.0em }
+#main p a, #main div a { font-weight: bold }
+#main pre { font-size: 3.0em }
+a { font-weight: bold; text-decoration: none }
+a:hover { text-decoration: underline }
+body.firefox a { font-weight: normal }
+#main { color: hsl(0.0, 0.0%, 0.0%) }
+#main a { font-weight: bold }
+#main a:hover { color: hsl(4.11, 89.62%, 58.43%) }
+#main { color: hsl(0.0, 0.0%, 0.0%) }
+#main-sidebar { border: solid 1.0px hsla(0.0, 0.0%, 100.0%, 0.0)  }
+#funky { font-family: fantasy; font-size: 30.0em; font-weight: bold }
+.error { border: solid 1.0px hsl(4.11, 89.62%, 58.43%) ; background-color: hsl(0.0, 100.0%, 93.33%) }
+.error .intrusion { background-image: url("/image/hacked.png") }
+.seriousError { border: solid 1.0px hsl(4.11, 89.62%, 58.43%) ; background-color: hsl(0.0, 100.0%, 93.33%); border-width: 3.0px }
+.seriousError .intrusion { background-image: url("/image/hacked.png") }
+.error { border: solid 1.0px hsl(4.11, 89.62%, 58.43%) ; background-color: hsl(0.0, 100.0%, 93.33%) }
+.attention { font-size: 3.0em; background-color: hsl(4.11, 89.62%, 58.43%) }
+.seriousError { border: solid 1.0px hsl(4.11, 89.62%, 58.43%) ; background-color: hsl(0.0, 100.0%, 93.33%); font-size: 3.0em; background-color: hsl(4.11, 89.62%, 58.43%); border-width: 3.0px }
+.error { border: solid 1.0px hsl(4.11, 89.62%, 58.43%) ; background-color: hsl(0.0, 100.0%, 93.33%) }
+.seriousError { border: solid 1.0px hsl(4.11, 89.62%, 58.43%) ; background-color: hsl(0.0, 100.0%, 93.33%); border-width: 3.0px }
+.criticalError { border: solid 1.0px hsl(4.11, 89.62%, 58.43%) ; background-color: hsl(0.0, 100.0%, 93.33%); border-width: 3.0px; position: fixed; top: 10.0%; bottom: 10.0%; left: 10.0%; right: 10.0% }
+a { color: hsl(206.57, 89.74%, 54.12%) }
+a:hover { text-decoration: underline }
+#fake-links .link { color: hsl(206.57, 89.74%, 54.12%) }
+#fake-links .link:hover { text-decoration: underline }
