@@ -8,7 +8,6 @@ import Halogen.Aff as HA
 import Halogen.VDom.Driver (runUI)
 import Web.DOM.ParentNode (QuerySelector(..))
 import ViewComponent as VC
-import Export (export)
 
 main :: Effect Unit
 main = do
