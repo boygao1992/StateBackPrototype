@@ -9,7 +9,12 @@ import Halogen.HTML as HH
 import Halogen.HTML.CSS as HC
 import Halogen.HTML.Properties as HP
 import HalogenUtils (classList)
-import CSSRoot as CSSRoot
+import CSS as CSS
+import CSSUtils (spaceEvenly) as CSS
+import CSS.TextAlign (center, textAlign) as CSSText
+import CSS.Common (center) as CSS
+import Color (white) as Color
+import Color.Scheme.X11 (gray, orangered, steelblue, yellowgreen) as Color
 
 -- | Types
 
@@ -93,16 +98,7 @@ flexboxExample =
       [ HH.span [ classList [ CN.label]]
         [ HH.text "<section>"]
       , HH.p_
-        [ HH.text "The "
-        , HH.code_
-          [ HH.text "margin-left"]
-        , HH.text " style for "
-        , HH.code_
-          [ HH.text "section"]
-        , HH.text "s makes sure there is room for the "
-        , HH.code_
-          [ HH.text "nav"]
-        , HH.text ". Otherwise, the absolute and static elements would overlap"
+        [ HH.text "Flexbox layout"
         ]
       , HH.span [ classList [ CN.endLabel]]
         [ HH.text "</section>"]
@@ -126,12 +122,101 @@ flexboxExample =
         [ HH.text "</section>"]
       ]
 
+flexWrapExample :: forall q. H.ComponentHTML q
+flexWrapExample =
+  HH.div_
+  [ HH.h4_
+    [ HH.text "flex-wrap: wrap;"]
+  , flexWrap CSS.wrap
+  , HH.h4_
+    [ HH.text "flex-wrap: no-wrap;"]
+  , flexWrap CSS.nowrap
+  ,  HH.h4_
+    [ HH.text "flex-wrap: wrap-reverse;"]
+  , flexWrap CSS.wrapReverse
+  ]
+
+  where
+    flexWrap :: CSS.FlexWrap -> H.ComponentHTML q
+    flexWrap fw =
+      HH.div [ HC.style do
+                CSS.display CSS.flex
+                CSS.flexWrap fw
+
+                CSS.color Color.white
+                CSS.height (CSS.px 150.0)
+                CSSText.textAlign CSSText.center
+                CSS.border CSS.solid (CSS.px 3.0) Color.gray
+             ]
+      [ HH.div [ HC.style do
+                  CSS.backgroundColor Color.orangered
+                  CSS.height (CSS.pct 50.0)
+                  CSS.width (CSS.pct 50.0)
+               ]
+        [ HH.text "1"]
+      , HH.div [ HC.style do
+                  CSS.backgroundColor Color.yellowgreen
+                  CSS.height (CSS.pct 50.0)
+                  CSS.width (CSS.pct 50.0)
+               ]
+        [ HH.text "2"]
+      , HH.div [ HC.style do
+                  CSS.backgroundColor Color.steelblue
+                  CSS.height (CSS.pct 50.0)
+                  CSS.width (CSS.pct 50.0)
+               ]
+        [ HH.text "3"]
+      ]
+
+justifyContentExample :: forall q. H.ComponentHTML q
+justifyContentExample =
+  HH.div_
+  [ justifyContentTemplate "flex-start" CSS.flexStart
+  , justifyContentTemplate "flex-end" CSS.flexEnd
+  , justifyContentTemplate "center" CSS.center
+  , justifyContentTemplate "space-around" CSS.spaceAround
+  , justifyContentTemplate "space-between" CSS.spaceBetween
+  , justifyContentTemplate "space-evenly" CSS.spaceEvenly
+  ]
+  where
+    justifyContentTemplate :: String -> CSS.JustifyContentValue -> H.ComponentHTML q
+    justifyContentTemplate str jc =
+      HH.div_
+      [ HH.h4_
+        [ HH.text $ "justify-content: " <> str <> ";"]
+      , HH.div [ HC.style do
+                   CSS.display CSS.flex
+                   CSS.justifyContent jc
+               ]
+        [ HH.div [ HC.style do
+                     CSS.backgroundColor Color.orangered
+                     CSS.width (CSS.px 100.0)
+                     CSS.height (CSS.px 100.0)
+                 ]
+          [ HH.text "1"]
+        , HH.div [ HC.style do
+                     CSS.backgroundColor Color.yellowgreen
+                     CSS.width (CSS.px 100.0)
+                     CSS.height (CSS.px 100.0)
+                 ]
+          [ HH.text "2"]
+        , HH.div [ HC.style do
+                     CSS.backgroundColor Color.steelblue
+                     CSS.width (CSS.px 100.0)
+                     CSS.height (CSS.px 100.0)
+                 ]
+          [ HH.text "3"]
+        ]
+      ]
+
 -- | Component
 
 render :: forall q. State -> H.ComponentHTML q
 render _ =
   HH.div_
   [ flexboxExample
+  , flexWrapExample
+  , justifyContentExample
   ]
 
 eval :: forall m. Query ~> H.ComponentDSL State Query Output m

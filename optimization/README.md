@@ -1,8 +1,12 @@
 # Page Loading Speed
 
+## Tool
 
+### 1. [jasonslyvia/react-lazyload](https://github.com/jasonslyvia/react-lazyload)
 
-## 1. [PageSpeed Insights Rules - Google](https://developers.google.com/speed/docs/insights/rules)
+## Reference
+
+### 1. [PageSpeed Insights Rules - Google](https://developers.google.com/speed/docs/insights/rules)
 
 > **Avoid landing page redirects**
 >

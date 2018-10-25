@@ -1,12 +1,14 @@
 module CSSUtils where
 
 import Prelude
-import CSS.Selector (Predicate(Pseudo, Class, Id), Refinement(Refinement), Selector(Selector), Path(Combined) )
+
+import CSS (margin, padding) as CSS
+import CSS.Flexbox (JustifyContentValue)
+import CSS.Selector (Predicate(Pseudo, Class, Id), Refinement(Refinement), Selector(Selector), Path(Combined))
 import CSS.Selector (deep, star, with) as CSS
 import CSS.Size (Size)
-import CSS (margin, padding) as CSS
-import CSS.Stylesheet (CSS, key)
 import CSS.String (fromString)
+import CSS.Stylesheet (CSS, key)
 import Color (Color)
 import Color as Color
 import Data.Maybe (fromMaybe)
@@ -54,3 +56,10 @@ padding2 s1 s2 = CSS.padding s1 s2 s1 s2
 
 borderWidth :: forall a. Size a -> CSS
 borderWidth = key $ fromString "border-width"
+
+-- | Flex
+class SpaceEvenly a where
+  spaceEvenly :: a
+
+instance spaceEvenlyJustifyContentValue :: SpaceEvenly JustifyContentValue where
+  spaceEvenly = fromString "space-evenly"
