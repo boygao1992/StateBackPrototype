@@ -12,9 +12,9 @@ import HalogenUtils (classList)
 import CSS as CSS
 import CSSUtils (spaceEvenly) as CSS
 import CSS.TextAlign (center, textAlign) as CSSText
-import CSS.Common (center) as CSS
+import CSS.Common (center, auto) as CSS
 import Color (white) as Color
-import Color.Scheme.X11 (gray, orangered, steelblue, yellowgreen) as Color
+import Color.Scheme.X11 as Color
 
 -- | Types
 
@@ -166,6 +166,20 @@ flexWrapExample =
                   CSS.width (CSS.pct 50.0)
                ]
         [ HH.text "3"]
+      , HH.div [ HC.style do
+                  CSS.backgroundColor Color.wheat
+                  CSS.height (CSS.pct 50.0)
+                  CSS.width (CSS.pct 50.0)
+               ]
+        [ HH.text "4"]
+      , HH.div [ HC.style do
+                  CSS.alignSelf CSS.flexEnd
+
+                  CSS.backgroundColor Color.slategray
+                  CSS.height (CSS.pct 50.0)
+                  CSS.width (CSS.pct 50.0)
+               ]
+        [ HH.text "5: align-self: flex-end"]
       ]
 
 justifyContentExample :: forall q. H.ComponentHTML q
