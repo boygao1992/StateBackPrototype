@@ -1,0 +1,21 @@
+{
+  "name": "flexbox",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "output"
+  ],
+  "dependencies": {
+    "purescript-prelude": "^4.1.0",
+    "purescript-console": "^4.1.0",
+    "purescript-effect": "^2.0.0",
+    "purescript-halogen": "^4.0.0",
+    "purescript-css": "^4.0.0",
+    "purescript-halogen-css": "^8.0.0",
+    "purescript-node-fs": "^5.0.0"
+  },
+  "devDependencies": {
+    "purescript-psci-support": "^4.0.0"
+  }
+}

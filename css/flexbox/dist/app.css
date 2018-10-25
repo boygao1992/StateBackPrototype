@@ -1,0 +1,10 @@
+.container { display: flex }
+nav { width: 200.0px }
+.flex-column { flex-basis: auto; flex-direction: row; flex-grow: 1; flex-shrink: 1 }
+.elem { border: solid 3.0px hsl(163.52, 43.96%, 59.41%) ; position: relative }
+.elem-red { border: solid 3.0px hsl(337.6, 64.66%, 54.51%) ; position: relative }
+.elem-yellow { border: solid 3.0px hsl(44.27, 98.1%, 58.82%) ; position: relative }
+.label { position: absolute; background-color: hsl(163.52, 43.96%, 59.41%); color: hsl(0.0, 0.0%, 50.2%); line-height: 1.0em; top: 0; left: 0; padding: 0 3.0px 3.0px 0  }
+.endLabel { position: absolute; background-color: hsl(163.52, 43.96%, 59.41%); color: hsl(0.0, 0.0%, 50.2%); line-height: 1.0em; right: 0; bottom: 0; padding: 3.0px 0 0 3.0px  }
+.elem-red > .label, .elem-red > .endLabel { color: hsl(0.0, 0.0%, 100.0%); background-color: hsl(337.6, 64.66%, 54.51%) }
+.elem-yellow > .label, .elem-yellow > .endLabel { color: hsl(0.0, 0.0%, 92.55%); background-color: hsl(44.27, 98.1%, 58.82%) }
