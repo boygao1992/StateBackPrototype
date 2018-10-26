@@ -2,7 +2,7 @@ module CSSUtils where
 
 import Prelude
 
-import CSS (margin, padding, borderRadius) as CSS
+import CSS (margin, padding, borderRadius, select, child) as CSS
 import CSS.Property (value)
 import CSS.Flexbox (JustifyContentValue)
 import CSS.Selector (Predicate(Pseudo, Class, Id), Refinement(Refinement), Selector(Selector), Path(Combined))
@@ -38,6 +38,8 @@ class_ s = CSS.star & byClass s
 combine :: Selector -> Selector -> Selector
 combine s1 s2 = Selector (Refinement []) (Combined s1 s2)
 
+infixl 6 CSS.select as ?
+infixl 6 CSS.child as |> -- A > B
 infixl 6 CSS.with as & -- AB, bug fix for 3.4.0
 infixl 6 CSS.deep as |* -- A B
 infixl 6 combine as ++

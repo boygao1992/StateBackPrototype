@@ -14,6 +14,10 @@ import Colors as Colors
 import CSSUtils (margin1, margin2, translate_, padding2, borderRadius1) as CSS
 import Images as Images
 import Urls as Urls
+import HalogenUtils (classList)
+import IDs as IDs
+import ClassNames as CN
+import CSSRoot (root) as CSSRoot
 
 -- | Types
 
@@ -34,31 +38,12 @@ type Output = Void
 -- | View
 header :: forall q. H.ComponentHTML q
 header =
-  HH.div [ HC.style do
-             CSS.height (CSS.px 35.0)
-             CSS.display CSS.flex
-             CSS.alignItems CSS.center
-             CSS.justifyContent CSS.center
-             CSS.padding (CSS.rem 1.9) CSS.nil (CSS.rem 3.9) CSS.nil
-         ]
-  [ HH.div [ HC.style do
-               CSS.position CSS.relative
-               CSS.top CSS.nil
-               CSS.left CSS.nil
-               CSS.right CSS.nil
-               CSS.zIndex 1
-
-               CSS.width (CSS.pct 75.0)
-           ]
-    [ HH.div [ HC.style do
-                 CSS.display CSS.flex
-                 CSS.alignItems CSS.center
-                 CSS.justifyContent CSS.spaceBetween
-             ]
-      [ logo
-      , nav
-      , contact
-      ]
+  HH.div [ HP.id_ IDs.header]
+  [ HH.div [ HP.id_ IDs.navbar]
+    [ logo
+    , nav
+    , contact
+    , HH.img [ HP.src Images.bubbleGreen]
     ]
   ]
   where
@@ -70,55 +55,26 @@ header =
              ]
       [ HH.text "Erudito-logo" ]
 
-    linkStyle :: CSS
-    linkStyle = do
-      CSS.color Colors.gray
-      CSS.margin1 (CSS.rem 0.95)
-      CSS.position CSS.relative
-
     nav :: H.ComponentHTML q
     nav =
-      HH.nav [ HC.style do
-                 CSS.display CSS.flex
+      HH.nav [ HP.id_ IDs.desktopMenu
              ]
-      [ HH.a [ HC.style linkStyle
-             , HP.href "/work"
-             ]
+      [ HH.a [ HP.href "/work"]
         [ HH.text "Work"]
-      , HH.a [ HC.style linkStyle
-             , HP.href "/services"
-             ]
+      , HH.a [ HP.href "/services"]
         [ HH.text "Services"]
-      , HH.a [ HC.style linkStyle
-             , HP.href "/about"
-             ]
+      , HH.a [ HP.href "/about"]
         [ HH.text "About"]
-      , HH.a [ HC.style linkStyle
-             , HP.href "/careers"
-             ]
+      , HH.a [ HP.href "/careers"]
         [ HH.text "Carrers"]
-      , HH.a [ HC.style linkStyle
-             , HP.href "/blog"
-             ]
+      , HH.a [ HP.href "/blog"]
         [ HH.text "Blog"]
       ]
 
     contact :: H.ComponentHTML q
     contact =
-      HH.a [ HC.style do
-               CSS.color Colors.white
-               CSS.display CSS.block
-               CSS.fontWeight (CSS.weight 600.0)
-           ]
-      [ HH.text "contact"
-      , HH.img [ HP.src Images.bubbleGreen
-               , HC.style do
-                   CSS.maxWidth (CSS.vw 50.0)
-                   CSS.position CSS.absolute
-                   CSS.transform $ CSS.translate_ (CSS.rem (-12.0)) (CSS.rem (-12.0))
-                   CSS.zIndex (-1)
-               ]
-      ]
+      HH.a [ HP.id_ IDs.contact]
+      [ HH.text "contact"]
 
 body :: forall q. H.ComponentHTML q
 body =
@@ -220,9 +176,7 @@ render _ =
   HH.div_
   [ header
   , body
-  , HC.stylesheet do
-      CSS.star ? do
-        CSS.boxSizing CSS.inherit
+  , HC.stylesheet CSSRoot.root
   ]
 
 eval :: forall m. Query ~> H.ComponentDSL State Query Output m

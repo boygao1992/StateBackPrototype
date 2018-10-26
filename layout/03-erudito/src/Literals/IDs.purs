@@ -1,5 +1,20 @@
 module IDs where
 
+header :: String
+header = "header"
+
+navbar :: String
+navbar = "navbar"
+
+desktopMenu :: String
+desktopMenu = "desktop-menu"
+
+mobileMenu :: String
+mobileMenu = "mobile-menu"
+
+contact :: String
+contact = "contact"
+
 bubbleYellow :: String
 bubbleYellow = "bubble-yellow"
 
