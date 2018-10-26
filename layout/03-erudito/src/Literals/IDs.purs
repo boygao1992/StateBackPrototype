@@ -15,6 +15,15 @@ mobileMenu = "mobile-menu"
 contact :: String
 contact = "contact"
 
+content :: String
+content = "content"
+
+splashText :: String
+splashText = "splash-text"
+
+splashImage :: String
+splashImage = "splash-image"
+
 bubbleYellow :: String
 bubbleYellow = "bubble-yellow"
 

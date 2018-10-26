@@ -7,16 +7,13 @@ import Halogen as H
 import Halogen.HTML as HH
 import Halogen.HTML.CSS as HC
 import Halogen.HTML.Properties as HP
-import CSS (absolute, alignItems, backgroundColor, block, border, boxSizing, color, display, em, flex, flexDirection, flexEnd, flexStart, flexWrap, fontSize, fontWeight, height, justifyContent, left, lineHeight, marginRight, marginTop, maxWidth, nil, nowrap, padding, pct, position, px, relative, rem, right, row, solid, spaceBetween, star, top, transform, vw, weight, width, zIndex, textWhitespace, whitespaceNoWrap, wrap) as CSS
-import CSS (CSS, (?))
-import CSS.Common (center, inherit) as CSS
+import CSS (alignItems, backgroundColor, border, color, display, em, flex, flexDirection, flexEnd, flexStart, flexWrap, fontSize, height, justifyContent, lineHeight, marginRight, marginTop, maxWidth, nil, nowrap, pct, px, rem, row, solid, spaceBetween, textWhitespace, whitespaceNoWrap, width, wrap) as CSS
+import CSS.Common (center) as CSS
 import Colors as Colors
-import CSSUtils (margin1, margin2, translate_, padding2, borderRadius1) as CSS
+import CSSUtils (borderRadius1, margin2, padding2) as CSS
 import Images as Images
 import Urls as Urls
-import HalogenUtils (classList)
 import IDs as IDs
-import ClassNames as CN
 import CSSRoot (root) as CSSRoot
 
 -- | Types
@@ -81,27 +78,13 @@ body =
   HH.div [ HC.style do
              CSS.marginTop (CSS.rem 3.8)
          ]
-  [ content1
+  [ content
   ]
 
-content1 :: forall q. H.ComponentHTML q
-content1 =
-  HH.div [ HC.style do
-             CSS.display CSS.flex
-             CSS.flexDirection CSS.row
-             CSS.alignItems CSS.flexStart
-             CSS.justifyContent CSS.center
-             CSS.flexWrap CSS.nowrap
-             CSS.height (CSS.rem 15.0)
-         ]
-  [ HH.div [ HC.style do
-               CSS.display CSS.flex
-               CSS.flexDirection CSS.row
-               CSS.alignItems CSS.center
-               CSS.justifyContent CSS.spaceBetween
-               CSS.flexWrap CSS.nowrap
-               CSS.width (CSS.pct 75.0)
-           ]
+content :: forall q. H.ComponentHTML q
+content =
+  HH.div [ HP.id_ IDs.content]
+  [ HH.div_
     [ textBlock
     , imageBlock
     ]
@@ -109,9 +92,7 @@ content1 =
   where
     textBlock :: H.ComponentHTML q
     textBlock =
-      HH.div [ HC.style do
-                 CSS.maxWidth (CSS.pct 35.0)
-             ]
+      HH.div [ HP.id_ IDs.splashText]
       [ HH.h1 [ HC.style do
                   CSS.fontSize (CSS.rem 3.0)
                   CSS.lineHeight (CSS.pct 110.0)
@@ -128,13 +109,8 @@ content1 =
 
     imageBlock :: H.ComponentHTML q
     imageBlock =
-      HH.div [ HC.style do
-                 CSS.maxWidth (CSS.pct 50.0)
-             ]
-      [ HH.img [ HP.src Urls.main
-               , HC.style do
-                   CSS.width (CSS.pct 100.0)
-               ]
+      HH.div [ HP.id_ IDs.splashImage]
+      [ HH.img [ HP.src Urls.main]
       ]
 
     buttonBlock :: H.ComponentHTML q

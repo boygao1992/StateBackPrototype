@@ -22,6 +22,15 @@ mobileMenu = CSS.id_ IDs.mobileMenu
 contact :: Selector
 contact = CSS.id_ IDs.contact
 
+content :: Selector
+content = CSS.id_ IDs.content
+
+splashText :: Selector
+splashText = CSS.id_ IDs.splashText
+
+splashImage :: Selector
+splashImage = CSS.id_ IDs.splashImage
+
 bubbleYellow :: Selector
 bubbleYellow = CSS.id_ IDs.bubbleYellow
 
@@ -35,4 +44,3 @@ bubbleGreen :: Selector
 bubbleGreen = CSS.id_ IDs.bubbleGreen
 
 -- | class selectors
-
