@@ -15,5 +15,5 @@ classList
 classList = classes <<< map ClassName
 
 -- | Svg
-svg_ :: forall p r i. String -> Array (IProp r i) -> HTML p i
-svg_ code props = Svg.icon code ((HH.attr (HH.AttrName "class") "icon") : props)
+svg_ :: forall p r i. String -> String -> Array (IProp r i) -> HTML p i
+svg_ className code props = Svg.icon code ((HH.attr (HH.AttrName "class") className) : props)
