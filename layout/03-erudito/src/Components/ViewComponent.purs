@@ -7,7 +7,7 @@ import Halogen as H
 import Halogen.HTML as HH
 import Halogen.HTML.CSS as HC
 import Halogen.HTML.Properties as HP
-import CSS (absolute, alignItems, backgroundColor, block, boxSizing, color, display, flex, flexDirection, flexWrap, fontWeight, height, justifyContent, left, marginTop, maxWidth, nil, nowrap, padding, pct, position, px, relative, rem, right, row, spaceBetween, star, top, transform, vw, weight, width, zIndex, flexStart, fontSize, em, lineHeight, flexEnd, marginRight, borderRadius, border, solid) as CSS
+import CSS (absolute, alignItems, backgroundColor, block, border, boxSizing, color, display, em, flex, flexDirection, flexEnd, flexStart, flexWrap, fontSize, fontWeight, height, justifyContent, left, lineHeight, marginRight, marginTop, maxWidth, nil, nowrap, padding, pct, position, px, relative, rem, right, row, solid, spaceBetween, star, top, transform, vw, weight, width, zIndex, textWhitespace, whitespaceNoWrap, wrap) as CSS
 import CSS (CSS, (?))
 import CSS.Common (center, inherit) as CSS
 import Colors as Colors
@@ -188,6 +188,7 @@ content1 =
                  CSS.flexDirection CSS.row
                  CSS.justifyContent CSS.flexStart
                  CSS.alignItems CSS.flexEnd
+                 CSS.flexWrap CSS.wrap
              ]
       [ HH.a [ HP.href "/contact"
              , HC.style do
@@ -196,16 +197,18 @@ content1 =
                  CSS.backgroundColor Colors.purple
                  CSS.color Colors.white
                  CSS.borderRadius1 (CSS.px 5.0)
+                 CSS.textWhitespace CSS.whitespaceNoWrap
              ]
         [ HH.text "Get in touch"]
       , HH.a [ HP.href "/contact"
              , HC.style do
-                 CSS.marginRight (CSS.rem 1.0)
+                 CSS.marginTop (CSS.rem 1.0)
                  CSS.padding2 (CSS.rem 1.05) (CSS.rem 1.85)
                  CSS.backgroundColor Colors.white
                  CSS.color Colors.gray
                  CSS.border CSS.solid (CSS.px 1.0) Colors.gray
                  CSS.borderRadius1 (CSS.px 5.0)
+                 CSS.textWhitespace CSS.whitespaceNoWrap
              ]
         [ HH.text "Watch our reel"]
       ]
