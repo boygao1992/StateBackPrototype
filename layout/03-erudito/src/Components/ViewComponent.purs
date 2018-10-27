@@ -79,6 +79,7 @@ body =
              CSS.marginTop (CSS.rem 3.8)
          ]
   [ content
+  , section1
   ]
 
 content :: forall q. H.ComponentHTML q
@@ -144,6 +145,19 @@ content =
              ]
         [ HH.text "Watch our reel"]
       ]
+
+section1 :: forall q. H.ComponentHTML q
+section1 =
+  HH.section_
+  [ HH.div_
+    [ HH.span_
+      [ HH.text "Nice to meet you!"]
+    , HH.h1_
+      [ HH.text "We're are a small team of storytellers, thinkers and problem solvers."]
+    ]
+  , HH.div_
+    []
+  ]
 
 -- | Component
 

@@ -34,7 +34,8 @@ contentLayout = do
     CSS.height (CSS.rem 50.0)
 
     CSS.query CSSMedia.screen (NE.singleton (CSSMedia.maxWidth screenSizeMobile)) do
-      CSS.flexWrap CSS.wrap
+      CSS.display CSS.block
+      CSS.height CSS.auto
 
 splashTextLayout :: CSS
 splashTextLayout = do
@@ -59,7 +60,7 @@ splashImageLayout = do
       CSS.height (CSS.pct 100.0)
 
       CSS.img ? do
-        CSS.height (CSS.pct 100.0)
+        CSS.maxHeight (CSS.pct 100.0)
 -- | Style
 
 -- | Root
