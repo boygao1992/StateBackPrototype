@@ -1,3 +1,67 @@
+# Default
+inline-block
+- `img`
+
+block
+- `div`
+- `p`
+- `ul`
+- `ol`
+- `nav`
+- `section`
+- `iframe`
+- `html`
+- `header`
+- `body`
+
+# Display
+
+display-outside features
+- size (control over properties related to `width` and `height`)
+  - `inline` vs rest
+- line-break
+  - `inline*` vs rest
+
+display-inside
+- `flex` (`block` by default)
+- `grid`
+- `table`
+
+inline-level (no line-break)
+- `inline` (no size)
+- `inline-block`
+- `inline-flex` (from `block` to `inline-block`)
+- `inline-grid`
+- `inline-table`
+
+block-level (with line-break)
+- `block`
+- `flex`
+- `grid`
+- `table`
+
+> `p` cannot contain block-level elements.
+
+
+# Float
+
+- `left` (space on the right is available for inline-level elements)
+- `right` (space on the left is available for inline-level elements)
+
+> As float implies the use of the block layout, it modifies the computed value of the display values, in some cases:
+
+push elements from inline-level to block-level (from `inline*` to `block`) if not already at
+
+# CSS Multiple Columns
+
+- `column-count` (~ `grid-template-columns: repeat(_, <column-width>)`)
+- `column-width`
+- `column-gap` (~ `grid-column-gap`)
+- `column-rule` (~ `border` on grid items)
+  - `column-rule-width`
+  - `column-rule-style`
+  - `column-rule-color`
+
 # CSS Grid
 
 column > row
