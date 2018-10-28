@@ -7,9 +7,16 @@ grid system
 - local
 
 grid layout
-- `grid-template-columns`
-- `grid-template-rows`
-- `grid-auto-rows`
+- `grid` (~ `grid-template` or `row / column`)
+  - `grid-template`, explicit
+    - `grid-template-rows`
+    - `grid-template-columns`
+    - `grid-template-area`, identified by unique names
+  - implicit
+    - `grid-auto-rows`
+    - `grid-auto-columns`
+    - `grid-auto-flow` (like `flex-direction`)
+      - value: `row` or `column` or `row dense` or `column dense`
 
 gap
 - `grid-column-gap`
