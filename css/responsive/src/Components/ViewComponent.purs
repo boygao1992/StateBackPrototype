@@ -87,14 +87,21 @@ render _ =
     aboutUs =
       HH.section [ classList [ CN.homeAbout]]
       [ HH.div [ classList [ CN.homeAboutText]]
-        [ HH.h1_
-          [ HH.text "Who we are"]
-        , HH.p_
-          [ HH.text "Sit by the fire drink water out of faucet hide head under blanket so no one can see cat is love, cat is life. Knock dish off table eating always hungry so favor packing over toy"]
-        , HH.p_
-          [ HH.strong_
-            [ HH.text "Rub face on owners."]
-          , HH.text " Peer out window, chatter at birds, lure them to mouth. Chase ball of string eat a plant, kill a hand, i am the best have secret plans."
+        [
+          HH.div [ classList [ CN.homeAboutTextBox]]
+          [
+            HH.div [ classList [ CN.boxTitle]]
+            [
+              HH.h1_
+              [ HH.text "Who we are"]
+            ]
+          , HH.p_
+            [ HH.text "Sit by the fire drink water out of faucet hide head under blanket so no one can see cat is love, cat is life. Knock dish off table eating always hungry so favor packing over toy"]
+          , HH.p_
+            [ HH.strong_
+              [ HH.text "Rub face on owners."]
+            , HH.text " Peer out window, chatter at birds, lure them to mouth. Chase ball of string eat a plant, kill a hand, i am the best have secret plans."
+            ]
           ]
         ]
       ]

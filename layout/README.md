@@ -1,4 +1,10 @@
+# Model
+
+margin | border | padding | content | padding | border | margin
+
 # Default
+
+## Default Display
 inline
 - `a`
 - `button`
@@ -15,12 +21,60 @@ block
 - `p`
 - `ul`
 - `ol`
+- `h1`, `h2`, `h3`, `h4`, `h5`, `h6`
 - `nav`
 - `section`
+- `form`
 - `iframe`
 - `html`
 - `header`
 - `body`
+
+## Default Margin and Padding
+
+| tag    | default                             |
+| -----: | :---------------------------------- |
+| `body` | `margin: 8px`                       |
+| `form` | `margin-top: 0em`                   |
+| `h1`   | `margin: 0.67em 0`                  |
+| `h2`   | `margin: 0.83em 0`                  |
+| `h3`   | `margin: 1em 0`                     |
+| `h4`   | `margin: 1.33em 0`                  |
+| `h5`   | `margin: 1.67em 0`                  |
+| `h6`   | `margin: 2.33em 0`                  |
+| `p`    | `margin: 1em 0`                     |
+| `ul`   | `margin: 1em 0, padding-left: 40px` |
+
+# Positioning
+`inline-block`
+- `position: static`, non-positioned
+  - row-wise sequential (total) ordering over the 2d pixel space
+  - row height is determined by the tallest element in the row
+- `position: relative`, positioned relative to its static position
+  - visual translation (`top`, `right`, `bottom`, `left`) will not affect its original static position
+  - `static` neighbors still interact with its static position
+  - forms new stacking context when
+    - `z-index` is not `auto`
+    - or `opacity` is `< 1.0`
+- `position: absolute`, positioned relative to its nearest positioned ancestor
+  - no static position
+  - forms new stacking context when
+    - `z-index` is not `auto`
+    - or `opacity` is `< 1.0`
+- `position: fixed`, positioned relative to the document
+  - `transform` property in parent will cause fixed element to become relative to the parent instead of the document
+  - forms new stacking context (after Chrome 22, Firefox 44)
+- `position: sticky` (`relative` + `fixed`)
+  - forms new stacking context
+  
+# Stacking Order
+when an element creates a new stacking context, all its child elements live in that stacking context
+
+`z-index` only rearrange the stacking order of elements within the same stacking context
+
+### 1.[MDN - The stacking context](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Positioning/Understanding_z_index/The_stacking_context)
+
+### 2.[What No One Told You About Z-Index](https://philipwalton.com/articles/what-no-one-told-you-about-z-index/)
 
 # Display
 

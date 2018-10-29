@@ -1,6 +1,6 @@
 module Selectors where
 
-import CSS (Selector)
+import CSS (Selector(..))
 import CSSUtils (class_)
 import ClassNames as CN
 
@@ -19,6 +19,9 @@ unstyledList = class_ CN.unstyledList
 
 title :: Selector
 title = class_ CN.title
+
+boxTitle :: Selector
+boxTitle = class_ CN.boxTitle
 
 button :: Selector
 button = class_ CN.button
@@ -43,6 +46,9 @@ homeAbout = class_ CN.homeAbout
 
 homeAboutText :: Selector
 homeAboutText = class_ CN.homeAboutText
+
+homeAboutTextBox :: Selector
+homeAboutTextBox = class_ CN.homeAboutTextBox
 
 portfolio :: Selector
 portfolio = class_ CN.portfolio

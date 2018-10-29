@@ -30,3 +30,6 @@ portfolio6 = "img/portfolio-06.jpg"
 
 heroBackground :: String
 heroBackground = "img/hero-bg.jpg"
+
+aboutBackground :: String
+aboutBackground = "img/who-we-are.jpg"

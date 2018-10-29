@@ -3,14 +3,14 @@ module CSSHeader where
 import Prelude
 
 import CSS (CSS)
-import CSS as CSS
+import CSS (a, absolute, color, display, em, float, floatLeft, floatRight, fontSize, header, hover, inlineBlock, left, li, nav, nil, noneTextDecoration, position, right, textDecoration, ul) as CSS
 import CSS.Common (none) as CSS
-import CSSUtils ((?), (&), (++))
-import CSSUtils (margin1, padding1, focus, pair) as CSS
 import CSS.ListStyle.Type (listStyleType) as CSS
 import CSS.Text.Transform (textTransform, uppercase) as CSS
-import Colors (white, lightgray) as Colors
 import CSSConfig (desktop)
+import CSSUtils ((?), (&), (++))
+import CSSUtils (margin1, padding1, focus, pair) as CSS
+import Colors (white, lightgray) as Colors
 import Selectors as S
 
 root :: CSS

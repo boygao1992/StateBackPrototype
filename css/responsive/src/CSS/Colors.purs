@@ -2,8 +2,11 @@ module Colors where
 
 import CSSUtils (safeFromHexString)
 import Color (Color)
-import Color (white) as Color
-import Color.Scheme.X11 (lightgray) as Color
+import Color (white, black) as Color
+import Color.Scheme.X11 (lightgray, springgreen) as Color
+
+black :: Color
+black = Color.black
 
 white :: Color
 white = Color.white
@@ -11,8 +14,11 @@ white = Color.white
 lightgray :: Color
 lightgray = Color.lightgray
 
-lightgreen :: Color
-lightgreen = safeFromHexString "#00ff6c"
+springgreen :: Color
+springgreen = Color.springgreen
 
-dark :: Color
-dark = safeFromHexString "#232323"
+william :: Color
+william = safeFromHexString "#37566a"
+
+mineshaft :: Color
+mineshaft = safeFromHexString "#232323"

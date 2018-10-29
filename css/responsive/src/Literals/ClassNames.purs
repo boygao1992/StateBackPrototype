@@ -22,6 +22,9 @@ buttonSmall = "button-small"
 title :: String
 title = "title"
 
+boxTitle :: String
+boxTitle = "box-title"
+
 -- | Grid
 
 column1 :: String
@@ -40,6 +43,9 @@ homeAbout = "home-about"
 
 homeAboutText :: String
 homeAboutText = "home-about-text"
+
+homeAboutTextBox :: String
+homeAboutTextBox = "home-about-text-box"
 
 portfolio :: String
 portfolio = "portfolio"
