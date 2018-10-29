@@ -1,4 +1,12 @@
 # Default
+inline
+- `a`
+- `button`
+- `canvas`
+- `code`
+- `span`
+- `strong`
+
 inline-block
 - `img`
 
