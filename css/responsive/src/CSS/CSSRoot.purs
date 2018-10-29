@@ -46,7 +46,7 @@ root = do
       CSS.display CSS.block
       CSS.fontSize (CSS.em 0.9)
 
-  desktop ? do
+  desktop do
     S.title ? do
       CSS.fontSize (CSS.rem 3.7)
 
@@ -58,6 +58,10 @@ root = do
     CSS.pair "border-style" "solid"
     CSS.borderWidth (CSS.px 2.0)
     CSS.padding2 (CSS.em 0.5) (CSS.em 1.75)
+
+  desktop do
+    S.button ? do
+      CSS.fontSize (CSS.rem 1.5)
 
   S.buttonAccent ? do
     CSS.color Colors.lightgreen
@@ -76,3 +80,7 @@ root = do
     CSS.padding2 (CSS.em 10.0) CSS.nil
     CSS.color Colors.white
 
+  desktop do
+    S.homeHero ? do
+      CSS.height (CSS.vh 100.0)
+      CSS.paddingTop (CSS.vh 35.0)
