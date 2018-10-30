@@ -112,3 +112,5 @@
 > - [Prioritize visible content](https://developers.google.com/speed/docs/insights/PrioritizeVisibleContent)
 > - [Remove render-blocking JavaScript](https://developers.google.com/speed/docs/insights/BlockingJS)
 
+
+### 2.[Web Performance 101](https://3perf.com/talks/web-perf-101/)

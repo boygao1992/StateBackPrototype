@@ -1,12 +1,6 @@
 module ClassNames where
 
 -- | General
-
--- | General
-
--- | General
-
--- | General
 container :: String
 container = "container"
 
