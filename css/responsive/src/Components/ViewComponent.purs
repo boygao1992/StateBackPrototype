@@ -148,7 +148,7 @@ render _ =
         [ HH.h1 [ classList [ CN.title]]
           [ HH.text "Like what you see?"
           , HH.span_
-            [ HH.text "Then waht are you waiting for?"]
+            [ HH.text "Then what are you waiting for?"]
           ]
         , HH.a [ HP.href ""
                , classList [ CN.button, CN.buttonDark]]

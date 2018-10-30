@@ -41,6 +41,12 @@ heroHint = class_ CN.heroHint
 heroSpring :: Selector
 heroSpring = class_ CN.heroSpring
 
+heroSpringTop :: Selector
+heroSpringTop = class_ CN.heroSpringTop
+
+heroSpringBottom :: Selector
+heroSpringBottom = class_ CN.heroSpringBottom
+
 -- | Gallery
 
 gallery :: Selector

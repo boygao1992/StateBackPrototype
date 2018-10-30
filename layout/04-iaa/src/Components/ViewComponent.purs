@@ -65,7 +65,7 @@ render _ =
 
     hero :: H.ComponentHTML q
     hero =
-      HH.div [ classList [ CN.hero]]
+      HH.section [ classList [ CN.hero]]
       [
         HH.h1 [ classList [ CN.heroTitle]]
         [ titleInstitute
@@ -73,10 +73,14 @@ render _ =
         , titleArchitectural
         , titleAnthropology
         ]
-      , HH.div [ classList [ CN.heroHint]]
-        []
+      , HH.p [ classList [ CN.heroHint]]
+        [ HH.text "Scroll Down"]
       , HH.div [ classList [ CN.heroSpring]]
-        []
+        [ HH.div [ classList [ CN.heroSpringTop]]
+          []
+        , HH.div [ classList [ CN.heroSpringBottom]]
+          []
+        ]
       ]
       where
         titleInstitute :: H.ComponentHTML q

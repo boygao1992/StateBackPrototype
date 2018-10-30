@@ -51,6 +51,12 @@ heroHint = hero_ "hint"
 heroSpring :: String
 heroSpring = hero_ "spring"
 
+heroSpringTop :: String
+heroSpringTop = heroSpring <> "Top"
+
+heroSpringBottom :: String
+heroSpringBottom = heroSpring <> "Bottom"
+
 -- | Gallery
 
 gallery :: String
