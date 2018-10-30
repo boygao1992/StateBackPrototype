@@ -112,12 +112,14 @@ render _ =
       [ HH.h1_
         [ HH.text "Some of our work"
         ]
-      , portfolioItem Urls.portfolio1
-      , portfolioItem Urls.portfolio2
-      , portfolioItem Urls.portfolio3
-      , portfolioItem Urls.portfolio4
-      , portfolioItem Urls.portfolio5
-      , portfolioItem Urls.portfolio6
+      , HH.div [ classList [ CN.portfolioList]]
+        [ portfolioItem Urls.portfolio1
+        , portfolioItem Urls.portfolio2
+        , portfolioItem Urls.portfolio3
+        , portfolioItem Urls.portfolio4
+        , portfolioItem Urls.portfolio5
+        , portfolioItem Urls.portfolio6
+        ]
       ]
       where
         portfolioItem :: String -> H.ComponentHTML q
@@ -126,12 +128,15 @@ render _ =
           [ HH.img [ HP.src url
                    , HP.alt "portfolio item"
                    ]
-          , HH.figcaption [ classList [ CN.portfolioDescription]]
-            [ HH.p_
-              [ HH.text "Project title"]
-            , HH.a [ HP.href ""
-                   , classList [ CN.button, CN.buttonAccent, CN.buttonSmall]]
-              [ HH.text "Project details"]
+          , HH.div [ classList [ CN.portfolioDescriptionBox]]
+            [
+              HH.figcaption [ classList [ CN.portfolioDescription]]
+              [ HH.p_
+                [ HH.text "Project title"]
+              , HH.a [ HP.href ""
+                     , classList [ CN.button, CN.buttonAccent, CN.buttonSmall]]
+                [ HH.text "Project details"]
+              ]
             ]
           ]
 

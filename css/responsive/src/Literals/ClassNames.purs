@@ -1,6 +1,12 @@
 module ClassNames where
 
 -- | General
+
+-- | General
+
+-- | General
+
+-- | General
 container :: String
 container = "container"
 
@@ -50,8 +56,14 @@ homeAboutTextBox = "home-about-text-box"
 portfolio :: String
 portfolio = "portfolio"
 
+portfolioList :: String
+portfolioList = "port-list"
+
 portfolioItem :: String
 portfolioItem = "port-item"
+
+portfolioDescriptionBox :: String
+portfolioDescriptionBox = "port-desc-box"
 
 portfolioDescription :: String
 portfolioDescription = "port-desc"

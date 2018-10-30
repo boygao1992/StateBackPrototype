@@ -1,6 +1,6 @@
 module Selectors where
 
-import CSS (Selector(..))
+import CSS (Selector)
 import CSSUtils (class_)
 import ClassNames as CN
 
@@ -53,8 +53,14 @@ homeAboutTextBox = class_ CN.homeAboutTextBox
 portfolio :: Selector
 portfolio = class_ CN.portfolio
 
+portfolioList :: Selector
+portfolioList = class_ CN.portfolioList
+
 portfolioItem :: Selector
 portfolioItem = class_ CN.portfolioItem
+
+portfolioDescriptionBox :: Selector
+portfolioDescriptionBox = class_ CN.portfolioDescriptionBox
 
 portfolioDescription :: Selector
 portfolioDescription = class_ CN.portfolioDescription

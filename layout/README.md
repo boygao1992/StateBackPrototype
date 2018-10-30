@@ -25,6 +25,8 @@ block
 - `nav`
 - `section`
 - `form`
+- `figure`
+- `figcaption`
 - `iframe`
 - `html`
 - `header`
@@ -32,18 +34,27 @@ block
 
 ## Default Margin and Padding
 
-| tag    | default                             |
-| -----: | :---------------------------------- |
-| `body` | `margin: 8px`                       |
-| `form` | `margin-top: 0em`                   |
-| `h1`   | `margin: 0.67em 0`                  |
-| `h2`   | `margin: 0.83em 0`                  |
-| `h3`   | `margin: 1em 0`                     |
-| `h4`   | `margin: 1.33em 0`                  |
-| `h5`   | `margin: 1.67em 0`                  |
-| `h6`   | `margin: 2.33em 0`                  |
-| `p`    | `margin: 1em 0`                     |
-| `ul`   | `margin: 1em 0, padding-left: 40px` |
+| tag      | default                             |
+| -----:   | :---------------------------------- |
+| `body`   | `margin: 8px`                       |
+| `form`   | `margin-top: 0em`                   |
+| `h1`     | `margin: 0.67em 0`                  |
+| `h2`     | `margin: 0.83em 0`                  |
+| `h3`     | `margin: 1em 0`                     |
+| `h4`     | `margin: 1.33em 0`                  |
+| `h5`     | `margin: 1.67em 0`                  |
+| `h6`     | `margin: 2.33em 0`                  |
+| `p`      | `margin: 1em 0`                     |
+| `ul`     | `margin: 1em 0, padding-left: 40px` |
+| `figure` | `margin: 1em 40px`                  |
+
+## Default spacing between `inline-block` elements
+
+> [Fighting the Space Between Inline Block Elements](https://css-tricks.com/fighting-the-space-between-inline-block-elements/)
+> The reason you get the spaces is because you have spaces between the elements
+> (a line break and a few tabs counts as a space, just to be clear). 
+
+for adjacent images (`<img>`, `display: inline-block` by default), lift them to `display: block`
 
 # Positioning
 `inline-block`
@@ -56,8 +67,9 @@ block
   - forms new stacking context when
     - `z-index` is not `auto`
     - or `opacity` is `< 1.0`
-- `position: absolute`, positioned relative to its nearest positioned ancestor
-  - no static position
+- `position: absolute`, positioned relative its static position in its nearest positioned ancestor
+  - no size
+  - visual translation (`top`, `right`, `bottom`, `left`) will not affect its original static position
   - forms new stacking context when
     - `z-index` is not `auto`
     - or `opacity` is `< 1.0`
