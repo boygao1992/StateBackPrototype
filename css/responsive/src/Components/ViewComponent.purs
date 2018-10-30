@@ -39,6 +39,7 @@ render _ =
   , hero
   , aboutUs
   , portfolio
+  , callToAction
   , footer
   , HC.stylesheet CSSRoot.root
   ]
@@ -109,7 +110,7 @@ render _ =
     portfolio :: H.ComponentHTML q
     portfolio =
       HH.section [ classList [ CN.portfolio]]
-      [ HH.h1_
+      [ HH.h1 [ classList [ CN.title]]
         [ HH.text "Some of our work"
         ]
       , HH.div [ classList [ CN.portfolioList]]
@@ -140,13 +141,30 @@ render _ =
             ]
           ]
 
+    callToAction :: H.ComponentHTML q
+    callToAction =
+      HH.div [ classList [ CN.callToAction]]
+      [ HH.div [ classList [ CN.container]]
+        [ HH.h1 [ classList [ CN.title]]
+          [ HH.text "Like what you see?"
+          , HH.span_
+            [ HH.text "Then waht are you waiting for?"]
+          ]
+        , HH.a [ HP.href ""
+               , classList [ CN.button, CN.buttonDark]]
+          [ HH.text "Hire us"]
+        ]
+      ]
+
     footer :: H.ComponentHTML q
     footer =
-      HH.footer_
-      [ description
-      , links
-      , links
-      , links
+      HH.footer [ classList [ CN.footer]]
+      [ HH.div [ classList [ CN.container]]
+        [ description
+        , links
+        , links
+        , links
+        ]
       ]
       where
         description :: H.ComponentHTML q

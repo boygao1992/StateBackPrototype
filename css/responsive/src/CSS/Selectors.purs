@@ -29,6 +29,9 @@ button = class_ CN.button
 buttonAccent :: Selector
 buttonAccent = class_ CN.buttonAccent
 
+buttonDark :: Selector
+buttonDark = class_ CN.buttonDark
+
 buttonSmall :: Selector
 buttonSmall = class_ CN.buttonSmall
 
@@ -64,3 +67,9 @@ portfolioDescriptionBox = class_ CN.portfolioDescriptionBox
 
 portfolioDescription :: Selector
 portfolioDescription = class_ CN.portfolioDescription
+
+callToAction :: Selector
+callToAction = class_ CN.callToAction
+
+footer :: Selector
+footer = class_ CN.footer

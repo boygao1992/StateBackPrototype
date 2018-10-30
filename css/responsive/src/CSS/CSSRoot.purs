@@ -3,20 +3,23 @@ module CSSRoot where
 import Prelude
 
 import CSS (CSS)
-import CSS as CSS
-import CSS.Common (auto) as CSS
+import CSS (backgroundColor, block, body, borderBox, borderColor, boxSizing, color, display, em, fontSize, height, hover, img, importUrl, inlineBlock, lineHeight, marginBottom, marginTop, maxWidth, nil, noneTextDecoration, p, pct, px, rem, span, star, textDecoration, width) as CSS
+import CSS.Common (auto, none) as CSS
 import CSS.Text.Transform (textTransform, uppercase) as CSS
 import CSS.TextAlign (center, textAlign) as CSSText
+import CSS.ListStyle.Type (listStyleType) as CSS
 import CSSUtils ((&), (++), (?))
-import CSSUtils (borderWidth, focus, margin1, margin2, padding2, pair) as CSS
+import CSSUtils (borderWidth, focus, margin1, margin2, padding1, padding2, pair) as CSS
 import Colors as Colors
 import Selectors as S
 import Urls (googleRaleway) as Urls
 import CSSConfig (desktop)
-import CSSHeader (root) as CSSHeader
-import CSSHero (root) as CSSHero
-import CSSAbout (root) as CSSAbout
-import CSSPortfolio (root) as CSSPortfolio
+import CSSHeader (root) as Header
+import CSSHero (root) as Hero
+import CSSAbout (root) as About
+import CSSPortfolio (root) as Portfolio
+import CSSCTA (root) as CTA
+import CSSFooter (root) as Footer
 
 
 
@@ -80,6 +83,14 @@ root = do
     CSS.backgroundColor Colors.springgreen
     CSS.color Colors.mineshaft
 
+  S.buttonDark ? do
+    CSS.color Colors.mineshaft
+    CSS.borderColor Colors.mineshaft
+
+  (S.buttonDark & CSS.hover) ++ (S.buttonDark & CSS.focus) ? do
+    CSS.backgroundColor Colors.mineshaft
+    CSS.color Colors.springgreen
+
   S.buttonSmall ? do
     CSS.fontSize (CSS.rem 0.7)
     CSS.pair "font-weight" "700"
@@ -88,11 +99,20 @@ root = do
     S.buttonSmall ? do
       CSS.fontSize (CSS.rem 0.8)
 
-  CSSHeader.root
+  S.unstyledList ? do
+    CSS.margin1 CSS.nil
+    CSS.padding1 CSS.nil
+    CSS.listStyleType CSS.none
 
-  CSSHero.root
+  Header.root
 
-  CSSAbout.root
+  Hero.root
 
-  CSSPortfolio.root
+  About.root
+
+  Portfolio.root
+
+  CTA.root
+
+  Footer.root
 

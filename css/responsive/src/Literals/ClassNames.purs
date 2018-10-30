@@ -22,6 +22,9 @@ button = "button"
 buttonAccent :: String
 buttonAccent = "button-accent"
 
+buttonDark :: String
+buttonDark = "button-dark"
+
 buttonSmall :: String
 buttonSmall = "button-small"
 
@@ -67,3 +70,9 @@ portfolioDescriptionBox = "port-desc-box"
 
 portfolioDescription :: String
 portfolioDescription = "port-desc"
+
+callToAction :: String
+callToAction = "cta"
+
+footer :: String
+footer = "footer"

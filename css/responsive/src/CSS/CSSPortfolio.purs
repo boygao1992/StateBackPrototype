@@ -4,11 +4,11 @@ module CSSPortfolio where
 import Prelude
 
 import CSS (CSS)
-import CSS (absolute, backgroundColor, block, bottom, color, display, em, flex, grid, hover, img, justifyContent, left, nil, padding, pct, position, relative, right, transform, width, zIndex) as CSS
+import CSS (absolute, backgroundColor, block, bottom, color, display, em, flex, grid, h1, hover, img, justifyContent, left, marginTop, nil, padding, pct, position, relative, right, transform, width, zIndex) as CSS
 import CSS.Overflow (overflow, hidden) as CSS
 import CSS.Common (center) as CSS
 import CSSUtils ((&), (?), (|*))
-import CSSUtils (margin1, margin2, pair, translate_) as CSS
+import CSSUtils (margin1, pair, translate_) as CSS
 import Colors as Colors
 import Selectors as S
 import CSSConfig (desktop, half)
@@ -17,7 +17,10 @@ import Color (rgba) as Color
 root :: CSS
 root = do
   S.portfolio ? do
-    CSS.margin2 (CSS.em 3.0) CSS.nil
+    CSS.marginTop $ CSS.em 3.0
+
+    CSS.h1 ? do
+      CSS.pair "font-weight" "300"
 
   S.portfolioItem ? do
     CSS.position CSS.relative
