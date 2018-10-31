@@ -70,7 +70,13 @@ borderRadius1 s = CSS.borderRadius s s s s
 
 -- | Pseudo
 focus :: Refinement
-focus = pseudo "focus"
+focus = fromString ":focus"
+
+before :: Refinement
+before = fromString "::before"
+
+after :: Refinement
+after = fromString "::after"
 
 -- | Flex
 class SpaceEvenly a where

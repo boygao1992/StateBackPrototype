@@ -3,7 +3,7 @@ module Animations where
 import Prelude
 
 import AnimationNames as AN
-import CSS as CSS
+import CSS (alternate, animation, fromString, infinite, keyframes, nil, pct, sec, transform, translate) as CSS
 import CSS (CSS)
 import CSSUtils (translate_, pair) as CSS
 import Data.Tuple (Tuple(Tuple))

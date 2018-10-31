@@ -114,3 +114,5 @@
 
 
 ### 2.[Web Performance 101](https://3perf.com/talks/web-perf-101/)
+
+### 3.[Case study: analyzing the Walmart site performance](https://iamakulov.com/notes/walmart/)

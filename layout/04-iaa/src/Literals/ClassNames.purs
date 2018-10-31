@@ -29,8 +29,18 @@ largeLogo = "large-logo"
 header :: String
 header = "header"
 
+headerLogo :: String
+headerLogo = header_ "logo"
+
 headerButton :: String
 headerButton = header_ "button"
+
+headerButtonContainer :: String
+headerButtonContainer = headerButton <> "Container"
+headerButtonPart1 :: String
+headerButtonPart1 = headerButton <> "Part1"
+headerButtonPart2 :: String
+headerButtonPart2 = headerButton <> "Part2"
 
 headerNavigationDesktop :: String
 headerNavigationDesktop = header_ "nav-desktop"

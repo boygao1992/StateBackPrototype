@@ -3610,12 +3610,14 @@ var PS = {};
       };
       return "hsla(" + (hue + (", " + (saturation + (", " + (lightness + (", " + (alpha + ")")))))));
   };
+  var black = hsl(0.0)(0.0)(0.0);
   exports["rgba"] = rgba;
   exports["rgb"] = rgb;
   exports["hsla"] = hsla;
   exports["hsl"] = hsl;
   exports["fromHexString"] = fromHexString;
   exports["cssStringHSLA"] = cssStringHSLA;
+  exports["black"] = black;
   exports["white"] = white;
 })(PS["Color"] = PS["Color"] || {});
 (function(exports) {
@@ -4063,6 +4065,24 @@ var PS = {};
       };
       return new Selector([  ], new Elem(s));
   });
+  var isStringRefinement = new CSS_String.IsString(function (s) {
+      return [ (function () {
+          var v = Data_String_CodePoints.take(1)(s);
+          if (v === "#") {
+              return Id.create(Data_String_CodePoints.drop(1)(s));
+          };
+          if (v === ".") {
+              return Class.create(Data_String_CodePoints.drop(1)(s));
+          };
+          if (v === ":") {
+              return Pseudo.create(Data_String_CodePoints.drop(1)(s));
+          };
+          if (v === "@") {
+              return Attr.create(Data_String_CodePoints.drop(1)(s));
+          };
+          return new Attr(s);
+      })() ];
+  });
   var eqPredicate = new Data_Eq.Eq(function (x) {
       return function (y) {
           if (x instanceof Id && y instanceof Id) {
@@ -4289,6 +4309,7 @@ var PS = {};
   exports["with"] = $$with;
   exports["eqPredicate"] = eqPredicate;
   exports["ordPredicate"] = ordPredicate;
+  exports["isStringRefinement"] = isStringRefinement;
   exports["isStringSelector"] = isStringSelector;
 })(PS["CSS.Selector"] = PS["CSS.Selector"] || {});
 (function(exports) {
@@ -4542,6 +4563,36 @@ var PS = {};
   var Data_Semigroup = PS["Data.Semigroup"];
   var Data_Tuple = PS["Data.Tuple"];
   var Prelude = PS["Prelude"];
+  var MediaType = function (x) {
+      return x;
+  };
+  var Feature = (function () {
+      function Feature(value0, value1) {
+          this.value0 = value0;
+          this.value1 = value1;
+      };
+      Feature.create = function (value0) {
+          return function (value1) {
+              return new Feature(value0, value1);
+          };
+      };
+      return Feature;
+  })();
+  var MediaQuery = (function () {
+      function MediaQuery(value0, value1, value2) {
+          this.value0 = value0;
+          this.value1 = value1;
+          this.value2 = value2;
+      };
+      MediaQuery.create = function (value0) {
+          return function (value1) {
+              return function (value2) {
+                  return new MediaQuery(value0, value1, value2);
+              };
+          };
+      };
+      return MediaQuery;
+  })();
   var Self = (function () {
       function Self(value0) {
           this.value0 = value0;
@@ -4676,6 +4727,13 @@ var PS = {};
           return rule(new Nested(new Sub(sel), runS(rs)));
       };
   };
+  var query = function (ty) {
+      return function (fs) {
+          return function ($404) {
+              return rule(Query.create(new MediaQuery(Data_Maybe.Nothing.value, ty, fs))(runS($404)));
+          };
+      };
+  };
   var keyframes = function (n) {
       return function (xs) {
           return rule(new Keyframe(new Keyframes(n, Data_Functor.map(Data_NonEmpty.functorNonEmpty(Data_Functor.functorArray))(Data_Profunctor_Strong.second(Data_Profunctor_Strong.strongFn)(runS))(xs))));
@@ -4719,6 +4777,9 @@ var PS = {};
   }, function ($408) {
       return S(Control_Applicative.pure(Control_Monad_Writer_Trans.applicativeWriterT(Data_Monoid.monoidArray)(Data_Identity.applicativeIdentity))($408));
   });
+  exports["MediaType"] = MediaType;
+  exports["MediaQuery"] = MediaQuery;
+  exports["Feature"] = Feature;
   exports["Self"] = Self;
   exports["Root"] = Root;
   exports["Pop"] = Pop;
@@ -4736,6 +4797,7 @@ var PS = {};
   exports["rule"] = rule;
   exports["key"] = key;
   exports["select"] = select;
+  exports["query"] = query;
   exports["keyframes"] = keyframes;
   exports["importUrl"] = importUrl;
   exports["functorStyleM"] = functorStyleM;
@@ -4935,6 +4997,9 @@ var PS = {};
   var valSize = new CSS_Property.Val(function (v) {
       return v;
   });
+  var rem = function (i) {
+      return Data_Semigroup.append(CSS_Property.semigroupValue)(CSS_Property.value(CSS_Property.valNumber)(i))(CSS_String.fromString(CSS_Property.isStringValue)("rem"));
+  };
   var pct = function (i) {
       return Data_Semigroup.append(CSS_Property.semigroupValue)(CSS_Property.value(CSS_Property.valNumber)(i))(CSS_String.fromString(CSS_Property.isStringValue)("%"));
   };
@@ -4946,6 +5011,7 @@ var PS = {};
   exports["nil"] = nil;
   exports["em"] = em;
   exports["pct"] = pct;
+  exports["rem"] = rem;
   exports["vw"] = vw;
   exports["valSize"] = valSize;
 })(PS["CSS.Size"] = PS["CSS.Size"] || {});
@@ -5000,6 +5066,35 @@ var PS = {};
   exports["none"] = none;
 })(PS["CSSAnimation"] = PS["CSSAnimation"] || {});
 (function(exports) {
+  // Generated by purs version 0.12.0
+  "use strict";
+  var CSS_Property = PS["CSS.Property"];
+  var CSS_Size = PS["CSS.Size"];
+  var CSS_String = PS["CSS.String"];
+  var CSS_Stylesheet = PS["CSS.Stylesheet"];
+  var Control_Semigroupoid = PS["Control.Semigroupoid"];
+  var Data_Function = PS["Data.Function"];
+  var Data_Maybe = PS["Data.Maybe"];
+  var Prelude = PS["Prelude"];                 
+  var screen = CSS_Stylesheet.MediaType(CSS_String.fromString(CSS_Property.isStringValue)("screen"));
+  exports["screen"] = screen;
+})(PS["CSS.Media"] = PS["CSS.Media"] || {});
+(function(exports) {
+  // Generated by purs version 0.12.0
+  "use strict";
+  var CSS_Media = PS["CSS.Media"];
+  var CSS_Property = PS["CSS.Property"];
+  var CSS_Size = PS["CSS.Size"];
+  var CSS_Stylesheet = PS["CSS.Stylesheet"];
+  var Control_Semigroupoid = PS["Control.Semigroupoid"];
+  var Data_Maybe = PS["Data.Maybe"];
+  var Prelude = PS["Prelude"];                 
+  var minWidth = function ($0) {
+      return CSS_Stylesheet.Feature.create("min-width")(Data_Maybe.Just.create(CSS_Property.value(CSS_Size.valSize)($0)));
+  };
+  exports["minWidth"] = minWidth;
+})(PS["CSSMedia"] = PS["CSSMedia"] || {});
+(function(exports) {
     "use strict";
   var CSS = PS["CSS"];
   var CSS_Media = PS["CSS.Media"];
@@ -5010,8 +5105,16 @@ var PS = {};
   var Data_NonEmpty = PS["Data.NonEmpty"];                 
   var springWidth = 0.1;
   var springMotion = 30.0;
-  var springHeight = 2.5;                                                                                                                     
+  var springHeight = 2.5;
+  var screenSizeHalf = CSS_Size.rem(37.0);
+  var screenSizeDesktop = CSS_Size.rem(60.0);
+  var half = CSS_Stylesheet.query(CSS_Media.screen)(Data_NonEmpty.singleton(Control_Plus.plusArray)(CSSMedia.minWidth(screenSizeHalf)));
+  var desktop = CSS_Stylesheet.query(CSS_Media.screen)(Data_NonEmpty.singleton(Control_Plus.plusArray)(CSSMedia.minWidth(screenSizeDesktop)));
   var ballRadius = 0.25;
+  exports["screenSizeDesktop"] = screenSizeDesktop;
+  exports["screenSizeHalf"] = screenSizeHalf;
+  exports["desktop"] = desktop;
+  exports["half"] = half;
   exports["ballRadius"] = ballRadius;
   exports["springWidth"] = springWidth;
   exports["springHeight"] = springHeight;
@@ -5061,13 +5164,22 @@ var PS = {};
   var JustifyContentValue = function (x) {
       return x;
   };
+  var FlexWrap = function (x) {
+      return x;
+  };
   var FlexDirection = function (x) {
       return x;
   };
   var AlignItemsValue = function (x) {
       return x;
+  };
+  var SpaceBetween = function (spaceBetween) {
+      this.spaceBetween = spaceBetween;
   };                                                                             
   var valJustifyContentValue = new CSS_Property.Val(function (v) {
+      return v;
+  });
+  var valFlexWrap = new CSS_Property.Val(function (v) {
       return v;
   });
   var valFlexDirection = new CSS_Property.Val(function (v) {
@@ -5075,33 +5187,48 @@ var PS = {};
   });
   var valAlignItemsValue = new CSS_Property.Val(function (v) {
       return v;
-  });                                                                                
+  });                                                                                                          
+  var spaceBetween = function (dict) {
+      return dict.spaceBetween;
+  };                                                                                               
+  var row = FlexDirection(CSS_String.fromString(CSS_Property.isStringValue)("row"));
+  var nowrap = FlexWrap(CSS_String.fromString(CSS_Property.isStringValue)("nowrap"));
   var justifyContent = CSS_Stylesheet.key(valJustifyContentValue)(CSS_String.fromString(CSS_Property.isStringKey)("justify-content"));
   var isStringJustifyContentValue = new CSS_String.IsString(function ($108) {
       return JustifyContentValue(CSS_String.fromString(CSS_Property.isStringValue)($108));
-  });                                                                                               
+  });                                                                                                                      
+  var spaceBetweenJustifyContentValue = new SpaceBetween(CSS_String.fromString(isStringJustifyContentValue)("space-between"));
   var isStringAlignItemsValue = new CSS_String.IsString(function ($110) {
       return AlignItemsValue(CSS_String.fromString(CSS_Property.isStringValue)($110));
   });
+  var flexWrap = CSS_Stylesheet.key(valFlexWrap)(CSS_String.fromString(CSS_Property.isStringKey)("flex-wrap"));
   var flexDirection = CSS_Stylesheet.key(valFlexDirection)(CSS_String.fromString(CSS_Property.isStringKey)("flex-direction"));
   var column = FlexDirection(CSS_String.fromString(CSS_Property.isStringValue)("column"));
   var centerJustifyContentValue = new CSS_Common.Center(CSS_String.fromString(isStringJustifyContentValue)("center"));
   var centerAlignItemsValue = new CSS_Common.Center(CSS_String.fromString(isStringAlignItemsValue)("center"));         
   var alignItems = CSS_Stylesheet.key(valAlignItemsValue)(CSS_String.fromString(CSS_Property.isStringKey)("align-items"));
+  exports["spaceBetween"] = spaceBetween;
+  exports["SpaceBetween"] = SpaceBetween;
   exports["AlignItemsValue"] = AlignItemsValue;
   exports["alignItems"] = alignItems;
   exports["FlexDirection"] = FlexDirection;
+  exports["row"] = row;
   exports["column"] = column;
   exports["flexDirection"] = flexDirection;
+  exports["FlexWrap"] = FlexWrap;
+  exports["nowrap"] = nowrap;
+  exports["flexWrap"] = flexWrap;
   exports["JustifyContentValue"] = JustifyContentValue;
   exports["justifyContent"] = justifyContent;
   exports["isStringAlignItemsValue"] = isStringAlignItemsValue;
   exports["valAlignItemsValue"] = valAlignItemsValue;
   exports["centerAlignItemsValue"] = centerAlignItemsValue;
   exports["valFlexDirection"] = valFlexDirection;
+  exports["valFlexWrap"] = valFlexWrap;
   exports["isStringJustifyContentValue"] = isStringJustifyContentValue;
   exports["valJustifyContentValue"] = valJustifyContentValue;
   exports["centerJustifyContentValue"] = centerJustifyContentValue;
+  exports["spaceBetweenJustifyContentValue"] = spaceBetweenJustifyContentValue;
 })(PS["CSS.Flexbox"] = PS["CSS.Flexbox"] || {});
 (function(exports) {
   // Generated by purs version 0.12.0
@@ -5121,6 +5248,16 @@ var PS = {};
               };
           };
       };
+  };                                                                                                                  
+  var marginTop = CSS_Stylesheet.key(CSS_Size.valSize)(CSS_String.fromString(CSS_Property.isStringKey)("margin-top"));      
+  var margin = function (a) {
+      return function (b) {
+          return function (c) {
+              return function (d) {
+                  return CSS_Stylesheet.key(CSS_Property.valTuple(CSS_Size.valSize)(CSS_Property.valTuple(CSS_Size.valSize)(CSS_Property.valTuple(CSS_Size.valSize)(CSS_Property.valTuple(CSS_Size.valSize)(CSS_Property.valUnit)))))(CSS_String.fromString(CSS_Property.isStringKey)("margin"))(Data_Tuple_Nested.tuple4(a)(b)(c)(d));
+              };
+          };
+      };
   };                                                                                                                    
   var left = CSS_Stylesheet.key(CSS_Size.valSize)(CSS_String.fromString(CSS_Property.isStringKey)("left"));
   var height = CSS_Stylesheet.key(CSS_Size.valSize)(CSS_String.fromString(CSS_Property.isStringKey)("height"));
@@ -5130,6 +5267,8 @@ var PS = {};
   exports["bottom"] = bottom;
   exports["left"] = left;
   exports["padding"] = padding;
+  exports["margin"] = margin;
+  exports["marginTop"] = marginTop;
 })(PS["CSS.Geometry"] = PS["CSS.Geometry"] || {});
 (function(exports) {
     "use strict";
@@ -5179,6 +5318,17 @@ var PS = {};
           return CSS_Geometry.padding(s1)(s2)(s1)(s2);
       };
   };
+  var padding1 = function (s) {
+      return CSS_Geometry.padding(s)(s)(s)(s);
+  };
+
+  // -- | Element
+  // root :: Selector
+  // root = CSS.element ":root"
+  // | Style
+  var margin1 = function (s) {
+      return CSS_Geometry.margin(s)(s)(s)(s);
+  };
   var byClass = function ($22) {
       return CSS_Selector.Refinement(Control_Applicative.pure(Control_Applicative.applicativeArray)(CSS_Selector.Class.create($22)));
   };
@@ -5191,13 +5341,16 @@ var PS = {};
   exports["safeFromHexString"] = safeFromHexString;
   exports["byClass"] = byClass;
   exports["class_"] = class_;
+  exports["margin1"] = margin1;
+  exports["padding1"] = padding1;
   exports["padding2"] = padding2;
   exports["borderRadius1"] = borderRadius1;
   exports["translate_"] = translate_;
   exports["pair"] = pair;
 })(PS["CSSUtils"] = PS["CSSUtils"] || {});
 (function(exports) {
-    "use strict";
+  // Generated by purs version 0.12.0
+  "use strict";
   var AnimationNames = PS["AnimationNames"];
   var CSS = PS["CSS"];
   var CSS_Animation = PS["CSS.Animation"];
@@ -5214,13 +5367,8 @@ var PS = {};
   var Data_NonEmpty = PS["Data.NonEmpty"];
   var Data_Tuple = PS["Data.Tuple"];
   var Prelude = PS["Prelude"];                 
-
-  // | Keyframes
   var vertical = CSS_Stylesheet.keyframes(AnimationNames.vertical)(new Data_NonEmpty.NonEmpty(new Data_Tuple.Tuple(0.0, CSS_Transform.transform(CSS_Transform.translate(CSS_Size.nil)(CSS_Size.nil))), [ Data_Tuple.Tuple.create(100.0)(CSS_Transform.transform(CSSUtils.translate_(CSS_Size.nil)(CSS_Size.pct(CSSConfig.springMotion)))) ]));
   var twinkle = CSS_Stylesheet.keyframes(AnimationNames.twinkle)(new Data_NonEmpty.NonEmpty(new Data_Tuple.Tuple(0.0, CSSUtils.pair("opacity")("1.0")), [ new Data_Tuple.Tuple(100.0, CSSUtils.pair("opacity")("0.1")) ]));
-
-  // twinkle
-  // | Animations
   var springOscillation = CSS_Animation.animation(CSS_String.fromString(CSS_Animation.isStringAnimationName)(AnimationNames.vertical))(CSS_Time.sec(1.0))(CSSAnimation.easeInOut)(CSS_Time.sec(0.0))(CSS_Animation.infinite)(CSS_Animation.alternate)(CSSAnimation.none);
   var root = Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(vertical)(function () {
       return twinkle;
@@ -5326,7 +5474,8 @@ var PS = {};
   });                                                                             
   var relative = Position(CSS_String.fromString(CSS_Property.isStringValue)("relative"));
   var position = CSS_Stylesheet.key(valPosition)(CSS_String.fromString(CSS_Property.isStringKey)("position"));
-  var inlineBlock = Display(CSS_String.fromString(CSS_Property.isStringValue)("inline-block"));        
+  var inlineBlock = Display(CSS_String.fromString(CSS_Property.isStringValue)("inline-block"));
+  var grid = Display(CSS_String.fromString(CSS_Property.isStringValue)("grid"));                       
   var flex = Display(CSS_String.fromString(CSS_Property.isStringValue)("flex"));             
   var display = CSS_Stylesheet.key(valDisplay)(CSS_String.fromString(CSS_Property.isStringKey)("display"));
   var block = Display(CSS_String.fromString(CSS_Property.isStringValue)("block"));
@@ -5339,6 +5488,7 @@ var PS = {};
   exports["block"] = block;
   exports["inlineBlock"] = inlineBlock;
   exports["flex"] = flex;
+  exports["grid"] = grid;
   exports["display"] = display;
   exports["valPosition"] = valPosition;
   exports["valDisplay"] = valDisplay;
@@ -5348,11 +5498,15 @@ var PS = {};
   "use strict";
   var CSS_Selector = PS["CSS.Selector"];
   var CSS_String = PS["CSS.String"];                                          
-  var span = CSS_String.fromString(CSS_Selector.isStringSelector)("span");
+  var span = CSS_String.fromString(CSS_Selector.isStringSelector)("span");  
+  var img = CSS_String.fromString(CSS_Selector.isStringSelector)("img");      
+  var figure = CSS_String.fromString(CSS_Selector.isStringSelector)("figure");
   var body = CSS_String.fromString(CSS_Selector.isStringSelector)("body");
   var b = CSS_String.fromString(CSS_Selector.isStringSelector)("b");
   exports["b"] = b;
   exports["body"] = body;
+  exports["figure"] = figure;
+  exports["img"] = img;
   exports["span"] = span;
 })(PS["CSS.Elements"] = PS["CSS.Elements"] || {});
 (function(exports) {
@@ -5403,6 +5557,14 @@ var PS = {};
   exports["hidden"] = hidden;
   exports["valOverflow"] = valOverflow;
 })(PS["CSS.Overflow"] = PS["CSS.Overflow"] || {});
+(function(exports) {
+  // Generated by purs version 0.12.0
+  "use strict";
+  var CSS_Selector = PS["CSS.Selector"];
+  var CSS_String = PS["CSS.String"];                 
+  var hover = CSS_String.fromString(CSS_Selector.isStringRefinement)(":hover");
+  exports["hover"] = hover;
+})(PS["CSS.Pseudo"] = PS["CSS.Pseudo"] || {});
 (function(exports) {
   // Generated by purs version 0.12.0
   "use strict";
@@ -5956,10 +6118,11 @@ var PS = {};
   // Generated by purs version 0.12.0
   "use strict";
   var CSSUtils = PS["CSSUtils"];
-  var Color = PS["Color"];
-  var Color_Scheme_X11 = PS["Color.Scheme.X11"];                 
+  var Color = PS["Color"];                 
   var white = Color.white;
   var robinsEggBlue = CSSUtils.safeFromHexString("#00C9B6");
+  var black = Color.black;
+  exports["black"] = black;
   exports["white"] = white;
   exports["robinsEggBlue"] = robinsEggBlue;
 })(PS["Colors"] = PS["Colors"] || {});
@@ -5997,6 +6160,10 @@ var PS = {};
   // | Namespaces
   var header_ = namespace(header);
   var headerButton = header_("button");
+  var headerButtonContainer = headerButton + "Container";
+  var headerButtonPart1 = headerButton + "Part1";
+  var headerButtonPart2 = headerButton + "Part2";
+  var headerLogo = header_("logo");
   var headerNavigationDesktop = header_("nav-desktop");
   var headerNavigationMobile = header_("nav-mobile");
 
@@ -6013,7 +6180,11 @@ var PS = {};
   exports["gallery_"] = gallery_;
   exports["logo"] = logo;
   exports["header"] = header;
+  exports["headerLogo"] = headerLogo;
   exports["headerButton"] = headerButton;
+  exports["headerButtonContainer"] = headerButtonContainer;
+  exports["headerButtonPart1"] = headerButtonPart1;
+  exports["headerButtonPart2"] = headerButtonPart2;
   exports["headerNavigationDesktop"] = headerNavigationDesktop;
   exports["headerNavigationMobile"] = headerNavigationMobile;
   exports["hero"] = hero;
@@ -6029,18 +6200,42 @@ var PS = {};
   exports["footer"] = footer;
 })(PS["ClassNames"] = PS["ClassNames"] || {});
 (function(exports) {
-  // Generated by purs version 0.12.0
-  "use strict";
+    "use strict";
   var CSS = PS["CSS"];
   var CSSUtils = PS["CSSUtils"];
   var ClassNames = PS["ClassNames"];                    
+
+  // | id selectors
+  // | class selectors
+  var logo = CSSUtils.class_(ClassNames.logo);          
   var heroTitle = CSSUtils.class_(ClassNames.heroTitle);
   var heroSpringTop = CSSUtils.class_(ClassNames.heroSpringTop);
   var heroSpringContainer = CSSUtils.class_(ClassNames.heroSpringContainer);
   var heroSpringBottom = CSSUtils.class_(ClassNames.heroSpringBottom);
   var heroSpring = CSSUtils.class_(ClassNames.heroSpring);
   var heroHint = CSSUtils.class_(ClassNames.heroHint);
-  var hero = CSSUtils.class_(ClassNames.hero);
+
+  // | Hero
+  var hero = CSSUtils.class_(ClassNames.hero);                                      
+  var headerLogo = CSSUtils.class_(ClassNames.headerLogo);
+  var headerButtonPart2 = CSSUtils.class_(ClassNames.headerButtonPart2);
+  var headerButtonPart1 = CSSUtils.class_(ClassNames.headerButtonPart1);
+  var headerButtonContainer = CSSUtils.class_(ClassNames.headerButtonContainer);
+  var headerButton = CSSUtils.class_(ClassNames.headerButton);
+
+  // | Header
+  var header = CSSUtils.class_(ClassNames.header);
+  var galleryItem = CSSUtils.class_(ClassNames.galleryItem);
+
+  // | Gallery
+  var gallery = CSSUtils.class_(ClassNames.gallery);
+  exports["logo"] = logo;
+  exports["header"] = header;
+  exports["headerLogo"] = headerLogo;
+  exports["headerButton"] = headerButton;
+  exports["headerButtonContainer"] = headerButtonContainer;
+  exports["headerButtonPart1"] = headerButtonPart1;
+  exports["headerButtonPart2"] = headerButtonPart2;
   exports["hero"] = hero;
   exports["heroTitle"] = heroTitle;
   exports["heroHint"] = heroHint;
@@ -6048,6 +6243,8 @@ var PS = {};
   exports["heroSpringContainer"] = heroSpringContainer;
   exports["heroSpringTop"] = heroSpringTop;
   exports["heroSpringBottom"] = heroSpringBottom;
+  exports["gallery"] = gallery;
+  exports["galleryItem"] = galleryItem;
 })(PS["Selectors"] = PS["Selectors"] || {});
 (function(exports) {
     "use strict";
@@ -6097,13 +6294,12 @@ var PS = {};
   var CSS_Flexbox = PS["CSS.Flexbox"];
   var CSS_Font = PS["CSS.Font"];
   var CSS_Geometry = PS["CSS.Geometry"];
-  var CSS_ListStyle_Type = PS["CSS.ListStyle.Type"];
   var CSS_Overflow = PS["CSS.Overflow"];
+  var CSS_Pseudo = PS["CSS.Pseudo"];
   var CSS_Selector = PS["CSS.Selector"];
   var CSS_Size = PS["CSS.Size"];
   var CSS_Stylesheet = PS["CSS.Stylesheet"];
   var CSS_Text = PS["CSS.Text"];
-  var CSS_Text_Transform = PS["CSS.Text.Transform"];
   var CSS_Text_Whitespace = PS["CSS.Text.Whitespace"];
   var CSS_TextAlign = PS["CSS.TextAlign"];
   var CSSConfig = PS["CSSConfig"];
@@ -6114,69 +6310,142 @@ var PS = {};
   var Prelude = PS["Prelude"];
   var Selectors = PS["Selectors"];
   var Urls = PS["Urls"];                 
+  var buttonPart = Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Display.position(CSS_Display.relative))(function () {
+      return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Display.display(CSS_Display.block))(function () {
+          return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Geometry.height(CSS_Size.rem(0.1)))(function () {
+              return CSS_Background.backgroundColor(Colors.black);
+          });
+      });
+  });
   var root = Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(Animations.root)(function () {
       return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Stylesheet.importUrl(Urls.googleRoboto))(function () {
           return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Stylesheet.select(CSS_Selector.star)(CSS_Box.boxSizing(CSS_Box.borderBox)))(function () {
-              return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Stylesheet.select(CSS_Elements.body)(CSSUtils.pair("font-family")("'Roboto', 'Helvetica Neue', 'Yu Gothic', YuGothic, '\u30d2\u30e9\u30ae\u30ce\u89d2\u30b4 Pro', 'Hiragino Kaku Gothic Pro', '\u30e1\u30a4\u30ea\u30aa', 'Meiryo', sans-serif")))(function () {
-                  return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Stylesheet.select(Selectors.hero)(Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Display.position(CSS_Display.relative))(function () {
-                      return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Background.background(CSS_Background["backgroundColor'"])(Colors.robinsEggBlue))(function () {
-                          return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_TextAlign.textAlign(CSS_TextAlign.center))(function () {
-                              return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Font.color(Colors.white))(function () {
-                                  return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSSUtils.padding2(CSS_Size.em(3.0))(CSS_Size.nil))(function () {
-                                      return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Text_Whitespace.textWhitespace(CSS_Text_Whitespace.whitespaceNoWrap))(function () {
-                                          return CSS_Overflow.overflow(CSS_Overflow.hidden);
-                                      });
-                                  });
+              return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Stylesheet.select(CSS_Elements.body)(Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSSUtils.pair("font-family")("'Roboto', 'Helvetica Neue', 'Yu Gothic', YuGothic, '\u30d2\u30e9\u30ae\u30ce\u89d2\u30b4 Pro', 'Hiragino Kaku Gothic Pro', '\u30e1\u30a4\u30ea\u30aa', 'Meiryo', sans-serif"))(function () {
+                  return CSSUtils.margin1(CSS_Size.nil);
+              })))(function () {
+                  return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Stylesheet.select(Selectors.header)(Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Display.display(CSS_Display.flex))(function () {
+                      return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSSUtils.padding2(CSS_Size.nil)(CSS_Size.rem(0.4)))(function () {
+                          return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Flexbox.flexDirection(CSS_Flexbox.row))(function () {
+                              return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Flexbox.flexWrap(CSS_Flexbox.nowrap))(function () {
+                                  return CSS_Flexbox.justifyContent(CSS_Flexbox.spaceBetween(CSS_Flexbox.spaceBetweenJustifyContentValue));
                               });
                           });
                       });
                   })))(function () {
-                      return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Stylesheet.select(Selectors.heroTitle)(Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Font.fontSize(CSS_Size.vw(8.75)))(function () {
-                          return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Text.letterSpacing(CSS_Size.em(0.15)))(function () {
-                              return CSS_Stylesheet.select(CSS_Elements.span)(Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Display.display(CSS_Display.block))(function () {
-                                  return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSSUtils.pair("font-weight")("100"))(function () {
-                                      return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Stylesheet.select(CSS_Elements.b)(CSSUtils.pair("font-weight")("400")))(function () {
-                                          return CSS_Stylesheet.select(CSS_Elements.span)(CSS_Display.display(CSS_Display.inlineBlock));
+                      return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Stylesheet.select(Selectors.headerLogo)(Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSSUtils.margin1(CSS_Size.nil))(function () {
+                          return CSS_Geometry.height(CSS_Size.pct(100.0));
+                      })))(function () {
+                          return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Stylesheet.select(Selectors.logo)(CSS_Geometry.height(CSS_Size.pct(100.0))))(function () {
+                              return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Stylesheet.select(Selectors.headerButtonContainer)(Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Geometry.width(CSS_Size.rem(1.5)))(function () {
+                                  return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Display.display(CSS_Display.flex))(function () {
+                                      return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Flexbox.alignItems(CSS_Common.center(CSS_Flexbox.centerAlignItemsValue)))(function () {
+                                          return CSS_Flexbox.justifyContent(CSS_Common.center(CSS_Flexbox.centerJustifyContentValue));
                                       });
                                   });
-                              }));
-                          });
-                      })))(function () {
-                          return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Stylesheet.select(Selectors.heroHint)(Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSSUtils.pair("font-weight")("400"))(function () {
-                              return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Font.fontSize(CSS_Size.vw(4.0)))(function () {
-                                  return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Text.letterSpacing(CSS_Size.em(0.33)))(function () {
-                                      return Animations.hintTwinkle;
-                                  });
-                              });
-                          })))(function () {
-                              return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Stylesheet.select(Selectors.heroSpringContainer)(Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Display.position(CSS_Display.absolute))(function () {
-                                  return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Geometry.left(CSS_Size.pct(50.0)))(function () {
-                                      return CSS_Geometry.bottom(CSS_Size.nil);
-                                  });
                               })))(function () {
-                                  return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Stylesheet.select(Selectors.heroSpring)(Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Display.position(CSS_Display.relative))(function () {
-                                      return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Display.display(CSS_Display.flex))(function () {
-                                          return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Flexbox.flexDirection(CSS_Flexbox.column))(function () {
-                                              return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Flexbox.justifyContent(CSS_Common.center(CSS_Flexbox.centerJustifyContentValue)))(function () {
-                                                  return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Flexbox.alignItems(CSS_Common.center(CSS_Flexbox.centerAlignItemsValue)))(function () {
-                                                      return Animations.springOscillation;
-                                                  });
+                                  return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Stylesheet.select(Selectors.headerButton)(Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSSUtils.pair("border")("none"))(function () {
+                                      return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSSUtils.pair("background")("none"))(function () {
+                                          return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Geometry.width(CSS_Size.pct(100.0)))(function () {
+                                              return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Geometry.height(CSS_Size.rem(2.0)))(function () {
+                                                  return CSSUtils.padding1(CSS_Size.nil);
                                               });
                                           });
                                       });
                                   })))(function () {
-                                      return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Stylesheet.select(Selectors.heroSpringTop)(Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Geometry.width(CSS_Size.em(CSSConfig.ballRadius * 2.0)))(function () {
-                                          return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Geometry.height(CSS_Size.em(CSSConfig.ballRadius * 2.0)))(function () {
-                                              return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSSUtils.borderRadius1(CSS_Size.em(CSSConfig.ballRadius)))(function () {
-                                                  return CSS_Background.backgroundColor(Colors.white);
+                                      return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Stylesheet.select(Selectors.headerButtonPart1)(Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Geometry.width(CSS_Size.pct(100.0)))(function () {
+                                          return buttonPart;
+                                      })))(function () {
+                                          return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Stylesheet.select(Selectors.headerButtonPart2)(Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Geometry.width(CSS_Size.pct(75.0)))(function () {
+                                              return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Geometry.marginTop(CSS_Size.rem(0.5)))(function () {
+                                                  return buttonPart;
+                                              });
+                                          })))(function () {
+                                              return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Stylesheet.select(CSS_Selector["with"](Selectors.headerButton)(CSS_Pseudo.hover))(Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Stylesheet.select(Selectors.headerButtonPart1)(CSS_Geometry.width(CSS_Size.pct(75.0))))(function () {
+                                                  return CSS_Stylesheet.select(Selectors.headerButtonPart2)(CSS_Geometry.width(CSS_Size.pct(100.0)));
+                                              })))(function () {
+                                                  return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Stylesheet.select(Selectors.hero)(Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Display.position(CSS_Display.relative))(function () {
+                                                      return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Background.background(CSS_Background["backgroundColor'"])(Colors.robinsEggBlue))(function () {
+                                                          return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_TextAlign.textAlign(CSS_TextAlign.center))(function () {
+                                                              return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Font.color(Colors.white))(function () {
+                                                                  return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSSUtils.padding2(CSS_Size.em(3.0))(CSS_Size.nil))(function () {
+                                                                      return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Text_Whitespace.textWhitespace(CSS_Text_Whitespace.whitespaceNoWrap))(function () {
+                                                                          return CSS_Overflow.overflow(CSS_Overflow.hidden);
+                                                                      });
+                                                                  });
+                                                              });
+                                                          });
+                                                      });
+                                                  })))(function () {
+                                                      return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Stylesheet.select(Selectors.heroTitle)(Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Font.fontSize(CSS_Size.vw(8.75)))(function () {
+                                                          return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Text.letterSpacing(CSS_Size.em(0.15)))(function () {
+                                                              return CSS_Stylesheet.select(CSS_Elements.span)(Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Display.display(CSS_Display.block))(function () {
+                                                                  return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSSUtils.pair("font-weight")("100"))(function () {
+                                                                      return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Stylesheet.select(CSS_Elements.b)(CSSUtils.pair("font-weight")("400")))(function () {
+                                                                          return CSS_Stylesheet.select(CSS_Elements.span)(CSS_Display.display(CSS_Display.inlineBlock));
+                                                                      });
+                                                                  });
+                                                              }));
+                                                          });
+                                                      })))(function () {
+                                                          return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Stylesheet.select(Selectors.heroHint)(Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSSUtils.pair("font-weight")("400"))(function () {
+                                                              return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Font.fontSize(CSS_Size.vw(4.0)))(function () {
+                                                                  return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Text.letterSpacing(CSS_Size.em(0.33)))(function () {
+                                                                      return Animations.hintTwinkle;
+                                                                  });
+                                                              });
+                                                          })))(function () {
+                                                              return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Stylesheet.select(Selectors.heroSpringContainer)(Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Display.position(CSS_Display.absolute))(function () {
+                                                                  return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Geometry.left(CSS_Size.pct(50.0)))(function () {
+                                                                      return CSS_Geometry.bottom(CSS_Size.nil);
+                                                                  });
+                                                              })))(function () {
+                                                                  return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Stylesheet.select(Selectors.heroSpring)(Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Display.position(CSS_Display.relative))(function () {
+                                                                      return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Display.display(CSS_Display.flex))(function () {
+                                                                          return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Flexbox.flexDirection(CSS_Flexbox.column))(function () {
+                                                                              return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Flexbox.justifyContent(CSS_Common.center(CSS_Flexbox.centerJustifyContentValue)))(function () {
+                                                                                  return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Flexbox.alignItems(CSS_Common.center(CSS_Flexbox.centerAlignItemsValue)))(function () {
+                                                                                      return Animations.springOscillation;
+                                                                                  });
+                                                                              });
+                                                                          });
+                                                                      });
+                                                                  })))(function () {
+                                                                      return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Stylesheet.select(Selectors.heroSpringTop)(Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Geometry.width(CSS_Size.em(CSSConfig.ballRadius * 2.0)))(function () {
+                                                                          return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Geometry.height(CSS_Size.em(CSSConfig.ballRadius * 2.0)))(function () {
+                                                                              return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSSUtils.borderRadius1(CSS_Size.em(CSSConfig.ballRadius)))(function () {
+                                                                                  return CSS_Background.backgroundColor(Colors.white);
+                                                                              });
+                                                                          });
+                                                                      })))(function () {
+                                                                          return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Stylesheet.select(Selectors.heroSpringBottom)(Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Background.backgroundColor(Colors.white))(function () {
+                                                                              return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Geometry.width(CSS_Size.em(CSSConfig.springWidth)))(function () {
+                                                                                  return CSS_Geometry.height(CSS_Size.em(CSSConfig.springHeight));
+                                                                              });
+                                                                          })))(function () {
+                                                                              return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Stylesheet.select(Selectors.gallery)(Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Display.display(CSS_Display.grid))(function () {
+                                                                                  return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSSUtils.pair("grid-template-columns")("1fr"))(function () {
+                                                                                      return CSS_Stylesheet.select(CSS_Elements.figure)(Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSSUtils.margin1(CSS_Size.nil))(function () {
+                                                                                          return CSSUtils.padding1(CSS_Size.nil);
+                                                                                      }));
+                                                                                  });
+                                                                              })))(function () {
+                                                                                  return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSSConfig.half(CSS_Stylesheet.select(Selectors.gallery)(CSSUtils.pair("grid-template-columns")("1fr 1fr"))))(function () {
+                                                                                      return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSSConfig.desktop(CSS_Stylesheet.select(Selectors.gallery)(CSSUtils.pair("grid-template-columns")("1fr 1fr 1fr"))))(function () {
+                                                                                          return CSS_Stylesheet.select(Selectors.galleryItem)(CSS_Stylesheet.select(CSS_Elements.img)(Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Display.display(CSS_Display.block))(function () {
+                                                                                              return CSS_Geometry.width(CSS_Size.pct(100.0));
+                                                                                          })));
+                                                                                      });
+                                                                                  });
+                                                                              });
+                                                                          });
+                                                                      });
+                                                                  });
+                                                              });
+                                                          });
+                                                      });
+                                                  });
                                               });
                                           });
-                                      })))(function () {
-                                          return CSS_Stylesheet.select(Selectors.heroSpringBottom)(Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Background.backgroundColor(Colors.white))(function () {
-                                              return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Geometry.width(CSS_Size.em(CSSConfig.springWidth)))(function () {
-                                                  return CSS_Geometry.height(CSS_Size.em(CSSConfig.springHeight));
-                                              });
-                                          }));
                                       });
                                   });
                               });
@@ -6187,6 +6456,7 @@ var PS = {};
           });
       });
   });
+  exports["buttonPart"] = buttonPart;
   exports["root"] = root;
 })(PS["CSSRoot"] = PS["CSSRoot"] || {});
 (function(exports) {
@@ -14084,7 +14354,7 @@ var PS = {};
           var titleAnthropology = Halogen_HTML_Elements.span_([ Halogen_HTML_Elements.b_([ Halogen_HTML_Core.text("A") ]), Halogen_HTML_Elements.span_([ Halogen_HTML_Core.text("nthropology") ]) ]);
           return Halogen_HTML_Elements.section([ HalogenUtils.classList([ ClassNames.hero ]) ])([ Halogen_HTML_Elements.h1([ HalogenUtils.classList([ ClassNames.heroTitle ]) ])([ titleInstitute, titleFor, titleArchitectural, titleAnthropology ]), Halogen_HTML_Elements.p([ HalogenUtils.classList([ ClassNames.heroHint ]) ])([ Halogen_HTML_Core.text("Scroll Down") ]), Halogen_HTML_Elements.div([ HalogenUtils.classList([ ClassNames.heroSpringContainer ]) ])([ Halogen_HTML_Elements.div([ HalogenUtils.classList([ ClassNames.heroSpring ]) ])([ Halogen_HTML_Elements.div([ HalogenUtils.classList([ ClassNames.heroSpringTop ]) ])([  ]), Halogen_HTML_Elements.div([ HalogenUtils.classList([ ClassNames.heroSpringBottom ]) ])([  ]) ]) ]) ]);
       })();
-      var header = Halogen_HTML_Elements.div([ HalogenUtils.classList([ ClassNames.header ]) ])([ Halogen_HTML_Elements.h1([ HalogenUtils.classList([ ClassNames.logo ]) ])([ Svgs.logo([  ]) ]), Halogen_HTML_Elements.button([ HalogenUtils.classList([ ClassNames.headerButton ]) ])([ Halogen_HTML_Elements.span_([  ]), Halogen_HTML_Elements.span_([  ]) ]), Halogen_HTML_Elements.nav([ HalogenUtils.classList([ ClassNames.headerNavigationDesktop ]) ])([  ]), Halogen_HTML_Elements.nav([ HalogenUtils.classList([ ClassNames.headerNavigationMobile ]) ])([  ]) ]);
+      var header = Halogen_HTML_Elements.div_([ Halogen_HTML_Elements.div([ HalogenUtils.classList([ ClassNames.header ]) ])([ Halogen_HTML_Elements.h1([ HalogenUtils.classList([ ClassNames.headerLogo ]) ])([ Svgs.logo([  ]) ]), Halogen_HTML_Elements.div([ HalogenUtils.classList([ ClassNames.headerButtonContainer ]) ])([ Halogen_HTML_Elements.button([ HalogenUtils.classList([ ClassNames.headerButton ]) ])([ Halogen_HTML_Elements.span([ HalogenUtils.classList([ ClassNames.headerButtonPart1 ]) ])([  ]), Halogen_HTML_Elements.span([ HalogenUtils.classList([ ClassNames.headerButtonPart2 ]) ])([  ]) ]) ]) ]), Halogen_HTML_Elements.nav([ HalogenUtils.classList([ ClassNames.headerNavigationDesktop ]) ])([  ]), Halogen_HTML_Elements.nav([ HalogenUtils.classList([ ClassNames.headerNavigationMobile ]) ])([  ]) ]);
       var gallery = (function () {
           var galleryItem = function (source) {
               return Halogen_HTML_Elements.figure([ HalogenUtils.classList([ ClassNames.galleryItem ]) ])([ Halogen_HTML_Elements.img([ Halogen_HTML_Properties.src(source) ]) ]);

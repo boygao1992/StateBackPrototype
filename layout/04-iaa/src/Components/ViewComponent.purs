@@ -47,20 +47,25 @@ render _ =
   where
     header :: H.ComponentHTML q
     header =
-      HH.div [ classList [ CN.header]]
-      [ HH.h1 [ classList [ CN.logo]]
-        [ Svgs.logo []
+      HH.div_
+      [ HH.div [ classList [ CN.header]]
+        [ HH.h1 [ classList [ CN.headerLogo]]
+          [ Svgs.logo []
+          ]
+        , HH.div [ classList [ CN.headerButtonContainer]]
+          [ HH.button [ classList [ CN.headerButton]]
+            [
+              HH.span [ classList [ CN.headerButtonPart1]]
+              []
+            , HH.span [ classList [ CN.headerButtonPart2]]
+              []
+            ]
+          ]
         ]
-      , HH.button [ classList [ CN.headerButton]]
-        [ HH.span_
+        , HH.nav [ classList [CN.headerNavigationDesktop]]
           []
-        , HH.span_
+        , HH.nav [ classList [CN.headerNavigationMobile]]
           []
-        ]
-      , HH.nav [ classList [CN.headerNavigationDesktop]]
-        []
-      , HH.nav [ classList [CN.headerNavigationMobile]]
-        []
       ]
 
     hero :: H.ComponentHTML q

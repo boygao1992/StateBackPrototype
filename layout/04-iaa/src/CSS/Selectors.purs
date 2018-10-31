@@ -19,8 +19,18 @@ largeLogo = class_ CN.largeLogo
 header :: Selector
 header = class_ CN.header
 
+headerLogo :: Selector
+headerLogo = class_ CN.headerLogo
+
 headerButton :: Selector
 headerButton = class_ CN.headerButton
+
+headerButtonContainer :: Selector
+headerButtonContainer = class_ CN.headerButtonContainer
+headerButtonPart1 :: Selector
+headerButtonPart1 = class_ CN.headerButtonPart1
+headerButtonPart2 :: Selector
+headerButtonPart2 = class_ CN.headerButtonPart2
 
 headerNavigationDesktop :: Selector
 headerNavigationDesktop =  class_ CN.headerNavigationDesktop

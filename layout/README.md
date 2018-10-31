@@ -207,6 +207,13 @@ grid constraints on item
 
 ### 7.[Women's Business Maker](http://www.wbm.miami/)
 
+### 8.[evomedia](https://www.evomedia.lt/en)
+
+### 9.[Otto van den Toorn](https://www.ottografie.nl/)
+
+### 10.[Linden Staub](https://lindenstaub.com/)
+
+
 # Reference
 
 ### 1. [material design](https://material.io/design/)

@@ -4,18 +4,23 @@ import Prelude
 
 import Animations as Animations
 import CSS (CSS)
-import CSS as CSS
-import CSS.Common (auto, none, center) as CSS
-import CSS.ListStyle.Type (listStyleType) as CSS
-import CSS.Overflow (overflow, hidden) as CSS
-import CSS.Text.Transform (textTransform, uppercase) as CSS
+import CSS (absolute, alignItems, b, background, backgroundColor, block, body, borderBox, bottom, boxSizing, color, column, display, em, figure, flex, flexDirection, flexWrap, fontSize, grid, height, hover, img, importUrl, inlineBlock, justifyContent, left, letterSpacing, marginTop, nil, nowrap, pct, position, relative, rem, row, spaceBetween, span, star, textWhitespace, vw, whitespaceNoWrap, width) as CSS
+import CSS.Common (center) as CSS
+import CSS.Overflow (hidden, overflow) as CSS
 import CSS.TextAlign (center, textAlign) as CSSText
-import CSSConfig (ballRadius, springWidth, springHeight)
-import CSSUtils ((&), (++), (?))
-import CSSUtils (borderRadius1, borderWidth, focus, margin1, margin2, padding1, padding2, pair) as CSS
+import CSSConfig (ballRadius, springWidth, springHeight, desktop, half)
+import CSSUtils ((?), (&))
+import CSSUtils (borderRadius1, margin1, padding1, padding2, pair) as CSS
 import Colors as Colors
 import Selectors as S
 import Urls as Urls
+
+buttonPart :: CSS
+buttonPart = do
+  CSS.position CSS.relative
+  CSS.display CSS.block
+  CSS.height (CSS.rem 0.1)
+  CSS.backgroundColor Colors.black
 
 root :: CSS
 root = do
@@ -28,6 +33,51 @@ root = do
 
   CSS.body ? do
     CSS.pair "font-family" "'Roboto', 'Helvetica Neue', 'Yu Gothic', YuGothic, 'ヒラギノ角ゴ Pro', 'Hiragino Kaku Gothic Pro', 'メイリオ', 'Meiryo', sans-serif"
+    CSS.margin1 CSS.nil
+
+
+  S.header ? do
+    CSS.display CSS.flex
+    CSS.padding2 CSS.nil (CSS.rem 0.4)
+    CSS.flexDirection CSS.row
+    CSS.flexWrap CSS.nowrap
+    CSS.justifyContent CSS.spaceBetween
+
+  S.headerLogo ? do
+    CSS.margin1 CSS.nil
+    CSS.height (CSS.pct 100.0)
+
+  S.logo ? do
+    CSS.height (CSS.pct 100.0)
+
+  S.headerButtonContainer ? do
+    CSS.width (CSS.rem 1.5)
+    CSS.display CSS.flex
+    CSS.alignItems CSS.center
+    CSS.justifyContent CSS.center
+
+  S.headerButton ? do
+    CSS.pair "border" "none"
+    CSS.pair "background" "none"
+    CSS.width (CSS.pct 100.0)
+    CSS.height (CSS.rem 2.0)
+    CSS.padding1 CSS.nil
+
+  S.headerButtonPart1 ? do
+    CSS.width (CSS.pct 100.0)
+    buttonPart
+
+  S.headerButtonPart2 ? do
+    CSS.width (CSS.pct 75.0)
+    CSS.marginTop (CSS.rem 0.5)
+    buttonPart
+
+  S.headerButton & CSS.hover ? do
+    S.headerButtonPart1 ? do
+      CSS.width (CSS.pct 75.0)
+    S.headerButtonPart2 ? do
+      CSS.width (CSS.pct 100.0)
+
 
   S.hero ? do
     CSS.position CSS.relative
@@ -80,3 +130,23 @@ root = do
     CSS.backgroundColor Colors.white
     CSS.width (CSS.em springWidth)
     CSS.height (CSS.em springHeight)
+
+  S.gallery ? do
+    CSS.display CSS.grid
+    CSS.pair "grid-template-columns" "1fr"
+    CSS.figure ? do
+      CSS.margin1 CSS.nil
+      CSS.padding1 CSS.nil
+
+  half do
+    S.gallery ? do
+      CSS.pair "grid-template-columns" "1fr 1fr"
+
+  desktop do
+    S.gallery ? do
+      CSS.pair "grid-template-columns" "1fr 1fr 1fr"
+
+  S.galleryItem ? do
+    CSS.img ? do
+      CSS.display CSS.block
+      CSS.width (CSS.pct 100.0)
