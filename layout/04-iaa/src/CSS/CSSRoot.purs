@@ -19,7 +19,7 @@ import Urls as Urls
 
 root :: CSS
 root = do
-  Animations.vertical
+  Animations.root
 
   CSS.importUrl Urls.googleRoboto
 
@@ -55,6 +55,7 @@ root = do
     CSS.pair "font-weight" "400"
     CSS.fontSize (CSS.vw 4.0)
     CSS.letterSpacing (CSS.em 0.33)
+    Animations.hintTwinkle
 
   S.heroSpringContainer ? do
     CSS.position CSS.absolute
