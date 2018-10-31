@@ -41,6 +41,9 @@ heroHint = class_ CN.heroHint
 heroSpring :: Selector
 heroSpring = class_ CN.heroSpring
 
+heroSpringContainer :: Selector
+heroSpringContainer = class_ CN.heroSpringContainer
+
 heroSpringTop :: Selector
 heroSpringTop = class_ CN.heroSpringTop
 

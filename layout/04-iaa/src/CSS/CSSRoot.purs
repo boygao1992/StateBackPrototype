@@ -2,13 +2,15 @@ module CSSRoot where
 
 import Prelude
 
+import Animations as Animations
 import CSS (CSS)
 import CSS as CSS
 import CSS.Common (auto, none, center) as CSS
+import CSS.ListStyle.Type (listStyleType) as CSS
 import CSS.Overflow (overflow, hidden) as CSS
 import CSS.Text.Transform (textTransform, uppercase) as CSS
 import CSS.TextAlign (center, textAlign) as CSSText
-import CSS.ListStyle.Type (listStyleType) as CSS
+import CSSConfig (ballRadius, springWidth, springHeight)
 import CSSUtils ((&), (++), (?))
 import CSSUtils (borderRadius1, borderWidth, focus, margin1, margin2, padding1, padding2, pair) as CSS
 import Colors as Colors
@@ -17,6 +19,7 @@ import Urls as Urls
 
 root :: CSS
 root = do
+  Animations.vertical
 
   CSS.importUrl Urls.googleRoboto
 
@@ -24,7 +27,7 @@ root = do
     CSS.boxSizing CSS.borderBox
 
   CSS.body ? do
-    CSS.pair "font-family" "'Roboto', sans-serif"
+    CSS.pair "font-family" "'Roboto', 'Helvetica Neue', 'Yu Gothic', YuGothic, 'ヒラギノ角ゴ Pro', 'Hiragino Kaku Gothic Pro', 'メイリオ', 'Meiryo', sans-serif"
 
   S.hero ? do
     CSS.position CSS.relative
@@ -50,23 +53,29 @@ root = do
 
   S.heroHint ? do
     CSS.pair "font-weight" "400"
+    CSS.fontSize (CSS.vw 4.0)
+    CSS.letterSpacing (CSS.em 0.33)
+
+  S.heroSpringContainer ? do
+    CSS.position CSS.absolute
+    CSS.left (CSS.pct 50.0)
+    CSS.bottom CSS.nil
 
   S.heroSpring ? do
-    CSS.position CSS.absolute
+    CSS.position CSS.relative
     CSS.display CSS.flex
     CSS.flexDirection CSS.column
     CSS.justifyContent CSS.center
     CSS.alignItems CSS.center
-    CSS.left (CSS.pct 50.0)
-    CSS.bottom CSS.nil
+    Animations.springOscillation
 
   S.heroSpringTop ? do
-    CSS.width (CSS.em 0.5)
-    CSS.height (CSS.em 0.5)
-    CSS.borderRadius1 (CSS.em 0.25)
+    CSS.width (CSS.em (ballRadius * 2.0))
+    CSS.height (CSS.em (ballRadius * 2.0))
+    CSS.borderRadius1 (CSS.em ballRadius)
     CSS.backgroundColor Colors.white
 
   S.heroSpringBottom ? do
     CSS.backgroundColor Colors.white
-    CSS.width (CSS.em 0.1)
-    CSS.height (CSS.em 2.0)
+    CSS.width (CSS.em springWidth)
+    CSS.height (CSS.em springHeight)

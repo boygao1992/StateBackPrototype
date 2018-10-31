@@ -51,6 +51,9 @@ heroHint = hero_ "hint"
 heroSpring :: String
 heroSpring = hero_ "spring"
 
+heroSpringContainer :: String
+heroSpringContainer = heroSpring <> "Container"
+
 heroSpringTop :: String
 heroSpringTop = heroSpring <> "Top"
 

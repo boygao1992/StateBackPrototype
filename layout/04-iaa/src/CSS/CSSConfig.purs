@@ -15,3 +15,15 @@ desktop = query CSSMedia.screen (NE.singleton (CSSMedia.minWidth screenSizeDeskt
 
 half :: CSS -> CSS
 half = query CSSMedia.screen (NE.singleton (CSSMedia.minWidth screenSizeHalf))
+
+ballRadius :: Number -- em
+ballRadius = 0.25
+
+springWidth :: Number -- em
+springWidth = 0.1
+
+springHeight :: Number -- em
+springHeight = 2.5
+
+springMotion :: Number -- pct
+springMotion = 30.0
