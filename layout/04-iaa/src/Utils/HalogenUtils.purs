@@ -5,7 +5,8 @@ import Halogen (IProp, ClassName(ClassName), HTML)
 import Halogen.HTML.Properties (classes)
 import Halogen.HTML (attr, AttrName(AttrName)) as HH
 import Svg.Renderer.Halogen as Svg
-import Data.Array ((:))
+import Data.Array ((:), filter)
+import Data.Tuple (Tuple, fst, snd)
 
 -- | Utils
 classList
@@ -13,6 +14,12 @@ classList
    . Array String
   -> IProp ("class" :: String | r) i
 classList = classes <<< map ClassName
+
+classList_
+  :: forall r i
+   . Array (Tuple Boolean String)
+  -> IProp ("class" :: String | r) i
+classList_ = classes <<< map (ClassName <<< snd) <<< filter fst
 
 -- | Svg
 svg_ :: forall p r i. String -> Array (IProp r i) -> HTML p i

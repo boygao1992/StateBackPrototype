@@ -25,6 +25,9 @@ headerLogo = class_ CN.headerLogo
 headerButton :: Selector
 headerButton = class_ CN.headerButton
 
+headerButtonOpen :: Selector
+headerButtonOpen = class_ CN.headerButtonOpen
+
 headerButtonContainer :: Selector
 headerButtonContainer = class_ CN.headerButtonContainer
 headerButtonPart1 :: Selector

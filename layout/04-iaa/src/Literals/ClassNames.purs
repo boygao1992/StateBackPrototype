@@ -35,6 +35,9 @@ headerLogo = header_ "logo"
 headerButton :: String
 headerButton = header_ "button"
 
+headerButtonOpen :: String
+headerButtonOpen = headerButton <> "Open"
+
 headerButtonContainer :: String
 headerButtonContainer = headerButton <> "Container"
 headerButtonPart1 :: String

@@ -4,16 +4,17 @@ import Prelude
 
 import Animations as Animations
 import CSS (CSS)
-import CSS (absolute, alignItems, b, background, backgroundColor, block, body, borderBox, bottom, boxSizing, color, column, display, em, figure, flex, flexDirection, flexWrap, fontSize, grid, height, hover, img, importUrl, inlineBlock, justifyContent, left, letterSpacing, marginTop, nil, nowrap, pct, position, relative, rem, row, spaceBetween, span, star, textWhitespace, vw, whitespaceNoWrap, width) as CSS
+import CSS (absolute, alignItems, b, background, backgroundColor, block, body, borderBox, bottom, boxSizing, color, column, deg, display, displayNone, em, figure, fixed, flex, flexDirection, flexWrap, fontSize, grid, height, hover, img, importUrl, inlineBlock, justifyContent, left, letterSpacing, li, marginTop, nil, nowrap, pct, position, relative, rem, rotate, row, spaceBetween, span, star, textWhitespace, transform, ul, vh, vw, whitespaceNoWrap, width, zIndex) as CSS
 import CSS.Common (center) as CSS
 import CSS.Overflow (hidden, overflow) as CSS
 import CSS.TextAlign (center, textAlign) as CSSText
 import CSSConfig (ballRadius, springWidth, springHeight, desktop, half)
-import CSSUtils ((?), (&))
-import CSSUtils (borderRadius1, margin1, padding1, padding2, pair) as CSS
+import CSSUtils ((&), (?))
+import CSSUtils (borderRadius1, margin1, padding1, padding2, pair, byClass) as CSS
 import Colors as Colors
 import Selectors as S
 import Urls as Urls
+import ClassNames as CN
 
 buttonPart :: CSS
 buttonPart = do
@@ -62,6 +63,7 @@ root = do
     CSS.width (CSS.pct 100.0)
     CSS.height (CSS.rem 2.0)
     CSS.padding1 CSS.nil
+    CSS.zIndex 3
 
   S.headerButtonPart1 ? do
     CSS.width (CSS.pct 100.0)
@@ -78,6 +80,45 @@ root = do
     S.headerButtonPart2 ? do
       CSS.width (CSS.pct 100.0)
 
+  S.headerButton & (CSS.byClass CN.headerButtonOpen) ? do
+    S.headerButtonPart1 ? do
+      CSS.width (CSS.pct 100.0)
+      CSS.transform $ CSS.rotate $ CSS.deg 45.0
+    S.headerButtonPart2 ? do
+      CSS.marginTop (CSS.rem (-0.10))
+      CSS.width (CSS.pct 100.0)
+      CSS.transform $ CSS.rotate $ CSS.deg (-45.0)
+
+  S.headerNavigationMobile ? do
+    CSS.display CSS.displayNone
+    CSS.width (CSS.vw 100.0)
+    CSS.height (CSS.vh 100.0)
+    CSS.color Colors.white
+    CSS.backgroundColor Colors.robinsEggBlue
+    CSS.fontSize (CSS.rem 2.0)
+    CSS.pair "font-weight" "100"
+
+    CSS.ul ? do
+      CSS.padding1 CSS.nil
+      CSS.pair "list-style" "none"
+      CSS.display CSS.flex
+      CSS.flexDirection CSS.column
+      CSS.alignItems CSS.center
+    CSS.li ? do
+      CSS.margin1 (CSS.em 0.5)
+
+  S.headerNavigationMobile & (CSS.byClass CN.headerButtonOpen)? do
+    CSS.display CSS.flex
+    CSS.alignItems CSS.center
+    CSS.justifyContent CSS.center
+    CSS.position CSS.fixed
+    CSS.zIndex 2
+
+  -- half do
+  --   S.headerNavigationMobile & (CSS.byClass CN.headerButtonOpen)? do
+  --     CSS.display CSS.displayNone
+  --   S.headerButton ? do
+  --     CSS.display CSS.displayNone
 
   S.hero ? do
     CSS.position CSS.relative
@@ -134,8 +175,8 @@ root = do
   S.gallery ? do
     CSS.display CSS.grid
     CSS.pair "grid-template-columns" "1fr"
+    CSS.alignItems CSS.center
     CSS.figure ? do
-      CSS.margin1 CSS.nil
       CSS.padding1 CSS.nil
 
   half do

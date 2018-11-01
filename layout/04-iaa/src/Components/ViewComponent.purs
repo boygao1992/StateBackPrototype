@@ -6,22 +6,28 @@ import Data.Maybe (Maybe(..))
 import Halogen as H
 import Halogen.HTML as HH
 import Halogen.HTML.CSS as HC
+import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
-import HalogenUtils (classList)
+import HalogenUtils (classList, classList_)
 import ClassNames as CN
 import CSSRoot (root) as CSSRoot
 import Urls as Urls
 import Svgs as Svgs
+import Data.Tuple (Tuple(Tuple))
 
 -- | Types
 
-type State = Unit
+type State =
+  { buttonOpen :: Boolean
+  }
 
 initialState :: State
-initialState = unit
+initialState =
+  { buttonOpen : false
+  }
 
 data Query next
-  = NoOp next
+  = ButtonOnClick next
 
 type Input = Unit
 
@@ -33,10 +39,11 @@ type Output = Void
 
 -- | Component
 
-render :: forall q. State -> H.ComponentHTML q
-render _ =
+render :: State -> H.ComponentHTML Query
+render { buttonOpen } =
   HH.div_
-  [ header
+  [ mobileNav
+  , header
   , hero
   , gallery
   , navigator
@@ -45,7 +52,23 @@ render _ =
   ]
 
   where
-    header :: H.ComponentHTML q
+    mobileNav :: H.ComponentHTML Query
+    mobileNav =
+      HH.nav [ classList_ [ Tuple true CN.headerNavigationMobile
+                          , Tuple buttonOpen CN.headerButtonOpen]]
+      [ HH.ul []
+        [ HH.li_
+          [ HH.text "Home"]
+        , HH.li_
+          [ HH.text "Works"]
+        , HH.li_
+          [ HH.text "About"]
+        , HH.li_
+          [ HH.text "Contact"]
+        ]
+      ]
+
+    header :: H.ComponentHTML Query
     header =
       HH.div_
       [ HH.div [ classList [ CN.header]]
@@ -53,9 +76,12 @@ render _ =
           [ Svgs.logo []
           ]
         , HH.div [ classList [ CN.headerButtonContainer]]
-          [ HH.button [ classList [ CN.headerButton]]
-            [
-              HH.span [ classList [ CN.headerButtonPart1]]
+          [ HH.button [ classList_ [ Tuple true CN.headerButton
+                                   , Tuple buttonOpen CN.headerButtonOpen
+                                   ]
+                      , HE.onClick $ HE.input_ ButtonOnClick
+                      ]
+            [ HH.span [ classList [ CN.headerButtonPart1]]
               []
             , HH.span [ classList [ CN.headerButtonPart2]]
               []
@@ -64,11 +90,9 @@ render _ =
         ]
         , HH.nav [ classList [CN.headerNavigationDesktop]]
           []
-        , HH.nav [ classList [CN.headerNavigationMobile]]
-          []
       ]
 
-    hero :: H.ComponentHTML q
+    hero :: forall q. H.ComponentHTML q
     hero =
       HH.section [ classList [ CN.hero]]
       [
@@ -123,7 +147,7 @@ render _ =
             [ HH.text "nthropology" ]
           ]
 
-    gallery :: H.ComponentHTML q
+    gallery :: forall q. H.ComponentHTML q
     gallery =
       HH.div [ classList [ CN.gallery]]
       [ galleryItem Urls.image01
@@ -148,12 +172,12 @@ render _ =
           [ HH.img [ HP.src source]
           ]
 
-    navigator :: H.ComponentHTML q
+    navigator :: forall q. H.ComponentHTML q
     navigator =
       HH.div [ classList [ CN.navigator]]
       []
 
-    footer :: H.ComponentHTML q
+    footer :: forall q. H.ComponentHTML q
     footer =
       HH.div [ classList [ CN.footer]]
       [ HH.small_
@@ -161,7 +185,9 @@ render _ =
       ]
 
 eval :: forall m. Query ~> H.ComponentDSL State Query Output m
-eval (NoOp next) = pure next
+eval (ButtonOnClick next) = next <$ do
+  { buttonOpen } <- H.get
+  H.modify_ $ _ { buttonOpen = not buttonOpen }
 
 component :: forall m. H.Component HH.HTML Query Input Output m
 component = H.component spec
