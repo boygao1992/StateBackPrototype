@@ -17,7 +17,7 @@
 \newtheorem{defn}{Definition}
 \newtheorem{property}{Property}
 \newtheorem{example}{Example}
-\newtheorem{given}{Given}
+\newtheorem*{given}{Given}
 \newtheorem*{goal}{Goal}
 \newtheorem*{prob}{Problem}
 \newtheorem*{solution}{Solution}

@@ -284,6 +284,177 @@ You will receive 7 points by solving Problem 3.13, an easier version of 3.17.)
 \end{solution}
 
 \section*{Problem 3}
+
+(Problem 3.4.1 on page 66 of CC (12 points))
+For each of the following problem involving Turing machines, determine whether
+or not it is decidable:
+\textbf{a)} Given a Turing machine $M$, does it halt on the empty string?
+\textbf{b)} Given a Turing machine $M$, is there a string which it halts?
+\textbf{c)} Given a Turing machine $M$, is $L(M)$ finite?
+( Here $L(M)$ denotes the set of strings $\mathbf{w}$ which $M(\mathbf{w})$="yes".)
+\textbf{d)} Given two Turing machines $M$ and $M'$, is $L(M) = L(M')$?
+( Xi: To prove a problem is decidable, show that if there is a TM that decides
+it, then one can construct a TM to decide the halting problem or\textit{a
+  problem that you have already shown to be undecidable}. )
+
+\subsection*{a) EmptyHalt}
+
+\begin{solution}
+  Let $\bbM$ be the set of all Turing machines. \\
+  \[
+    \begin{aligned}
+      \text{Halt} &= \{ <M, w>: \forall M \in \bbM, \forall w \in \Sigma^*, M(w) = 1\}\\
+      \text{EmptyHalt} &= \{ <M> : \forall M \in \bbM, M(\epsilon) = 1 \}
+    \end{aligned}
+  \]
+
+  reduction from EmptyHalt to Halt:
+  \begin{given}
+    $<M ,w>$, where $M \in \bbM$ and $w \in \Sigma^*$
+  \end{given}
+  \begin{construct}[Turing machine $M'$ from $M$ with $w$ encoded in its FSA]
+    $\forall \text{ input } w' \in \Sigma^*$,
+    \begin{enumerate}
+    \item erase input $w'$ from the tape
+    \item write $w$ to the tape
+    \item reset pointer to the beginning of the tape and reset state to $q_{start}$
+    \item simulate $M$ on $w$
+    \end{enumerate}
+  \end{construct}
+  Therefore, $\exists M' \in \bbM, \forall w' \in \Sigma^*, M'(w') = M(w)$ and thus $ M'(\epsilon) = M(w)$.\\
+  If EmptyHalt is decidable then Halt is decidable.
+  But Halt is not decidable so EmptyHalt is not decidable.
+
+\end{solution}
+
+\subsection*{b) Exist}
+  Let $\bbM$ be the set of all Turing machines. \\
+  \[
+    \begin{aligned}
+      \text{Halt} &= \{ <M, w>: \forall M \in \bbM, \forall w \in \Sigma^*, M(w) = 1\}\\
+      \text{Exist} &= \{ <M> : \forall M \in \bbM, \exists w \in \Sigma^*, M(w) = 1 \}
+    \end{aligned}
+  \]
+
+  \begin{given}
+    $<M ,w>$, where $M \in \bbM$ and $w \in \Sigma^*$
+  \end{given}
+  Using the same construct as in \textbf{a)},
+  we have $\exists M' \in \bbM, \forall w' \in \Sigma^*, M'(w') = M(w)$.\\
+  If Exist is decidable then Halt is decidable.
+  But Halt is not decidable so Exist is not decidable.
+
+\subsection*{c) Finite}
+  Let $\bbM$ be the set of all Turing machines. \\
+  \[
+    \begin{aligned}
+      \text{Halt} &= \{ <M, w>: \forall M \in \bbM, \forall w \in \Sigma^*, M(w) = 1\}\\
+      \text{Finite} &= \{ <M> : \forall M \in \bbM, L(M) \text{ is finite} \}
+    \end{aligned}
+  \]
+  \begin{given}
+    $<M ,w>$, where $M \in \bbM$ and $w \in \Sigma^*$
+  \end{given}
+  Using the same construct as in \textbf{a)} but with its answer flipped, we have\\
+  \[
+    \exists M' \in \bbM, \forall w' \in \Sigma^*, M'(w') = \lnot M(w)
+  \]
+  Therefore, $M(w) = 1 \iff L(M') = \emptyset$ (which is finite).
+  If Finite is decidable then Halt is decidable.
+  But Halt is not decidable so Finite is not decidable.
+
+\subsection*{d) Equal}
+  Let $\bbM$ be the set of all Turing machines. \\
+  \[
+    \begin{aligned}
+      \text{Halt} &= \{ <M, w>: \forall M \in \bbM, \forall w \in \Sigma^*, M(w) = 1\}\\
+      \text{Equal} &= \{ <M_1, M_2> : \forall M_1 \in \bbM, \forall M_2 \in \bbM, L(M_1)=L(M_2) \}
+    \end{aligned}
+  \]
+
+  reduction from Equal to Halt:
+  \begin{given}
+    $<M ,w>$, where $M \in \bbM$ and $w \in \Sigma^*$
+  \end{given}
+  \begin{construct}[Turing machine $M_1$ and $M_2$]
+    \[
+      M_1(w_1) =
+      \left\{
+        \begin{aligned}
+          1 ; &\text{ if } w_1 = \epsilon\\
+          0 ; &\text{ otherwise}
+        \end{aligned}
+      \right.
+    \]
+    \[
+      M_2(w_2) =
+      \left\{
+        \begin{aligned}
+          M(w) ;& \text{ if } w_2 = \epsilon\\
+          0 ;& \text{ otherwise}
+        \end{aligned}
+      \right.
+    \]
+  \end{construct}
+  Therefore, $M(w) = 1 \iff L(M_1) = L(M_2)$.\\
+  If Equal is decidable then Halt is decidable.
+  But Halt is not decidable so Equal is not decidable.
+
+  
+
+
+
 \section*{Problem 4}
+(Problem 3.4.5 on page 67 of CC (10 points))
+Show that $L$ is recursive if and only if there is a Turing machine $M$ that
+enumerates $L$, and such that the strings in $L$ are output by $M$ in
+length-increasing fashion.
+(For the if direction, if $L$ is finite there is nothing to prove.
+So suppose it is infinite.)
+(Xi: Read pages 61-62 of CC or pages 140-141 of TC for the direction of a Turing
+machine enumerating a language $L$.)
+
+\subsection*{1) $ \forall L \subset \Sigma^*, \exists M \in \bbM, L = L(M) \Rightarrow \exists M' \in \bbM, L = E(M')$}
+
+\begin{proof}
+  \begin{given}
+    \begin{enumerate}
+    \item $L \subset \Sigma^*$
+    \item $M \in \bbM$ such that $L = L(M)$
+    \end{enumerate}
+  \end{given}
+
+  \begin{construct}[Turing machine $M'$ that enumerates $L$]
+    $\forall \text{ input } x \in \Sigma^*$, \\
+    enumerate $\Sigma^*$ ($w \leftarrow \Sigma^*$) in lexicographical order ($0, 1, 10, 11, 100, \dots$):
+    \begin{enumerate}
+    \item simulate $M$ on $w$, if $M(w) = 1$ then output $\sqcup w \sqcup$ at the end of
+      the tape
+    \item if $w = x$, then accept.
+    \end{enumerate}
+    
+  \end{construct}
+\end{proof}
+
+\subsection*{2) $\forall L \subset \Sigma^*, \exists M \in \bbM, L = E(M) \Rightarrow \exists M' \in \bbM, L = L(M')$}
+
+\begin{proof}
+  \begin{given}
+    \begin{enumerate}
+    \item $L \subset \Sigma^*$
+    \item $M \in \bbM$ such that $L = E(M)$
+    \end{enumerate}
+  \end{given}
+
+  \begin{construct}[Turing machine $M'$ that determines $L$]
+    $\forall \text{ input } x \in \Sigma^*$, \\
+    simulate $M$ on $\epsilon$
+    \begin{enumerate}
+    \item if the tape ends with $\sqcup x \sqcup$, then accept.
+    \item if the tape ends with $\sqcup w \sqcup$ where $|w| > |x|$, then reject.
+    \end{enumerate}
+    
+  \end{construct}
+\end{proof}
 
 \end{document} 
