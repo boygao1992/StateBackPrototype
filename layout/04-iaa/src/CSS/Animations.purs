@@ -54,3 +54,5 @@ hintTwinkle =
     CSS.infinite
     CSS.alternate
     CSSAM.none
+
+-- TODO: modify hero content layout and add text unfolding animation
