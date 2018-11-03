@@ -3,7 +3,7 @@ module Animations where
 import Prelude
 
 import AnimationNames as AN
-import CSS (alternate, animation, fromString, infinite, keyframes, nil, pct, sec, transform, translate) as CSS
+import CSS (alternate, animation, fromString, infinite, keyframes, nil, sec, transform, translate) as CSS
 import CSS (CSS)
 import CSSUtils (translate_, pair) as CSS
 import Data.Tuple (Tuple(Tuple))
@@ -16,7 +16,7 @@ import CSSConfig (springMotion)
 vertical :: CSS
 vertical = CSS.keyframes AN.vertical $
   ( Tuple 0.0 ( CSS.transform ( CSS.translate CSS.nil CSS.nil))) :|
-  [ ( Tuple 100.0 $ CSS.transform $ CSS.translate_ CSS.nil (CSS.pct springMotion) )]
+  [ ( Tuple 100.0 $ CSS.transform $ CSS.translate_ CSS.nil springMotion )]
 
 twinkle :: CSS
 twinkle = CSS.keyframes AN.twinkle $

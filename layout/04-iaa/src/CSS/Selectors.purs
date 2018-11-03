@@ -19,6 +19,10 @@ largeLogo = class_ CN.largeLogo
 header :: Selector
 header = class_ CN.header
 
+headerBar :: Selector
+headerBar = class_ CN.headerBar
+
+
 headerLogo :: Selector
 headerLogo = class_ CN.headerLogo
 
@@ -37,6 +41,9 @@ headerButtonPart2 = class_ CN.headerButtonPart2
 
 headerNavigationDesktop :: Selector
 headerNavigationDesktop =  class_ CN.headerNavigationDesktop
+
+headerNavigationDesktopContact :: Selector
+headerNavigationDesktopContact = class_ CN.headerNavigationDesktopContact
 
 headerNavigationMobile :: Selector
 headerNavigationMobile =  class_ CN.headerNavigationMobile

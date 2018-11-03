@@ -4,23 +4,25 @@ import Prelude
 
 import Animations as Animations
 import CSS (CSS)
-import CSS (absolute, alignItems, b, background, backgroundColor, block, body, borderBox, bottom, boxSizing, color, column, deg, display, displayNone, em, figure, fixed, flex, flexDirection, flexWrap, fontSize, grid, height, hover, img, importUrl, inlineBlock, justifyContent, left, letterSpacing, li, marginTop, nil, nowrap, pct, position, relative, rem, rotate, row, spaceBetween, span, star, textWhitespace, transform, ul, vh, vw, whitespaceNoWrap, width, zIndex) as CSS
+import CSS (absolute, alignItems, b, background, backgroundColor, block, body, borderBox, bottom, boxSizing, color, column, deg, display, displayNone, em, figure, fixed, flex, flexDirection, flexWrap, fontSize, grid, height, hover, img, importUrl, inlineBlock, justifyContent, left, letterSpacing, li, marginTop, nil, nowrap, pct, position, relative, rem, rotate, row, spaceBetween, span, star, textWhitespace, transform, ul, vh, vw, whitespaceNoWrap, width, zIndex, top, margin, a, textDecoration, noneTextDecoration, fromString, ms) as CSS
 import CSS.Common (center) as CSS
 import CSS.Overflow (hidden, overflow) as CSS
 import CSS.TextAlign (center, textAlign) as CSSText
+import CSSAnimation (easeInOut)
 import CSSConfig (ballRadius, springWidth, springHeight, desktop, half)
 import CSSUtils ((&), (?))
-import CSSUtils (borderRadius1, margin1, padding1, padding2, pair, byClass) as CSS
+import CSSUtils (borderRadius1, byClass, margin1, margin2, padding1, padding2, pair, transition, after) as CSS
+import ClassNames as CN
+import Color (rgba) as Color
 import Colors as Colors
 import Selectors as S
 import Urls as Urls
-import ClassNames as CN
 
 buttonPart :: CSS
 buttonPart = do
   CSS.position CSS.relative
   CSS.display CSS.block
-  CSS.height (CSS.rem 0.1)
+  CSS.height (CSS.rem 0.07)
   CSS.backgroundColor Colors.black
 
 root :: CSS
@@ -36,23 +38,50 @@ root = do
     CSS.pair "font-family" "'Roboto', 'Helvetica Neue', 'Yu Gothic', YuGothic, 'ヒラギノ角ゴ Pro', 'Hiragino Kaku Gothic Pro', 'メイリオ', 'Meiryo', sans-serif"
     CSS.margin1 CSS.nil
 
-
   S.header ? do
+    CSS.height (CSS.rem 4.0)
+    CSS.margin CSS.nil CSS.nil (CSS.rem 0.1) CSS.nil
+
+    CSS.a ? do
+      CSS.textDecoration CSS.noneTextDecoration
+      CSS.letterSpacing (CSS.em 0.06)
+      CSS.color Colors.black
+
+    CSS.a & CSS.after ? do
+      CSS.position CSS.absolute
+      CSS.left CSS.nil
+      CSS.bottom (CSS.em (-0.5))
+      CSS.pair "content" "''"
+      CSS.height (CSS.em 0.12)
+      CSS.width CSS.nil
+      CSS.backgroundColor Colors.robinsEggBlue
+      CSS.transition "all" (CSS.ms 250.0) easeInOut (CSS.ms 0.0)
+
+    CSS.a & (CSS.fromString ":hover::after") ? do
+      CSS.width (CSS.pct 100.0)
+
+  S.headerBar ? do
+    CSS.position CSS.fixed
+    CSS.width (CSS.pct 100.0)
+    CSS.height (CSS.rem 4.0)
     CSS.display CSS.flex
-    CSS.padding2 CSS.nil (CSS.rem 0.4)
+    CSS.padding2 (CSS.rem 0.2) (CSS.rem 0.4)
     CSS.flexDirection CSS.row
     CSS.flexWrap CSS.nowrap
+    CSS.alignItems CSS.center
     CSS.justifyContent CSS.spaceBetween
+    CSS.backgroundColor (Color.rgba 255 255 255 0.4)
+    CSS.zIndex 1
 
   S.headerLogo ? do
+    CSS.display CSS.flex
+    CSS.justifyContent CSS.center
     CSS.margin1 CSS.nil
-    CSS.height (CSS.pct 100.0)
 
   S.logo ? do
-    CSS.height (CSS.pct 100.0)
+    CSS.height (CSS.rem 1.6)
 
   S.headerButtonContainer ? do
-    CSS.width (CSS.rem 1.5)
     CSS.display CSS.flex
     CSS.alignItems CSS.center
     CSS.justifyContent CSS.center
@@ -60,19 +89,21 @@ root = do
   S.headerButton ? do
     CSS.pair "border" "none"
     CSS.pair "background" "none"
-    CSS.width (CSS.pct 100.0)
-    CSS.height (CSS.rem 2.0)
+    CSS.width (CSS.rem 2.0)
+    CSS.height (CSS.rem 1.5)
     CSS.padding1 CSS.nil
     CSS.zIndex 3
 
   S.headerButtonPart1 ? do
     CSS.width (CSS.pct 100.0)
     buttonPart
+    CSS.transition "all" (CSS.ms 250.0) easeInOut (CSS.ms 0.0)
 
   S.headerButtonPart2 ? do
     CSS.width (CSS.pct 75.0)
     CSS.marginTop (CSS.rem 0.5)
     buttonPart
+    CSS.transition "all" (CSS.ms 250.0) easeInOut (CSS.ms 0.0)
 
   S.headerButton & CSS.hover ? do
     S.headerButtonPart1 ? do
@@ -81,6 +112,7 @@ root = do
       CSS.width (CSS.pct 100.0)
 
   S.headerButton & (CSS.byClass CN.headerButtonOpen) ? do
+
     S.headerButtonPart1 ? do
       CSS.width (CSS.pct 100.0)
       CSS.transform $ CSS.rotate $ CSS.deg 45.0
@@ -89,14 +121,44 @@ root = do
       CSS.width (CSS.pct 100.0)
       CSS.transform $ CSS.rotate $ CSS.deg (-45.0)
 
-  S.headerNavigationMobile ? do
+  S.headerNavigationDesktop ? do
     CSS.display CSS.displayNone
+    CSS.ul ? do
+      CSS.margin1 CSS.nil
+      CSS.padding1 CSS.nil
+      CSS.pair "list-style" "none"
+      CSS.display CSS.flex
+      CSS.flexDirection CSS.row
+      CSS.alignItems CSS.center
+      CSS.justifyContent CSS.spaceBetween
+    CSS.li ? do
+      CSS.margin2 CSS.nil (CSS.em 1.0)
+      CSS.position CSS.relative
+
+  S.headerNavigationDesktopContact ? do
+    CSS.display CSS.displayNone
+    CSS.position CSS.relative
+
+  half do
+    S.headerNavigationDesktop ? do
+      CSS.display CSS.block
+    S.headerNavigationDesktopContact ? do
+      CSS.display CSS.block
+
+  S.headerNavigationMobile ? do
+    CSS.position CSS.fixed
+    CSS.display CSS.flex
+    CSS.top CSS.nil
+    CSS.left CSS.nil
     CSS.width (CSS.vw 100.0)
-    CSS.height (CSS.vh 100.0)
+    CSS.height CSS.nil
+    CSS.pair "opacity" "0.0"
+    -- CSS.height (CSS.vh 100.0)
     CSS.color Colors.white
     CSS.backgroundColor Colors.robinsEggBlue
     CSS.fontSize (CSS.rem 2.0)
     CSS.pair "font-weight" "100"
+    CSS.transition "all" (CSS.ms 250.0) easeInOut (CSS.ms 0.0)
 
     CSS.ul ? do
       CSS.padding1 CSS.nil
@@ -113,14 +175,17 @@ root = do
     CSS.justifyContent CSS.center
     CSS.position CSS.fixed
     CSS.zIndex 2
+    CSS.height (CSS.vh 100.0)
+    CSS.pair "opacity" "1.0"
 
-  -- half do
-  --   S.headerNavigationMobile & (CSS.byClass CN.headerButtonOpen)? do
-  --     CSS.display CSS.displayNone
-  --   S.headerButton ? do
-  --     CSS.display CSS.displayNone
+  half do
+    S.headerNavigationMobile & (CSS.byClass CN.headerButtonOpen)? do
+      CSS.display CSS.displayNone
+    S.headerButtonContainer ? do
+      CSS.display CSS.displayNone
 
   S.hero ? do
+    CSS.display CSS.block
     CSS.position CSS.relative
     CSS.background Colors.robinsEggBlue
     CSSText.textAlign CSSText.center
@@ -169,8 +234,8 @@ root = do
 
   S.heroSpringBottom ? do
     CSS.backgroundColor Colors.white
-    CSS.width (CSS.em springWidth)
-    CSS.height (CSS.em springHeight)
+    springWidth
+    springHeight
 
   S.gallery ? do
     CSS.display CSS.grid

@@ -2,14 +2,17 @@ module CSSUtils where
 
 import Prelude
 
+import CSS.Common (browsers)
+import CSS (Time)
+import CSS.Transition (TimingFunction)
 import CSS (borderRadius, child, margin, padding, select) as CSS
 import CSS.Flexbox (JustifyContentValue)
-import CSS.Property (class Val, value)
+import CSS.Property (class Val, value, (!))
 import CSS.Selector (Predicate(Pseudo, Class, Id), Refinement(Refinement), Selector(Selector), Path(Combined))
 import CSS.Selector (deep, star, with) as CSS
 import CSS.Size (Size(Size), Rel)
 import CSS.String (fromString)
-import CSS.Stylesheet (CSS, key)
+import CSS.Stylesheet (CSS, key, prefixed)
 import CSS.Transform (Transformation(..))
 import Color (Color)
 import Color as Color
@@ -69,6 +72,9 @@ borderRadius1 :: forall a. Size a -> CSS
 borderRadius1 s = CSS.borderRadius s s s s
 
 -- | Pseudo
+link :: Refinement
+link = fromString ":link"
+
 focus :: Refinement
 focus = fromString ":focus"
 
@@ -112,6 +118,11 @@ gridArray = GridArray
 
 gridRepeat :: forall a. Int -> Size a -> GridArray (Size a)
 gridRepeat n s = GridArray (replicate n s)
+
+-- | Transition
+-- from purescript-css/master
+transition :: String -> Time -> TimingFunction -> Time -> CSS
+transition p d f e = prefixed (browsers <> fromString "transition") (p ! d ! f ! e)
 
 -- | HACK
 

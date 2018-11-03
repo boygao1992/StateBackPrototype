@@ -42,8 +42,7 @@ type Output = Void
 render :: State -> H.ComponentHTML Query
 render { buttonOpen } =
   HH.div_
-  [ mobileNav
-  , header
+  [ header
   , hero
   , gallery
   , navigator
@@ -52,26 +51,11 @@ render { buttonOpen } =
   ]
 
   where
-    mobileNav :: H.ComponentHTML Query
-    mobileNav =
-      HH.nav [ classList_ [ Tuple true CN.headerNavigationMobile
-                          , Tuple buttonOpen CN.headerButtonOpen]]
-      [ HH.ul []
-        [ HH.li_
-          [ HH.text "Home"]
-        , HH.li_
-          [ HH.text "Works"]
-        , HH.li_
-          [ HH.text "About"]
-        , HH.li_
-          [ HH.text "Contact"]
-        ]
-      ]
-
     header :: H.ComponentHTML Query
     header =
-      HH.div_
-      [ HH.div [ classList [ CN.header]]
+      HH.header [ classList [ CN.header]]
+      [
+        HH.div [ classList [ CN.headerBar]]
         [ HH.h1 [ classList [ CN.headerLogo]]
           [ Svgs.logo []
           ]
@@ -87,10 +71,51 @@ render { buttonOpen } =
               []
             ]
           ]
+        , HH.nav [ classList [ CN.headerNavigationDesktop]]
+          [ HH.ul []
+            [ HH.li_
+              [ HH.a [ HP.href ""]
+                [ HH.text "Home" ]
+              ]
+            , HH.li_
+              [ HH.a [ HP.href ""]
+                [ HH.text "Works" ]
+              ]
+            , HH.li_
+              [ HH.a [ HP.href ""]
+                [
+                  HH.text "About"
+                ]
+              ]
+            ]
+          ]
+        , HH.span [ classList [ CN.headerNavigationDesktopContact]]
+          [ HH.a [ HP.href ""]
+            [
+              HH.text "Contact"
+            ]
+          ]
+        , mobileNav
         ]
-        , HH.nav [ classList [CN.headerNavigationDesktop]]
-          []
       ]
+
+      where
+        mobileNav :: H.ComponentHTML Query
+        mobileNav =
+          HH.nav [ classList_ [ Tuple true CN.headerNavigationMobile
+                              , Tuple buttonOpen CN.headerButtonOpen]]
+          [ HH.ul []
+            [ HH.li_
+              [ HH.text "Home"]
+            , HH.li_
+              [ HH.text "Works"]
+            , HH.li_
+              [ HH.text "About"]
+            , HH.li_
+              [ HH.text "Contact"]
+            ]
+          ]
+
 
     hero :: forall q. H.ComponentHTML q
     hero =
