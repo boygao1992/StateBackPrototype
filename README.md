@@ -1,6 +1,6 @@
 Folders
 - `architecture`, code annotations and collection of thoughts on frameworks and libraries
-  - `architecture/autocomplete`, design process of my autocomplete component (`ADTplayground/purescript-autocomplete`)
+  - `architecture/autocomplete`, design process of my autocomplete component (`ADTplayground/purescript-autocomplete`) and some generalization on Rx for describing dependency among state variables
   - `architecture/purescript-halogen`, digging internals of Purescript Halogen
   - `architecture/FRP`, digging FRP implementations
   - `architecture/xi-editor`, learning core concepts of Conflict-free Replicated Data Type (CRDT)
