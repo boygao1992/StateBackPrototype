@@ -1,5 +1,57 @@
+Folders
+- `architecture`, code annotations and collection of thoughts on frameworks and libraries
+  - `architecture/autocomplete`, design process of my autocomplete component (`ADTplayground/purescript-autocomplete`)
+  - `architecture/purescript-halogen`, digging internals of Purescript Halogen
+  - `architecture/FRP`, digging FRP implementations
+  - `architecture/xi-editor`, learning core concepts of Conflict-free Replicated Data Type (CRDT)
+  - `architecture/effects`, exploring constructs in Purescript effect ecosystem
+- `modulization`
+  - bridging abstractions in OOP and FP
+  - exploring component-oriented architectures and extensible effects
+- `UI`
+  - `UI/reorganizable_layout`, exploring formal representation of layout in 2d pixel space for fully reorganizable layout
+  - `UI/layout`, purescript-css experiments on responsive layout
+    - `UI/layout/04-iaa`, imitate home page of [IAA.](https://i-f-aa.com/) with flexbox and grid
+  - `UI/style`
+  - `UI/animation`
+  - `UI/shape`
+- `category_theory`, notes on category theory
+- `css`, solving encountered issues when using purescript-css
+  - `scss-doc`, isomorphic constructs in `scss` and `purescript-css`
+- `computation`, `formal_verification`, notes on computational complexity and formal verification
+
 # Problems in Current Frameworks
 [User interfaces as reactive systems - Technuflections Blog](https://brucou.github.io/posts/user-interfaces-as-reactive-systems/)
+
+## Overview
+
+As the application grows, we programmers can no longer fit the entire picture in our minds so we start to partition the system into independent subsystems.
+In OOP, subsystems are usually modeled as objects (or actors in concurrent settings) and the communication protocols shared among objects are specified by interfaces with named methods encoding the events/actions.
+In FP, the partition of the system is more malleable because subsystems are not rigidly framed by a static interface but interpreted / recognized by the domain of first-class (state transition) functions. The composition of pure functions allows us to build static signal graph (Elm) and with the power of monad we are able to build dynamic signal graph (Halogen) which has the same level of expressiveness as dynamic object graph in OOP.
+
+But OOP as a modeling language doesn't regulate the growth of the object graph. With accumulated complexity in the wiring of components, the event cascading paths will get harder and harder to reason about.
+DOM tree in 2D UI and scene graph in 3D applications enforce a partial order over the set of objects thus communications are restricted to parent-child relations, because in most of the cases the communications are also local in the pixel space.
+But non-local communications, for instance some mutual exclusion constraints over a set of state variables scattered around the object graph, will be cumbersome to encode sorely using local propagation. It's like projecting a high-dimensional curve down to a two-dimensional grid, which just adds unnecessary complexity and noise to the code base.
+The key issue is that the tree structure of the object graph, whether in DOM or in scene graph, works for the rendering engine but has little to do with the way we reason about the behavior of the UI.
+We want a higher-level language to concisely describe the interaction between a finite numbers of moving parts, i.e. view components, on screen which are likely to form a graph.
+
+React or other VDOM-powered component systems allow us to move closer to the problem domain and simplify the object graph by removing DOM nodes without any dynamic behaviors out of the picture.
+But they still live in that tree thus having remote communication problem and they don't help organizing effects.
+
+Redux global store is a mediator that connects to all components to handle remote communications by state transition functions (reducers) but require these state variables to be factored out of React.
+It's a rational decision to let Redux take over all the state variables and leave React to compose pure view functions.
+Because encoding events as data or regular languages (algebraic data-types in Elm, algebra functor in Halogen, but string literals in Redux which raises a namespacing issue in event space management) and using pure state transition functions (reducers) as interpreters to handle state mutation is cleaner and simpler to test than implicitly encoding events by named methods and mutating state by direct state assignment.
+But event cascading pathways between view components are shadowed by state transition functions.
+Even with a decent type system like in Elm, there's no way to tell the dependencies (or causal relationships) among state variables of a state transition function by just staring at its type signature.
+We need to dig into the actual code to reconstruct that picture.
+Constructs from functional reactive programming (FRP) emphasize dependencies by explicit wiring statements which can be borrowed to structure state transition functions (but not for the entire system, construction of mutual constraints using feedback loops can be hairy).
+
+In Redux or Elm (after 0.17), the state transition of the entire system has to be done in one pass.
+The purpose of this enforcement to eliminate feedback loops is to restrict complexity of the giant state transition function of the system at top-level.
+But then there's no room for incremental state refinements which is common in hardware design.
+I guess there's a distinction between the mindsets of these two communities.
+But I want to have the best parts from both and form a coherent solution for my own front-end framework so I explored both.
+
 
 ## Halogen
 [Reading TEA leaves](https://github.com/benkolera/ylj-reading-the-tea-leaves)
@@ -32,7 +84,6 @@ not ideal if forced to test everything on browser, even the execution of behavio
 In order to pass supplement state to child components, the child need an unnecessary state synchronization step (by copying from parent component).
 Ideally, the supplement state should be passed to the `render` (or `view` in Elm) function directly.
 I guess they want to keep the shape of all `render` functions unified (`render :: State -> Halogen.ComponentHTML Query`).
-Another reason, for performance aspect, might be that direct passing doesn't actually save memory consumption because automatic currying for higher-order functions will cache the state any way. (need further investigation)
 
 - basically following the Elm architecture to encode event cascading pathways in Type but different approach
   - Elm: use nested Union Type to structure the event space as the pathways
@@ -43,7 +94,7 @@ Another reason, for performance aspect, might be that direct passing doesn't act
     parent is required to configure child's `update` function by supplying a translator function for each output event
     child's `update` function is also irregular which doesn't handle IO Effect (`Cmd` in Elm) directly but only the translated event
   - Halogen: use Free Monad to encode the tree
-  no essential difference conceptually except all the convenience from the Monad interface
+  allow to construct dynamic signal graph
   upstream passing has explicit `Output` event from child to parent so basically committed to one common solution in Elm community (not saying the idea is from Elm)
     - `Output` from a child component doesn't directly return to where parent component made the `Query`, which means it lose the context.
     Potentially, the same effect will get executed twice at two different places in parent's `eval` function. Solution:
@@ -62,7 +113,7 @@ Another reason, for performance aspect, might be that direct passing doesn't act
 1. CycleJS claims that the Main Function is *Pure*, but not really.
   Still need mocking for testing.
   - event listener attach/removal is side effect which is not abstracted away from Main.
-  - RxJS Observable has many stateful operators which are declarative (named)  but encapsulate/hide state.
+  - RxJS Observable has many stateful operators which are declarative (named) but encapsulate/hide state.
     - MemoryStream / operators with buffers
     - time-related operators
 
@@ -80,22 +131,21 @@ e.g. TodoMVC, delete button is attached to child components (TodoItem) while the
 
 ## ELM
 
-1. ~~state transition function without validation of state~~
-
-  - Precise construction of state space by Union type and Product type, which encapsulate the state validation logic.
+1. state space formalism
+  - Precise construction of state space by algebraic data types
+    - con: pre-mature commitment to a state space partition will make it hard for further adjustment
   - Further refinement of state space relies on runtime conditionals.
 
 2. no pleasant way to access information in the pixel space (because VDOM is an incomplete communication protocol between DOM and the application internal)
 
-3. child-parent message passing need child to expose state getter/lense function to its parent to grant parent access to its state (give it ability to interpret)
+3. child-parent message passing need child to expose state getter/lense function to its parent to grant parent access to its state (give it ability to interpret, similar to callback handlers in React)
   (in OOP, Translator Pattern)
 
-4. node-to-node communication is even worse.
-  Need to find a common ancestor and all the ancestor/parent along the way to be aware of the communication.
-
-5. first-order FRP and static signal graph. Separation between Container and Child Component in state management (which is essential for creating General Container Widget) while maintaining the ability to add/remove child components dynamically in runtime is not possible.
+4. Remote communication. Like React, need to find a common ancestor and all the ancestor/parent along the way to be aware of the communication.
 
 ![Node-to-Node Message Passing](./doc/node-to-node_message_passing.png "Node-to-Node Message Passing")
+
+5. First-order FRP and static signal graph. Separation between Container and Child Component in state management (which is essential for creating General Container Widget) while maintaining the ability to add/remove child components dynamically in runtime is not possible.
 
 6. Missing Type Classes
 
@@ -103,13 +153,13 @@ e.g. TodoMVC, delete button is attached to child components (TodoItem) while the
 
 [Elm Is Wrong](http://reasonablypolymorphic.com/blog/elm-is-wrong/)
 
-### Potential Fix
-
 Elm support synchronous and asynchronous recursive Update on Model.
 - Sync: directly call the `Update` function with the `Msg` (sequential)
 - Async: pack the `Msg` in `Cmd` (branching is possible, but ordering not guaranteed)
 
-Able to implement `Regulator` and `PostCensor`
+Able to implement
+- `Regulator` and `PostCensor` for state refinement
+- remote communication
 
 ## SAM
 
@@ -137,50 +187,20 @@ TODO
 
 [grmble/purescript-bonsai - Elm TEA with VDOM](https://github.com/grmble/purescript-bonsai)
 
-> A Pux application consists of two types and two functions:
-> 1. A type for the app's **State**.
->
-> A type for the application's state. For example, the state of a simple counter that can be incremented or decremented may be an integer:
-> ```purescript
-> type State = Int
-> ```
->
-> 2. A type for **Event**s such as the user clicking a button.
->
-> Pux listens for DOM events and reifies them using the application's event type. For example, a simple counter needs events for incrementing and decrementing in response to clicking buttons:
-> ```purescript
-> data Event = Increment | Decrement
-> ```
->
-> 3. A function which produces a new state from events, **foldp**.
->
-> Whenever an event occurs a new state is produced by folding it with the current state using foldp. Continuing the counter example, the previous count is combined with the current event to produce a new count:
-> ```purescript
-> foldp :: ∀ fx. Event -> State -> EffModel State Event fx
-> foldp Increment n = { state: n + 1, effects: [] }
-> foldp Decrement n = { state: n - 1, effects: [] }
-> ```
->
-> 4. A function which produces HTML from the current state, **view**.
->
-> The view function takes state and returns the corresponding HTML.
-> ```purescript
-> view :: State -> HTML Event
-> view count =
->   div do
->     button #! onClick (const Increment) $ text "Increment"
->     span $ text (show count)
->     button #! onClick (const Decrement) $ text "Decrement"
-> ```
-
 ## React + Redux
 
-State transition function and Output function are separated into Reducer and Middleware.
+Pure state transition functions and effects are separated into Reducers and Middlewares.
 
-1. Middlewares don't compose. Functional specification needed.
+1. Middlewares don't compose. Functional specification needed i.e. extensible/algebraic effects.
 
-2. Reducer can be modulized based on DOM tree's hierarchical structure but then suffer from the same communication problem as ELM. 
-If reducer tree is flattened into a single layer hash map (all components directly subscribing dimensions of interest from the store by react-redux `connect`), then global constraints are easy to implement but cyclic dependency are still not properly handled (some parent components know too much).
+2. Reducer (state transition function) can be modulized based on DOM tree's hierarchical structure for local communication but
+  - hard to reason and maintain without algebraic data types but sorely relying on namespacing by string concatenation
+  - React native parent-child communication pattern is recommended
+    - downstream passing by props
+    - upstream passing by callback handlers
+  - Redux usage should be restricted to
+    - dispatch state to relatively independent subsystems (then let React to handle downstream passing)
+    - remote communication e.g. mutual exclusion constraint over components of the same class; upstream passing events to top-level singleton like modal component; etc.
 
 ### React VDOM
 
@@ -192,24 +212,27 @@ Functionality
 
 `React.Component` can be parametrized by data, event handlers, and view/render functions (officially called Render Props).
 
-If the Component is parametrized by view functions, then it focuses on **view state** handling logic.
+Components which are parametrized by view functions focus on **view state** handling logic, called container.
 
-Component without any view state handling logic is pure template.
+Components without any view state handling logic are pure templates, called presentational components.
 
 
-## Angular2 / Vue
-
-TODO
 
 ## Some Progress in the Community
 ### 1. [scalable-frontend-with-elm-or-redux](https://github.com/slorber/scalable-frontend-with-elm-or-redux)
+
 ### 2. [The Rise Of The State Machines](https://www.smashingmagazine.com/2018/01/rise-state-machines/) - [Stent | FSM in JS](https://github.com/krasimir/stent)
 Still, Scalability Issues:
 - How to divide the state space to reduce the complexity to a certain level in which an average programmer is able to reason about?
 - How to compose individual state machines? Communication with network/graph?
 
+### 3.[Namespacing Actions for Redux - Our Experience with Creating Reusable Functional Components with React, Redux, and Redux-Loop](https://kickstarter.engineering/namespacing-actions-for-redux-d9b55a88b1b1)
+
+
 
 # Comparison between Finite State Machine, Actor, FRP, Arrowized FRP, and OOP with Mutation
+
+TODO
 
 ## Actor
 
@@ -378,7 +401,7 @@ Refined the behavior of each widget by adding guards to fulfill local constraint
   - some information is packed differently (into different widgets than before)
   - extra information (dispatch to widgets already existed or add new widgets)
   - modify the appearance of some widgets (not a big deal)
-  - modify the behavior of some widgets
+  - modify the local behavior of some widgets
   - replace some widgets entirely by other implementations
   - extra behaviors on a group of widgets (may get packed into a new container)
   
@@ -771,23 +794,6 @@ Framework-independent & composable
 ## Input/Event Space Partition
 1. Event Type definition
 2. Organization of Event Indices/Names
-
-
-### Deprecate Event Handler Model
-State Transition Function: State x Event/Input -> State x Output 
-
-DOM has its primitive event dispatching system for event handling which is the event handler mechanism.
-Event handlers are supposed to be part of the state transition functions that matches pre-defined events by its name in the function call.
-But this enforces the programmer to partition the event space **first** then the state space, which doesn't match our native thinking of a state graph.
-We usually organize the state space in hierarchical manner because states are easier to understand (by visualization or direct observation of the system).
-Given a specific state of the system, then we talk about the outgoing edges (state transitions) associated with that state, which presumably is a small set that human developers are able to deal with.
-
-So the first thing to do is to inverse the order of pattern matching. 
-All the event handlers registered in DOM call our singleton giant state transition function. 
-
-Event handlers are still useful but we only need the following information to be past to our state transition function:
-- where the event is created in the DOM tree/hierarchy
-- payload of the event (primitive events are usually parametrized)
 
 ### Multiple instances of the same component
 Componentized UI systems ship independent parts (disjoint dimensions in the state vector) of the system as components, each of which has its own state transition function therefore comes with a set of pre-defined events.

@@ -22,7 +22,6 @@ not ideal if forced to test everything on browser, even the execution of behavio
 In order to pass supplement state to child components, the child need an unnecessary state synchronization step (by copying from parent component).
 Ideally, the supplement state should be passed to the `render` (or `view` in Elm) function directly.
 I guess they want to keep the shape of all `render` functions unified (`render :: State -> Halogen.ComponentHTML Query`).
-Another reason, for performance aspect, might be that direct passing doesn't actually save memory consumption because automatic currying for higher-order functions will cache the state any way. (need further investigation)
 
 - basically following the Elm architecture to encode event cascading pathways in Type but different approach
   - Elm: use nested Union Type to structure the event space as the pathways
@@ -33,7 +32,7 @@ Another reason, for performance aspect, might be that direct passing doesn't act
     parent is required to configure child's `update` function by supplying a translator function for each output event
     child's `update` function is also irregular which doesn't handle IO Effect (`Cmd` in Elm) directly but only the translated event
   - Halogen: use Free Monad to encode the tree
-  no essential difference conceptually except all the convenience from the Monad interface
+  allow to construct dynamic signal graph
   upstream passing has explicit `Output` event from child to parent so basically committed to one common solution in Elm community (not saying the idea is from Elm)
     - `Output` from a child component doesn't directly return to where parent component made the `Query`, which means it lose the context.
     Potentially, the same effect will get executed twice at two different places in parent's `eval` function. Solution:
