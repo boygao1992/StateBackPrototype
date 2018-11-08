@@ -142,7 +142,7 @@ render { buttonOpen } =
       where
         titleInstitute :: H.ComponentHTML q
         titleInstitute =
-          HH.span_
+          HH.span [ classList [ CN.heroInstitute]]
           [ HH.b_
             [ HH.text "I"]
           , HH.span_
@@ -151,12 +151,12 @@ render { buttonOpen } =
 
         titleFor :: H.ComponentHTML q
         titleFor =
-          HH.span_
+          HH.span [ classList [ CN.heroFor]]
           [ HH.text "for"]
 
         titleArchitectural :: H.ComponentHTML q
         titleArchitectural =
-          HH.span_
+          HH.span [ classList [ CN.heroArchitectural]]
           [ HH.b_
             [ HH.text "A"]
           , HH.span_
@@ -165,7 +165,7 @@ render { buttonOpen } =
 
         titleAnthropology :: H.ComponentHTML q
         titleAnthropology =
-          HH.span_
+          HH.span [ classList [ CN.heroAnthropology]]
           [ HH.b_
             [ HH.text "A"]
           , HH.span_

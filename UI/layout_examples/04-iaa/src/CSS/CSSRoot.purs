@@ -4,13 +4,13 @@ import Prelude
 
 import Animations as Animations
 import CSS (CSS)
-import CSS (absolute, alignItems, b, background, backgroundColor, block, body, borderBox, bottom, boxSizing, color, column, deg, display, displayNone, em, figure, fixed, flex, flexDirection, flexWrap, fontSize, grid, height, hover, img, importUrl, inlineBlock, justifyContent, left, letterSpacing, li, marginTop, nil, nowrap, pct, position, relative, rem, rotate, row, spaceBetween, span, star, textWhitespace, transform, ul, vh, vw, whitespaceNoWrap, width, zIndex, top, margin, a, textDecoration, noneTextDecoration, fromString, ms) as CSS
+import CSS as CSS
 import CSS.Common (center) as CSS
 import CSS.Overflow (hidden, overflow) as CSS
-import CSS.TextAlign (center, textAlign) as CSSText
+import CSS.TextAlign (center, textAlign, leftTextAlign, rightTextAlign) as CSSText
 import CSSAnimation (easeInOut)
 import CSSConfig (ballRadius, springWidth, springHeight, desktop, half)
-import CSSUtils ((&), (?))
+import CSSUtils ((&), (?), (++))
 import CSSUtils (borderRadius1, byClass, margin1, margin2, padding1, padding2, pair, transition, after) as CSS
 import ClassNames as CN
 import Color (rgba) as Color
@@ -195,7 +195,7 @@ root = do
     CSS.overflow CSS.hidden
 
   S.heroTitle ? do
-    CSS.fontSize (CSS.vw 8.75)
+    CSS.fontSize (CSS.vmin 8.75)
     CSS.letterSpacing (CSS.em 0.15)
     CSS.span ? do
       CSS.display CSS.block
@@ -207,11 +207,35 @@ root = do
       CSS.span ? do
         CSS.display CSS.inlineBlock
 
+    desktop do
+      CSS.display CSS.flex
+      CSS.flexDirection CSS.row
+      CSS.flexGrow 1
+      CSS.flexShrink 1
+      CSS.flexWrap CSS.wrap
+      CSS.justifyContent CSS.center
+
+      CSS.span ? do
+        CSS.flexBasis $ CSS.pct 30.0
+
+      S.heroInstitute ? do
+        CSS.flexBasis $ CSS.pct 50.0
+
+      S.heroInstitute ++ S.heroArchitectural ? do
+        CSSText.textAlign CSSText.rightTextAlign
+        CSS.padding CSS.nil (CSS.em 0.5) CSS.nil CSS.nil
+
+      S.heroFor ++ S.heroAnthropology ? do
+        CSSText.textAlign CSSText.leftTextAlign
+
   S.heroHint ? do
     CSS.pair "font-weight" "400"
     CSS.fontSize (CSS.vw 4.0)
     CSS.letterSpacing (CSS.em 0.33)
     Animations.hintTwinkle
+
+    desktop do
+      CSS.fontSize $ CSS.rem 1.0
 
   S.heroSpringContainer ? do
     CSS.position CSS.absolute

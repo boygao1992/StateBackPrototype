@@ -8,7 +8,7 @@ import Data.NonEmpty (singleton) as NE
 import CSS as CSS
 
 screenSizeDesktop :: Size Rel
-screenSizeDesktop = rem 60.0
+screenSizeDesktop = rem 64.0
 
 screenSizeHalf :: Size Rel
 screenSizeHalf = rem 37.0

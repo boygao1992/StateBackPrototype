@@ -138,6 +138,9 @@ push elements from inline-level to block-level (from `inline*` to `block`) if no
 
 # CSS Grid
 
+- primarily partition the space by ratio
+- space allocation of grid items are constrained by border attachment or span
+
 column > row
 
 grid system
@@ -181,6 +184,9 @@ grid constraints on item
 ```
 
 # CSS Flexbox
+
+- `flex-grow`: distribute available space to flex items by ratio
+- `flex-shrink`: re-allocated space from flex items by ratio when content space overflow the flex container
 
 # Examples
 

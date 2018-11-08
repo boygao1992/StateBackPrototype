@@ -5058,6 +5058,9 @@ var PS = {};
   var vw = function (i) {
       return Data_Semigroup.append(CSS_Property.semigroupValue)(CSS_Property.value(CSS_Property.valNumber)(i))(CSS_String.fromString(CSS_Property.isStringValue)("vw"));
   };
+  var vmin = function (i) {
+      return Data_Semigroup.append(CSS_Property.semigroupValue)(CSS_Property.value(CSS_Property.valNumber)(i))(CSS_String.fromString(CSS_Property.isStringValue)("vmin"));
+  };
   var vh = function (i) {
       return Data_Semigroup.append(CSS_Property.semigroupValue)(CSS_Property.value(CSS_Property.valNumber)(i))(CSS_String.fromString(CSS_Property.isStringValue)("vh"));
   };
@@ -5087,6 +5090,7 @@ var PS = {};
   exports["rem"] = rem;
   exports["vw"] = vw;
   exports["vh"] = vh;
+  exports["vmin"] = vmin;
   exports["Angle"] = Angle;
   exports["deg"] = deg;
   exports["valSize"] = valSize;
@@ -5233,7 +5237,7 @@ var PS = {};
   var springMotion = CSS_Size.pct(30.0);
   var springHeight = CSS_Geometry.height(CSS_Size.em(2.5));
   var screenSizeHalf = CSS_Size.rem(37.0);
-  var screenSizeDesktop = CSS_Size.rem(60.0);               
+  var screenSizeDesktop = CSS_Size.rem(64.0);               
   var half = CSS_Stylesheet.query(CSS_Media.screen)(Data_NonEmpty.singleton(Control_Plus.plusArray)(CSSMedia.minWidth(screenSizeHalf)));
   var desktop = CSS_Stylesheet.query(CSS_Media.screen)(Data_NonEmpty.singleton(Control_Plus.plusArray)(CSSMedia.minWidth(screenSizeDesktop)));
   var ballRadius = 0.25;
@@ -5301,7 +5305,8 @@ var PS = {};
   };
   var SpaceBetween = function (spaceBetween) {
       this.spaceBetween = spaceBetween;
-  };                                                                             
+  };                                                                                            
+  var wrap = FlexWrap(CSS_String.fromString(CSS_Property.isStringValue)("wrap"));
   var valJustifyContentValue = new CSS_Property.Val(function (v) {
       return v;
   });
@@ -5328,7 +5333,14 @@ var PS = {};
       return AlignItemsValue(CSS_String.fromString(CSS_Property.isStringValue)($110));
   });
   var flexWrap = CSS_Stylesheet.key(valFlexWrap)(CSS_String.fromString(CSS_Property.isStringKey)("flex-wrap"));
+  var flexShrink = function (i) {
+      return CSS_Stylesheet.key(CSS_Property.valValue)(CSS_String.fromString(CSS_Property.isStringKey)("flex-shrink"))(CSS_String.fromString(CSS_Property.isStringValue)(Data_Show.show(Data_Show.showInt)(i)));
+  };
+  var flexGrow = function (i) {
+      return CSS_Stylesheet.key(CSS_Property.valValue)(CSS_String.fromString(CSS_Property.isStringKey)("flex-grow"))(CSS_String.fromString(CSS_Property.isStringValue)(Data_Show.show(Data_Show.showInt)(i)));
+  };
   var flexDirection = CSS_Stylesheet.key(valFlexDirection)(CSS_String.fromString(CSS_Property.isStringKey)("flex-direction"));
+  var flexBasis = CSS_Stylesheet.key(CSS_Size.valSize)(CSS_String.fromString(CSS_Property.isStringKey)("flex-basis"));
   var column = FlexDirection(CSS_String.fromString(CSS_Property.isStringValue)("column"));
   var centerJustifyContentValue = new CSS_Common.Center(CSS_String.fromString(isStringJustifyContentValue)("center"));
   var centerAlignItemsValue = new CSS_Common.Center(CSS_String.fromString(isStringAlignItemsValue)("center"));         
@@ -5337,12 +5349,16 @@ var PS = {};
   exports["SpaceBetween"] = SpaceBetween;
   exports["AlignItemsValue"] = AlignItemsValue;
   exports["alignItems"] = alignItems;
+  exports["flexBasis"] = flexBasis;
   exports["FlexDirection"] = FlexDirection;
   exports["row"] = row;
   exports["column"] = column;
   exports["flexDirection"] = flexDirection;
+  exports["flexGrow"] = flexGrow;
+  exports["flexShrink"] = flexShrink;
   exports["FlexWrap"] = FlexWrap;
   exports["nowrap"] = nowrap;
+  exports["wrap"] = wrap;
   exports["flexWrap"] = flexWrap;
   exports["JustifyContentValue"] = JustifyContentValue;
   exports["justifyContent"] = justifyContent;
@@ -5436,6 +5452,11 @@ var PS = {};
   var margin1 = function (s) {
       return CSS_Geometry.margin(s)(s)(s)(s);
   };
+  var combine = function (s1) {
+      return function (s2) {
+          return new CSS_Selector.Selector([  ], new CSS_Selector.Combined(s1, s2));
+      };
+  };
   var byClass = function ($22) {
       return CSS_Selector.Refinement(Control_Applicative.pure(Control_Applicative.applicativeArray)(CSS_Selector.Class.create($22)));
   };
@@ -5449,6 +5470,7 @@ var PS = {};
   exports["safeFromHexString"] = safeFromHexString;
   exports["byClass"] = byClass;
   exports["class_"] = class_;
+  exports["combine"] = combine;
   exports["margin1"] = margin1;
   exports["margin2"] = margin2;
   exports["padding1"] = padding1;
@@ -6245,10 +6267,14 @@ var PS = {};
       return v;
   });
   var textAlign = CSS_Stylesheet.key(valTextAlign)(CSS_String.fromString(CSS_Property.isStringKey)("text-align"));
+  var rightTextAlign = TextAlign(CSS_String.fromString(CSS_Property.isStringValue)("right"));
+  var leftTextAlign = TextAlign(CSS_String.fromString(CSS_Property.isStringValue)("left"));
   var center = TextAlign(CSS_String.fromString(CSS_Property.isStringValue)("center"));
   exports["TextAlign"] = TextAlign;
   exports["textAlign"] = textAlign;
   exports["center"] = center;
+  exports["leftTextAlign"] = leftTextAlign;
+  exports["rightTextAlign"] = rightTextAlign;
   exports["valTextAlign"] = valTextAlign;
 })(PS["CSS.TextAlign"] = PS["CSS.TextAlign"] || {});
 (function(exports) {
@@ -6272,7 +6298,11 @@ var PS = {};
   // | Hero
   var hero = "hero";
   var hero_ = namespace(hero);
+  var heroAnthropology = hero_("anthropology");
+  var heroArchitectural = hero_("architectural");
+  var heroFor = hero_("for");
   var heroHint = hero_("hint");
+  var heroInstitute = hero_("institute");
   var heroSpring = hero_("spring");
   var heroSpringBottom = heroSpring + "Bottom";
   var heroSpringContainer = heroSpring + "Container";
@@ -6320,6 +6350,10 @@ var PS = {};
   exports["headerNavigationMobile"] = headerNavigationMobile;
   exports["hero"] = hero;
   exports["heroTitle"] = heroTitle;
+  exports["heroInstitute"] = heroInstitute;
+  exports["heroFor"] = heroFor;
+  exports["heroArchitectural"] = heroArchitectural;
+  exports["heroAnthropology"] = heroAnthropology;
   exports["heroHint"] = heroHint;
   exports["heroSpring"] = heroSpring;
   exports["heroSpringContainer"] = heroSpringContainer;
@@ -6343,18 +6377,26 @@ var PS = {};
   exports["robinsEggBlue"] = robinsEggBlue;
 })(PS["Colors"] = PS["Colors"] || {});
 (function(exports) {
-  // Generated by purs version 0.12.0
-  "use strict";
+    "use strict";
   var CSS = PS["CSS"];
   var CSSUtils = PS["CSSUtils"];
   var ClassNames = PS["ClassNames"];                    
+
+  // | id selectors
+  // | class selectors
   var logo = CSSUtils.class_(ClassNames.logo);          
   var heroTitle = CSSUtils.class_(ClassNames.heroTitle);
   var heroSpringTop = CSSUtils.class_(ClassNames.heroSpringTop);
   var heroSpringContainer = CSSUtils.class_(ClassNames.heroSpringContainer);
   var heroSpringBottom = CSSUtils.class_(ClassNames.heroSpringBottom);
   var heroSpring = CSSUtils.class_(ClassNames.heroSpring);
+  var heroInstitute = CSSUtils.class_(ClassNames.heroInstitute);
   var heroHint = CSSUtils.class_(ClassNames.heroHint);
+  var heroFor = CSSUtils.class_(ClassNames.heroFor);
+  var heroArchitectural = CSSUtils.class_(ClassNames.heroArchitectural);
+  var heroAnthropology = CSSUtils.class_(ClassNames.heroAnthropology);
+
+  // | Hero
   var hero = CSSUtils.class_(ClassNames.hero);
   var headerNavigationMobile = CSSUtils.class_(ClassNames.headerNavigationMobile);
   var headerNavigationDesktopContact = CSSUtils.class_(ClassNames.headerNavigationDesktopContact);
@@ -6365,8 +6407,12 @@ var PS = {};
   var headerButtonContainer = CSSUtils.class_(ClassNames.headerButtonContainer);
   var headerButton = CSSUtils.class_(ClassNames.headerButton);
   var headerBar = CSSUtils.class_(ClassNames.headerBar);
+
+  // | Header
   var header = CSSUtils.class_(ClassNames.header);
   var galleryItem = CSSUtils.class_(ClassNames.galleryItem);
+
+  // | Gallery
   var gallery = CSSUtils.class_(ClassNames.gallery);
   exports["logo"] = logo;
   exports["header"] = header;
@@ -6381,6 +6427,10 @@ var PS = {};
   exports["headerNavigationMobile"] = headerNavigationMobile;
   exports["hero"] = hero;
   exports["heroTitle"] = heroTitle;
+  exports["heroInstitute"] = heroInstitute;
+  exports["heroFor"] = heroFor;
+  exports["heroArchitectural"] = heroArchitectural;
+  exports["heroAnthropology"] = heroAnthropology;
   exports["heroHint"] = heroHint;
   exports["heroSpring"] = heroSpring;
   exports["heroSpringContainer"] = heroSpringContainer;
@@ -6425,7 +6475,8 @@ var PS = {};
   exports["image13"] = image13;
 })(PS["Urls"] = PS["Urls"] || {});
 (function(exports) {
-    "use strict";
+  // Generated by purs version 0.12.0
+  "use strict";
   var Animations = PS["Animations"];
   var CSS = PS["CSS"];
   var CSS_Background = PS["CSS.Background"];
@@ -6658,21 +6709,45 @@ var PS = {};
                                                                                           });
                                                                                       });
                                                                                   })))(function () {
-                                                                                      return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Stylesheet.select(Selectors.heroTitle)(Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Font.fontSize(CSS_Size.vw(8.75)))(function () {
+                                                                                      return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Stylesheet.select(Selectors.heroTitle)(Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Font.fontSize(CSS_Size.vmin(8.75)))(function () {
                                                                                           return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Text.letterSpacing(CSS_Size.em(0.15)))(function () {
-                                                                                              return CSS_Stylesheet.select(CSS_Elements.span)(Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Display.display(CSS_Display.block))(function () {
+                                                                                              return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Stylesheet.select(CSS_Elements.span)(Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Display.display(CSS_Display.block))(function () {
                                                                                                   return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSSUtils.pair("font-weight")("100"))(function () {
                                                                                                       return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Stylesheet.select(CSS_Elements.b)(CSSUtils.pair("font-weight")("400")))(function () {
                                                                                                           return CSS_Stylesheet.select(CSS_Elements.span)(CSS_Display.display(CSS_Display.inlineBlock));
                                                                                                       });
                                                                                                   });
-                                                                                              }));
+                                                                                              })))(function () {
+                                                                                                  return CSSConfig.desktop(Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Display.display(CSS_Display.flex))(function () {
+                                                                                                      return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Flexbox.flexDirection(CSS_Flexbox.row))(function () {
+                                                                                                          return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Flexbox.flexGrow(1))(function () {
+                                                                                                              return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Flexbox.flexShrink(1))(function () {
+                                                                                                                  return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Flexbox.flexWrap(CSS_Flexbox.wrap))(function () {
+                                                                                                                      return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Flexbox.justifyContent(CSS_Common.center(CSS_Flexbox.centerJustifyContentValue)))(function () {
+                                                                                                                          return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Stylesheet.select(CSS_Elements.span)(CSS_Flexbox.flexBasis(CSS_Size.pct(30.0))))(function () {
+                                                                                                                              return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Stylesheet.select(Selectors.heroInstitute)(CSS_Flexbox.flexBasis(CSS_Size.pct(50.0))))(function () {
+                                                                                                                                  return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Stylesheet.select(CSSUtils.combine(Selectors.heroInstitute)(Selectors.heroArchitectural))(Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_TextAlign.textAlign(CSS_TextAlign.rightTextAlign))(function () {
+                                                                                                                                      return CSS_Geometry.padding(CSS_Size.nil)(CSS_Size.em(0.5))(CSS_Size.nil)(CSS_Size.nil);
+                                                                                                                                  })))(function () {
+                                                                                                                                      return CSS_Stylesheet.select(CSSUtils.combine(Selectors.heroFor)(Selectors.heroAnthropology))(CSS_TextAlign.textAlign(CSS_TextAlign.leftTextAlign));
+                                                                                                                                  });
+                                                                                                                              });
+                                                                                                                          });
+                                                                                                                      });
+                                                                                                                  });
+                                                                                                              });
+                                                                                                          });
+                                                                                                      });
+                                                                                                  }));
+                                                                                              });
                                                                                           });
                                                                                       })))(function () {
                                                                                           return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Stylesheet.select(Selectors.heroHint)(Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSSUtils.pair("font-weight")("400"))(function () {
                                                                                               return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Font.fontSize(CSS_Size.vw(4.0)))(function () {
                                                                                                   return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(CSS_Text.letterSpacing(CSS_Size.em(0.33)))(function () {
-                                                                                                      return Animations.hintTwinkle;
+                                                                                                      return Control_Bind.discard(Control_Bind.discardUnit)(CSS_Stylesheet.bindStyleM)(Animations.hintTwinkle)(function () {
+                                                                                                          return CSSConfig.desktop(CSS_Font.fontSize(CSS_Size.rem(1.0)));
+                                                                                                      });
                                                                                                   });
                                                                                               });
                                                                                           })))(function () {
@@ -14796,10 +14871,10 @@ var PS = {};
   var render = function (v) {
       var navigator = Halogen_HTML_Elements.div([ HalogenUtils.classList([ ClassNames.navigator ]) ])([  ]);
       var hero = (function () {
-          var titleInstitute = Halogen_HTML_Elements.span_([ Halogen_HTML_Elements.b_([ Halogen_HTML_Core.text("I") ]), Halogen_HTML_Elements.span_([ Halogen_HTML_Core.text("nstitute") ]) ]);
-          var titleFor = Halogen_HTML_Elements.span_([ Halogen_HTML_Core.text("for") ]);
-          var titleArchitectural = Halogen_HTML_Elements.span_([ Halogen_HTML_Elements.b_([ Halogen_HTML_Core.text("A") ]), Halogen_HTML_Elements.span_([ Halogen_HTML_Core.text("rchitactural") ]) ]);
-          var titleAnthropology = Halogen_HTML_Elements.span_([ Halogen_HTML_Elements.b_([ Halogen_HTML_Core.text("A") ]), Halogen_HTML_Elements.span_([ Halogen_HTML_Core.text("nthropology") ]) ]);
+          var titleInstitute = Halogen_HTML_Elements.span([ HalogenUtils.classList([ ClassNames.heroInstitute ]) ])([ Halogen_HTML_Elements.b_([ Halogen_HTML_Core.text("I") ]), Halogen_HTML_Elements.span_([ Halogen_HTML_Core.text("nstitute") ]) ]);
+          var titleFor = Halogen_HTML_Elements.span([ HalogenUtils.classList([ ClassNames.heroFor ]) ])([ Halogen_HTML_Core.text("for") ]);
+          var titleArchitectural = Halogen_HTML_Elements.span([ HalogenUtils.classList([ ClassNames.heroArchitectural ]) ])([ Halogen_HTML_Elements.b_([ Halogen_HTML_Core.text("A") ]), Halogen_HTML_Elements.span_([ Halogen_HTML_Core.text("rchitactural") ]) ]);
+          var titleAnthropology = Halogen_HTML_Elements.span([ HalogenUtils.classList([ ClassNames.heroAnthropology ]) ])([ Halogen_HTML_Elements.b_([ Halogen_HTML_Core.text("A") ]), Halogen_HTML_Elements.span_([ Halogen_HTML_Core.text("nthropology") ]) ]);
           return Halogen_HTML_Elements.section([ HalogenUtils.classList([ ClassNames.hero ]) ])([ Halogen_HTML_Elements.h1([ HalogenUtils.classList([ ClassNames.heroTitle ]) ])([ titleInstitute, titleFor, titleArchitectural, titleAnthropology ]), Halogen_HTML_Elements.p([ HalogenUtils.classList([ ClassNames.heroHint ]) ])([ Halogen_HTML_Core.text("Scroll Down") ]), Halogen_HTML_Elements.div([ HalogenUtils.classList([ ClassNames.heroSpringContainer ]) ])([ Halogen_HTML_Elements.div([ HalogenUtils.classList([ ClassNames.heroSpring ]) ])([ Halogen_HTML_Elements.div([ HalogenUtils.classList([ ClassNames.heroSpringTop ]) ])([  ]), Halogen_HTML_Elements.div([ HalogenUtils.classList([ ClassNames.heroSpringBottom ]) ])([  ]) ]) ]) ]);
       })();
       var header = (function () {

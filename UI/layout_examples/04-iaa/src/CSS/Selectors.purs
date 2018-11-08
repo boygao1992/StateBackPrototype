@@ -55,6 +55,18 @@ hero = class_ CN.hero
 heroTitle :: Selector
 heroTitle = class_ CN.heroTitle
 
+heroInstitute :: Selector
+heroInstitute = class_ CN.heroInstitute
+
+heroFor :: Selector
+heroFor = class_ CN.heroFor
+
+heroArchitectural :: Selector
+heroArchitectural = class_ CN.heroArchitectural
+
+heroAnthropology :: Selector
+heroAnthropology = class_ CN.heroAnthropology
+
 heroHint :: Selector
 heroHint = class_ CN.heroHint
 

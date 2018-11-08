@@ -64,6 +64,18 @@ hero = "hero"
 heroTitle :: String
 heroTitle = hero_ "title"
 
+heroInstitute :: String
+heroInstitute = hero_ "institute"
+
+heroFor :: String
+heroFor = hero_ "for"
+
+heroArchitectural :: String
+heroArchitectural = hero_ "architectural"
+
+heroAnthropology :: String
+heroAnthropology = hero_ "anthropology"
+
 heroHint :: String
 heroHint = hero_ "hint"
 
