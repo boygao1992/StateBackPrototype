@@ -2,6 +2,11 @@
 
 margin | border | padding | content | padding | border | margin
 
+margin collapse
+- rationale: margin (space) doesn't interact with the outline of another margin but borders
+- with `display: flex` or `display: grid`, child nodes seem no longer have margin collapse
+because the partition lines serve as an additional set of boundaries in-between previously collapsing margins (space)
+
 # Default
 
 ## Default Display
