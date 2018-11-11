@@ -32,7 +32,7 @@ header {
   @media only screen and (min-width: 768px) {
     header {
       display: grid;
-      grid-template-columns: 1fr auto minmax(600px, 3fr) 1fr;
+      grid-template-columns: 1fr auto minmax(450px, 3fr) 1fr;
       grid-gap: 5em; } }
 
 @media only screen and (min-width: 768px) {
@@ -42,6 +42,7 @@ header {
 nav {
   position: absolute;
   width: 100%;
+  padding-left: 1em;
   text-align: left;
   background-color: rgba(85, 214, 170, 0.85);
   transform: scale(1, 0);

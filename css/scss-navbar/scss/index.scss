@@ -11,6 +11,9 @@ $breakpoint-desktop: 768px;
 // z-index
 $layer-top: 999;
 
+// alignment
+$nav-left-margin: 1em;
+
 
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,700);
 
@@ -66,7 +69,7 @@ header {
 
   @include desktop {
     display: grid;
-    grid-template-columns: 1fr auto minmax(600px, 3fr) 1fr;
+    grid-template-columns: 1fr auto minmax(450px, 3fr) 1fr;
     grid-gap: 5em;
   }
 }
@@ -81,6 +84,7 @@ nav {
   position: absolute;
   width: 100%;
 
+  padding-left: $nav-left-margin;
   text-align: left;
   background-color: $header-background-color;
 
@@ -178,7 +182,7 @@ nav {
 .nav-toggle-label {
   position: absolute;
   top: 0;
-  left: 1em;
+  left: $nav-left-margin;
 
   height: 100%;
   display: flex;
