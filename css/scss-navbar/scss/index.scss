@@ -1,0 +1,221 @@
+// colors
+$color-white: #fff;
+$color-black: #000;
+
+$header-background-color: rgba(85, 214, 170, .85);
+
+// breakpoint
+$breakpoint-tablet: 480px;
+$breakpoint-desktop: 768px;
+
+// z-index
+$layer-top: 999;
+
+
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,700);
+
+@mixin tablet {
+  @media only screen and (min-width: #{$breakpoint-tablet}) and (max-width: #{$breakpoint-desktop}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media only screen and (min-width: #{$breakpoint-desktop}) {
+    @content;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+*::before {
+  box-sizing: border-box;
+}
+
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Raleway, sans-serif;
+  font-weight: 300;
+  background: '#222';
+  margin: 0;
+}
+
+.content {
+  display: grid;
+  height: 200vh;
+  align-items: center;
+
+  background-blend-mode: multiply;
+  background-color: '#333';
+  background-image: url('https://unsplash.it/1000/1001');
+  background-size: cover;
+}
+
+header {
+  position: fixed;
+  z-index: $layer-top;
+  width: 100%;
+
+  background-color: $header-background-color;
+  text-align: center;
+
+  @include desktop {
+    display: grid;
+    grid-template-columns: 1fr auto minmax(600px, 3fr) 1fr;
+    grid-gap: 5em;
+  }
+}
+
+.logo {
+  @include desktop {
+    grid-column: 2 / 3;
+  }
+}
+
+nav {
+  position: absolute;
+  width: 100%;
+
+  text-align: left;
+  background-color: $header-background-color;
+
+  transform: scale(1, 0);
+  transform-origin: top;
+  transition: transform 400ms ease-in-out;
+
+  @include desktop {
+    grid-column: 3 / 4;
+
+    // style reset
+    position: static;
+    transform: scale(1, 1);
+    background-color: transparent;
+    text-align: center;
+
+    display: flex;
+    justify-content: end;
+    align-items: center;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    height: 10em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    @include desktop {
+      height: auto;
+      width: 70%;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+  }
+
+  a {
+    color: $color-white;
+    text-decoration: none;
+    font-size: 1.2em;
+    text-transform: uppercase;
+
+    opacity: 0;
+    transition: opacity 150ms ease-in-out;
+
+    @include desktop {
+      opacity: 1;
+
+      position: relative;
+
+      &::before {
+        position: absolute;
+        content: '';
+        top: -.3em;
+
+        height: .1em;
+        width: 100%;
+        background-color: $color-black;
+        transform: scale(0, 1);
+        transform-origin: left;
+        transition: transform 250ms ease-in-out;
+      }
+
+      &:hover::before {
+        transform: scale(1, 1);
+      }
+
+    }
+
+    &:hover {
+      color: $color-black;
+    }
+  }
+
+}
+
+.nav-toggle {
+  display: none;
+}
+
+.nav-toggle:checked ~ nav {
+  transform: scale(1, 1);
+
+  a {
+    opacity: 1;
+    transition: opacity 250ms ease-in-out 250ms;
+  }
+}
+
+.nav-toggle-label {
+  position: absolute;
+  top: 0;
+  left: 1em;
+
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  @include desktop {
+    display: none;
+  }
+
+  %hamberger {
+    display: block;
+    width: 2em;
+    height: .1em;
+    border-radius: .05px;
+    background-color: $color-white;
+  }
+
+  span {
+    @extend %hamberger;
+
+    position: relative;
+
+    &::before {
+      @extend %hamberger;
+      content: '';
+      position: absolute;
+      bottom: .5em;
+    }
+
+    &::after {
+      @extend %hamberger;
+      content: '';
+      position: absolute;
+      top: .5em;
+    }
+
+  }
+}
+

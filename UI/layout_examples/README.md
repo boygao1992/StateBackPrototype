@@ -7,6 +7,13 @@ margin collapse
 - with `display: flex` or `display: grid`, child nodes seem no longer have margin collapse
 because the partition lines serve as an additional set of boundaries in-between previously collapsing margins (space)
 
+`box-sizing`
+- `border-box`, dimension-related properties are associated with the outer boundary of border (border + padding + content)
+  - `width`, `height`
+  - `position: absolute`
+    - `top`, `right`, `bottom`, `left`
+- `content-box`, dimension-related properties are associated with the inner boundary of border (padding + content)
+
 # Default
 
 ## Default Display
@@ -164,7 +171,7 @@ grid layout
     - `grid-auto-flow` (like `flex-direction`)
       - value: `row` or `column` or `row dense` or `column dense`
 
-gap
+`grid-gap`
 - `grid-column-gap`
 - `grid-row-gap`
 
@@ -180,11 +187,12 @@ grid constraints on item
 - top-left corner: `(x1, y1)`
 - bottom-right corner: `(x2, y2)`
 
-`fr` - proportional distribution over the unfixed pixels
+`fr` - proportional distribution over the unfixed pixels (or "available" space)
 ```css
 .grid {
   width: 1100px;
   grid-template-column: 1fr 200px 2fr; /* = 300px 200px 600px */
+  /* content with px width living within a column with fr width will not be shrinked (column width will not strictly follow the ratio specifed by fr when viewport width is small enough), because px is more specific than fr thus prioritized in calculation, similar to columns with px width */
 }
 ```
 

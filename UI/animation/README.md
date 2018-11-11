@@ -11,6 +11,12 @@
   - `steps(x, [ start | end ])`
 - `frames-timing-function`
   - `frames(x) :: Int -> TimingFunc`
+  
+(2018.11) for performance reason, limit transition to the following types
+- opacity
+- scale
+- translate
+- rotate
 
 ### 1.[Animate.css](https://daneden.github.io/animate.css/)
 
