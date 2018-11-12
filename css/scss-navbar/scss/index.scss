@@ -5,20 +5,10 @@ $color-black: #000;
 $header-background-color: rgba(85, 214, 170, .85);
 
 // breakpoint
-$breakpoint-tablet: 480px;
 $breakpoint-desktop: 768px;
 
-// z-index
-$layer-top: 999;
-
-// alignment
-$nav-left-margin: 1em;
-
-
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,700);
-
-@mixin tablet {
-  @media only screen and (min-width: #{$breakpoint-tablet}) and (max-width: #{$breakpoint-desktop}) {
+@mixin mobile {
+  @media only screen and (max-width: #{$breakpoint-desktop}) {
     @content;
   }
 }
@@ -29,16 +19,30 @@ $nav-left-margin: 1em;
   }
 }
 
+// z-index
+$layer-top: 999;
+
+// alignment
+$nav-left-margin: 1em;
+
+// font
+$ff: "Raleway", sans-serif;
+$fw-1: 300;
+$fw-n: 400;
+$fw-b: 900;
+
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,700);
+
 * {
   box-sizing: border-box;
-}
 
-*::before {
-  box-sizing: border-box;
-}
+  &::before {
+    box-sizing: border-box;
+  }
 
-*::after {
-  box-sizing: border-box;
+  &::after {
+    box-sizing: border-box;
+  }
 }
 
 body {
@@ -81,24 +85,23 @@ header {
 }
 
 nav {
-  position: absolute;
   width: 100%;
 
   padding-left: $nav-left-margin;
-  text-align: left;
-  background-color: $header-background-color;
 
-  transform: scale(1, 0);
-  transform-origin: top;
-  transition: transform 400ms ease-in-out;
+  @include mobile {
+    position: absolute;
+    transform: scale(1, 0);
+    transform-origin: top;
+    transition: transform 400ms ease-in-out;
+    background-color: $header-background-color;
+    text-align: left;
+  }
+
 
   @include desktop {
     grid-column: 3 / 4;
 
-    // style reset
-    position: static;
-    transform: scale(1, 1);
-    background-color: transparent;
     text-align: center;
 
     display: flex;
@@ -132,12 +135,12 @@ nav {
     font-size: 1.2em;
     text-transform: uppercase;
 
-    opacity: 0;
-    transition: opacity 150ms ease-in-out;
+    @include mobile {
+      opacity: 0;
+      transition: opacity 150ms ease-in-out;
+    }
 
     @include desktop {
-      opacity: 1;
-
       position: relative;
 
       &::before {
@@ -171,11 +174,13 @@ nav {
 }
 
 .nav-toggle:checked ~ nav {
-  transform: scale(1, 1);
+  @include mobile {
+    transform: scale(1, 1);
 
-  a {
-    opacity: 1;
-    transition: opacity 250ms ease-in-out 250ms;
+    a {
+      opacity: 1;
+      transition: opacity 250ms ease-in-out 250ms;
+    }
   }
 }
 

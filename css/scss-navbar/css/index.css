@@ -1,12 +1,10 @@
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,700);
 * {
   box-sizing: border-box; }
-
-*::before {
-  box-sizing: border-box; }
-
-*::after {
-  box-sizing: border-box; }
+  *::before {
+    box-sizing: border-box; }
+  *::after {
+    box-sizing: border-box; }
 
 body {
   font-family: Raleway, sans-serif;
@@ -40,20 +38,19 @@ header {
     grid-column: 2 / 3; } }
 
 nav {
-  position: absolute;
   width: 100%;
-  padding-left: 1em;
-  text-align: left;
-  background-color: rgba(85, 214, 170, 0.85);
-  transform: scale(1, 0);
-  transform-origin: top;
-  transition: transform 400ms ease-in-out; }
+  padding-left: 1em; }
+  @media only screen and (max-width: 768px) {
+    nav {
+      position: absolute;
+      transform: scale(1, 0);
+      transform-origin: top;
+      transition: transform 400ms ease-in-out;
+      background-color: rgba(85, 214, 170, 0.85);
+      text-align: left; } }
   @media only screen and (min-width: 768px) {
     nav {
       grid-column: 3 / 4;
-      position: static;
-      transform: scale(1, 1);
-      background-color: transparent;
       text-align: center;
       display: flex;
       justify-content: end;
@@ -77,12 +74,13 @@ nav {
     color: #fff;
     text-decoration: none;
     font-size: 1.2em;
-    text-transform: uppercase;
-    opacity: 0;
-    transition: opacity 150ms ease-in-out; }
+    text-transform: uppercase; }
+    @media only screen and (max-width: 768px) {
+      nav a {
+        opacity: 0;
+        transition: opacity 150ms ease-in-out; } }
     @media only screen and (min-width: 768px) {
       nav a {
-        opacity: 1;
         position: relative; }
         nav a::before {
           position: absolute;
@@ -102,11 +100,12 @@ nav {
 .nav-toggle {
   display: none; }
 
-.nav-toggle:checked ~ nav {
-  transform: scale(1, 1); }
-  .nav-toggle:checked ~ nav a {
-    opacity: 1;
-    transition: opacity 250ms ease-in-out 250ms; }
+@media only screen and (max-width: 768px) {
+  .nav-toggle:checked ~ nav {
+    transform: scale(1, 1); }
+    .nav-toggle:checked ~ nav a {
+      opacity: 1;
+      transition: opacity 250ms ease-in-out 250ms; } }
 
 .nav-toggle-label {
   position: absolute;

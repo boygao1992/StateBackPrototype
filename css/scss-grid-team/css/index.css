@@ -1,0 +1,76 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,900);
+* {
+  box-sizing: border-box; }
+  *::before {
+    box-sizing: border-box; }
+  *::after {
+    box-sizing: border-box; }
+
+body {
+  font-family: "Raleway", sans-serif;
+  font-weight: 300;
+  margin: 0; }
+
+.grid-container {
+  width: 95%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: auto;
+  grid-gap: 1em;
+  align-items: center; }
+  @media only screen and (min-width: 480px) and (max-width: 768px) {
+    .grid-container {
+      grid-template-columns: repeat(2, 1fr); } }
+  @media only screen and (min-width: 768px) {
+    .grid-container {
+      grid-template-columns: repeat(3, 1fr); } }
+
+.out-team {
+  background-color: #0b2027;
+  padding: 5em 0;
+  color: rgba(248, 248, 248, 0.6); }
+
+@media only screen and (min-width: 480px) and (max-width: 768px) {
+  .team-description {
+    grid-row: span 2; } }
+
+@media only screen and (min-width: 768px) {
+  .team-description {
+    grid-row: auto;
+    grid-column: span 2; } }
+
+.team-title {
+  text-transform: uppercase;
+  font-weight: 300;
+  font-size: 5rem;
+  color: #f8f8f8;
+  margin-top: 0; }
+  .team-title span {
+    display: block;
+    font-weight: 900; }
+
+.team-member {
+  margin: 0;
+  padding: 0;
+  position: relative; }
+  .team-member img {
+    display: block;
+    width: 100%; }
+  .team-member figcaption {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    bottom: 1em;
+    left: 1em;
+    background-color: rgba(112, 169, 161, 0.8);
+    color: #0b2027;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 300ms ease-in-out 150ms; }
+  .team-member:hover figcaption {
+    opacity: 1; }
+  .team-member .name {
+    text-transform: uppercase;
+    text-align: center; }

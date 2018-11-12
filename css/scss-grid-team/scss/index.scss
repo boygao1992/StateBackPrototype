@@ -1,0 +1,144 @@
+// colors
+$dark-blue: #0b2027;
+$blue: #40798c;
+$accent: #70a9a1;
+$light-accent: #70a9a1;
+$yellow: #f6f1d1;
+$white: #f8f8f8;
+
+// breakpoint
+$breakpoint-tablet: 480px;
+$breakpoint-desktop: 768px;
+
+// font
+$ff: "Raleway", sans-serif;
+$fw-1: 300;
+$fw-n: 400;
+$fw-b: 900;
+
+@mixin mobile {
+  @media only screen and (max-width: #{$breakpoint-tablet}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media only screen and (min-width: #{$breakpoint-tablet}) and (max-width: #{$breakpoint-desktop}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media only screen and (min-width: #{$breakpoint-desktop}) {
+    @content;
+  }
+}
+
+// z-index
+$layer-top: 999;
+
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,900);
+
+
+* {
+  box-sizing: border-box;
+
+  &::before {
+    box-sizing: border-box;
+  }
+
+  &::after {
+    box-sizing: border-box;
+  }
+}
+
+body {
+  font-family: $ff;
+  font-weight: $fw-1;
+  margin: 0;
+}
+
+.grid-container {
+  width: 95%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: auto;
+  grid-gap: 1em;
+  align-items: center;
+
+  @include tablet {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include desktop {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.out-team {
+  background-color: $dark-blue;
+  padding: 5em 0;
+  color: rgba($white, .6);
+
+}
+
+.team-description {
+  @include tablet {
+    grid-row: span 2;
+  }
+
+  @include desktop {
+    grid-row: auto;
+    grid-column: span 2;
+  }
+}
+
+.team-title {
+  text-transform: uppercase;
+  font-weight: $fw-1;
+  font-size: 5rem;
+  color: $white;
+  margin-top: 0;
+
+  span {
+    display: block;
+    font-weight: $fw-b;
+  }
+
+}
+
+.team-member {
+  margin: 0;
+  padding: 0;
+  position: relative;
+
+  img {
+    display: block;
+    width: 100%;
+  }
+
+  figcaption {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    bottom: 1em;
+    left: 1em;
+    background-color: rgba($accent, .8);
+    color: $dark-blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 300ms ease-in-out 150ms;
+  }
+
+  &:hover figcaption {
+    opacity: 1;
+  }
+
+  .name {
+    text-transform: uppercase;
+    text-align: center;
+  }
+}
+

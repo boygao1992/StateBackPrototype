@@ -68,6 +68,12 @@ block
 
 for adjacent images (`<img>`, `display: inline-block` by default), lift them to `display: block`
 
+## Default line-height
+
+> [MDN - line-height](https://developer.mozilla.org/en-US/docs/Web/CSS/line-height)
+> `normal`
+> - Depends on the user agent. Desktop browsers (including Firefox) use a default value of roughly **1.2**, depending on the element's font-family.
+
 # Positioning
 `inline-block`
 - `position: static`, non-positioned
