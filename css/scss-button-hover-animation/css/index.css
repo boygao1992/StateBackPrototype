@@ -1,0 +1,174 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,700);
+*,
+*::before,
+*::after {
+  box-sizing: border-box; }
+
+body {
+  font-family: Raleway, sans-serif;
+  font-weight: 300;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 1em; }
+
+.button1,
+.button2,
+.button3,
+.button4,
+.button5,
+.button6,
+.button7,
+.button8,
+.button9,
+.button10,
+.button11,
+.button12 {
+  border: 1px solid #3498db;
+  background: none;
+  padding: .5em 1em;
+  font-size: 1em;
+  cursor: pointer;
+  transition: 800ms ease-in-out;
+  position: relative;
+  overflow: hidden; }
+  .button1::before,
+  .button2::before,
+  .button3::before,
+  .button4::before,
+  .button5::before,
+  .button6::before,
+  .button7::before,
+  .button8::before,
+  .button9::before,
+  .button10::before,
+  .button11::before,
+  .button12::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 0%;
+    background-color: #3498db;
+    z-index: -1;
+    transition: 800ms ease-in-out; }
+
+.button1,
+.button2,
+.button5,
+.button6 {
+  color: #3498db; }
+  .button1:hover,
+  .button2:hover,
+  .button5:hover,
+  .button6:hover {
+    color: #fff; }
+    .button1:hover::before,
+    .button2:hover::before,
+    .button5:hover::before,
+    .button6:hover::before {
+      height: 200%; }
+
+.button3,
+.button4,
+.button7,
+.button8 {
+  color: #fff; }
+  .button3::before,
+  .button4::before,
+  .button7::before,
+  .button8::before {
+    height: 200%; }
+  .button3:hover,
+  .button4:hover,
+  .button7:hover,
+  .button8:hover {
+    color: #3498db; }
+    .button3:hover::before,
+    .button4:hover::before,
+    .button7:hover::before,
+    .button8:hover::before {
+      height: 0; }
+
+.button1::before,
+.button3::before,
+.button5::before,
+.button7::before {
+  top: 0;
+  left: 0;
+  border-radius: 0 0 50% 50%; }
+
+.button2::before,
+.button4::before,
+.button6::before,
+.button8::before {
+  bottom: 0;
+  left: 0;
+  border-radius: 50% 50% 0 0; }
+
+.button5::before,
+.button6::before {
+  width: 0; }
+
+.button5:hover::before,
+.button6:hover::before {
+  width: 100%; }
+
+.button7:hover::before,
+.button8:hover::before {
+  width: 0; }
+
+.button9,
+.button10 {
+  color: #3498db;
+  transition: 1.5s; }
+  .button9::before,
+  .button10::before {
+    height: 300%;
+    width: 180%;
+    top: -100%;
+    transform: scale(0, 0);
+    transition: 1.8s; }
+  .button9:hover,
+  .button10:hover {
+    color: #fff; }
+    .button9:hover::before,
+    .button10:hover::before {
+      transform: scale(1, 1); }
+
+.button11,
+.button12 {
+  color: #fff;
+  transition: 1.5s; }
+  .button11::before,
+  .button12::before {
+    height: 300%;
+    width: 180%;
+    top: -100%;
+    transform: scale(1, 1);
+    transition: 1.8s; }
+  .button11:hover,
+  .button12:hover {
+    color: #3498db; }
+    .button11:hover::before,
+    .button12:hover::before {
+      transform: scale(0, 0); }
+
+.button9::before,
+.button11::before {
+  left: -50%;
+  border-radius: 0 50% 50% 0;
+  transform-origin: 0 50%; }
+
+.button10::before,
+.button12::before {
+  right: -50%;
+  border-radius: 50% 0 0 50%;
+  transform-origin: 100% 50%; }

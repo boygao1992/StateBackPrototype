@@ -1,0 +1,230 @@
+// colors
+$color-curious-blue: #3498db;
+$color-white: #fff;
+
+// breakpoint
+$breakpoint-desktop: 768px;
+
+@mixin mobile {
+  @media only screen and (max-width: #{$breakpoint-desktop}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media only screen and (min-width: #{$breakpoint-desktop}) {
+    @content;
+  }
+}
+
+// z-index
+$layer-top: 999;
+$layer-bottom: -1;
+
+// alignment
+// font
+$ff: "Raleway", sans-serif;
+$fw-1: 300;
+$fw-n: 400;
+$fw-b: 900;
+
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,700);
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+
+}
+
+body {
+  font-family: Raleway, sans-serif;
+  font-weight: 300;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 1em;
+}
+
+%button {
+  border: 1px solid $color-curious-blue;
+  background: none;
+  padding: .5em 1em;
+  font-size: 1em;
+  cursor: pointer;
+  transition: 800ms ease-in-out;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 0%;
+    background-color: $color-curious-blue;
+    z-index: $layer-bottom;
+    transition: 800ms ease-in-out;
+  }
+}
+
+.button1,
+.button2,
+.button3,
+.button4,
+.button5,
+.button6,
+.button7,
+.button8,
+.button9,
+.button10,
+.button11,
+.button12 {
+  @extend %button;
+}
+
+.button1,
+.button2,
+.button5,
+.button6 {
+  color: $color-curious-blue;
+
+  &:hover {
+    color: $color-white;
+
+    &::before {
+      height: 200%;
+    }
+  }
+
+}
+
+.button3,
+.button4,
+.button7,
+.button8 {
+  color: $color-white;
+
+  &::before {
+    height: 200%;
+  }
+
+  &:hover {
+    color: $color-curious-blue;
+
+    &::before {
+      height: 0;
+    }
+  }
+}
+
+.button1,
+.button3,
+.button5,
+.button7 {
+  &::before {
+    top: 0;
+    left: 0;
+    border-radius: 0 0 50% 50%;
+  }
+}
+
+.button2,
+.button4,
+.button6,
+.button8 {
+  &::before {
+    bottom: 0;
+    left: 0;
+    border-radius: 50% 50% 0 0;
+  }
+}
+
+.button5,
+.button6 {
+  &::before {
+    width: 0;
+  }
+
+  &:hover::before {
+    width: 100%;
+  }
+}
+
+.button7,
+.button8 {
+  &:hover::before {
+    width: 0;
+  }
+}
+
+.button9,
+.button10 {
+  color: $color-curious-blue;
+  transition: 1.5s;
+
+  &::before {
+    height: 300%;
+    width: 180%;
+    top: -100%;
+    transform: scale(0, 0);
+    transition: 1.8s;
+  }
+
+  &:hover {
+    color: $color-white;
+
+    &::before {
+      transform: scale(1, 1);
+    }
+  }
+}
+
+.button11,
+.button12 {
+  color: $color-white;
+  transition: 1.5s;
+
+  &::before {
+    height: 300%;
+    width: 180%;
+    top: -100%;
+    transform: scale(1, 1);
+    transition: 1.8s;
+  }
+
+  &:hover {
+    color: $color-curious-blue;
+
+    &::before {
+      transform: scale(0, 0);
+    }
+  }
+}
+
+.button9,
+.button11 {
+  &::before {
+    left: -50%;
+    border-radius: 0 50% 50% 0;
+    transform-origin: 0 50%;
+  }
+}
+
+.button10,
+.button12 {
+  &::before {
+    right: -50%;
+    border-radius: 50% 0 0 50%;
+    transform-origin: 100% 50%;
+  }
+}
+
