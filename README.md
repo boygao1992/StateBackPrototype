@@ -4474,6 +4474,15 @@ dubious
 
 ### 3.[LukaJCB/Algebra.purs - Alternative Tagless Final encoding in Purescript](https://gist.github.com/LukaJCB/c59b9e7b41bd1b12e5d4d3de683f6a5f)
 
+## Security
+
+### 1.[Advanced web security topics](https://blog.georgovassilis.com/2016/04/16/advanced-web-security-topics/)
+
+> - images with embedded HTML
+> - css scrollbar appearance event triggering css font request url
+>   - different characters with different font sizes
+>   - able to infer the bag of characters from the rendered size (scrollbar trick)
+
 ## Others
 
 ### 1.[To Dissect a Mockingbird: A Graphical Notation for the Lambda Calculus with Animated Reduction](http://dkeenan.com/Lambda/)

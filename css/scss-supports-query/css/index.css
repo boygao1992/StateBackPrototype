@@ -1,0 +1,43 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,900);
+*,
+*::before,
+*::after {
+  box-sizing: border-box; }
+
+body {
+  font-family: "Raleway", sans-serif;
+  font-weight: 300;
+  margin: 0; }
+
+h2 {
+  color: #ee6352; }
+
+.hero {
+  background-color: #000;
+  color: #fff; }
+
+.footer {
+  background-color: #52595f;
+  color: #fff; }
+
+@supports (display: grid) {
+  .hero,
+  .main-content,
+  .footer {
+    display: grid;
+    grid-template-columns: minmax(1em, 1fr) minmax(300px, 900px) minmax(1em, 1fr); }
+    .hero > *,
+    .main-content > *,
+    .footer > * {
+      grid-column: 2 / 3; } }
+
+@supports not (display: grid) {
+  .hero,
+  .main-content,
+  .footer {
+    margin: 0 auto;
+    padding: calc(50% - 450px); }
+    .hero > *,
+    .main-content > *,
+    .footer > * {
+      width: 900px; } }

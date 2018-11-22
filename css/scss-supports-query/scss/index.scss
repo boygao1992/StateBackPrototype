@@ -1,0 +1,87 @@
+// colors
+$color-orange: #ee6352;
+$color-gray: #52595f;
+$color-black: #000;
+$color-white: #fff;
+
+// breakpoint
+$breakpoint-tablet: 480px;
+$breakpoint-desktop: 768px;
+
+// font
+$ff: "Raleway", sans-serif;
+$fw-1: 300;
+$fw-n: 400;
+$fw-b: 900;
+
+@mixin mobile {
+  @media only screen and (max-width: #{$breakpoint-tablet}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media only screen and (min-width: #{$breakpoint-tablet}) and (max-width: #{$breakpoint-desktop}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media only screen and (min-width: #{$breakpoint-desktop}) {
+    @content;
+  }
+}
+
+// z-index
+$layer-top: 999;
+
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,900);
+
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $ff;
+  font-weight: $fw-1;
+  margin: 0;
+}
+
+h2 {
+  color: $color-orange;
+}
+
+.hero {
+  background-color: $color-black;
+  color: $color-white;
+}
+
+.footer {
+  background-color: $color-gray;
+  color: $color-white;
+}
+
+.hero,
+.main-content,
+.footer {
+  @supports (display: grid) {
+    display: grid;
+    grid-template-columns: minmax(1em, 1fr) minmax(300px, 900px) minmax(1em, 1fr);
+
+    > * {
+      grid-column: 2 / 3;
+    }
+  }
+  @supports not (display: grid) {
+    margin: 0 auto;
+    padding: calc(50% - 450px);
+
+    > * {
+      width: 900px;
+    }
+  }
+
+}
