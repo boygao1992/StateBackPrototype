@@ -4483,6 +4483,10 @@ dubious
 >   - different characters with different font sizes
 >   - able to infer the bag of characters from the rendered size (scrollbar trick)
 
+## Typed FSM
+
+### 1.[coot (author of purescript-redox) - Typed Transitions, Finite State Machines and Free Categories](https://coot.me/posts/finite-state-machines.html)
+
 ## Others
 
 ### 1.[To Dissect a Mockingbird: A Graphical Notation for the Lambda Calculus with Animated Reduction](http://dkeenan.com/Lambda/)
