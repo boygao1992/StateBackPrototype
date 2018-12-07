@@ -25,6 +25,64 @@
 \begin{document}
 \maketitle
 
-\section*{Problem 1}
+\section*{Problem 4}
+
+\begin{prob}
+  Problem 8.15 on page 303 of TC (5 points if you can show the following problem
+  is in PSPACE; 10 points if you can show if it is in P!):
+  The cat-and-mouse game is played by two players, "CAT" and "Mouse", on an
+  arbitrary undirected graph.
+  At a given point each player occupies a node of the graph.
+  The players take turns moving to a node adjacent to the one that they
+  currently occupy.
+  A special node of the graph is called "Hole".
+  Terminal conditions of the game:
+  \begin{itemize}
+  \item \textbf{Cat wins} if the two players ever occupy the same node.
+  \item \textbf{Mouse wins} if it reaches the Hole before the preceding happens.
+  \item The game is a \textbf{draw} if the two players ever simultaneously reach
+    positions that they previously occupied.
+  \end{itemize} 
+  Let
+  \[
+    \begin{aligned}
+      \text{HAPPY-CAT} = \{ (G,c,m,h) \ | \
+      &\text{G,c,m,h are respectively a graph, and}\\
+      &\text{positions of the Cat, Mouse, and Hole, such that}\\
+      &\text{Cat has a wining strategy, if Cat moves first}.\}
+    \end{aligned}
+  \]
+  Show that HAPPY-CAT is in PSPACE (and in P for more points).
+\end{prob}
+
+\begin{solution}
+\begin{proof}[HAPPY-CAT is in P]
+  \ \\
+  Given undirected graph $G(V,E)$, where $|V| = n$.\\
+  The state space of the game has $2n^2$ vertices:
+  \[
+    \begin{aligned}
+    \text{State} =&\\
+      &\{ &\text{Cat\_position} &:: V\\
+      &,  &\text{Mouse\_position} &:: V\\
+      &,  &\text{turn\_player} &:: \{ \text{Cat}, \text{Mouse}\}\\
+      &\}
+    \end{aligned}
+  \]
+  Annotate the states by Cat's win condition:
+  \[
+    \forall V_0 \in V, (\{V_0, V_0, \text{Cat}\}, \text{Cat\_Win})
+    \text{ and } 
+    (\{V_0, V_0, \text{Mouse}\}, \text{Cat\_Win})
+  \]
+
+  HAPPY-CAT then can be formalized as a reachability problem:\\
+  Given Cat's initial position $V_{Cat\_init} \in V$,
+  Mouse's initial position $V_{Mouse\_init} \in V$,
+  and initial turn player Cat, whether there's a state annotated by Cat\_Win can
+  be reached.
+\end{proof}
+\end{solution}
+
 
 \end{document} 
