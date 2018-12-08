@@ -69,6 +69,15 @@
       &\}
     \end{aligned}
   \]
+  \[
+    \# \text{ of states} = |V| * |V| * 2 = n * n * 2 = 2n^2
+  \]
+  The edges between states are valid state transitions, the number of which is
+  at most $8n^4$.
+
+  Each vertex takes $log_2n$ bits and each edge takes $2log_2n$ bits, so the
+  entire state graph takes $(2n^2log_2n + 16n^4log_2n)$ bits which is $O(n^5)$.
+
   Annotate the states by Cat's win condition:
   \[
     \forall V_0 \in V, (\{V_0, V_0, \text{Cat}\}, \text{Cat\_Win})
@@ -80,7 +89,14 @@
   Given Cat's initial position $V_{Cat\_init} \in V$,
   Mouse's initial position $V_{Mouse\_init} \in V$,
   and initial turn player Cat, whether there's a state annotated by Cat\_Win can
-  be reached.
+  be reached from this initial state.
+
+  We can use BFS traversing the state graph backwards from Cat's win states,
+  until reach the initial state and accept, or exhaust all the reachable edges
+  without hitting the initial state and reject.
+  The runtime is bounded by the number of edges which is $O(n^4)$.
+
+  Therefore, HAPPY-CAT is in P.
 \end{proof}
 \end{solution}
 
