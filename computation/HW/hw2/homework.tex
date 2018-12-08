@@ -25,6 +25,231 @@
 \begin{document}
 \maketitle
 
+\section*{Problem 1}
+\subsection*{(a)}
+\begin{prob}
+  Exercises 7.7 on page 271 and Problem 7.14 on page 272 of TC (6 points):
+  Show that NP is closed under union ($\cup$), concatenation ($<>$), and star
+  operation ($*$).
+  ( Xi: You may want to use the alternative view of NP as languages decided by
+    polynomial-time verifiers.
+    Can you also show that P is closed under the star operation?
+  )
+\end{prob}
+
+\begin{solution}
+  \ \\
+  \begin{itemize}
+  \item NP is closed under union ($\cup$).
+    \begin{goal}
+      Given $L_1 \in$ NP, $L_2 \in$ NP.
+      Show $L_1 \cup L_2 \in$ NP.
+    \end{goal}
+    \begin{proof}
+      \[
+        \begin{aligned}
+        L_1 \in \text{NP} \Rightarrow \exists D_1 \in \text{all NTMs}, L(D_1) = L_1\\
+        L_2 \in \text{NP} \Rightarrow \exists D_2 \in \text{all NTMs}, L(D_2) = L_2
+        \end{aligned}
+      \]
+
+      Construct a NTM, $D(w)$: $\forall w \in \Sigma^*$,
+      \begin{enumerate}
+      \item Non-deterministically guess if $w \in L_1$ , or $w \in L_2$, or $w \notin L_1
+        \land w \notin L_2$.
+      \item If the guess is
+        \begin{itemize}
+        \item $w \in L_1$, then
+          simulate $D_1$ on $w$ and return the result.
+        \item $w \in L_2$, then
+          simulate $D_2$ on $w$ and return the result.
+        \item $w \notin L_1 \land w \notin L_2$, then
+          reject
+        \end{itemize}
+      \end{enumerate}
+
+      $\forall w \in L_1 \cup L_2$, then $w \in L_1 \lor w \in L_2$, there is a branch
+      in $D$ that accepts.
+
+      $\forall w \notin L_1 \cup L_2$, then $w \notin L_1 \land w \notin L_2$, all branches in
+      $D$ rejects:
+      \begin{itemize}
+      \item branch1: $D_1(w) = 0$
+      \item branch2: $D_2(w) = 0$
+      \item branch3: rejects
+      \end{itemize}
+
+      Therefore, $L(D) = L_1 \cup L_2$ where $D$ is a NTM, so $L_1 \cup L_2 \in$ NP.
+
+    \end{proof}
+
+  \item NP is closed under concatenation ($<>$).
+    \begin{goal}
+      Given $L_1 \in$ NP, $L_2 \in$ NP.
+      Show $L_1 <> L_2 \in$ NP.
+    \end{goal}
+    \begin{proof}
+      \[
+        \begin{aligned}
+        L_1 \in \text{NP} \Rightarrow \exists D_1 \in \text{all NTMs}, L(D_1) = L_1\\
+        L_2 \in \text{NP} \Rightarrow \exists D_2 \in \text{all NTMs}, L(D_2) = L_2
+        \end{aligned}
+      \]
+
+      Construct a NTM, $D(w)$: $\forall w \in \Sigma^*$ where $|w| = n$,
+      \begin{enumerate}
+      \item Non-deterministically guess a number $n_1 \in \{0, 1, \dots, n\}$
+      \item Let $w_1$ be the first $n_1$ characters of $w$, and $w_2$ be the
+        rest $(n-n_1)$ characters.
+        Simulate $D_1$ on $w_1$ and $D_2$ on $w_2$, and return $D_1(w_1)
+        \land D_2(w_2)$.
+      \end{enumerate}
+      
+      $\forall w \in L_1 <> L_2$, there is a branch in $D$ that accepts where
+      the choice of $n_1$ is exactly the length of $w_1 \in L_1$ and $(n - n_1)$ is
+      exactly the length of $w_2 \in L_2$ and $w = w_1 <> w_2$.
+
+      $\forall w \notin L_1 <> L_2$, all branches in
+      $D$ rejects since there's no such a partition of $w$ into $w_1$ and $w_2$
+      where $D_1(w_1)=1 $ and $D_2(w_2)=1$.
+
+      Therefore, $L(D) = L_1 <> L_2$ where $D$ is a NTM, so $L_1 <> L_2 \in$ NP.
+    \end{proof}
+
+  \item NP is closed under star operation ($*$).
+
+    \begin{goal}
+      Given $L_1 \in$ NP.
+      Show $L_1^* \in$ NP.
+    \end{goal}
+    \begin{proof}
+      \[
+        \begin{aligned}
+        L_1 \in \text{NP} \Rightarrow \exists D_1 \in \text{all NTMs}, L(D_1) = L_1\\
+        \end{aligned}
+      \]
+
+      Construct a NTM, $D(w)$: $\forall w \in \Sigma^*$ where $|w| = n$,\\
+      Non-deterministically guess a number $k \in \{0, 1, \dots, n\}$
+      \begin{itemize}
+      \item if $n \not\equiv 0 (\text{mod}\ k)$, then reject
+      \item if $n \equiv 0 (\text{mod}\ k)$, then let $x$ be the first $k$ characters
+        of $w$.\\
+        Simulate $D_1$ on $x$ and return $D_1(x)$.
+      \end{itemize}
+
+      $\forall w \in L_1^*$, there is a branch in $D$ that accepts.
+
+      $\forall w \notin L_1^*$, all branches in $D$ rejects.
+
+      Therefore, $L(D) = L_1^*$ where $D$ is a NTM, so $L_1^* \in$ NP.
+    \end{proof}
+  \end{itemize}
+\end{solution}
+
+\subsection*{(b)}
+
+\begin{prob}
+  Exercise 7.11 on page 272 of TC (4 points):
+  Call graph $G$ and $H$ isomorphic if the nodes of G may be reordered so that
+  it is identical to $H$.
+  Let
+  \[
+    \text{ISO} = \{ (G, H) \ | \ G \text{ and } H \text{ are isomorphic graphs} \}.
+  \]
+  Show that ISO $\in$ NP.
+\end{prob}
+\begin{proof}
+  Construct a NTM, $D(w)$:
+  $\forall G(V_G, E_G), H(V_H, E_H) \in$ all graphs,
+  \begin{itemize}
+  \item If $|V_G| \ne |V_H| \lor |E_G| \ne |E_H|$, reject
+  \item Otherwise, let $|V_G| = |V_H| = n$.
+    \begin{enumerate}
+    \item Enumerate all vertices in $V_G$, and non-deterministically guess a
+    new assignment of index $\in \{1,2,\dots,n\}$ to each vertex.
+    (Here I assume vertices in G and H are indexed by numbers from $\{1,2,\dots,
+    n\}$)
+    \item Once we have the reordered graph $V_G'$, compare $V_G'$ and $H$ by
+      vertices and edges.\\
+      If $V_G'$ and $H$ are identical, accept; otherwise, reject.
+    \end{enumerate}
+  \end{itemize}
+
+  $\forall (G,H) \in ISO$, there is a branch in $D$ that accepts.
+
+  $\forall (G,H) \notin ISO$, all branches in $D$ rejects.
+
+  Therefore, $L(D) = $ ISO where $D$ is a NTM, so ISO $\in$ NP.
+\end{proof}
+
+\section*{Problem 2}
+
+\subsection*{(a)}
+
+\begin{prob}
+  Problem 8.20 on page 304 of TC (10 points):
+  An undirected graph is bipartite if its nodes may be divided into two sets so
+  that all edges go from a node in one set to a node in the other set.
+  Show that a graph is bipartite if and only if it doesn't contain a cycle that
+  has an odd number of nodes.
+\end{prob}
+
+\begin{goal}
+  Prove $G(V,E)$ is a bipartite graph $\Leftrightarrow$ $\forall p \subseteq E$, if $p$ is a cycle, then $|p|$ is even.
+\end{goal}
+
+\begin{proof}
+  \ \\
+  \begin{itemize}
+  \item LHS $\Rightarrow$ RHS
+    \ \\
+    A cycle is a closed path which starts and ends at the same vertex.
+    Thus, in a bipartite graph, a cycle starts and ends at the same side.
+    In order to get back to the same side, it takes even-number steps,
+    i.e. Left$\rightarrow$Right, and then Right$\rightarrow$Left, because there's no edge within the
+    same side. So all cycles in a bipartite graph are of even length. Since
+    cycles have the same number of edges as the number of vertices, all cycles
+    in a bipartite graph have even number of vertices.
+  \item LHS $\Leftarrow$ RHS
+    Pick a vertex $v_0 \in V$.
+    Partition $V$ into two sets:
+    \begin{enumerate}
+    \item vertices of even-length distance from $v_0$, including $v_0$ itself
+    \item vertices of odd-length distance from $v_0$
+    \end{enumerate}
+
+    Proof by contradiction:\\
+    Assume there exists edges in the same set, then there exists an odd cycle
+    containing $v_0$ and there is a vertex in the same set as $v_0$ but of
+    odd-length distance to $v_0$, which leads to a contradiction.
+    Therefore, there's no edges in the same set and thus this graph is a bipartite graph.
+  \end{itemize}
+  
+\end{proof}
+
+\subsection*{(b)}
+\begin{prob}
+  Let
+  \[
+    \text{BIPARTITE} = \{ G \ |\ G \text{ is a bipartite graph} \}.
+  \]
+  Show that BIPARTITE $\in$ NL.
+  ( Xi: What is the more natural complexity class to which BIPARTITE belongs?
+    as suggested by the fact mentioned, and what do we know about this class?
+  )
+\end{prob}
+
+\section*{Problem 3}
+
+\begin{prob}
+  Show that P $\ne$ SPACE(n).
+  ( Hint: Assume P = SPACE(n).
+    Use the space hierarchy theorem to derive a contradition.
+    You may find the function pad, defined in Problem 9.18, to be helpful.
+  )
+\end{prob}
+
 \section*{Problem 4}
 
 \begin{prob}
@@ -55,9 +280,8 @@
   Show that HAPPY-CAT is in PSPACE (and in P for more points).
 \end{prob}
 
-\begin{solution}
-\begin{proof}[HAPPY-CAT is in P]
-  \ \\
+\begin{proof}
+  HAPPY-CAT is in P. \\
   Given undirected graph $G(V,E)$, where $|V| = n$.\\
   The state space of the game has $2n^2$ vertices:
   \[
@@ -98,7 +322,6 @@
 
   Therefore, HAPPY-CAT is in P.
 \end{proof}
-\end{solution}
 
 
 \end{document} 
