@@ -240,6 +240,39 @@
   )
 \end{prob}
 
+\begin{proof}
+  BIPARTITE $\in$ NL.\\
+
+  Since NL = CoNL, it's equivalent to prove $\overline{\text{BIPARTITE}} \in$ NL.
+
+  Construct a log-space NTM, $D(G)$: $\forall G(V,E) \in \text{all graphs}$,
+  \begin{enumerate}
+  \setcounter{enumi}{-1}
+  \item Initialize a counter: $i = 1$
+  \item Non-deterministically decide a vertex, $v_1 \in V$, as the starting point.\\
+    Increment counter, $i := i + 1 \Rightarrow i = 2$.
+  \item Non-deterministically decide a vertex, $v_i \in V$,
+    \begin{itemize}
+    \item if $(V_i,V_{i-1}) \notin E$, reject.
+    \item if $(V_i,V_{i-1}) \in E$,
+      \begin{itemize}
+      \item if $V_i = V_1$ and $i$ is odd, then accept;
+      \item if $i > |V|$, then reject;
+      \item if $V_i \ne V_1$, increment counter, $i := i + 1$, and repeat step 2.
+      \end{itemize}
+    \end{itemize}
+  \end{enumerate}
+
+  $\forall G \in \overline{\text{BIPARTITE}}$, there exists an odd cycle in $G$, then
+  there is one branch in $D$ that accepts.
+
+  $\forall G \notin \overline{\text{BIPARTITE}}$, then no branch in $D$ accepts.
+
+  Therefore, $L(D) = \overline{\text{BIPARTITE}}$ where $D$ is a log-space NTM,
+  so $\overline{\text{BIPARTITE}} \in$ NL and thus BIPARTITE $\in$ NL.
+
+\end{proof}
+
 \section*{Problem 3}
 
 \begin{prob}
@@ -249,6 +282,18 @@
     You may find the function pad, defined in Problem 9.18, to be helpful.
   )
 \end{prob}
+\begin{proof}[Proof by contradiction]
+  Assume P = SPACE(n), then $\forall L \in$ SPACE(n), $\exists D \in$ all DTMs with time
+  complexity $p(n)$, $L(D) = L$, where $p$ is a polynomial function.
+
+  Then for SPACE($n^2$), $\forall L \in$ SPACE(n), $\exists D' \in$ all DTMs with time
+  complexity $p(n^2)$ which is still polynomial, $L(D') = L$.
+  Therefore, P = SPACE($n^2$) and thus SPACE(n) = SPACE($n^2$) which contradicts
+  the result, SPACE(n) $\ne$ SPACE($n^2$), from space hierarchy theorem.
+
+  So P $\ne$ SPACE(n).
+
+\end{proof}
 
 \section*{Problem 4}
 
