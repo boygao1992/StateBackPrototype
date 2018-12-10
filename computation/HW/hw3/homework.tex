@@ -1,0 +1,74 @@
+\documentclass[twoside,11pt]{homework}
+
+\coursename{COMS 4236: Computational Complexity (Fall 2018)} 
+
+\studname{Wenbo Gao}    % YOUR NAME GOES HERE
+\studmail{wg2313@columbia.edu}% YOUR UNI GOES HERE
+\hwNo{3}                   % THE HOMEWORK NUMBER GOES HERE
+\date{\today} % DATE GOES HERE
+
+% Uncomment the next line if you want to use \includegraphics.
+\usepackage{graphicx}
+%\includegraphics[height=0.3\textheight]{hw0.pdf}
+\usepackage{physics}
+% \usepackage{tikz}
+
+% \usetikzlibrary{fit,positioning,arrows,automata,calc}
+% \tikzset{
+%   main/.style={circle, minimum size = 15mm, thick, draw =black!80, node distance = 10mm},
+%   connect/.style={-latex, thick},
+%   box/.style={rectangle, minimum height = 8mm,draw=black!100}
+% }
+
+% environments: theorem[*rename], proof[*rename], 
+
+\begin{document}
+\maketitle
+
+\section*{Problem 1}
+
+\begin{prob}
+  Problem 11.5.18 on page 275 of CC:
+  Show that, if NP $\subseteq$ BPP, then RP = NP.
+  (That is, if SAT can be solved by randomized machine, then it can be solved by
+  randomized machines with no false positives, presumably by computing a
+  satisfying truth as in Example 10.3.)
+\end{prob}
+
+\section*{Problem 2}
+\begin{prob}
+  Let $0 < \epsilon_1 < \epsilon_2 < 1$ denote two constants. Let $D(\cdot, \cdot)$ be a deterministic
+  polynomial-time computable Boolean function, and let $L$ be a language (the
+  setting so far is exactly the same as the definition of BPP.)
+  $D$ and $L$ satisfy the following property:
+  Given any $x \in \{0, 1\}^n$, if $y$ is sampled uniformly at random from $\{ 0,1
+  \}^m$ for some $m$ polynomial in $n$, then
+  \[
+    x \in L \Rightarrow \text{Pr}_{y \in \{0,1\}^m}[D(x,y) = 1] \ge \epsilon_2
+    \text{ and }
+    x \notin L \Rightarrow \text{Pr}_{y \in \{0,1\}^m}[D(x,y) = 1] \le \epsilon_1.
+  \]
+
+  Show that $L \in$ BPP.
+  (Note that $\epsilon_2$ can be smaller than $1/2$.
+   Use the Chernoff bound.)
+\end{prob}
+
+\section*{Problem 3}
+
+\begin{prob}
+  Similar to P/poly, one can define P/$\log n$, where the advice string is of
+  length only $O(\log n)$ for input size $n$.
+  Show that, if SAT $\in$ P/$\log n$, then P = NP.
+  (Hint: Self-reducibility.)
+\end{prob}
+
+\section*{Problem 4}
+
+\begin{prob}
+  Show that, if PSPACE $\subseteq$ P/poly, then PSPACE = $\Sigma_2^P$.
+  (Hint: Use self-reducibility to "implicitly" build a winning strategy for the
+  existential player in the TQBF game.)
+\end{prob}
+
+\end{document} 
