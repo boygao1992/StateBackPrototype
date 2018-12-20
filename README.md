@@ -4043,8 +4043,84 @@ hoistCoyoneda nat (Coyoneda ex) =
   runExists (\(CoyonedaF func fi) -> coyoneda func (nat fi)) ex
 ```
 
+### 19.[Fixing GADTs](http://www.timphilipwilliams.com/posts/2013-01-16-fixing-gadts.html)
 
+higher-order functors
+- `Fix :: (* -> *) -> *`
+- `HFix :: ((* -> *) -> (* -> *)) -> (* -> *)` ~ `((* -> *) -> * -> *) -> * -> *`
+- `data ExprF :: (* -> *) -> * -> *`
+- `type Expr = HFix ExprF`
+- `hfmap :: forall f g h. (forall a. f a -> g a) -> (forall a. h (f a) -> h (g a))`
+  - `h(f a)` ~ `(h . f) a` functor composition
+  
+```haskell
+class HFunctor (h :: (* -> *) -> * -> *) where
+  hfmap :: (f :~> g) -> h f :~> h g
+```
+- `:~>` natural transformation
 
+### 20.[Approximating GADTs in PureScript](http://code.slipthrough.net/2016/08/10/approximating-gadts-in-purescript/)
+
+```haskell
+data Expr a where
+  Val :: Int -> Expr Int
+  Add :: Expr Int -> Expr Int -> Expr Int
+  Mult :: Expr Int -> Expr Int -> Expr Int
+  Equal :: Expr Int -> Expr Int -> Expr Bool
+  Not :: Expr Bool -> Expr Bool
+```
+
+problem solved by GADT over ADT Sum Type
+- all data constructors for an ADT Sum Type share the same type-level representation
+- if the interpreter of the data structure requires extra type information for each case (when pattern matching each data constructor), it's not achievable by ADT 
+```purescript
+data ADT
+  = Case1 Int
+  | Case2 Boolean
+  | Case3 String
+
+Case1 :: Int -> Int -> ADT
+Case2 :: Boolean -> ADT
+Case3 :: String -> ADT
+```
+
+- GADT, similar to ADT, also bundles a number of Types, not all into one Type, but potentially into one Type for each constructor.
+
+```haskell
+data GADT a where
+  Case1 :: Int -> Int -> GADT Int
+  Case2 :: Boolean -> GADT Boolean
+  Case3 :: String -> GADT String
+```
+
+One way to simulate GADT is to add an extra `proof` argument to each data constructor of an ADT Sum Type as an indicator
+- use Leibniz equality to encode a concrete Type for each case
+- later we can fetch the concrete Type from that `proof` argument through `coerce <<< symm`
+
+```purescript
+newtype Leibniz a b = Leibniz (forall f. f a -> f b)
+infix 4 type Leibniz as ~
+
+symm :: forall a b. (a ~ b) -> (b ~ a)
+coerce :: forall a b. (a ~ b) -> (a -> b)
+
+coerceSymm :: forall a b. (a ~ b) -> b -> a
+coerceSymm = coerce <<< symm
+```
+
+One problem with this solution is that we cannot directly use the data constructors from the ADT Sum Type but need to build a new constructor for each case with the `proof` argument filled with `id :: forall a. a -> a` (so more boilerplate than GADT)
+```purescript
+add :: Expr Int -> Expr Int -> Expr Int
+add x y = Add x y id
+
+not :: Expr Boolean -> Expr Boolean
+not x = Not x id
+
+...
+```
+
+Pro
+- rather than messing with `HFix`, we can simply use regular `Fix` for `Expr` to get its fixed-point
 
 ## Comonad
 
