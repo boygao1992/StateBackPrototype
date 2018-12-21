@@ -2430,6 +2430,7 @@ dimap :: (c → a) → (b → d) → (a → b) → (c → d)
 
 
 
+
 ## Functional Data Structures
 
 ### 1.[Functional Data Structures - Prabhakar Ragde](https://cs.uwaterloo.ca/~plragde/flaneries/FDS/)
@@ -4549,6 +4550,78 @@ dubious
 ### 2.[Optimizing Tagless Final - Science of Code blog](https://lukajcb.github.io/blog/functional/2018/01/03/optimizing-tagless-final.html)
 
 ### 3.[LukaJCB/Algebra.purs - Alternative Tagless Final encoding in Purescript](https://gist.github.com/LukaJCB/c59b9e7b41bd1b12e5d4d3de683f6a5f)
+
+## Extensible Effect
+TODO: `/modulization/Monad-Transformer_vs_Class-Mixin.md`
+
+### 1.[Operational Monad](https://wiki.haskell.org/Operational)
+
+[The Operational Monad Tutorial](http://themonadreader.wordpress.com/2010/01/26/issue-15/)
+
+- represent monadic operators as data by GADT
+  - able to write optimizers around the data/operational representation of the program 
+  - and pre-process the program before execution/interpretation
+- write separate interpreters to carry out the actual computation
+
+```haskell
+data StackInstuction a where
+  Push :: Int -> StackInstruction ()
+  Pop :: StackInstruction Int
+
+-- | Monad
+data Program instr a where ...
+  -- | Applicative
+  Pure :: forall instr a. a -> Program instr a
+  -- | Bind
+  Bind :: forall instr a b. instr a -> (a -> Program instr b) -> Program instr b
+  infix 6 Bind as >>=
+
+type StackProgram a = Program StackInstruction a
+
+type Stack a = List a
+
+interpret :: StackProgram a -> (Stack Int -> a)
+interpret (Push a >>= is) stack = interpret (is ()) (a : stack)
+interpret (Pop >>= is) (b : stack) = interpret (is b) stack
+interpret (Pure c) stack = c
+```
+
+- note that the interpreter is a recursive function
+  - with free monad, we can factor out the recursion to be a generic function `foldFree`
+  
+- **Monadic Parser Combinators**
+
+- **Connection with the Continuation Monad**
+
+> Traditionally, the continuation monad transformer, `ContT`, has been used to implement these advanced monads.
+> This is no accident; both approaches are capable of implementing any monad.
+> In fact they are almost the same thing:
+> the continuation monad is the **refunctionalization** of instructions as functions
+
+Yoneda Embedding: `(a -> r) -> r` ~ `a`
+
+- Drawbacks
+  1. `(>>=)`has the same quadratic running time problem as `(++)` when used in a left-associative fashion.
+    - solution: Reflection without Remorse
+  2. lose of laziness
+    - regular monad can cope with some infinite programs
+    - we cannot represent infinite programs with infinitely large data and then interpret them recursively
+      - the construction of `data` is eager
+      - we need `coData` but only languages with dependent types have a clear cut between `data` and `coData`
+
+### 2.[Quick and dirty reinversion of control](http://blog.sigfpe.com/2011/10/quick-and-dirty-reinversion-of-control.html)
+
+re-invert inversion of control (from callback-style control flow to imperative/sequential script style) in OpenGL programming by `ContT`
+
+```haskell
+render f = liftIO $ displayCallback $= f -- lift into ContT
+
+yield = ContT $ \f -> idleCallback $= Just (f () )
+
+-- | class of all writable state variables
+class HasSetter s where
+  ($=) :: s a -> a -> IO () -- write a new value into a state variable
+```
 
 ## Security
 
