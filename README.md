@@ -4623,6 +4623,58 @@ class HasSetter s where
   ($=) :: s a -> a -> IO () -- write a new value into a state variable
 ```
 
+## Zipper
+
+TODO: graph representation by linear types
+
+### 1.[An Applicative Control-Flow Graph Based on Huet’s Zipper](https://www.cs.tufts.edu/~nr/pubs/zipcfg.pdf)
+
+### 2.[The Derivative of a Regular Type is its Type of One-Hole Contexts - Conor McBride](http://strictlypositive.org/diff.pdf)
+
+### 2.[Haskell/Zippers - Wikibooks](https://en.wikibooks.org/wiki/Haskell/Zippers)
+
+### 3.[Zipper - Haskill Wiki](https://wiki.haskell.org/Zipper)
+
+### 4.[Zippers and Comonad in Haskell - NP-incompleteness](https://kunigami.blog/2013/09/30/zippers-and-comonads-in-haskell/)
+
+### 5.[When the fancy technique that seems relevant is the wrong tool (a note of caution on zippers)](https://pchiusano.github.io/2014-08-12/zippers-not-useful.html)
+
+> Can you write a JSON library that uses zippers? Sure. Is it the best tool for that goal? Probably not. Our industry is full of people wasting time solving hard problems created artificially, which could be solved trivially or sidestepped entirely just by revisiting earlier assumptions.
+> Perhaps it is of theoretical interest that certain problems can be solved with zippers, but zippers per se, in their specific instantiation, are rarely (I won’t say never) the best solution to a problem. 
+
+> David Barbour:
+> linear typed programming: with generic data structures that may contain linear types, you can't really copy data... but you can break them apart and stick them back together after removing or inserting a few elements. Zippers are great for almost any form of generic programming with linear types.
+
+> runarorama:
+> A path means you navigate the tree from the root every time which is O(n) in the length of your path. For a small tree, that's alright I suppose. But what if you have a large tree, or a cyclic graph?
+> The idea of the zipper is simply that a "path" is a delimited continuation that lets you access the target of that path in O(1). Every path comes "pre-traversed". 
+> The XMonad zipper is cyclic, so the movements don't return Maybe.
+
+### 6.[purescript-argonaut-traversals](https://github.com/purescript-contrib/purescript-argonaut-traversals)
+
+### 7.Pavel Panchekha's zipper series
+
+[Zippers, Part 1: Huet Zippers](https://pavpanchekha.com/blog/zippers/huet.html)
+
+[Part 2: Zippers as Derivatives](https://pavpanchekha.com/blog/zippers/derivative.html)
+
+[Part 3: Kiselyov Zippers](https://pavpanchekha.com/blog/zippers/kiselyov.html)
+
+[Part 4: Fast Multi-zippers](https://pavpanchekha.com/blog/zippers/multi-zippers.html)
+
+### 8.[Type Inference, Haskell and Dependent Types - Adam Gundry's PhD Thesis](http://adam.gundry.co.uk/pub/thesis/)
+
+> Huet (1997) taught us how to use a ‘zipper’ data structure to represent a position in a tree, such as a term. The path to the current location is represented as a list of layers, where each layer corresponds to choosing a single branch at a node, and stores the subtrees rooted at the other branches.
+> McBride (2001) observed that the type of the zipper can be computed by differentiation, and further refined the structure to represent left-to-right progress through a term (McBride, 2008).
+
+### 9. XMonad
+
+[Roll Your Own Window Manager: Tracking Focus with a Zipper](https://donsbot.wordpress.com/2007/05/17/roll-your-own-window-manager-tracking-focus-with-a-zipper/)
+
+[Xmonad in Coq: Programming a window manager in a proof assistant](http://www.staff.science.uu.nl/~swier004/talks/2012a-utrecht.pdf)
+
+### 10. [Cyclic Types](https://www.schoolofhaskell.com/user/tomberek/cyclic-types)
+
 ## Security
 
 ### 1.[Advanced web security topics](https://blog.georgovassilis.com/2016/04/16/advanced-web-security-topics/)
