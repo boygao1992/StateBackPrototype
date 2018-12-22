@@ -35,6 +35,54 @@
   satisfying truth as in Example 10.3.)
 \end{prob}
 
+\begin{goal}
+  Prove SAT $\in$ NP-complete $\subseteq$ NP $\subseteq$ RP.
+\end{goal}
+
+\begin{proof}
+  \ \\
+  Let $A$ be a machine in BPP that decides SAT, $L(A) = SAT$,
+  \begin{given}
+    \[
+      \begin{aligned}
+        \forall x \in SAT \Rightarrow \text[Pr]_{y \in \{0,1\}^{q(n)}}[D(x,y) = 1] \ge \frac{2}{3}\\
+        \forall x \notin SAT \Rightarrow \text[Pr]_{y \in \{0,1\}^{q(n)}}[D(x,y) = 1] \le \frac{1}{3}
+      \end{aligned}
+    \]
+  \end{given}
+  $\forall w \in SAT$, where w is binary encoding of a boolean formula $\Phi$,\\
+  where $w = < \lambda x_1, x_2, \dots, x_n. \Phi(x_1, x_2, \dots, x_n)>$,\\
+  construct a DTM, $D$, as the following,
+  \begin{enumerate}
+  \item Initialize counter $i = 1$
+  \item Simulate both $\lambda x_{i+1}, \dots, x_n. \Phi(x_1, \dots, T,x_{i+1}, \dots, x_n)$
+    and\\ $\lambda x_{i+1}, \dots, x_n. \Phi(x_1, \dots, F, x_{i+1}, \dots, x_n)$ on $A$
+  \item If $(A(\Phi(x_1, \dots, T,x_{i+1}, \dots, x_n)), A(\Phi(x_1, \dots, F, x_{i+1}, \dots, x_n))$
+    \begin{itemize}
+    \item $= (0,0)$, then reject
+    \item $= (1,0)$, then keep $x_{i} = T$, increment counter $i = i + 1$, and repeat step 2
+    \item $= (0,1)$, then keep $x_{i} = F$ , increment counter $i = i + 1$, and repeat step 2
+    \item $= (1,1)$, then keep $x_{i} = T$ (or $x_{i} = F$, the choice doesn't
+      matter), increment counter $i = i + 1$, and repeat step 2.
+    \end{itemize}
+  \item Once we have an assignment of $\Phi$, verify the assignment
+    \begin{itemize}
+    \item If $\Phi(x_1, x_2, \dots, x_n) = 1$, then accept;
+    \item otherwise, reject.
+    \end{itemize}
+  \end{enumerate}
+
+  This way we guarantee that if $w \notin SAT$, our machine $D$ always rejects.
+  
+  If $w \in SAT$, there is $\ge (\frac{2}{3})^n$ chance that the machine $A$ is
+  correct in all $n$ iterations.
+
+  We can amplify this probability to be $\ge \frac{1}{2}$ by repeating this
+  experiment polynomial times.
+  
+  Therefore, $L(D) =$ SAT $\land L(D) \in$ RP, and thus SAT $\in$ RP.
+\end{proof}
+
 \section*{Problem 2}
 \begin{prob}
   Let $0 < \epsilon_1 < \epsilon_2 < 1$ denote two constants. Let $D(\cdot, \cdot)$ be a deterministic
