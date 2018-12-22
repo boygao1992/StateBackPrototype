@@ -27,13 +27,11 @@
 
 \section*{Problem 1}
 
-\begin{prob}
-  Problem 11.5.18 on page 275 of CC:
-  Show that, if NP $\subseteq$ BPP, then RP = NP.
-  (That is, if SAT can be solved by randomized machine, then it can be solved by
-  randomized machines with no false positives, presumably by computing a
-  satisfying truth as in Example 10.3.)
-\end{prob}
+Problem 11.5.18 on page 275 of CC:
+Show that, if NP $\subseteq$ BPP, then RP = NP.
+(That is, if SAT can be solved by randomized machine, then it can be solved by
+randomized machines with no false positives, presumably by computing a
+satisfying truth as in Example 10.3.)
 
 \begin{goal}
   Prove SAT $\in$ NP-complete $\subseteq$ NP $\subseteq$ RP.
@@ -45,8 +43,8 @@
   \begin{given}
     \[
       \begin{aligned}
-        \forall x \in SAT \Rightarrow \text[Pr]_{y \in \{0,1\}^{q(n)}}[D(x,y) = 1] \ge \frac{2}{3}\\
-        \forall x \notin SAT \Rightarrow \text[Pr]_{y \in \{0,1\}^{q(n)}}[D(x,y) = 1] \le \frac{1}{3}
+        \forall x \in SAT \Rightarrow \text{Pr}_{y \in \{0,1\}^{q(n)}}[D(x,y) = 1] \ge \frac{2}{3}\\
+        \forall x \notin SAT \Rightarrow \text{Pr}_{y \in \{0,1\}^{q(n)}}[D(x,y) = 1] \le \frac{1}{3}
       \end{aligned}
     \]
   \end{given}
@@ -55,14 +53,14 @@
   construct a DTM, $D$, as the following,
   \begin{enumerate}
   \item Initialize counter $i = 1$
-  \item Simulate both $\lambda x_{i+1}, \dots, x_n. \Phi(x_1, \dots, T,x_{i+1}, \dots, x_n)$
-    and\\ $\lambda x_{i+1}, \dots, x_n. \Phi(x_1, \dots, F, x_{i+1}, \dots, x_n)$ on $A$
+  \item Simulate both $\lambda x_{i+1}, \dots, x_n. \Phi(x_1, \dots, True,x_{i+1}, \dots, x_n)$
+    and\\ $\lambda x_{i+1}, \dots, x_n. \Phi(x_1, \dots, False, x_{i+1}, \dots, x_n)$ on $A$
   \item If $(A(\Phi(x_1, \dots, T,x_{i+1}, \dots, x_n)), A(\Phi(x_1, \dots, F, x_{i+1}, \dots, x_n))$
     \begin{itemize}
     \item $= (0,0)$, then reject
-    \item $= (1,0)$, then keep $x_{i} = T$, increment counter $i = i + 1$, and repeat step 2
-    \item $= (0,1)$, then keep $x_{i} = F$ , increment counter $i = i + 1$, and repeat step 2
-    \item $= (1,1)$, then keep $x_{i} = T$ (or $x_{i} = F$, the choice doesn't
+    \item $= (1,0)$, then keep $x_{i} = True$, increment counter $i = i + 1$, and repeat step 2
+    \item $= (0,1)$, then keep $x_{i} = False$ , increment counter $i = i + 1$, and repeat step 2
+    \item $= (1,1)$, then keep $x_{i} = True$ (or $x_{i} = False$, the choice doesn't
       matter), increment counter $i = i + 1$, and repeat step 2.
     \end{itemize}
   \item Once we have an assignment of $\Phi$, verify the assignment
@@ -84,23 +82,39 @@
 \end{proof}
 
 \section*{Problem 2}
-\begin{prob}
-  Let $0 < \epsilon_1 < \epsilon_2 < 1$ denote two constants. Let $D(\cdot, \cdot)$ be a deterministic
-  polynomial-time computable Boolean function, and let $L$ be a language (the
-  setting so far is exactly the same as the definition of BPP.)
-  $D$ and $L$ satisfy the following property:
-  Given any $x \in \{0, 1\}^n$, if $y$ is sampled uniformly at random from $\{ 0,1
-  \}^m$ for some $m$ polynomial in $n$, then
+Let $0 < \epsilon_1 < \epsilon_2 < 1$ denote two constants. Let $D(\cdot, \cdot)$ be a deterministic
+polynomial-time computable Boolean function, and let $L$ be a language (the
+setting so far is exactly the same as the definition of BPP.)
+$D$ and $L$ satisfy the following property:
+Given any $x \in \{0, 1\}^n$, if $y$ is sampled uniformly at random from $\{ 0,1
+\}^m$ for some $m$ polynomial in $n$, then
+\[
+  x \in L \Rightarrow \text{Pr}_{y \in \{0,1\}^m}[D(x,y) = 1] \ge \epsilon_2
+  \text{ and }
+  x \notin L \Rightarrow \text{Pr}_{y \in \{0,1\}^m}[D(x,y) = 1] \le \epsilon_1.
+\]
+
+Show that $L \in$ BPP.
+(Note that $\epsilon_2$ can be smaller than $1/2$.
+  Use the Chernoff bound.)
+
+\begin{proof}
+  Construct a DTM, $D'$, which independently draws $k$ instances from
+  $\{0,1\}^m$,\\ $\{y_1, y_2, \dots, y_k\}$, $\forall x \notin L$,
   \[
-    x \in L \Rightarrow \text{Pr}_{y \in \{0,1\}^m}[D(x,y) = 1] \ge \epsilon_2
-    \text{ and }
-    x \notin L \Rightarrow \text{Pr}_{y \in \{0,1\}^m}[D(x,y) = 1] \le \epsilon_1.
+    E[ \sum_{i = 1}^k D(x,y_i) ] = k \cdot \epsilon_1
+  \]
+  By Chernoff bound, $\Delta = k \cdot (\frac{\epsilon_1 + \epsilon_2}{2} - \epsilon_1) = k \cdot \frac{\epsilon_2 - \epsilon_1}{2}$,
+  \[
+    \begin{aligned}
+      Pr[D'(x, y_1, y_2, \dots, y_k) = 1]
+      = Pr[ \sum_{i = 1}^k D(x,y_i) \ge k \cdot \frac{\epsilon_1 + \epsilon_2}{2}]
+      \le e^{\frac{-2 (k \cdot \frac{\epsilon_2 - \epsilon_1}{2})^2}{k}} = e^{-\Omega(k)}
+    \end{aligned}
   \]
 
-  Show that $L \in$ BPP.
-  (Note that $\epsilon_2$ can be smaller than $1/2$.
-   Use the Chernoff bound.)
-\end{prob}
+  Therefore, $L = L(D') \in$ Strong BPP, and thus $L \in$ BPP.
+\end{proof}
 
 \section*{Problem 3}
 
@@ -111,12 +125,45 @@
   (Hint: Self-reducibility.)
 \end{prob}
 
+\begin{proof}
+  Since advice string is of $O(\log n)$, it's able to enumerate all 
+  $2^{O(\log n)} = O(n)$ advice strings in poly-time and, $\forall x \in \{0,1\}^n$,
+  if at least one advice string accepts then accept; otherwise, reject.
+  
+  This way we can determinitically decide SAT in poly-time.
+  Therefore, P = NP.
+\end{proof}
+
 \section*{Problem 4}
 
-\begin{prob}
-  Show that, if PSPACE $\subseteq$ P/poly, then PSPACE = $\Sigma_2^P$.
-  (Hint: Use self-reducibility to "implicitly" build a winning strategy for the
-  existential player in the TQBF game.)
-\end{prob}
+Show that, if PSPACE $\subseteq$ P/poly, then PSPACE = $\Sigma_2^P$.
+(Hint: Use self-reducibility to "implicitly" build a winning strategy for the
+existential player in the TQBF game.)
+
+\begin{proof}
+  PSPACE $\subseteq$ P/poly $\Rightarrow$ there exists a poly-size circuit sequence $\{C_m\}$ where
+  $C_m$ decides TQBF instances of size $m$.
+
+  For a TQBF instance of size $m$, $Q_1 X_1. Q_2 X_2. \dots Q_n X_n. \Phi(X_1,
+  \dots, X_n)$,\\
+  use $\exists$ quantifier of $\Sigma_2^p$ to non-deterministically guess the circuit
+  sequence,
+  \begin{enumerate}
+  \item initialize counter $i = 1$
+  \item for $\exists$-player's turn, $\exists X_i$, check $C_k(Q_{i+1}X_{i+1}. \dots Q_n X_n.
+    \Phi(X_1, \dots, True,
+    X_{i+1}, \dots, X_n))$\\
+    and $C_k(Q_{i+1}X_{i+1}. \dots Q_n X_n. \Phi(X_1, \dots, False, X_{i+1}, \dots, X_n))$,
+    where $k \le m$,
+    \begin{itemize}
+    \item if both $= 0$, then reject
+    \item Otherwise, keep the assignment of $X_i$ which leads to $C_k(\dots) =
+      1$, increment counter $i = i + 1$, and repeat step 2 - 3
+    \end{itemize}
+  \item for $\forall$-player's turn, use $\forall$ quantifier of $\Sigma_2^p$
+  \end{enumerate}
+
+  Therefore, TQBF $\in \Sigma_2^P$ and thus PSPACE = $\Sigma_2^P$.
+\end{proof}
 
 \end{document} 
