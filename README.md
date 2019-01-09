@@ -4690,6 +4690,23 @@ TODO: graph representation by linear types
 
 ### 1.[coot (author of purescript-redox) - Typed Transitions, Finite State Machines and Free Categories](https://coot.me/posts/finite-state-machines.html)
 
+## Type-level Programming
+
+### 1.[Reflecting values to types and back](https://www.schoolofhaskell.com/user/thoughtpolice/using-reflection)
+
+[purescript-reflection](https://github.com/paf31/purescript-reflection)
+
+> The conﬁgurations problem is to propagate run-time preferences throughout a program, allowing multiple concurrent conﬁguration sets to coexist safely under statically guaranteed separation.
+
+> - Dynamically constructed type-class instances
+
+`unsafeCoerce` trick
+
+> - Turning up the magic to over 9000
+> ConstraintKinds, TypeFamilies, unsafeCoerce
+
+Purescript doesn't have `Constraint` kind yet.
+
 ## Others
 
 ### 1.[To Dissect a Mockingbird: A Graphical Notation for the Lambda Calculus with Animated Reduction](http://dkeenan.com/Lambda/)
