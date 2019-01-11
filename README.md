@@ -3009,7 +3009,30 @@ simple dependency injection with mocking, for unit tests
 > This should almost always just be pure functions and relatively simple data types.
 > Reach for only as much power as you need – and you need much less than you think!
 
+### 2.[Explicit `forall` - Haskell School](https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week/guide-to-ghc-extensions/explicit-forall)
 
+```haskell
+{-# LANGUAGE ExplicitForAll #-}
+{-# LANGUAGE ScopedTypeVariables #-}
+
+{-# LANGUAGE LiberalTypeSynonyms #-} -- type check after all synonyms have been expanded. able to partially apply a type synonym
+
+type Const a b :: Type -> Type -> Type
+type Id a :: Type -> Type
+type NatApp f g i = f i -> g i
+
+                 -- (Const Int) is partially applied
+myFunc :: NatApp Id (Const Int) Char
+
+{-# LANGUAGE RankNTypes #-}
+
+rankNExample :: (forall n. Num n => n -> n) -> (Int, Double)
+rankNExample f = (f 1, f 1.0)
+```
+
+### 3.[total-1.0.0: Exhaustive pattern matching using traversals, prisms, and lenses](http://www.haskellforall.com/2015/01/total-100-exhaustive-pattern-matching.html)
+
+similar to `purescript-variant`
 
 
 
