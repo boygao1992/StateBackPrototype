@@ -3034,6 +3034,10 @@ rankNExample f = (f 1, f 1.0)
 
 similar to `purescript-variant`
 
+### 4.[Tying the Knot - Haskell Wiki](https://wiki.haskell.org/Tying_the_Knot)
+
+mutually recursive structure by laziness
+
 
 
 ## React
