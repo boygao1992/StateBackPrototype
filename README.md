@@ -4408,6 +4408,8 @@ data Day f g a
 
 ### 14.[Backprop as Functor: A compositional perspective on supervised learning](https://arxiv.org/abs/1711.10455)
 
+### 15.[Lenses for the Mere Mortal: PureScript Edition](https://leanpub.com/lenses)
+
 
 ## Actor Model
 
