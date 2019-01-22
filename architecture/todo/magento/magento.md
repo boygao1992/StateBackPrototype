@@ -4,3 +4,5 @@
 
 ['Connecting GraphQL To Your Own React Project' Jisse Reitsma](https://www.youtube.com/watch?v=2fkPG17KHn0)
 [Magento GraphQL Community Meeting, 6 December 2018](https://www.youtube.com/watch?v=QkhGudTbUMc)
+
+[Magento 2 Data Model Structure](https://github.com/blackbird-agency/magento-2-data-model-sample)
