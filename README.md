@@ -4736,6 +4736,95 @@ TODO: graph representation by linear types
 
 Purescript doesn't have `Constraint` kind yet.
 
+## Rust
+
+### 1.[The RustDoc Book](https://doc.rust-lang.org/book/)
+
+#### Chapter 4 - Understanding Ownership
+
+- static values are kept in stack
+- dynamic values are kept in heap
+
+linear logic
+- each value has only one owner/variable which holds a pointer/reference to that piece of memory
+- value will be automatically cleaned up when its owner/variable goes out of scope
+- value can be cleaned up early (before the end of scope) with `std::mem::drop`
+- variables are by default immutable
+  - mutable variable can be declared with extra `mut` keyword
+
+`Drop` trait (type class in Rust)
+```rust
+pub trait Drop {
+    fn drop(&mut self);
+}
+```
+- `drop` is a callback for cleanup event
+  - in which we can emit some effects (e.g. `println` to Console)
+- nested `struct` (Record in Rust) will be `drop`ped recursively from outer to inner
+
+#### Chapter 10 - Generic Types, Traits, and Lifetimes
+
+- lifetimes
+  - scoped values, can be think of as `ST` in PureScript with `kind Region` phantom type
+
+#### Chapter 15 - Smart Pointers
+
+reference counted smart pointer
+- [stack overflow](https://softwareengineering.stackexchange.com/questions/30254/why-garbage-collection-if-smart-pointers-are-there)
+- circular reference will break the assumption and cause memory leak
+- atomic mutation over reference counts can be the bottleneck of throughput
+- unbounded destruction time from immediate update assumption
+
+#### Chapter 16 - Fearless Concurrency
+
+### 2.[Rust Reference](https://doc.rust-lang.org/reference/)
+
+### 3.[Module std::prelude](https://doc.rust-lang.org/std/prelude/index.html)
+
+`std::cmp`
+- `trait Eq` ~ `class Eq`
+- `trait Ord` ~ `class Ord`
+
+`std::option`
+- `Enum Option<T>` ~ `Maybe t`
+
+```rust
+pub enum Option<T> {
+    None,
+    Some(T),
+}
+```
+
+`std::result`
+- `Enum Result<T, E>` ~ `Either e t`
+
+```rust
+pub enum Result<T, E> {
+    Ok(T),
+    Err(E),
+}
+```
+
+`std::iter`
+- Traits
+  - `trait Iterator`
+    - lazy list
+- Structs ~ function object (Rust doesn't support higher order kind yet)
+  - `struct Map` ~ `Functor List`, `map`
+  - `FlatMap` ~ `Monad List`, `bind`
+  - `struct Scan` ~ `Foldable List`, `foldl`
+
+```rust
+trait Iterator {
+    type Item;
+    fn next(&mut self) -> Option<Self::Item>;
+}
+```
+
+### 4.[Philip Walder - a taste of linear logic (1993)](http://homepages.inf.ed.ac.uk/wadler/papers/lineartaste/lineartaste-revised.pdf)
+
+### 5.[Gentle Intro to Type-level Recursion in Rust: From Zero to HList Sculpting](https://beachape.com/blog/2017/03/12/gentle-intro-to-type-level-recursion-in-Rust-from-zero-to-frunk-hlist-sculpting/)
+
 ## Others
 
 ### 1.[To Dissect a Mockingbird: A Graphical Notation for the Lambda Calculus with Animated Reduction](http://dkeenan.com/Lambda/)
