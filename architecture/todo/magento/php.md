@@ -1,0 +1,4 @@
+- [PHP DI](http://php-di.org/)
+- [phpmd - PHP Mess Detector](https://phpmd.org/rules/index.html)
+- [php-annotations](https://php-annotations.readthedocs.io/en/latest/index.html)
+- [php reflection](http://php.net/manual/en/book.reflection.php)
