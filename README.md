@@ -4840,3 +4840,6 @@ trait Iterator {
 ### 5.[A Study of Scales](https://ianring.com/musictheory/scales/)
 
 ### 6.[Modes of Limited Transposition](http://welliam.github.io/molts/)
+
+### 7.[Standardized ladder of functional programming](http://lambdaconf.us/downloads/documents/lambdaconf_slfp.pdf)
+
