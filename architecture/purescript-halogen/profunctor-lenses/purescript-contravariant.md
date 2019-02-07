@@ -1,11 +1,14 @@
 [purescript-contravariant](https://pursuit.purescript.org/packages/purescript-contravariant/)
 
-- Data.Comparison 
-- Data.Decidable 
-- Data.Decide 
+Class
+- Data.Functor.Contravariant 
 - Data.Divide 
 - Data.Divisible 
-- Data.Equivalence 
-- Data.Functor.Contravariant 
+- Data.Decide 
+- Data.Decidable 
+
+Data
 - Data.Op 
 - Data.Predicate 
+- Data.Equivalence 
+- Data.Comparison 
