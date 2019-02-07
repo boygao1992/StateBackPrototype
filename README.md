@@ -4736,6 +4736,8 @@ TODO: graph representation by linear types
 
 Purescript doesn't have `Constraint` kind yet.
 
+### 2.[Typeable and Data in Haskell](https://chrisdone.com/posts/data-typeable)
+
 ## Rust
 
 ### 1.[The RustDoc Book](https://doc.rust-lang.org/book/)

@@ -127,7 +127,8 @@ splitChoice :: forall p a b c d. Category p => Choice p =>
 splitChoice l r = left l >>> right r
 
 fanin :: forall p a b c. Category p => Choice p =>
-    p a c -> p b c -> p (Either a b) c
+ -- p a b -> p c b -> p (Either a c) (Either b b)
+    p a b -> p c b -> p (Either a c)         b
 fanin l r = rmap (either identity identity) (splitChoice l r)
 ```
 
