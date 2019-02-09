@@ -4827,6 +4827,11 @@ trait Iterator {
 
 ### 5.[Gentle Intro to Type-level Recursion in Rust: From Zero to HList Sculpting](https://beachape.com/blog/2017/03/12/gentle-intro-to-type-level-recursion-in-Rust-from-zero-to-frunk-hlist-sculpting/)
 
+
+## Compiler
+
+### 1.[Introducing PureScript Erlang backend](https://nwolverson.uk/devlog/2016/08/01/introducing-purescript-erlang.html)
+
 ## Others
 
 ### 1.[To Dissect a Mockingbird: A Graphical Notation for the Lambda Calculus with Animated Reduction](http://dkeenan.com/Lambda/)
