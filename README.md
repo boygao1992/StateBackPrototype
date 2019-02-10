@@ -2428,6 +2428,205 @@ dimap :: (c → a) → (b → d) → (a → b) → (c → d)
 
 ### 24.[The Monad.Reader - a electronic magazine about all things Haskell](https://themonadreader.wordpress.com/)
 
+### 25.[lemastero/scala_typeclassopedia](https://github.com/lemastero/scala_typeclassopedia)
+
+> Abstract Algebra
+>
+> Category Theory
+>
+>     Covariant Functors
+>         Functor
+>         Apply
+>         Applicative
+>         Selective
+>
+>     Monad
+>         Reader
+>         Writer
+>         State
+>         RWS Monad
+>         Update Monad
+>         Logic Monad, Prompt Monad, Failure Monad
+>         Type-Indexed Monads
+>         ContT (Continuation Monad)
+>         Reverse State Monad
+>         Tardis (Bidirectional State Monad)
+>         Chronicle Monad
+>
+>     IO related monads
+>         IO
+>         Bifunctor IO (BIO)
+>         RIO Monad (Reader + IO)
+>         TRIO (RIO Monad + Bifunctor IO)
+>
+>     Commutative
+>         CommutativeArrow
+>
+>     Contravariant functors
+>         Contravariant
+>         Divide (Contravariant Apply)
+>         Divisible (Contravariant Applicative)
+>
+>     Contravariant Kan Extensions
+>         Contravariant Yoneda
+>         Contravariant Coyoneda
+>         Contravariant Day
+>         Invariant Day
+>
+>     Invariant Functors
+>         Invariant (Invariant Functor, Exponential Functor)
+>         Invariant Day
+>
+>     Natural transformation (FunctionK)
+>
+>     Bifunctors
+>         Bifunctor
+>         Bifunctor Join
+>         Bifunctor Wrap
+>         Bifunctor Flip
+>         Bifunctor Joker
+>         Bifunctor Clown
+>         Bifunctor Product
+>         Bifunctor Sum
+>         Bifunctor Tannen
+>         Bifunctor Biff
+>         Bitraverse
+>         Bifoldable
+>
+>     Comonads
+>         Comonad
+>             Coreader (Env comonad, Product comonad)
+>             Cowriter
+>             Cofree
+>             Cokleisli
+>
+>     Bimonad
+>
+>     Traversing Folding Filtering
+>         Monoid
+>         Foldable
+>         Traverse
+>         Bitraverse
+>         Bifoldable
+>         FunctorFilter
+>         TraverseFilter
+>         Distributive
+>
+>     Monads not compose - solutions
+>         Monad Transformers
+>         Free Monads
+>         Tagless Final
+>         Extensible effects
+>
+>     Free constructions
+>         Free Applicative
+>         Free Monads
+>         Cofree
+>         Free Alternative
+>         Free Arrow
+>         Free Monad transformers
+>
+>     Representable & Adjunctions
+>         Representable
+>         Corepresentable
+>         Adjunction
+>         Adjoint Triples
+>
+>     (Co)Yoneda & (Co)Density & Kan Extensions
+>         Yoneda
+>         Coyoneda
+>         Right Kan extension
+>         Left Kan Extension
+>         Density Comonad
+>         Codensity
+>         Day Convolution
+>
+>     Profunctors
+>         Profunctor
+>         Star
+>         CoStar
+>         Strong Profunctor
+>         Tambara
+>         Choice Profunctor
+>         Extranatural Transformation
+>         Profunctor Functor
+>         Profunctor Monad
+>         Profunctor Comonad
+>         Procompose
+>         ProductProfunctor
+>         SumProfunctor
+>
+>     Profunctor Adjuctions & Representable
+>         Profunctor Adjunction
+>         Profunctor Rep
+>
+>     Profunctor Kan Extensions
+>         Profunctor Yoneda
+>         Profunctor CoYoneda
+>         Profunctor Ran
+>         Profunctor Codensity
+>
+>     Arrows
+>         Category
+>         Arrow
+>         CommutativeArrow
+>         Arrow Choice
+>         Arrow Apply, Arrow Monad
+>         Arrow Loop
+>         Arrow Zero
+>         Free Arrow
+>         Kleisli
+>         Cokleisli
+>         BiArrow
+>         BiKleisli
+>
+>     Cayley representations
+>         Difference Lists
+>         Codensity
+>         Double Cayley Representation
+>
+>     ADT (Algebra of types)
+>         Unit
+>         Void
+>         Product
+>         Sum (Coproduct)
+>         These
+>
+>     Higher kinded & exotic abstractions
+>         Monoidal Category, Monoid Object
+>         Day Convolution
+>         Functor Functor (FFunctor)
+>         Monad morphisms
+>         higher kinded category theory
+>         SemigroupK (Plus)
+>         MonoidK (PlusEmpty)
+>         Dinatural Transformation
+>         Ends & Coends
+>         Align
+>         Task
+>         Transducers
+>
+>     Limits
+>         Cone
+>         Cocone
+>         Diagonal Functor
+>         Limit
+>         Colimit
+>         Ends & Coends
+>
+>     Recursion schemas
+>         Unfoldable
+>
+>     Optics
+>
+>     Functor Oriented Programming
+>
+>     Advanced Category Theory
+>
+>     Resource About Category Theory
+>
+>     Functional data structures
+
 
 
 
@@ -4409,6 +4608,8 @@ data Day f g a
 ### 14.[Backprop as Functor: A compositional perspective on supervised learning](https://arxiv.org/abs/1711.10455)
 
 ### 15.[Lenses for the Mere Mortal: PureScript Edition](https://leanpub.com/lenses)
+
+### 16.[Categories of Optics - Mitchell Riley](https://arxiv.org/pdf/1809.00738.pdf)
 
 
 ## Actor Model
