@@ -4950,6 +4950,8 @@ Purescript doesn't have `Constraint` kind yet.
 
 ### 2.[Typeable and Data in Haskell](https://chrisdone.com/posts/data-typeable)
 
+### 3.[Sandy Maguire - Thinking with Types - Type-Level Programming in Haskell](https://leanpub.com/thinking-with-types)
+
 ## Rust
 
 ### 1.[The RustDoc Book](https://doc.rust-lang.org/book/)
