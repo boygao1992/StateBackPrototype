@@ -894,6 +894,8 @@ In CycleJS,
 
 ### 7.[Spin - software verification tool](http://spinroot.com/spin/whatispin.html)
 
+### 8.[Imandra - a cloud-native automated reasoning engine](https://www.imandra.ai/)
+
 
 ## Stateful HTML Elements handling for performance
 
@@ -1035,6 +1037,15 @@ Output variables’ values depend on the values of the state variables.
 > - between t0 and t0 + t, the system is isolated, i.e. there is no exterior intervention that alters the state of the system
 >
 > **Event Handler**: Takes in a schedule of events and returns the quantities of interest at each event.
+
+### 3.[philzook58/ad-lens - Haskell](https://github.com/philzook58/ad-lens)
+
+> These blog posts try to explain a bit about what is going on here
+> http://www.philipzucker.com/reverse-mode-auto-differentiation-kind-like-lens/
+> http://www.philipzucker.com/reverse-mode-differentiation-is-kind-of-like-a-lens-ii/
+> http://www.philipzucker.com/bidirectional-applicative-programming-and-automatic-differentation/
+
+> A lens is a getter and setter pair `a -> (b, (b->a))`. This is also the signature of reverse mode automatic differentiation. The function `(b->a)` is the **transposed Jacobian** (using a function representation of Matrices. Matrices are a certain kind of Vector -> Vector functions).
 
 # Reference
 
@@ -5032,6 +5043,12 @@ trait Iterator {
 ## Compiler
 
 ### 1.[Introducing PureScript Erlang backend](https://nwolverson.uk/devlog/2016/08/01/introducing-purescript-erlang.html)
+
+## Propagator
+
+### 1.[Propagation Networks: A Flexible and Expressive Substrate for Computation - Alexey Radul - PhD Thesis](http://web.mit.edu/~axch/www/phd-thesis.pdf)
+
+### 2.[The Art of the Propagator - Alexey Radul and Gerald Jay Sussman](http://web.mit.edu/~axch/www/art.pdf)
 
 ## Others
 
