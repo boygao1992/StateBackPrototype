@@ -2331,8 +2331,12 @@ Regarding "inspection", building a structure out of a free Applicative rather th
 
 ### 18.[Notions of Computation as Monoids](https://arxiv.org/abs/1406.4823)
 
+[Categorical Semantics for Arrows](http://homepages.inf.ed.ac.uk/cheunen/publications/2008/arrows/arrows.pdf)
+
 > There are different notions of computation, the most popular being monads, applicative functors, and arrows.
 > In this article we show that these three notions can be seen as monoids in a monoidal category. 
+
+> Arrows have been recently shown to be strong monoids in a monoidal category of profunctors by Jacobs et al.
 
 ### 19.[Profunctors, Arrows, & Static Analysis](https://elvishjerricco.github.io/2017/03/10/profunctors-arrows-and-static-analysis.html)
 
@@ -2637,6 +2641,12 @@ dimap :: (c → a) → (b → d) → (a → b) → (c → d)
 >     Resource About Category Theory
 >
 >     Functional data structures
+
+### 26.[Profunctors in Haskell](http://blog.sigfpe.com/2011/07/profunctors-in-haskell.html)
+
+[Profunctor Composition](https://hackage.haskell.org/package/profunctors-5.2/docs/Data-Profunctor-Composition.html)
+
+### 27.[Arrows: A General Interface to Computation](https://www.haskell.org/arrows/)
 
 
 
