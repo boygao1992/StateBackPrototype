@@ -1534,7 +1534,7 @@ you simply set up calculations outside of the system that create new inputs that
 > ```
 > compute a fixed point
 
-### 13. [TimeFiles: Push-Pull Signal-Function Functional Reactive Programming](https://github.com/eamsden/pushbasedFRP/raw/master/Docs/Thesis/thesis.pdf)
+### 13. [TimeFlies: Push-Pull Signal-Function Functional Reactive Programming](https://github.com/eamsden/pushbasedFRP/raw/master/Docs/Thesis/thesis.pdf)
 
 [briancavalier/arrow in JS](https://github.com/briancavalier/arrow)
 
@@ -1555,9 +1555,15 @@ you simply set up calculations outside of the system that create new inputs that
 > 3.4.4 Reactivity
 > `switch` combinator
 
-> 3.4.5 Feedback
-> This combinator provides decoupling for signals but not events.
-> This means that the programmer has the responsibility to ensure that feedback does not generate an infinite sequence of events in a single time-step.
+#### 3.4.5 Feedback
+
+> This is especially useful when we have two signal functions which we would like to **mutually interact**.
+
+> This combinator provides decoupling for signals
+>   (the input signal is the output signal at the **previous** time-step)
+> but not for events
+>   (event occurences are supplied to the combinator immediately).
+> Programmer has the responsibility to ensure that feedback does not generate an infinite sequence of events in a single time-step.
 
 > 3.4.6 Event-Specific Combinators
 > 3.4.7 Joining
@@ -2052,6 +2058,10 @@ a DSL for RDP
 [purescript-concur](https://github.com/ajnsit/purescript-concur)
 
 ### 38.[John Hughes: Generalising monads to arrows](https://www.sciencedirect.com/science/article/pii/S0167642399000234)
+
+### 39.[A Survey of Functional Reactive Programming](https://pdfs.semanticscholar.org/5046/034fe0cddda681ad9374d306fd27eec8b5fb.pdf)
+
+### 40.[Generalized Arrows - heterogeneous metaprogramming](http://www.megacz.com/berkeley/garrows/)
 
 ## Self-adjusting Computation (SAC)
 
