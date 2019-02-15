@@ -2063,6 +2063,12 @@ a DSL for RDP
 
 ### 40.[Generalized Arrows - heterogeneous metaprogramming](http://www.megacz.com/berkeley/garrows/)
 
+### 41.[Wormholes: Introducing Effect to FRP](http://haskell.cs.yale.edu/wp-content/uploads/2012/08/Winograd-Cort-Wormholes.pdf)
+
+> 2.4 Causality
+> **strictly causal looping**: all loops must contain some sort of delay such that the input only depends on past outputs.
+
+
 ## Self-adjusting Computation (SAC)
 
 ### 1.[Self-Adjusting Computation - Umut Acar - Carnegie Mellon University](http://www.umut-acar.org/self-adjusting-computation)
