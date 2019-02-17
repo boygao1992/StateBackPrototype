@@ -5096,3 +5096,5 @@ trait Iterator {
 
 ### 7.[Standardized ladder of functional programming](http://lambdaconf.us/downloads/documents/lambdaconf_slfp.pdf)
 
+### 8.[A guide to the PureScript numeric hierarchy](https://a-guide-to-the-purescript-numeric-hierarchy.readthedocs.io/en/latest/)
+
