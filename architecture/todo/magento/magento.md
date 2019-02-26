@@ -6,3 +6,5 @@
 [Magento GraphQL Community Meeting, 6 December 2018](https://www.youtube.com/watch?v=QkhGudTbUMc)
 
 [Magento 2 Data Model Structure](https://github.com/blackbird-agency/magento-2-data-model-sample)
+
+[Alan Storm - Magento 2 blog post series](https://alanstorm.com/category/magento-2/)
