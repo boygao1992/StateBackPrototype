@@ -39,4 +39,9 @@ CREATE TABLE `catalog_product_entity` (
 - `sku` ("stockkeeping unit")
   - a unique identifier for each product (for domain operators)
 - `attribute_set_id`
+  - taxonomy for product (for database developer)
+    - associated with a set of product attributes
+    - caveat: `catalog_category` is another taxonomy of product (primary for end users)
+  - source key
+    - `attribute_set_id` from `eav_attribute_set`
 
