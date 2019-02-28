@@ -51,7 +51,7 @@ CREATE TABLE `eav_attribute` (
   - values
     - built-in (not instantiated as a dedicated table, but directly lives in entity tables)
       - `static`
-    - customized
+    - customized (corresponds to MySQL built-in value types)
       - `text`
       - `varchar`
       - `int`
@@ -60,5 +60,20 @@ CREATE TABLE `eav_attribute` (
 - `attribute_code`
   - attribute name
 
+# Value Tables (Entity-Attribute-"Value")
 
-
+- table naming convention
+  - `{entity_type_code}_entity_{backend_type}`
+- columns
+  - `entity_id` (community version) / `row_id` (enterprise version)
+    - source key
+      - `entity_id` from `catalog_product_entity`
+      - a unique identifier for products
+  - `attribute_id`
+    - source key
+      - `attribute_id` from `eav_attribute`
+  - `value`
+    - "V" in "EAV" model
+  - `store_id`
+    - optional, default to `0`
+    - able to further differentiate attribute values for different stores
