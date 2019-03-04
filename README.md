@@ -5072,6 +5072,43 @@ trait Iterator {
 
 ### 1.[Introducing PureScript Erlang backend](https://nwolverson.uk/devlog/2016/08/01/introducing-purescript-erlang.html)
 
+## Parser
+
+### 1.[Deciphering Haskell's applicative and monadic parsers](https://eli.thegreenplace.net/2017/deciphering-haskells-applicative-and-monadic-parsers/)
+
+the examples do not utilize the power of Monad (control of computation based on runtime values) so they can be faithfully implemented using Applicative and simply replace `do` by `ado` to preserve the syntactical elegance.
+
+### 2.[Deterministic, Error-Correcting Combinator Parsers](http://www.staff.science.uu.nl/~swier101/Papers/1996/LL1.pdf)
+
+### 3.[Parsing context-sensitive languages with Applicative](https://byorgey.wordpress.com/2012/01/05/parsing-context-sensitive-languages-with-applicative/)
+
+> ```haskell
+> guard' :: Alternative f => Bool -> f ()
+> guard' True  = pure ()
+> guard' False = empty
+>
+> parseArbitrary :: (String -> Bool) -> Parser ()
+> parseArbitrary p =
+>       (eof <* guard' (p [])) 
+>   <|> foldr (<|>) parserZero 
+>         (map (\c -> char c *> 
+>                     parseArbitrary (p . (c:)) -- recursion
+>              ) 
+>              ['a'..'z']
+>         )
+> ```
+
+> For any given predicate p, you can think of parseArbitrary p as an infinite tree with a 26-way branch at each node.
+> Each node "remembers" the path taken to reach it from the root of the tree, in the form of prepend functions composed with the original predicate.
+> We have constructed an infinite grammar: each node in the tree corresponds to a production, one for every possible input prefix.
+
+> wren ng thornton says:
+> Infinite grammars are perfectly useful, provided that we acknowledge the structure they have. This is just like the reason why PDAs are useful: technically push-down automata are infinite-state machines, but by encoding them as a finite-state machine plus a stack we make explicit the **subregularities** of the infinite-state machine. With PDAs we’re saying that infinite graphs (i.e., infinite DFAs) are helpful, because we can finitize them; with your example in mind, we’re saying that infinite hypergraphs (i.e., infinite CFGs) are helpful— which should intuitively follow from the facts that hypergraphs are helpful and that infinite graphs are helpful. 
+> This is the same intuition behind why Ryan Ingram’s implementation gives better error messages: his version makes the subregularities defining the a^n b^n c^n language explicit; that is, he makes the finitization of the infinite hypergraph explicit. We can do this for a large collection of languages simply by adding indices/parameters to the nonterminals of a CFG —which is akin to giving a stack to a DFA— and this is what is done in many grammar formalisms more powerful than context-free. It’s the explicit finitization which enables giving decent error messages.
+> Though your example is quite nice because it shows how we can take an arbitrary characteristic function and convert it into an Applicative parser. I’m loathe to call a characteristic function a “grammar” for precisely the same reason why you get awful error messages— namely, that characteristic functions have no structure, whereas I’d define grammars as being a means of explaining the structure behind (particular classes of) characteristic functions.
+
+### 4.[FUNCTIONAL PEARL: Applicative programming with eﬀects](http://strictlypositive.org/IdiomLite.pdf)
+
 ## Propagator
 
 ### 1.[Propagation Networks: A Flexible and Expressive Substrate for Computation - Alexey Radul - PhD Thesis](http://web.mit.edu/~axch/www/phd-thesis.pdf)
