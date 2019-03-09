@@ -2068,6 +2068,10 @@ a DSL for RDP
 > 2.4 Causality
 > **strictly causal looping**: all loops must contain some sort of delay such that the input only depends on past outputs.
 
+### 42.[Hardware Design and Functional Programming: a Perfect Match](http://www.jucs.org/jucs_11_7/hardware_design_and_functional/jucs_11_7_1135_1158_sheeran.pdf)
+
+### 43.[volkerschatz - Wavelet transform in Haskell](http://www.volkerschatz.com/science/haswavelet.html)
+
 
 ## Self-adjusting Computation (SAC)
 
@@ -5114,6 +5118,32 @@ the examples do not utilize the power of Monad (control of computation based on 
 ### 1.[Propagation Networks: A Flexible and Expressive Substrate for Computation - Alexey Radul - PhD Thesis](http://web.mit.edu/~axch/www/phd-thesis.pdf)
 
 ### 2.[The Art of the Propagator - Alexey Radul and Gerald Jay Sussman](http://web.mit.edu/~axch/www/art.pdf)
+
+## Haskell for Math
+
+### 1. [HaskellForMaths - Hackage](http://hackage.haskell.org/package/HaskellForMaths)
+
+### 2. HaskellForMaths - Tensor Product
+
+[New modules - Quantum Algebra](http://haskellformaths.blogspot.com/2010/11/new-modules-quantum-algebra.html)
+
+[The free vector space on a type, part 1](http://haskellformaths.blogspot.com/2010/12/free-vector-space-on-type-part-1.html)
+
+[Tensor products of vector spaces, part 1](http://haskellformaths.blogspot.com/2011/02/tensor-products-of-vector-spaces-part-1.html)
+
+[Tensor Products, part 2: Monoids and Arrows](http://haskellformaths.blogspot.com/2011/03/tensor-products-part-2-monoids-and.html)
+
+[What is an Algebra?](http://haskellformaths.blogspot.com/2011/04/what-is-algebra.html)
+
+[What is a Coalgebra?](http://haskellformaths.blogspot.com/2011/04/what-is-coalgebra.html)
+
+[The Tensor Algebra Monad](http://haskellformaths.blogspot.com/2011/07/tensor-algebra-monad.html)
+
+[Commutative Algebra in Haskell, part 1](http://haskellformaths.blogspot.com/2011/09/commutative-algebra-in-haskell-part-1.html)
+
+[Commutative Algebra and Algebraic Geometry](http://haskellformaths.blogspot.com/2011/09/commutative-algebra-and-algebraic.html)
+
+### 3. [volkerschatz - A recursive tensor data type](http://www.volkerschatz.com/science/hastensor.html)
 
 ## Others
 
