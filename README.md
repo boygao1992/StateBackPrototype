@@ -5072,6 +5072,13 @@ trait Iterator {
 ### 5.[Gentle Intro to Type-level Recursion in Rust: From Zero to HList Sculpting](https://beachape.com/blog/2017/03/12/gentle-intro-to-type-level-recursion-in-Rust-from-zero-to-frunk-hlist-sculpting/)
 
 
+## Linear Logic
+
+### 1.[Linear Logic - Stanford Encyclopedia of Philosophy](https://plato.stanford.edu/entries/logic-linear/#BitHis)
+
+### 2.[Linear Logic Propositions as Session Types](https://www.researchgate.net/publication/265978616_Linear_Logic_Propositions_as_Session_Types)
+
+
 ## Compiler
 
 ### 1.[Introducing PureScript Erlang backend](https://nwolverson.uk/devlog/2016/08/01/introducing-purescript-erlang.html)

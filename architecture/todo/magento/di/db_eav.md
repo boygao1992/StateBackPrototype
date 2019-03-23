@@ -74,3 +74,7 @@
   </type>
   ```
     - `magento/module-eav/Model/Entity/Setup/PropertyMapper.php`
+
+- `Magento\Framework\DB\Ddl\Table`
+  - `addForeignKey`
+  - `addColumn`

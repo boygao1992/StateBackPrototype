@@ -93,3 +93,26 @@ mysql -h localhost -u username -p
 # Stop server
 mysqladmin -p -u username shutdown
 ```
+
+# Local
+
+`app/etc/env.php`
+- `backend` > `frontName`
+- `db` > `connection` > `default` > `dbname`
+
+`core_config_data`
+- `web/unsecure/base_url`
+- `web/secure/base_url`
+
+`/etc/apache2/site-enabled/vhost.conf`
+- `ServerName`
+- `DocumentRoot`
+
+- `composer update`
+- `bin/magento setup:upgrade`
+- `bin/magento setup:static-content:deploy -f`
+- `bin/magento cache:clean`
+
+file system permission
+- `chown :www-data`
+- `chmod`
