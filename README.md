@@ -1374,6 +1374,13 @@ the actor solution in the article makes an ad-hoc partition on the global state 
 
 ### 6.[Beautiful Concurrency - an introduction to STM in Haskell](https://www.schoolofhaskell.com/school/advanced-haskell/beautiful-concurrency)
 
+### 7.[lvish: Parallel scheduler, LVar data structures, and infrastructure to build more](http://hackage.haskell.org/package/lvish)
+
+> A programming model based on monotonically-growing concurrent data structures.
+
+> - [FHPC 2013: LVars: lattice-based data structures for deterministic parallelism](http://dl.acm.org/citation.cfm?id=2502326)
+> - [POPL 2014: Freeze after writing: quasi-deterministic parallel programming with LVars](http://www.cs.indiana.edu/~lkuper/papers/2013-lvish-draft.pdf)
+> - [PLDI 2014: Taming the Parallel Effect Zoo: Extensible Deterministic Parallelism with LVish](http://www.cs.indiana.edu/~rrnewton/papers/effectzoo-draft.pdf)
 
 ## Arrowized FRP
 
@@ -3279,7 +3286,6 @@ similar to `purescript-variant`
 mutually recursive structure by laziness
 
 
-
 ## React
 
 ### 1.[Simple React Patterns - Dealing With Side-Effects In React](http://lucasmreis.github.io/blog/simple-react-patterns/)
@@ -5083,6 +5089,8 @@ trait Iterator {
 
 ### 1.[Introducing PureScript Erlang backend](https://nwolverson.uk/devlog/2016/08/01/introducing-purescript-erlang.html)
 
+### 2.[Crafting Interpreters](http://www.craftinginterpreters.com/)
+
 ## Parser
 
 ### 1.[Deciphering Haskell's applicative and monadic parsers](https://eli.thegreenplace.net/2017/deciphering-haskells-applicative-and-monadic-parsers/)
@@ -5119,6 +5127,22 @@ the examples do not utilize the power of Monad (control of computation based on 
 > Though your example is quite nice because it shows how we can take an arbitrary characteristic function and convert it into an Applicative parser. I’m loathe to call a characteristic function a “grammar” for precisely the same reason why you get awful error messages— namely, that characteristic functions have no structure, whereas I’d define grammars as being a means of explaining the structure behind (particular classes of) characteristic functions.
 
 ### 4.[FUNCTIONAL PEARL: Applicative programming with eﬀects](http://strictlypositive.org/IdiomLite.pdf)
+
+### 5.[Ben Lynn | Blog](https://crypto.stanford.edu/~blynn/)
+
+> lambda calculus
+> haskell
+> parser
+
+
+[Parser Combinators](https://crypto.stanford.edu/~blynn/haskell/parse.html)
+> The evolution of parsing
+> - recursive descent parsers
+> - parser generator
+> - parser combinators
+> - parsing expression grammars (PEGs)
+> - parsing with derivatives
+
 
 ## Propagator
 
@@ -5172,3 +5196,31 @@ the examples do not utilize the power of Monad (control of computation based on 
 
 ### 8.[A guide to the PureScript numeric hierarchy](https://a-guide-to-the-purescript-numeric-hierarchy.readthedocs.io/en/latest/)
 
+### 9.[Revenge of the Nerds](http://www.paulgraham.com/icad.html)
+
+> The Cost of Being Average
+
+> How does a more powerful language enable you to write shorter programs? One technique you can use, if the language will let you, is something called bottom-up programming.
+> Instead of simply writing your application in the base language, you build on top of the base language a language for writing programs like yours, then write your program in it.
+> The combined code can be much shorter than if you had written your whole program in the base language-- indeed, this is how most compression algorithms work.
+> A bottom-up program should be easier to modify as well, because in many cases the language layer won't have to change at all.
+
+> [Programming Bottom-Up](http://www.paulgraham.com/progbot.html)
+> Experienced Lisp programmers divide up their programs differently.
+> As well as top-down design, they follow a principle which could be called bottom-up design-- changing the language to suit the problem.
+> In Lisp, you don't just write your program down toward the language, you also build the language up toward your program.
+> As you're writing a program you may think "I wish Lisp had such-and-such an operator." So you go and write it.
+> Afterward you realize that using the new operator would simplify the design of another part of the program, and so on.
+> Language and program evolve together.
+> Like the border between two warring states, the boundary between language and program is drawn and redrawn, until eventually it comes to rest along the mountains and rivers, the natural frontiers of your problem.
+> In the end your program will look as if the language had been designed for it.
+> And when language and program fit one another well, you end up with code which is clear, small, and efficient.
+
+> Code size is important, because the time it takes to write a program depends mostly on its length.
+> If your program would be three times as long in another language, it will take three times as long to write-- 
+> and you can't get around this by hiring more people, because beyond a certain size new hires are actually a net lose. Fred Brooks described this phenomenon in his famous book **The Mythical Man-Month**, and everything I've seen has tended to confirm what he said.
+
+> As one data point on the curve, at any rate, if you were to compete with ITA and chose to write your software in C, they would be able to develop software twenty times faster than you.
+> If you spent a year on a new feature, they'd be able to duplicate it in less than three weeks.
+> Whereas if they spent just three months developing something new, it would be five years before you had it too.
+> I mean five years if nothing goes wrong. In fact, the way things work in most companies, any development project that would take five years is likely never to get finished at all.
