@@ -2687,6 +2687,10 @@ dimap :: (c → a) → (b → d) → (a → b) → (c → d)
 ### 3.[MonadReader - issue 16](https://themonadreader.files.wordpress.com/2010/05/issue16.pdf)
 > Playing with Priority Queues - Louis Wasserman
 
+### 4.[Finger trees: a single general-purpose data structure](http://www.staff.city.ac.uk/~ross/papers/FingerTree.pdf)
+
+[Monoids and Finger Trees](https://apfelmus.nfshost.com/articles/monoid-fingertree.html)
+
 ## Model Theory
 ### 1.[Model Theory - Wikipedia](https://en.wikipedia.org/wiki/Model_theory)
 universal algebra + logic = model theory
@@ -5196,7 +5200,7 @@ the examples do not utilize the power of Monad (control of computation based on 
 
 ### 8.[A guide to the PureScript numeric hierarchy](https://a-guide-to-the-purescript-numeric-hierarchy.readthedocs.io/en/latest/)
 
-### 9.[Revenge of the Nerds](http://www.paulgraham.com/icad.html)
+### 9.[Paul Graham - Revenge of the Nerds](http://www.paulgraham.com/icad.html)
 
 > The Cost of Being Average
 
@@ -5224,3 +5228,28 @@ the examples do not utilize the power of Monad (control of computation based on 
 > If you spent a year on a new feature, they'd be able to duplicate it in less than three weeks.
 > Whereas if they spent just three months developing something new, it would be five years before you had it too.
 > I mean five years if nothing goes wrong. In fact, the way things work in most companies, any development project that would take five years is likely never to get finished at all.
+
+### 10.[Paul Graham - Beating the Averages](http://www.paulgraham.com/avg.html)
+
+> The source code of the Viaweb editor was probably about **20-25% macros**.
+> Macros are harder to write than ordinary Lisp functions, and it's considered to be bad style to use them when they're not necessary.
+> So every macro in that code is there because it has to be.
+> What that means is that at least 20-25% of the code in this program is doing things that you can't easily do in any other language.
+> However skeptical the Blub programmer might be about my claims for the mysterious powers of Lisp, this ought to make him curious.
+> We weren't writing this code for our own amusement.
+> We were a tiny startup, programming as hard as we could in order to put technical barriers between us and our competitors.
+
+> Ordinarily technology changes fast.
+> But programming languages are different: programming languages are not just technology, but what programmers think in.
+> They're half technology and half **religion**.[6]
+> And so the median language, meaning whatever language the median programmer uses, moves as slow as an iceberg.
+> Garbage collection, introduced by Lisp in about 1960, is now widely considered to be a good thing.
+> Runtime typing, ditto, is growing in popularity.
+> Lexical closures, introduced by Lisp in the early 1970s, are now, just barely, on the radar screen.
+> Macros, introduced by Lisp in the mid 1960s, are still terra incognita.
+
+### 11.[Mark Karpov - Lisp and Haskell](https://markkarpov.com/post/lisp-and-haskell.html)
+
+> Here is a blog post called [“Dynamic Languages are Static Languages”](https://existentialtype.wordpress.com/2011/03/19/dynamic-languages-are-static-languages/).
+> In short, the author makes the point that dynamic langauges are static languages but with one huge type including all possible values.
+> The lack of the immense power to express meaning of your program on type level is another downside of Lisp.
