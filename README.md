@@ -177,6 +177,8 @@ Moore Machine(?)
 ## Elm-like purescript (PUX, Spork, Bonsai, Panda)
 TODO
 
+[ajnsit/purescript-concur](https://github.com/ajnsit/purescript-concur)
+
 [ehrenmurdick/purescript-oak](https://github.com/ehrenmurdick/purescript-oak)
 
 [Spork - Elm-like for PureScript](https://github.com/natefaubion/purescript-spork)
@@ -4662,6 +4664,27 @@ data Day f g a
 
 ### 16.[Categories of Optics - Mitchell Riley](https://arxiv.org/pdf/1809.00738.pdf)
 
+### 17.[Code Examples and Notes for my talk on Functional References (Lenses and such) at the Santa Monica Haskell Meetup](https://github.com/friedbrice/lenses-talk)
+
+> Further Learning 
+> - Simon Peyton Jones, "Lenses: compositional data access and manipulation" (https://skillsmatter.com/skillscasts/4251-lenses-compositional-data-access-and-manipulation). 
+> - Brian McKenna, "Productionisation of Functional Optics" (https://www.youtube.com/watch?v=H01dw-BMmlE). 
+> - Gabrial Gonzalez, "lens-tutorial" (http://hackage.haskell.org/package/lens-tutorial).
+>
+> Notable Haskell Lens Libraries 
+> - Edward Kmett, "lens" (https://hackage.haskell.org/package/lens).
+> - Russell O'Connor, Michael Thompson, "lens-simple" (http://hackage.haskell.org/package/lens-simple).
+> - Edward Kmett, Artyom Kazak, "microlens" (http://hackage.haskell.org/package/microlens).
+> - Csongor Kiss, "generic-lens" (http://hackage.haskell.org/package/generic-lens).
+>
+> History of Functional References/Lenses
+> - 2007, Luke Palmer, "Making Haskell nicer for game programming" (http://web.archive.org/web/20080515203207/http://luqui.org/blog/archives/2007/07/26/making-haskell-nicer-for-game-programming/).
+> - 2008, Edward A. Kmett, Russell O'Connor, Tony Morris, "data-lens" (http://hackage.haskell.org/package/data-lens).
+> - 2008, Conal Elliott, "Semantic editor combinators" (http://conal.net/blog/posts/semantic-editor-combinators).
+> - 2009, Twan van Laarhoven, "CPS based functional references" (https://www.twanvl.nl/blog/haskell/cps-functional-references).
+> - 2012, Russell O'Conner, "Polymorphic Update with van Laarhoven Lenses" (http://r6.ca/blog/20120623T104901Z.html). 
+> - 2012, Edward Kmett, "Mirrored Lenses" (http://comonad.com/reader/2012/mirrored-lenses/).
+
 
 ## Actor Model
 
@@ -5179,6 +5202,62 @@ the examples do not utilize the power of Monad (control of computation based on 
 [Commutative Algebra and Algebraic Geometry](http://haskellformaths.blogspot.com/2011/09/commutative-algebra-and-algebraic.html)
 
 ### 3. [volkerschatz - A recursive tensor data type](http://www.volkerschatz.com/science/hastensor.html)
+
+## Exception Handling
+
+### 1.[Catching all exceptions](https://www.schoolofhaskell.com/user/snoyberg/general-haskell/exceptions/catching-all-exceptions)
+
+> an example of asynchronous exception
+
+> The `timeout` function forks a new thread to run worker in.
+> If worker does not complete within 5 ms, that new thread is thrown a timeout exception.
+> This kind of throwing is done by the `throwTo` function, and is an **asynchronous exception**.
+
+the exception is thrown to which ever line-of-code being executed at that point in time
+
+```haskell
+import Control.Exception
+import System.Timeout
+import Control.Concurrent
+
+catchAny :: IO a -> (SomeException -> IO a) -> IO a
+catchAny = Control.Exception.catch
+
+dangerous :: IO Int
+dangerous = do
+    putStrLn "Succeeds this time, but takes some time"
+    threadDelay 10000 -- <- thrown here
+    return 5
+    
+worker :: IO ()
+worker = do
+    x <- catchAny dangerous $ \e -> do -- <- caught here
+        putStrLn $ "Caught an exception: " ++ show e
+        return (-1)
+    putStrLn $ "x + 10 == " ++ show (x + 10)
+
+main :: IO ()
+main = do
+    res <- timeout 5000 worker -- <- not thrown and caught here
+    case res of
+        Nothing -> putStrLn "worker did not run to completion"
+        Just () -> putStrLn "worker ran to completion"
+```
+
+### 2.[safe-exceptions](https://www.stackage.org/package/safe-exceptions)
+
+> Determining sync vs async
+> Handling of sync vs async exceptions
+> Exceptions in cleanup code
+> Caveats
+> - Checked vs unchecked
+> - Explicit vs implicit
+> - Type-based differentiation
+> - Deadlock detection exceptions
+
+### 3.[FP Complete - Exceptions Best Practices in Haskell](https://www.fpcomplete.com/blog/2016/11/exceptions-best-practices-haskell)
+
+### 4.[FP Complete - Safe exception handling](https://haskell.fpcomplete.com/tutorial/exceptions)
 
 ## Others
 
