@@ -5259,7 +5259,9 @@ main = do
 
 ### 4.[FP Complete - Safe exception handling](https://haskell.fpcomplete.com/tutorial/exceptions)
 
-### 5.[Asynchronous Exceptions in Haskell](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/07/asynch-exns.pdf)
+### 5.[Microsoft Research - Asynchronous Exceptions in Haskell](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/07/asynch-exns.pdf)
+
+### 6.[FP Complete - Asynchronous Exception Handling in Haskell](https://www.fpcomplete.com/blog/2018/04/async-exception-handling-haskell)
 
 ## Others
 
