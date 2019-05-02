@@ -5259,6 +5259,8 @@ main = do
 
 ### 4.[FP Complete - Safe exception handling](https://haskell.fpcomplete.com/tutorial/exceptions)
 
+### 5.[Asynchronous Exceptions in Haskell](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/07/asynch-exns.pdf)
+
 ## Others
 
 ### 1.[To Dissect a Mockingbird: A Graphical Notation for the Lambda Calculus with Animated Reduction](http://dkeenan.com/Lambda/)
