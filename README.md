@@ -5207,6 +5207,15 @@ the examples do not utilize the power of Monad (control of computation based on 
 
 ### 1.[Catching all exceptions](https://www.schoolofhaskell.com/user/snoyberg/general-haskell/exceptions/catching-all-exceptions)
 
+> [safe-exceptions](https://www.stackage.org/package/safe-exceptions)
+> ## Determining sync vs async
+> Run an action in a separate thread, don’t give that thread’s ID to anyone else, and assume that any exception that kills it is a synchronous exception. 
+> Problems
+> - It’s much more expensive to fork a thread every time we want to deal with exceptions
+> - It’s not fully reliable: it’s possible for the thread ID of the forked thread to leak somewhere, or the runtime system to send it an async exception
+> - While this works for actions living in IO, it gets trickier for pure functions and monad transformer stacks. The latter issue is solved via monad-control and the exceptions packages. The former issue, however, means that it’s impossible to provide a universal interface for failure for pure and impure actions. This may seem esoteric, and if so, don’t worry about it too much.
+
+
 > an example of asynchronous exception
 
 > The `timeout` function forks a new thread to run worker in.
