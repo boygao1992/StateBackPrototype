@@ -4973,11 +4973,23 @@ TODO: graph representation by linear types
 
 ### 9. XMonad
 
-[Roll Your Own Window Manager: Tracking Focus with a Zipper](https://donsbot.wordpress.com/2007/05/17/roll-your-own-window-manager-tracking-focus-with-a-zipper/)
+[Roll Your Own Window Manager, Part 1: Defining and Testing a Model](https://web.archive.org/web/20070503112312/http://cgi.cse.unsw.edu.au/~dons/blog/2007/05/01)
+
+[Roll Your Own Window Manager, Part 2: Tracking Focus with a Zipper](https://web.archive.org/web/20120323213901/https://donsbot.wordpress.com/2007/05/17/roll-your-own-window-manager-tracking-focus-with-a-zipper/)
 
 [Xmonad in Coq: Programming a window manager in a proof assistant](http://www.staff.science.uu.nl/~swier004/talks/2012a-utrecht.pdf)
 
 ### 10. [Cyclic Types](https://www.schoolofhaskell.com/user/tomberek/cyclic-types)
+
+### 11. Zippers Series - Pavel Panchekha
+
+[Zippers, Part 1: Huet Zippers](https://pavpanchekha.com/blog/zippers/huet.html)
+
+[Zippers, Part 2: Zippers as Derivatives](https://pavpanchekha.com/blog/zippers/derivative.html)
+
+[Zippers, Part 3: Kiselyov Zippers](https://pavpanchekha.com/blog/zippers/kiselyov.html)
+
+[Zippers, Part 4: Multi-Zippers](https://pavpanchekha.com/blog/zippers/multi-zippers.html)
 
 ## Security
 
@@ -5271,6 +5283,137 @@ main = do
 ### 5.[Microsoft Research - Asynchronous Exceptions in Haskell](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/07/asynch-exns.pdf)
 
 ### 6.[FP Complete - Asynchronous Exception Handling in Haskell](https://www.fpcomplete.com/blog/2018/04/async-exception-handling-haskell)
+
+## Haskell Concurrency
+
+### 1.[Haskell's Missing Concurrency Basics](https://www.snoyman.com/blog/2016/11/haskells-missing-concurrency-basics)
+
+> `putStrLn` is not thread-safe
+> non-closable channel
+
+[say](https://www.stackage.org/package/say)
+> when writing a line of textual data to a `Handle`
+> , such as sending some messages t o ther terminal
+> , we’d like to have the following properties:
+>   - Properly handle character encoding settings on the Handle
+>   - For reasonably sized messages, ensure that the entire message is written in one chunk to avoid interleaving data with other threads
+>     - This includes the trailing newline character
+>   - Avoid unnecessary memory allocations and copies
+>   - Minimize locking
+>   - Provide a simple API
+
+> `putStrLn` -> `say` / `sayString`
+> `print` -> `sayShow`
+> `hPutStrLn` -> `hSay` / `hSayString`
+> `hPrint` -> `hSayShow`
+> helpers for `stderr`: `sayErr`, `sayErrString`, `sayErrShow`
+
+### 2.[Weird UnliftIO](https://www.reddit.com/r/haskell/comments/98xcc2/weird_unliftio/)
+
+#### edwardkmett
+
+> Note: Pretty much any of the CPS'd monads like
+> ```haskell
+> newtype ContT r m a = ContT ((a -> m r) -> m r)
+> ```
+> won't work with your scheme.
+
+> Data.Functor.Adjunction only covers adjunctions from Hask -> Hask, because it is built on the 'Functor' class. There is however, only one such adjunction. `(,e) -| (->) e`. Every other instance is isomorphic to that case. e.g. `Identity -| Identity` is isomorphic to choosing `e = ()`, etc. Composition is equivalent to choosing `e = the product of the two parts`. This is why I started using the idea of representable functors more in Haskell. One fewer argument to pass around to talk about both halves of the adjunction.
+>
+> There is another adjunction easily expressed in Haskell, which is that `(->r) -| (->r)`. That one gives rise to `Cont r a = (a -> r) -> r`, but it goes through `Hask^op`. If you stick a monad in the middle of that adjunction you're sticking a monad in Haskop in, so it takes a comonad (full of continuations) and gives you a monad.
+>
+> This one is kind of nice because if you quantify over r
+>
+> ```haskell
+> newtype Co w a = Co (forall r. (a -> r) -> r)
+> ```
+>
+> then it takes Store/Costate and gives back (CPS'd) State. In general it transforms Co Cofoo into Foo.
+>
+> The proof that all monads can be decomposed into adjunctions relies on the existence of the Kleisli and Eilenberg-Moore categories. There is always an adjunction that passed through something there. Sadly that starts to step outside what we can express in Haskell.
+
+#### gelisam
+> Now that I'm taking a closer look, I see that this isn't based on UnliftIO: on the contrary, this is a promising alternative to UnliftIO!
+
+> To better illustrate where I think this approach fits in the landscape and why I think it's promising, let's recap the problem we're trying to solve. For simplicity, I will assume that IO is always the innermost base monad. MonadBaseControl and UnliftIO both try to make it easy to reuse higher-order IO functions like withFile :: FilePath -> IOMode -> (Handle -> IO r) -> IO r in monad stacks which contain more than IO effects, e.g. withFile' :: c m => FilePath -> IOMode -> (Handle -> m r) -> m r. Ideally we would want c ~ MonadIO, but that constraint is not powerful enough to implement withFile' in terms of withFile. c ~ MonadBaseControl IO and c ~ MonadUnliftIO are powerful enough, but both have some significant drawbacks. Very different drawbacks though.
+>
+> **MonadBaseControl's drawback is that it sometimes loses non-IO side-effects**. For example,
+>
+> ```haskell
+> import Control.Exception.Lifted
+> import Control.Monad.IO.Class
+> import Control.Monad.Trans.State
+>
+> -- |
+> -- >>> execStateT partialEffects1 "foo"
+> -- !
+> -- ?
+> -- "foo!"
+> partialEffects1 :: StateT String IO ()
+> partialEffects1 = (liftIO (putStrLn "!") >> modify (++ "!"))
+>         `finally` (liftIO (putStrLn "?") >> modify (++ "?"))
+> ```
+>
+> doesn't output "foo!?" as one might expect, even though the finalizer block clearly gets executed. The reason for this is that MonadBaseControl encodes the non-IO effects as a pure value returned by the IO computation, but Control.Exception.finally :: IO a -> IO b -> IO a drops the b value returned by the finalizer, and so there is no way for Control.Exception.Lifted.finally to use that value to inject those non-IO effects back into the m computation.
+>
+> Another way in which MonadBaseControl may lose side-effects is when combining the effects of two computations. For example,
+>
+> import Control.Concurrent.Async.Lifted
+> import Control.Monad.Trans.State
+>
+> ```haskell
+> -- |
+> -- >>> execStateT partialEffects2 "foo"
+> -- "foo?"
+> partialEffects2 :: StateT String IO ()
+> partialEffects2 = modify (++ "!") `concurrently_` modify (++ "?")
+> ```
+>
+> doesn't output "foo!?" as one might expect, this time because the first computation's non-IO effects are injected back into the m by replacing the state with "foo!", and then the second computation's non-IO effects are injected back into the m by replacing that state with "foo?". Note that not all monad transformers inject their non-IO effects by overwriting the effects of previous computations; the following, for example, returns the expected result.
+>
+> ```haskell
+> -- |
+> -- >>> execWriterT fullEffects1
+> -- "!?"
+> fullEffects1 :: WriterT String IO ()
+> fullEffects1 = tell "!" `concurrently_` tell "?"
+> ```
+>
+> All right, let's look at UnliftIO next. Unlike MonadBaseControl, it never drops non-IO side-effects. That's because **it doesn't support any non-IO side-effects, so injecting the non-IO effects can never go wrong. You can't use StateT or WriterT, you must use IORefs instead.** Yeah, yeah, it does support ReaderT, but come on, that barely counts as an effect. One advantage of IORef over StateT is that their state changes persist when computations fail. One disadvantage, however, is that their state changes persist when computations fail. **Sometimes we want changes to persist, sometimes we don't! Monad transformers allow you to pick `ExceptT e (StateT s m)` or `StateT s (ExceptT e m)` depending on which behaviour you want, but UnliftIO forces you to pick the behaviour in which changes persist**. That's the drawback.
+>
+> Finally, let's look at your approach. You're splitting a computation's effects into the pre-IO effects, the IO effects, and the post-IO effects. That certainly covers many more effects than just ReaderT r IO. Does it help to avoid accidentally dropping non-IO side-effects? I think it does! I mean, it's certainly possible to use Split to implement a version of finally which drops some non-IO effects:
+>
+> ```haskell
+> finally' :: ( Applicative (Outer m), Applicative (Inner m)
+>             , Middle m ~ IO
+>             , Split m
+>             )
+>          => m a -> m b -> m a
+> finally' body finalizer = unsplit (liftA2 finally (split body) (split finalizer))
+>
+> -- |
+> -- >>> execStateT partialEffects3 "foo"
+> -- !
+> -- ?
+> -- "foo!"
+> partialEffects3 :: StateT String IO ()
+> partialEffects3 = (liftIO (putStrLn "!") >> modify (++ "!"))
+>        `finally'` (liftIO (putStrLn "?") >> modify (++ "?"))
+> ```
+>
+> But since Split is a lot less magical than MonadBaseControl, I think it should be relatively obvious to the implementers of finally' that if they don't apply the finalizer's post-IO side-effects, they're not going to happen.
+>
+> My only gripe so far is that the semantics are far from obvious. I was really surprised by the No instance for (Monoid Int) error, and even when the state does have a Monoid instance, I don't think
+>
+> ```haskell
+> -- |
+> -- >>> execStateT weirdEffects1 "foo"
+> -- "foo!foo?"
+> weirdEffects1 :: StateT String IO ((), ())
+> weirdEffects1 = modify (++ "!") `concurrently` modify (++ "?")
+> ```
+>
+> is the expected output. The ideal solution would be to be able to use StateT with withFile, because the effects occur one after the other, but not with concurrently. And Split makes that possible! We just need to be a little more careful with our choice of Inner and Outer. You reused (,) s's Applicative instance, but I think it would be better to define a newtype which only has a Functor instance.
 
 ## Others
 

@@ -1,0 +1,141 @@
+# Table
+
+store
+- `store_website`
+- `store_group`
+  - Foreign Key `website_id` = `store_website`.`website_id`
+- `store`
+  - Foreign Key `group_id` = `store_group`.`group_id`
+  - Foreign Key `website_id` = `store_website`.`website_id`
+
+customer
+- `customer_entity`
+  - Foreign Key `website_id` = `store_website`.`website_id`
+  - Foreign Key `store_id` = `store`.`store_id`
+- `customer_address_entity`
+  - Foreign Key `parent_id` = `customer_entity`.`entity_id`
+
+- `customer_address_entity_datetime`
+- `customer_address_entity_decimal`
+- `customer_address_entity_int`
+- `customer_address_entity_text`
+- `customer_address_entity_varchar`
+
+- `customer_eav_attribute`
+- `customer_eav_attribute_website`
+
+- `customer_entity_datetime`
+- `customer_entity_decimal`
+- `customer_entity_int`
+- `customer_entity_text`
+- `customer_entity_varchar`
+
+- `customer_form_attribute`
+- `customer_grid_flat`
+- `customer_group`
+- `customer_log`
+- `customer_visitor`
+
+sales order
+- `sales_order`
+  - Primary Key `entity_id`
+  - Foreign Key `customer_id` = `customer_entity`.`entity_id`
+  - Foreign Key `store_id` = `store`.`store_id`
+- `sales_order_aggregated_created`
+  - Primary Key `id`
+  - Foreign Key `store_id` = `store`.`store_id`
+- `sales_order_aggregated_updated`
+  - Primary Key `id`
+  - Foreign Key `store_id` = `store`.`store_id`
+- `sales_order_grid`
+  - Primary Key `entity_id`
+- `sales_order_tax`
+  - Primary Key `tax_id`
+- `sales_order_status`
+  - Primary Key `status`
+  - fields
+    - `sales_order_status_label`
+      - Primary Key (`status`, `store_id`)
+      - Foreign Key `status` = `sales_order_status`.`status`
+      - Foreign Key `store_id` = `store`.`store_id`
+    - `sales_order_status_state`
+      - Primary Key (`status`, `state`)
+      - Foreign Key `sales_order_status` = `sales_order_status`.`status`
+- `sales_invoice_grid`
+  - Primary Key `entity_id`
+- `sales_invoiced_aggregated`
+  - Primary Key `id`
+  - Foreign Key `store_id` = `store`.`store_id`
+- `sales_invoiced_aggregated_order`
+  - Primary Key `id`
+  - Foreign Key `store_id` = `store`.`store_id`
+- `sales_refunded_aggregated`
+  - Primary Key `id`
+  - Foreign Key `store_id` = `store`.`store_id`
+- `sales_refunded_aggregated_order`
+  - Primary Key `id`
+  - Foreign Key `store_id` = `store`.`store_id`
+- `sales_shipment_grid`
+- `sales_shipping_aggregated`
+  - Foreign Key `store_id` = `store`.`store_id`
+- `sales_shipping_aggregated_order`
+  - Foreign Key `store_id` = `store`.`store_id`
+- `sales_creditmemo_grid`
+- `sales_sequence_meta`
+  - fields
+    - `sales_sequence_profile`
+      - Foreign Key `meta_id` = `sales_sequence_meta`.`meta_id`
+- `sales_bestsellers_aggregated_daily`
+  - Foreign Key `store_id` = `store`.`store_id`
+- `sales_bestsellers_aggregated_monthly`
+  - Foreign Key `store_id` = `store`.`store_id`
+- `sales_bestsellers_aggregated_yearly`
+  - Foreign Key `store_id` = `store`.`store_id`
+- fields
+  - `sales_order_address`
+    - Primary Key `entity_id`
+    - Foreign Key `parent_id` = `sales_order`.`entity_id`
+  - `sales_order_status_history`
+    - Foreign Key `parent_id` = `sales_order`.`entity_id`
+  - `sales_order_item`
+    - Foreign Key `order_id` = `sales_order`.`entity_id`
+    - Foreign Key `store_id` = `store`.`store_id`
+    - fields
+      - `sales_order_tax_item` NOTE join table (`sales_order_item`, `sales_order_tax`)
+        - Foreign Key `item_id` = `sales_order_item`.`item_id`
+        - Foreign Key `tax_id` = `sales_order_tax`.`tax_id`
+        - Foreign Key `associated_item_id` = `sales_order_item`.`item_id` NOTE all NULL
+        - Unique Key (`item_id`, `tax_id`)
+  - `sales_invoice`
+    - Foreign Key `order_id` = `sales_order`.`entity_id`
+    - Foreign Key `store_id` = `store`.`store_id`
+    - fields
+      - `sales_invoice_comment`
+        - Foreign Key `parent_id` = `sales_invoice`.`entity_id`
+      - `sales_invoice_item`
+        - Foreign Key `parent_id` = `sales_invoice`.`entity_id`
+  - `sales_order_payment`
+    - Foreign Key `parent_id` = `sales_order`.`entity_id`
+    - fields
+      - `sales_payment_transaction`
+        - Foreign Key `order_id` = `sales_order`.`entity_id`
+        - Foreign Key `payment_id` = `sales_order_payment`.`entity_id`
+        - Foreign Key `parent_id` = `sales_payment_transaction`.`transaction_id` NOTE self-reference NOTE all null
+  - `sales_shipment`
+    - Foreign Key `order_id` = `sales_order`.`entity_id`
+    - Foreign Key `store_id` = `store`.`store_id`
+    - fields
+      - `sales_shipment_comment`
+        - Foreign Key `parent_id` = `sales_shipment`.`entity_id`
+      - `sales_shipment_item`
+        - Foreign Key `parent_id` = `sales_shipment`.`entity_id`
+      - `sales_shipment_track`
+        - Foreign Key `parent_id` = `sales_shipment`.`entity_id`
+  - `sales_creditmemo`
+    - Foreign Key `order_id` = `sales_order`.`entity_id`
+    - Foreign Key `store_id` = `store`.`store_id`
+    - fields
+      - `sales_creditmemo_comment`
+        - Foreign Key `parent_id` = `sales_creditmemo`.`entity_id`
+      - `sales_creditmemo_item`
+        - Foreign Key `parent_id` = `sales_creditmemo`.`entity_id`
