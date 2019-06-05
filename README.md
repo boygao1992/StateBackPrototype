@@ -4685,6 +4685,8 @@ data Day f g a
 > - 2012, Russell O'Conner, "Polymorphic Update with van Laarhoven Lenses" (http://r6.ca/blog/20120623T104901Z.html). 
 > - 2012, Edward Kmett, "Mirrored Lenses" (http://comonad.com/reader/2012/mirrored-lenses/).
 
+### 18.[Finding correct (lens) laws - Oleg Grenrus](http://oleg.fi/gists/posts/2018-12-12-find-correct-laws.html)
+
 
 ## Actor Model
 
@@ -5000,7 +5002,49 @@ TODO: graph representation by linear types
 >   - different characters with different font sizes
 >   - able to infer the bag of characters from the rendered size (scrollbar trick)
 
-### 2.[MDN - Cookie#Security](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#Security)
+### 2. Cookie
+
+[Cookie | MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#Security)
+
+> The `Set-Cookie` and `Cookie` headers
+> with every new request to the server, the browser will send back all previously stored cookies to the server using the Cookie header.
+
+> [Set-Cookie | MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie)
+> Set-Cookie:
+> {cookie-name}={cookie-value}
+> Expires={date}
+> Max-Age={number}
+> Domain={domain-value}
+> Path={path-value}
+> Secure
+> HttpOnly
+> SameSite=Strict
+
+
+> XSS
+> `HttpOnly` cookies are inaccessible to JavaScript's `Document.cookie` API; they are only sent to the server
+
+> CSRF
+> - GET endpoints should be idempotent (stateless)
+> - CSRF token should be unique per user and stored such that the server can look up the expected value when the request is sent
+> - Cookies that are used for sensitive actions (such as session cookies) should 
+>   - have a short lifetime 
+>   - with the `SameSite` attribute set to `Strict` or `Lax`.
+
+[Web security essentials - Sessions and cookies](https://www.sohamkamani.com/blog/2017/01/08/web-security-session-cookies/)
+
+[Protecting Your Cookies: HttpOnly](https://blog.codinghorror.com/protecting-your-cookies-httponly/)
+
+[SameSite cookies explained - Secure your site by learning how to explicitly mark your cross-site cookies. ](https://web.dev/samesite-cookies-explained)
+
+
+### 3. Open Web Application Security Project (OWASP)
+
+[OWASP Cheat Sheet Series](https://github.com/OWASP/CheatSheetSeries/tree/master/cheatsheets)
+
+[Cross-Site Request Forgery (CSRF)](https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF))
+
+[Cross-site Scripting (XSS)](https://www.owasp.org/index.php/Cross-site_Scripting_(XSS))
 
 ## Typed FSM
 
