@@ -3230,6 +3230,8 @@ To achieve human-level intelligence, learning machines need the guidance of a mo
 
 ## Haskell
 
+### 0. [Simon Peyton Jones | Microsoft Publication](https://www.microsoft.com/en-us/research/people/simonpj/)
+
 ### 1.[Three Layer Haskell Cake - To Overcome](http://www.parsonsmatt.org/2018/03/22/three_layer_haskell_cake.html)
 
 > Layer 1:
@@ -3290,6 +3292,7 @@ similar to `purescript-variant`
 ### 4.[Tying the Knot - Haskell Wiki](https://wiki.haskell.org/Tying_the_Knot)
 
 mutually recursive structure by laziness
+
 
 
 ## React
