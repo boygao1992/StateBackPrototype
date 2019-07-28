@@ -2721,6 +2721,13 @@ an area of mathematics primarily concerned with counting, both as a means and an
 
 
 ## Category Theory
+
+#### 1.[The n-Category Café](https://golem.ph.utexas.edu/category/)
+
+[A Graphical Calculus for Proarrow Equipments](https://golem.ph.utexas.edu/category/2017/08/a_graphical_calculus_for_proar.html)
+
+[Proarrow equipment in Hask](https://gist.github.com/sjoerdvisscher/340b567ac8cb062093d98217c551e849)
+
 ### Theory
 #### 1.[A Concise Course in Algebraic Topology](https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf)
 #### 2.[Abstract and Concrete Categories](http://katmat.math.uni-bremen.de/acc/acc.pdf)
@@ -4689,6 +4696,18 @@ data Day f g a
 > - 2012, Edward Kmett, "Mirrored Lenses" (http://comonad.com/reader/2012/mirrored-lenses/).
 
 ### 18.[Finding correct (lens) laws - Oleg Grenrus](http://oleg.fi/gists/posts/2018-12-12-find-correct-laws.html)
+
+### 19. Bartosz Lens Series
+
+[Lenses, Stores, and Yoneda](https://bartoszmilewski.com/2013/10/08/lenses-stores-and-yoneda/)
+
+[From Lenses to Yoneda Embedding](https://bartoszmilewski.com/2015/07/13/from-lenses-to-yoneda-embedding/)
+
+[Profunctor Polymorphism](https://bartoszmilewski.com/2016/08/16/profunctor-polymorphism/)
+
+[Profunctor Optics: The Categorical View](https://bartoszmilewski.com/2017/07/07/profunctor-optics-the-categorical-view/)
+
+[Promonads, Arrows, and Einstein Notation for Profunctors](https://bartoszmilewski.com/2019/03/27/promonads-arrows-and-einstein-notation-for-profunctors/)
 
 
 ## Actor Model

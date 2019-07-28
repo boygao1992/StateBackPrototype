@@ -1,18 +1,6 @@
 # Pure
-
 import Data.MemoTrie (memo)
-class HasTrie t where
-  data (:->:) t :: * -> *
-
-  tire :: (t -> a) -> t :->: a
-  untrie :: (t :->: a) -> t -> a
-  enumerate :: (t :->: a) -> [(t, a)]
 memo :: HasTrie t => (t -> a) -> t -> a
-memo = untrie <<< trie
-
-class Patch p where
-  type PatchTarget p :: *
-  apply :: p -> PatchTarget p -> Maybe (PatchTarget p)
 
 newtype Behavior (Pure t) a = Behavior (t -> a)
 newtype Event (Pure t) a = Event (t -> Maybe a)
@@ -44,3 +32,6 @@ pushCheap = push
 -- (t -> a) -> (t -> a)
 pull :: PullM (Pure t) a -> Behavior (Pure t) a
 pull = Behavior <<< memo
+
+-- merge :: GCompare k => DMap k (Event t) -> Event t (DMap k Identity)
+-- merge
