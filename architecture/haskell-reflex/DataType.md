@@ -69,4 +69,16 @@ data GOrdering a b where
 class GEq f => GCompare (f :: k -> *) where
   gcompare :: forall a b. f a -> f b -> GOrdering a b
 
+# Reflex
+
+newtype EventSelector t k = EventSelector
+  { -- | Retrieve the 'Event' for the given key.  The type of the 'Event' is
+    -- determined by the type of the key, so this can be used to fan-out
+    -- 'Event's whose sub-'Event's have different types.
+    --
+    -- Using 'EventSelector's and the 'fan' primitive is far more efficient than
+    -- (but equivalent to) using 'mapMaybe' to select only the relevant
+    -- occurrences of an 'Event'.
+    select :: forall v. k v -> Event t v
+  }
 
