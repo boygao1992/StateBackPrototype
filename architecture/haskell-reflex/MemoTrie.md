@@ -1,4 +1,12 @@
-# HasTrie
+[MemoTrie: Trie-based memo functions](https://hackage.haskell.org/package/MemoTrie)
+- [Conal Elloitt's Trie Series](http://conal.net/blog/tag/trie)
+- [Ralf Hinze - Generalizing Generalized Tries](http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.8.4069)
+
+[purescript-memoize](https://github.com/paf31/purescript-memoize)
+- [Conal Elloitt - talk-2014-elegant-memoization](https://github.com/conal/talk-2014-elegant-memoization/blob/master/README.md)
+- [Ralf Hinze - Memo functions, polytyically!](http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.43.3272)
+
+# MemoTrie
 
 ```haskell
 class HasTrie a where
@@ -69,7 +77,7 @@ instance (HasTrie a, HasTrie b) => HasTrie (a, b) where
         )
 ```
 
-# Containers
+## Containers
 
 ```haskell
 instance HasTrie a => HasTrie [a] where
@@ -103,7 +111,7 @@ instance HasTrie a => HasTrie [a] where
         (x:xs) -> Right (x, xs)
 ```
 
-# Primitive Types
+## Primitive Types
 
 ```haskell
 instance HasTrie Bool where
