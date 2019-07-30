@@ -5481,6 +5481,31 @@ main = do
 >
 > is the expected output. The ideal solution would be to be able to use StateT with withFile, because the effects occur one after the other, but not with concurrently. And Split makes that possible! We just need to be a little more careful with our choice of Inner and Outer. You reused (,) s's Applicative instance, but I think it would be better to define a newtype which only has a Functor instance.
 
+## Physics Engine
+
+### 1. [Simbody](https://simtk.org/projects/simbody/)
+### 2. [ODE (Open Dynamics Engine)](http://www.ode.org/)
+### 3. [Bullet](https://pybullet.org/wordpress/)
+### 4. [DART (Dynamic Animation and Robotics Toolkit)](http://dartsim.github.io/)
+### 5. [MuJoCo](http://mujoco.org/)
+### 6. [raisim](https://github.com/leggedrobotics/raisimLib)
+
+### 7. [GAZEBO](http://gazebosim.org/)
+
+Backend
+- ODE
+- Bullet
+- Simbody
+- DART
+
+## Ray Tracer
+
+### 1.[tracy](https://github.com/jtdaugherty/tracy)
+
+### 2.[Glome](https://github.com/jimsnow/glome)
+
+### 3.[HRay](https://wiki.haskell.org/The_Monad.Reader/Issue5/HRay:_A_Haskell_ray_tracer)
+
 ## Others
 
 ### 1.[To Dissect a Mockingbird: A Graphical Notation for the Lambda Calculus with Animated Reduction](http://dkeenan.com/Lambda/)
