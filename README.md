@@ -3300,7 +3300,7 @@ similar to `purescript-variant`
 
 mutually recursive structure by laziness
 
-
+### 5.[Weak Reference](http://hackage.haskell.org/package/base-4.12.0.0/docs/System-Mem-Weak.html)
 
 ## React
 
