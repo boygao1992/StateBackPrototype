@@ -219,8 +219,15 @@ cacheEvent e =
       !mSubscribedRef
         = unsafeNewIORef e (emptyFastWeak :: FastWeak a)
           where
+            -- NOTE Control.Monad.Primitive
+            -- in short: [IO/ST](http://dev.stephendiehl.com/hask/#iost)
+            -- in depth: [Primitive Haskell - FP Complete](https://haskell.fpcomplete.com/tutorial/primitive-haskell)
             unsafeNewIORef :: a -> b -> IORef b
             unsafeNewIORef a b = unsafePerformIO $ do
+              -- TODO GHC.Prim (touch# :: o -> State# RealWorld -> State# RealWorld)
+              -- NOTE the point of touch is to prevent premature GC
+              -- from [Behavior of touch#](https://mail.haskell.org/pipermail/glasgow-haskell-users/2014-December/025502.html)
+              -- NOTE [Deprecate touch and introduce with](https://github.com/haskell/primitive/issues/216)
               (touch :: Control.Monad.Primitive.PrimMonad m => a -> m ()) a
               newIORef b
 

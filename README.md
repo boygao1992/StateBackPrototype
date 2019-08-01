@@ -3302,6 +3302,10 @@ mutually recursive structure by laziness
 
 ### 5.[Weak Reference](http://hackage.haskell.org/package/base-4.12.0.0/docs/System-Mem-Weak.html)
 
+### 6.[The cost of weak pointers and finalizers in GHC](http://blog.ezyang.com/2014/05/the-cost-of-weak-pointers-and-finalizers-in-ghc/)
+
+### 7.[Stretching the storage manager: weak pointers and stable names in Haskell](http://simonmar.github.io/bib/papers/weak.pdf)
+
 ## React
 
 ### 1.[Simple React Patterns - Dealing With Side-Effects In React](http://lucasmreis.github.io/blog/simple-react-patterns/)
