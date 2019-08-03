@@ -116,24 +116,9 @@ newtype Behavior t a = Behavior (BehaviorM t a)
                 , parents ::
                     [ -- NOTE SomeBehaviorSubscribed t
                       exists a.
-                        ( forall p. BehaviorSubscribedHold -- NOTE (Hold t p)
-                            { value :: IORef (PatchTarget p)
-                            , invalidators :: IORef [Weak (Invalidator t)] -- NOTE rec
-                            , event :: Event t p -- NOTE This must be lazy, or holds cannot be defined before their input Events
-                            , parent ::
-                                IORef
-                                ( Maybe -- NOTE (EventSubscription t)
-                                  { unsubscribe :: IO ()
-                                  , subscribed :: -- NOTE EventSubscribed t
-                                      { heightRef :: IORef Height
-                                      , retained :: Any
-                                      }
-                                  }
-                                ) -- Keeps its parent alive (will be undefined until the hold is initialized) --TODO: Probably shouldn't be an IORef
-                            , nodeId :: Int -- NOTE debug
-                            }
-                        | BehaviorSubscribedPull (PullSubscribed t a) -- NOTE rec
-                        )
+                      ( forall p. BehaviorSubscribedHold (Hold t p) -- NOTE expanded below
+                      | BehaviorSubscribedPull (PullSubscribed t a) -- NOTE rec
+                      )
                     ] -- Need to keep parent behaviors alive, or they won't let us know when they're invalidated
                 }
               )
@@ -148,19 +133,44 @@ newtype Behavior t a = Behavior (BehaviorM t a)
           , subscribers :: !(WeakBag (Subscriber t a))
           , ownInvalidator ::  !(Invalidator t)
           , ownWeakInvalidator :: !(IORef (Weak (Invalidator t))) -- NOTE rec
-          , behaviorParents :: !(IORef [SomeBehaviorSubscribed t]) -- NOTE expanded above
+          , behaviorParents :: !(IORef [SomeBehaviorSubscribed t]) -- NOTE expanded below
           , parent :: !(Behavior t (Event t a)) -- NOTE rec
           , currentParent :: !(IORef (EventSubscription t)) -- NOTE expanded above
           , weakSelf :: !(IORef (Weak (SwitchSubscribed t a))) -- NOTE rec
           , nodeId :: Int -- NOTE debug
           }
       )
-    , IORef [SomeBehaviorSubscribed t] -- NOTE expanded above
+    , IORef
+        [ -- NOTE SomeBehaviorSubscribed t
+          exists a.
+            ( forall p. BehaviorSubscribedHold (Hold t p) -- NOTE expanded below
+            | BehaviorSubscribedPull -- NOTE (PullSubscribed t a)
+                { value :: a
+                , invalidators :: IORef [Weak (Invalidator t)] -- NOTE rec
+                , ownInvalidator :: Invalidator t -- NOTE rec
+                , parents :: [SomeBehaviorSubscribed t] -- NOTE rec -- Need to keep parent behaviors alive, or they won't let us know when they're invalidated
+                }
+            )
+        ]
     )
   , IORef
       [ -- NOTE SomeHoldInit t
-        exists p. Patch p =>
-          Hold t p -- NOTE expanded above
+        exists p. Patch p => -- NOTE Hold t p
+          { value :: IORef (PatchTarget p)
+          , invalidators :: IORef [Weak (Invalidator t)] -- NOTE rec
+          , event :: Event t p -- NOTE This must be lazy, or holds cannot be defined before their input Events
+          , parent ::
+              IORef
+              ( Maybe -- NOTE (EventSubscription t)
+                { unsubscribe :: IO ()
+                , subscribed :: -- NOTE EventSubscribed t
+                    { heightRef :: IORef Height
+                    , retained :: Any
+                    }
+                }
+              ) -- Keeps its parent alive (will be undefined until the hold is initialized) --TODO: Probably shouldn't be an IORef
+          , nodeId :: Int -- NOTE debug
+          }
       ]
   )
   -> IO a
@@ -330,3 +340,149 @@ cacheEvent e =
                   toAny = unsafeCoerce
 
           return (es, occ)
+
+# push
+
+pushCheap
+  :: forall t a b
+  . (a -> EventM t (Maybe b)) -- a -> IO (Maybe b)
+  -> Event t a -- Subscriber t a -> IO (Maybe a, {unsubscribe :: IO ()})
+  -> Event t b -- Subscriber t b -> IO (Maybe b, {unsubscribe :: IO ()})
+pushCheap !f (Event eventA) = Event \(subscriberB :: Subscriber t b) -> do
+  let
+    subscriberA :: Subscriber t a
+      = subscriberB
+        { propagate = \a -> do
+            (mb :: Maybe b) <- f a
+            traverse_ subscriberB.propagate mb
+        }
+  (subscription :: EventSubscription t, occA :: Maybe a)
+    <- eventA subscriberA
+  occB :: Maybe b
+    <- join <$> traverse f occA
+  return (subscription, occB)
+
+push
+  :: forall t a b
+  . HasSpiderTimeline t
+  => (a -> EventM t (Maybe b))
+  -> Event t a -> Event t b
+push f e = cacheEvent (pushCheap f e)
+
+# Pull
+
+type BehaviorEnv t =
+  ( Maybe ( Weak (Invalidator t)
+          , IORef [SomeBehaviorSubscribed t]
+          )
+  , IORef [SomeHoldInit t]
+  )
+newtype BehaviorM t a = BehaviorM (ReaderT (BehaviorEnv t) IO a)
+newtype Behavior t a = Behavior (BehaviorM t a)
+
+data Pull t a = Pull
+  { value :: !(IORef (Maybe (PullSubscribed t a)))
+  , compute :: !(BehaviorM t a)
+  , nodeId :: Int -- NOTE debug
+  }
+data PullSubscribed t a = PullSubscribed
+  { value :: !a
+  , invalidators :: !(IORef [Weak (Invalidator t)])
+  , ownInvalidator :: !(Invalidator t)
+  , parents :: ![SomeBehaviorSubscribed t] -- Need to keep parent behaviors alive, or they won't let us know when they're invalidated
+  }
+
+behaviorPull :: Pull x a -> Behavior x a
+behaviorPull !p = Behavior
+  $ (liftIO $ readIORef $ p.value :: IORef (Maybe (PullSubscribed t a)))
+  >>= \case
+    Just (subscribed :: PullSubscribed t a) -> do
+      askParentsRef >>= traverse_ \(r :: IORef [SomeBehaviorSubscribed t]) ->
+        liftIO $ modifyIORef' r
+          (SomeBehaviorSubscribed (BehaviorSubscribedPull subscribed) : _)
+        where
+          askParentsRef :: BehaviorM t (Maybe (IORef [SomeBehaviorSubscribed t]))
+          askParentsRef = do
+            (!m, _) :: BehaviorEnv t
+              <- BehaviorM ask
+            case m of
+              Nothing -> return Nothing
+              Just (_, !p :: IORef [SomeBehaviorSubscribed t]) ->
+                return $ Just p
+
+      askInvalidator >>= traverse_ \(wi :: Weak (Invalidator t)) ->
+        liftIO
+        $ modifyIORef'
+            (subscribed.invalidators :: IORef [Weak (Invalidator t)])
+            (wi : _)
+        where
+          askInvalidator :: BehaviorM t (Maybe (Weak (Invalidator t)))
+          askInvalidator = do
+            (!m, _) :: BehaviorEnv t
+              <- BehaviorM ask
+            case m of
+              Nothing -> return Nothing
+              Just (!wi :: Weak (Invalidator t), _) ->
+                return $ Just wi
+
+      liftIO $ touch $ subscribed.ownInvalidator :: Invalidator t
+      return $ subscribed.value :: a
+    Nothing -> do
+      i :: Invalidator t
+        <- liftIO $ newInvalidatorPull p
+        where
+          newInvalidatorPull :: Pull t a -> IO (Invalidator t)
+          newInvalidatorPull p = return $! InvalidatorPull p
+
+      wi :: Weak (Invalidator t)
+        <- liftIO $ mkWeakPtrWithDebug i "InvalidatorPull"
+        where
+          debugFinalize :: Bool
+          debugFinalize = False
+
+          mkWeakPtrWithDebug :: a -> String -> IO (Weak a)
+          mkWeakPtrWithDebug x debugNote = do
+            x' <- evaluate x
+            mkWeakPtr x' $
+              if debugFinalize
+              then Just $ putStrLn $ "finalizing: " ++ debugNote
+              else Nothing
+
+      parentsRef :: IORef [SomeBehaviorSubscribed t]
+        <- liftIO $ newIORef []
+
+      a <- do
+          holdInits :: IORef [SomeHoldInit t]
+            <- askBehaviorHoldInits
+            where
+              askBehaviorHoldInits :: BehaviorM t (IORef [SomeHoldInit t])
+              askBehaviorHoldInits = do
+                (_, !his) <- BehaviorM ask
+                return his
+          liftIO
+            $ runReaderT (unBehaviorM p.compute) :: BehaviorEnv t -> IO a
+            $ (Just (wi, parentsRef), holdInits)
+
+      invsRef :: IORef [Weak (Invalidator t)]
+        <- liftIO . newIORef . maybeToList
+        =<< (askInvalidator :: BehaviorM t (Maybe (Weak (Invalidator t))))
+
+      parents :: [SomeBehaviorSubscribed t]
+        <- liftIO $ readIORef parentsRef
+
+      let subscribed = PullSubscribed
+            { value = a
+            , invalidators = invsRef
+            , ownInvalidator = i
+            , parents = parents
+            }
+      liftIO $ writeIORef p.value $ Just subscribed
+      askParentsRef >>= mapM_ (\r -> liftIO $ modifyIORef' r (SomeBehaviorSubscribed (BehaviorSubscribedPull subscribed) :))
+      return a
+
+pull :: BehaviorM x a -> Behavior x a
+pull a = behaviorPull $ Pull
+  { value = unsafeNewIORef a Nothing
+  , compute = a
+  , nodeId = unsafeNodeId a -- NOTE debug
+  }

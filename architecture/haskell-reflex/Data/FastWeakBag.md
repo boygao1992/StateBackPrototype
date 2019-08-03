@@ -65,7 +65,7 @@ insert a (FastWeakBag nextId children) = do
                         v@(a',_) -> a' `seq` v
             b `seq` return b
   let
-    -- NOTE clearup is in WHNF
+    -- NOTE cleanup is in WHNF
     -- ~ IntMap.delete myId cs `seq` (IntMap.delete myId cs, ()) `seq` return ()
     -- NOTE the evaluation of () will trigger evaluation of (IntMap.delete myId cs)
     cleanup :: IO ()
