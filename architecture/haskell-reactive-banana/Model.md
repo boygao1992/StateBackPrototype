@@ -1,5 +1,7 @@
 # Model (Semantic)
 
+discrete-time signal function
+
 ## Types
 
 type Time = Int -- >= 0
@@ -13,14 +15,21 @@ newtype Event a = E (Moment (Maybe a)) -- NOTE Event is a special type of Behavi
   deriving newtype (Functor, Apply, Applicative, Bind, Monad, MonadFix)
 newtype EventSample a = ES [Maybe a] -- sampling of an Event function from Time = 0
 
+sampleEvent :: forall a. Event a -> EventSample a
+sampleEvent (E (M tma)) = tma <$> [0..]
+
 sampleEventHead :: forall a. Time -> Event a -> EventSample a
-sampleEventHead t = ES . take t . toEventSample
+sampleEventHead t = ES . take t . unES . sampleEvent
 
-toEventSample :: forall a. Event a -> EventSample a
-toEventSample (E (M tma)) = tma <$> [0..]
+valueE :: forall a. EventSample a -> Event a
+valueE (ES mas) = E $ M \t -> (mas ++ repeat Nothing) !! t
 
-fromEventSample :: forall a. EventSample a -> Event a
-fromEventSample (ES mas) = E $ M $ \t -> (mas ++ repeat Nothing) !! t
+sampleBehavior :: forall a. Behavior a -> BehaviorSample a
+sampleBehavior (B (M ta)) = BS $ ta <$> [0..]
+
+-- NOTE must be an infinite sample
+unsafeValueB :: forall a. BehaviorSample a -> Behavior a
+unsafeValueB (BS as) = B $ M \t -> as !! t
 
 eventSampleToBehaviorSample :: forall a. a -> EventSample a -> BehaviorSample a
 eventSampleToBehaviorSample init (ES mas) = BS $ go init mas
@@ -33,6 +42,15 @@ eventSampleToBehaviorSample init (ES mas) = BS $ go init mas
       in current : eventSampleToBehaviorSample current rest
     go _ [] = []
 
+eventToBehavior :: forall a. a -> Event a -> Behavior a
+eventToBehavior init
+  = unsafeValueB
+  . eventSampleToBehaviorSample init
+  . sampleEvent
+
+behaviorToEvent :: forall a. Behavior a -> Event a
+behaviorToEvent (B (M ta)) = E $ M \t -> Just $ ta t
+
 interpret
   :: forall a b
   . (Event a -> Event b)
@@ -42,7 +60,7 @@ interpret f (ES sampleA)
   = ES
   . sampleEventHead (length sampleA)
   . f
-  . fromEventSample
+  . valueE
 
 ## Instances
 
@@ -71,7 +89,7 @@ instance MonadFix Moment where
   mfix :: forall a. (a -> Moment a) -> Moment a
   mfix k = M $ mfix (unM . k :: a -> (Time -> a)) :: Time -> a
 
-## Operators
+## First-order Operators
 
 never :: forall a. Event a
 never = E $ M $ const Nothing
@@ -88,22 +106,65 @@ unionWith f e1 e2 = E $ M \t -> combine <$> e1 <*> e2
 filterJust :: forall a. Event (Maybe a) -> Event a
 filterJust (E (M tmma)) = E $ M $ join <$> tmma
 
-apply :: forall a b. Behavior (a -> b) -> Event a -> Event b
-apply (B mf) (E ma) = E $ (fmap <$> mf) <*> ma
+applyE :: forall a b. Behavior (a -> b) -> Event a -> Event b
+applyE (B mf) (E ma) = E $ (fmap <$> mf) <*> ma
 
 -- Forget all event occurences before a particular time
-forgetE :: forall a. Time -> EventSample a -> EventSample a
-forgetE t (ES as) = drop t as
+forgetES :: forall a. Time -> EventSample a -> EventSample a
+forgetES t (ES as) = drop t as
+
+valueB :: forall a. BehaviorSample a -> Behavior a
+valueB = unsafeValueB
+
+# Second-order Operators
 
 -- TODO convolution using Comonad extend
 stepper :: forall a. a -> Event a -> Behavior (Behavior a)
 stepper init e0 = B $ M $ \t ->
   let
-    es0 = toEventSample e0
-    es1 = replicate t (Just init) ++ forgetE t es0
-    (BS bs1) = eventSampleToBehaviorSample init es1
+    es0 = sampleEvent e0
+    (ES mas) = forgetES t es0
+    es1 = ES $ replicate t (Just init) ++ mas
+    bs = eventSampleToBehaviorSample init es1
   in
-    B $ M $ \t -> bs1 !! t
+    unsafeValueB bs
 
--- accumE :: forall a. a -> Event (a -> a) -> Behavior (Event a)
--- accumE init (E (M tmf)) =
+accumE :: forall a. a -> Event (a -> a) -> Behavior (Behavior a)
+accumE init e1 = mdo
+  let (e2 :: Event a) = ( (\a f -> f a) <$> b :: Behavior ((a -> a) -> a) ) `applyE` e1
+  b :: Behavior a
+    <- stepper init e2
+  pure e2
+
+observeE :: Event (Behavior a) -> Event a
+observeE = (E (M tmB)) = E $ M \t ->
+  let
+    mB = tmB t
+  in
+    (\ta -> ta t) . unB <$> mB
+
+diagonalB :: Behavior (Behavior a) -> Behavior a
+diagonalB (B (M tB)) = B $ M \t ->
+  let
+    (B (M ta)) = tB t
+  in
+    ta t
+
+forgetDiagonalE :: Event (Event a) -> Event (EventSample a)
+forgetDiagonalE (E (M tmE)) = E $ M \t ->
+  let
+    mE = tmE t
+    mES = forgetES t . sampleEvent <$> mE
+  in
+    mES
+
+switchE :: Event (Event a) -> Behavior (Event a)
+switchE eE =
+  let (E (M tES)) = forgetDiagonalE eE
+  in B $ M \t -> valueE $ tES t
+
+switchB :: Behavior a -> Event (Behavior a) -> Behavior (Behavior a)
+switchB initB eB
+  = diagonalB
+  <$> stepper initB eB :: Behavior (Behavior (Behavior a))
+
