@@ -4714,6 +4714,7 @@ data Day f g a
 [Promonads, Arrows, and Einstein Notation for Profunctors](https://bartoszmilewski.com/2019/03/27/promonads-arrows-and-einstein-notation-for-profunctors/)
 
 
+
 ## Actor Model
 
 ### 1.[Inconsistency Robustness - Carl Hewitt, John Woods](https://www.amazon.com/Inconsistency-Robustness-Studies-Logic-Hewitt/dp/1848901593)
@@ -5509,6 +5510,17 @@ Backend
 ### 2.[Glome](https://github.com/jimsnow/glome)
 
 ### 3.[HRay](https://wiki.haskell.org/The_Monad.Reader/Issue5/HRay:_A_Haskell_ray_tracer)
+
+## Datatype Generic Programming
+
+### 1.[Scrap Your Boilerplate: A Practical Design Pattern for Generic Programming](https://www.microsoft.com/en-us/research/wp-content/uploads/2003/01/hmap.pdf)
+
+### 2.[Scrap Your Boilerplate with Class: Extensible Generic Functions](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/07/gmap3.pdf)
+
+### 3.[Uniform Boilerplate and List Processing (Scrap your Scary Types)](https://ndmitchell.com/downloads/paper-uniform_boilerplate_and_list_processing-30_sep_2007.pdf)
+
+### 4.[Functor is to Lens as Applicative is to Biplate: Introducing Multiplate](https://arxiv.org/abs/1103.2841)
+
 
 ## Others
 
