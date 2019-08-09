@@ -5517,9 +5517,11 @@ Backend
 
 ### 2.[Scrap Your Boilerplate with Class: Extensible Generic Functions](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/07/gmap3.pdf)
 
-### 3.[Uniform Boilerplate and List Processing (Scrap your Scary Types)](https://ndmitchell.com/downloads/paper-uniform_boilerplate_and_list_processing-30_sep_2007.pdf)
+### 3.[(Compos) A pattern for almost compositional functions](https://dl.acm.org/citation.cfm?doid=1159803.1159834)
 
-### 4.[Functor is to Lens as Applicative is to Biplate: Introducing Multiplate](https://arxiv.org/abs/1103.2841)
+### 4.[(Uniplate) Uniform Boilerplate and List Processing (Scrap your Scary Types)](https://ndmitchell.com/downloads/paper-uniform_boilerplate_and_list_processing-30_sep_2007.pdf)
+
+### 5.[(Multiplate) Functor is to Lens as Applicative is to Biplate: Introducing Multiplate](https://arxiv.org/abs/1103.2841)
 
 
 ## Others
