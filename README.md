@@ -2083,8 +2083,34 @@ a DSL for RDP
 
 ### 44.[Anthony Daniels, A Semantics of Functions and Behaviours, 1999](http://www.cs.nott.ac.uk/Research/fop/daniels-thesis.pdf)
 
-> Chapter 9: Complete Formal Semantics
+> Chapter 8: Complete Formal Semantics
 > in typed lambda-calculus or PCF (Programming Computable Functions)
+
+#### 8.3 Explicit typing
+
+> the only purpose of **type annotations in terms** is 
+> to simplify the process of driving typing judgments
+> , whereas a typing judgment provides all the type information necessary to interpret a term.
+
+> So the process of deriving a valid typing judgment for a term is a necessary part of interpreting the term semantically. 
+> However, the process is completely routine, because 
+> with the help of the type annotations on bound variables 
+> it is possible to obtain a valid typing judgment 
+> using a simple **bottom up** approach.
+> **Annotating bound variables** is the **minimum typing information** that must be present, for arbitrary terms, to enable **explicit typing**.
+> if the leaves have unique types then by induction all finite terms have unique types.
+
+> Type checking would be more difficult without explicit types for bound variables, and in fact many programs would have more than one valid typing judgment
+> e.g. identity function `λx.x : θ -> θ` where ` ∀θ ∈ Type`
+> This is not the case with explicit typing, as we shall now prove.
+
+> Theorem 8.1 Uniqueness of Typing Judgments
+
+> Figure 8.2: A bottom up type checking algorithm
+> T : Context ⨯ Term -> Type
+
+#### 8.4 Semantics of non-behavior terms
+> terms of simply typed lambda calculus with a recursion operator
 
 
 ## Self-adjusting Computation (SAC)
