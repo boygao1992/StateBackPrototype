@@ -101,12 +101,12 @@ I guess they want to keep the shape of all `render` functions unified (`render :
       1. carry the context to the child component. but the child component will need to be augmented for all its `Query` (bad)
       2. instead of `Query` the child component as a sealed state machine, use the child's state transition function (which is stateless) as a service. but then the parent need to make extra `Query`s to get child components' states, and the child components' should have their state transition functions factored out of `eval` function like in Elm
       3. stop using `Output` mechanism. Instead, augment child component's `Query` if there is a clear `Output` to the parent, similar to how parent `Query` for child's state: `data Query next = Query1 Input (Output -> next)` where `Output -> next` is an event handler (all of them are hacky, but this might be the best solution so far)
-    
+
 
 - Parent/Container component has all types of child components encoded in its Type (`Halogen.ParentHTML Query ChildQuery ChildSlot m`), i.e.
   - `ChildQuery`: a coproduct of all `Query` algebra functors (through `Coproduct :: (Type -> Type) -> (Type -> Type) -> Type`) from child components,
   - `ChildSlot`: a coproduct of all `Slot` types (through `Either :: Type -> Type -> Type` or by a tagged union) of child components.
-  
+
 
 ## CycleJS
 
@@ -245,7 +245,7 @@ Actors communicating with each other through channels is basically saying that i
 
 But the network itself is not part of the program as a monolithic state machine, which means either the network is static, or the evolution of the network can not be traced by the state history.
 
-Post-censor is expressible but too hard to implement in this model because of the implicit state in all the channels with a buffer. 
+Post-censor is expressible but too hard to implement in this model because of the implicit state in all the channels with a buffer.
 
 The benefit of channels is that the wiring between senders and receivers has less manual coordination and thus less error-prone.
 
@@ -309,7 +309,7 @@ However, if the system requires certain degree of fault tolerance, the card info
 
 ##### Hierarchical Finite State Machine (HFSM)
 HFSM requires a horizontal split on the state space and construct state transition functions in each subspace.
-When constructing the HFSM, a vertical split is conducted first and some of the state transition functions from the horizontal split can be reused directly or with slight modification (usually parametrized) across these vertically partitioned subspaces, which will reduce a fair amount of boilerplate in code base. 
+When constructing the HFSM, a vertical split is conducted first and some of the state transition functions from the horizontal split can be reused directly or with slight modification (usually parametrized) across these vertically partitioned subspaces, which will reduce a fair amount of boilerplate in code base.
 
 ##### Behavior Tree (BT)
 State space is hierarchically classified into subspaces using vertical splits.
@@ -406,7 +406,7 @@ Refined the behavior of each widget by adding guards to fulfill local constraint
   - modify the local behavior of some widgets
   - replace some widgets entirely by other implementations
   - extra behaviors on a group of widgets (may get packed into a new container)
-  
+
 ### Indexing / Classification Strategy
 
 #### Staged Computation / action decomposition (Hierarchical State Machines)
@@ -589,13 +589,13 @@ For isomorphic control, the number of DOF should exactly match the dimensionalit
 
 If the gap between the number of DOF given by the input devices and the required number for control parameters is too large, we need to reduce the required DOF for user input.
 One common technique is to introduce the derivative (difference per frame) of a continuously varying variable to the state vector and to map the value of 1DOF in controllers' state to that derivative to indirectly modify the state of the system.
-The system will maintain the two-way constraints between the variables and their derivatives. 
+The system will maintain the two-way constraints between the variables and their derivatives.
 Thus, we can switch between different derivatives and change their values by only investing 1DOF in controllers' state.
 To stop changing a variable, simply assign the derivative of that variable to 0.
 
 ## Hot-Swappable Input (Device) Mapping Profile
 
-Mapping between 
+Mapping between
 - pre-defined events in virtual input components / physical input devices
 - events in the event-driven system
 
@@ -636,7 +636,7 @@ I guess Global Clock is better for animation.
 ### Free / CoFree
 #### 1.[Free from Tree & Halogen VDOM](https://www.youtube.com/watch?v=eKkxmVFcd74)
 
-Core primitives to model any recursive types, which means you can build Mu/Nu (fixed-point data type) out of Free/CoFree. 
+Core primitives to model any recursive types, which means you can build Mu/Nu (fixed-point data type) out of Free/CoFree.
 Mathematically equivalent but may not be optimal for performance because of the structural overhead (e.g. extra wrapping which takes more memory and of course extra unwrapping).
 It's like trading performance for generality so that you can get all the operators for free.
 
@@ -953,7 +953,7 @@ An architecture with M **clients**, invoking N **remote operations**/actions whi
 I would personally support any approach where:
 - operations are explicit (machine readable contracts, generated clients)
 - an interface can change while remaining compatible (when possible) with existing consumers which are not immediately interested in consuming that change (that should limit the number of versions in production to 3 or less)
-- an architecture where operations are not hard wired to the systems of record since you want to be in the position to 
+- an architecture where operations are not hard wired to the systems of record since you want to be in the position to
   - control how changes from the systems of record propagate to the operation's contract
   - add new systems of record in the future without asking your clients to change anything
 
@@ -976,7 +976,7 @@ Personally, I prefer a "Service-Oriented" approach where the consistency respons
 
 ### 1.[Debugging Go Routine leaks](https://blog.minio.io/debugging-go-routine-leaks-a1220142d32c)
 
-Daily code optimization using benchmarks and profiling in Golang - Gophercon India 2016 talk - 
+Daily code optimization using benchmarks and profiling in Golang - Gophercon India 2016 talk -
 [article](https://medium.com/@hackintoshrao/daily-code-optimization-using-benchmarks-and-profiling-in-golang-gophercon-india-2016-talk-874c8b4dc3c5)
 / [youtube](https://www.youtube.com/watch?v=-KDRdz4S81U)
 
@@ -1163,7 +1163,7 @@ all common markups explained by examples
 - Attribute Ends With Selector: `[attribute$="value"]`, Select all elements with an attribute value that ends with specific characters
 - Attribute Wildcard Selector: `[attribute*="value"]`, Select all elements with an attribute value that contains specific characters anywhere
 
-1. `plate` 
+1. `plate`
 2. `bento`
 3. `#fancy`
 4. `plate apple`
@@ -1211,9 +1211,9 @@ Object composition.
 
 > **Separating Layout and Style**
 > The Style Elements library makes layout a first class idea, which makes working with style and layout a breeze.
-> It also makes refactoring your style feel similarly invincible as refactoring in Elm! 
-> The main idea is that layout should live in your view, and your stylesheet should deal with all properties except those relating to layout, position, sizing, and spacing. 
-> The `Element` module contains all the components that go in your view. 
+> It also makes refactoring your style feel similarly invincible as refactoring in Elm!
+> The main idea is that layout should live in your view, and your stylesheet should deal with all properties except those relating to layout, position, sizing, and spacing.
+> The `Element` module contains all the components that go in your view.
 > The `Style` module is the base for creating your stylesheet.
 
 
@@ -1303,7 +1303,7 @@ The action of Conditional depends on the value of the token that arrives from B:
 
 Processes in a PN are called **Coroutines**.
 
-Blocking reads and nonblocking writes. Such interaction between processes is called **Rendezvous**. 
+Blocking reads and nonblocking writes. Such interaction between processes is called **Rendezvous**.
 
 Boundness of buffers and deadlock are also undecidable.
 
@@ -1392,7 +1392,7 @@ the actor solution in the article makes an ad-hoc partition on the global state 
 ![causal commutative arrows](./doc/from-Euterpea-video.png "Causal Commutative Arrows")
 
 ### 2. Causal Commutative Arrows and Their Optimization
-[Paper](http://haskell.cs.yale.edu/wp-content/uploads/2012/06/FromJFP.pdf) 
+[Paper](http://haskell.cs.yale.edu/wp-content/uploads/2012/06/FromJFP.pdf)
 [Youtube](https://vimeo.com/6652662)
 
 Causal Commutative Normal Form(CCNF):
@@ -1400,8 +1400,8 @@ Causal Commutative Normal Form(CCNF):
 - Transition only based on abstract laws without committing to any particular implementation.
 
 ### 3. Causal Commutative Arrows Revisited
-[Paper](https://www.cl.cam.ac.uk/~jdy22/papers/causal-commutative-arrows-revisited.pdf) 
-[Youtube](https://www.youtube.com/watch?v=bnFHYsL4QNc) 
+[Paper](https://www.cl.cam.ac.uk/~jdy22/papers/causal-commutative-arrows-revisited.pdf)
+[Youtube](https://www.youtube.com/watch?v=bnFHYsL4QNc)
 [Github](https://github.com/yallop/causal-commutative-arrows-revisited)
 
 ### 4. [Yampa](https://wiki.haskell.org/Yampa#Primitive_signal_functions)
@@ -1451,9 +1451,9 @@ Classic FRP Event Examples:
 
 FRP Variants
 - Classic FRP
-  e.g. Fran, FrTime 
+  e.g. Fran, FrTime
 - Push-pull FRP
-  e.g. reactive 
+  e.g. reactive
 - Arrowized FRP
   e.g. Yampa, Elera
 
@@ -1516,7 +1516,7 @@ able to build highly configurable computations that can respond to reconfigurati
 lack of history-sensitivity, thus less suitable UI
 suitable for efficient on-line algorithms that could be updated efficiently when the problem changes in a small way.
 
-easy to reason about, all an SAC computation is doing is incrementalizing an otherwise ordinary functional program. 
+easy to reason about, all an SAC computation is doing is incrementalizing an otherwise ordinary functional program.
 full equational reasoning if avoid effects within SAC computation.
 
 #### History sensitivity for SAC
@@ -1607,7 +1607,7 @@ stateful behaviors
 
 Behavior<Behavior<A>> : a behavior of a behavior is like a value that depends on two moments in time. This makes sense for scan because the result of accumulating depends both on when we start accumulating and where we are now.
 
-To get rid of the extra layer of nesting we often use sample. 
+To get rid of the extra layer of nesting we often use sample.
 It has the type (b: Behavior<A>) => Now<A>.
 ``` javascript
 const count = sample(scan((acc, inc) => acc + inc, 0, incrementStream));
@@ -1683,7 +1683,7 @@ Therefore `sf` is analogous to a sequential circuit.
 
 [HW Solutions](https://github.com/izzyleung/Principles-Of-Reactive-Programming)
 
-### 30. Reactive Programming Tutorial in Scala + GWT. Signal. 
+### 30. Reactive Programming Tutorial in Scala + GWT. Signal.
 
 [Part 1](http://www.kazachonak.com/2012/06/reactive-programming-tutorial-in-scala.html)
 
@@ -1771,7 +1771,7 @@ pure f =
 > `(>>>)` is just reverse function composition
 > ```haskell
 > (>>>) :: SF a b -> SF b c -> SF a c
-> sf1 >>> sf2 
+> sf1 >>> sf2
 >   =
 >     \s ->
 >       \t ->
@@ -1803,7 +1803,7 @@ first sf =
       let
         (a,c) = s t
              -- sf :: Signal a -> Signal b = (Time -> a) -> (Time -> b)
-        b = (sf 
+        b = (sf
               -- supply sf with a constant signal :: Time -> a
               (\_ -> a)) t
       in
@@ -1819,7 +1819,7 @@ sf1 &&& sf2 =
         c = (sf2 s) t
       in
         (b,c)
-  
+
 loop :: SF (a,c) (b,c) -> SF a b
 ```
 
@@ -1974,7 +1974,7 @@ lift :: (a -> b) -> Signal a -> Signal b
 
 TODO: `Time`
 ```elm
-type alias Time = 
+type alias Time =
     Float
 ```
 > Using the Time constants instead of raw numbers is very highly recommended.
@@ -2001,7 +2001,7 @@ remove continuous `Signal`
 > RDP is stateless logic on a stateful grid
 
 > declarative effects
-> For a small subset of effects, 
+> For a small subset of effects,
 > that have nice properties - e.g. **idempotence, commutativity, monotonicity**
 > one can achieve equational reasoning and refactoring on par with the very best pure, law abiding programming models.
 > This includes state, video, music, sensor networks, control systems, user interface.
@@ -2010,14 +2010,14 @@ remove continuous `Signal`
 > RDP's effect model was inspired from a symmetric observer effect in physics and psychology: one cannot observe a system without influencing its behavior.
 > Demands are represented as long-lived signals. Signal processing is local, modular, and composable. Treating the signals as a set is essential for RDP's spatial idempotence and commutativity.
 
-> RDP is a **bidirectional dataflow** model. 
-> In addition to receiving values, every downstream client is also pushing values upstream: parameters. 
-> The cost of supporting bidirectional dataflow and effects on externals is RDP must abandon the illusion of "instantaneous" dataflow. 
+> RDP is a **bidirectional dataflow** model.
+> In addition to receiving values, every downstream client is also pushing values upstream: parameters.
+> The cost of supporting bidirectional dataflow and effects on externals is RDP must abandon the illusion of "instantaneous" dataflow.
 Asynchronous/Concurrent dataflow
 
 > weaknesses
 > - must use a point-free style for RDP behaviors
-> - ideally need robust, monotonic, well synchronized clocks 
+> - ideally need robust, monotonic, well synchronized clocks
 why, if concurrent already? For built-in scheduler?
 > - Performance of dynamic behaviors is poor
 >   designed with an assumption of having very few, relatively stable 'layers' of dynamic behavior, e.g. for staged metaprogramming
@@ -2025,31 +2025,31 @@ why, if concurrent already? For built-in scheduler?
 #### Domain Model
 
 
-> - Resources 
-> might broadly be classed into sensors, actuators, state, and services. 
-> Specific examples include keyboard, mouse, joystick, webcam, microphone, monitor, speaker, filesystem, databases, network, printers. By nature, resources are external to RDP, but may be accessed by RDP behaviors. 
-> Resources cannot be created in RDP: there is no equivalent to OOP new. 
+> - Resources
+> might broadly be classed into sensors, actuators, state, and services.
+> Specific examples include keyboard, mouse, joystick, webcam, microphone, monitor, speaker, filesystem, databases, network, printers. By nature, resources are external to RDP, but may be accessed by RDP behaviors.
+> Resources cannot be created in RDP: there is no equivalent to OOP new.
 > However, resources may be dynamically discovered at runtime, and clever manipulations of stateful resources (such as a filesystem) can model creation in terms of discovery (e.g. by computing a unique filename).
 
 Drivers, IO handling
 
-> - Behaviors 
-> describe computation-rich data plumbing between resources. 
-> Some behaviors will represent access to a resource, providing a capability to observe or influence it. 
-> But the majority of behaviors in an RDP application are often simple data plumbing and pure transforms (cf. Sirea.Behavior). 
-> RDP behaviors cannot accumulate state; all state is kept in external resources. 
-> A simple, linear behavior might gain a joystick signal from GLFW, transform that signal into controls for a robotic arm, bcross over to a partition representing the robot resource, then push the signal to the robotic arm. (getJoyData >>> bfmap joyToRobotArmCtrl >>> bcross >>> controlArm). 
+> - Behaviors
+> describe computation-rich data plumbing between resources.
+> Some behaviors will represent access to a resource, providing a capability to observe or influence it.
+> But the majority of behaviors in an RDP application are often simple data plumbing and pure transforms (cf. Sirea.Behavior).
+> RDP behaviors cannot accumulate state; all state is kept in external resources.
+> A simple, linear behavior might gain a joystick signal from GLFW, transform that signal into controls for a robotic arm, bcross over to a partition representing the robot resource, then push the signal to the robotic arm. (getJoyData >>> bfmap joyToRobotArmCtrl >>> bcross >>> controlArm).
 > RDP can express many independently concurrent behaviors, e.g. using |*|. Behaviors can be dynamic, i.e. there is a behavior to evaluate behaviors (beval).
 
 internal representation of external state
 
-> - Signals 
-> describe values as they change over time. 
-> Those values typically represent states - e.g. the position of a mouse, frames from a webcam, content for a video display. 
-> Future states are not entirely predictable, so signals must be updated over time. 
-> Propagating those updates and transforming the signals are the primary roles of behaviors. 
-> It is not possible to observe a signal's history, and consequently signals are constrained by durations of explicit, active observation. 
-> For example, a signal describing the position of a joystick is only active while a behavior is actively observing it. 
+> - Signals
+> describe values as they change over time.
+> Those values typically represent states - e.g. the position of a mouse, frames from a webcam, content for a video display.
+> Future states are not entirely predictable, so signals must be updated over time.
+> Propagating those updates and transforming the signals are the primary roles of behaviors.
+> It is not possible to observe a signal's history, and consequently signals are constrained by durations of explicit, active observation.
+> For example, a signal describing the position of a joystick is only active while a behavior is actively observing it.
 > Behaviors cannot create or destroy signals, but can manipulate existing signals in flexible ways.
 
 internal state
@@ -2088,14 +2088,14 @@ a DSL for RDP
 
 #### 8.3 Explicit typing
 
-> the only purpose of **type annotations in terms** is 
+> the only purpose of **type annotations in terms** is
 > to simplify the process of driving typing judgments
 > , whereas a typing judgment provides all the type information necessary to interpret a term.
 
-> So the process of deriving a valid typing judgment for a term is a necessary part of interpreting the term semantically. 
-> However, the process is completely routine, because 
-> with the help of the type annotations on bound variables 
-> it is possible to obtain a valid typing judgment 
+> So the process of deriving a valid typing judgment for a term is a necessary part of interpreting the term semantically.
+> However, the process is completely routine, because
+> with the help of the type annotations on bound variables
+> it is possible to obtain a valid typing judgment
 > using a simple **bottom up** approach.
 > **Annotating bound variables** is the **minimum typing information** that must be present, for arbitrary terms, to enable **explicit typing**.
 > if the leaves have unique types then by induction all finite terms have unique types.
@@ -2310,17 +2310,17 @@ lead me to the idea of unifying `Monoid`, `Category`(<= `Semigroupoid`), `Monad`
 #### 10. [Alt, Plus, and Alternative](http://www.tomharding.me/2017/04/24/fantas-eel-and-specification-10/)
 
 > `Alt`: `Functor`-level `Semigroup`
-> You can do [database connection failover](https://gist.github.com/i-am-tom/9651cd1e95443c4cbf3953429e988b07), [API/resource routing](https://github.com/slamdata/purescript-routing/blame/master/GUIDE.md#L96-L102), and, most magically of all, [text parsing](https://github.com/purescript/purescript/blob/master/src/Language/PureScript/Parser/Declarations.hs#L161-L169). 
+> You can do [database connection failover](https://gist.github.com/i-am-tom/9651cd1e95443c4cbf3953429e988b07), [API/resource routing](https://github.com/slamdata/purescript-routing/blame/master/GUIDE.md#L96-L102), and, most magically of all, [text parsing](https://github.com/purescript/purescript/blob/master/src/Language/PureScript/Parser/Declarations.hs#L161-L169).
 > The key thing all these cases have in common is that you want to try something **with a contingency plan for failure**.
 > `Plus`: `Functor`-level `Monoid`
 > `Alternative`: `Plus` and `Applicative`
 > - Distributivity: `x.ap(f.alt(g)) === x.ap(f).alt(x.ap(g))`
 > - Annihilation: `x.ap(A.zero()) === A.zero()`
-> You’ll often hear `Alternative` types described as `monoid`-shaped `applicative`s, and this is a good intuition. 
+> You’ll often hear `Alternative` types described as `monoid`-shaped `applicative`s, and this is a good intuition.
 > We talked about `of` as being the `identity` of `Applicative`, but this is only at context-level.
 > For an `Alternative` type, `zero` is the `identity` value at context- and value-level.
 
-### 5. A functional approach to building React applications. 
+### 5. A functional approach to building React applications.
 [Part 1 - Deconstructing the React Component](https://jaysoo.ca/2017/04/30/learn-fp-with-react-part-1/)
 
 [Part 2 - The Reader monad and read-only context](https://jaysoo.ca/2017/05/10/learn-fp-with-react-part-2/)
@@ -2394,7 +2394,7 @@ Regarding "inspection", building a structure out of a free Applicative rather th
 [Categorical Semantics for Arrows](http://homepages.inf.ed.ac.uk/cheunen/publications/2008/arrows/arrows.pdf)
 
 > There are different notions of computation, the most popular being monads, applicative functors, and arrows.
-> In this article we show that these three notions can be seen as monoids in a monoidal category. 
+> In this article we show that these three notions can be seen as monoids in a monoidal category.
 
 > Arrows have been recently shown to be strong monoids in a monoidal category of profunctors by Jacobs et al.
 
@@ -2402,12 +2402,12 @@ Regarding "inspection", building a structure out of a free Applicative rather th
 
 #### Background - Analysis of Expressive Programs: Applicative
 > The difference between applicatives and monads is that with applicatives, you can see what those components are before you run the program.
-> You don’t know what their results will be, but you can at least see what they’re going to try to do. 
+> You don’t know what their results will be, but you can at least see what they’re going to try to do.
 ```haskell
 (,) <$> getUsername userId1 <*> getUsername userId2
-``` 
+```
 > It could in principle batch both calls into one SQL query.
-> the thing being analyzed is static for the duration of the analysis, so for all intents and purposes, it’s **static analysis**. 
+> the thing being analyzed is static for the duration of the analysis, so for all intents and purposes, it’s **static analysis**.
 ```haskell
 class (Functor t, Foldable t) => Traversable t where
   traverse :: Applicative f => (a -> f b) -> t a -> f (t b)
@@ -2415,8 +2415,8 @@ class (Functor t, Foldable t) => Traversable t where
 instance Traversable [] where
   traverse _ [] = pure []
   traverse f (a:as) = (:) <$> f a <*> traverse f as
-``` 
-> This allows you to iterate applicative effects over collections of data whose size and shape are unknown. 
+```
+> This allows you to iterate applicative effects over collections of data whose size and shape are unknown.
 > If the applicative is capable of analyzing those components, then using `traverse` allows that applicative to analyze any arbitrary sequence of components.
 > In the case of `traverse getUsername ids`, you could imagine the applicative building one big long SQL query that gets the usernames for a bunch of IDs in one go.
 
@@ -2492,8 +2492,8 @@ dimap :: (c → a) → (b → d) → (a → b) → (c → d)
 > 5 Applicative versus Monad?
 > One situation where the full power of monads is not always required is parsing,
 > although only certain pairs of monads are composable, the Applicative class is closed under composition
-> For example, both `Maybe ◦ IO` and `IO ◦ Maybe` are applicative: 
-> `IO ◦ Maybe` is an applicative functor in which computations have a notion of ‘failure’ and ‘prioritised choice’, even if their ‘real world’ side-effects cannot be undone. 
+> For example, both `Maybe ◦ IO` and `IO ◦ Maybe` are applicative:
+> `IO ◦ Maybe` is an applicative functor in which computations have a notion of ‘failure’ and ‘prioritised choice’, even if their ‘real world’ side-effects cannot be undone.
 > Note that `IO` and `Maybe` may also be composed as monads (**though not vice versa**), but the applicative functor determined by the composed monad differs from the composed applicative functor: the binding power of the monad allows the second `IO` action to be aborted if the first returns a failure.
 
 > 6 Applicative functors and Arrows
@@ -2795,19 +2795,19 @@ an area of mathematics primarily concerned with counting, both as a means and an
 > The logic takes the form of tools we can use to make and understand objects using others.
 > In turn, the existence of these tools can be seen as axioms for a suitable category.
 
-> Lawvere had noticed before his Hegelian turn (I think) that these axioms can be encoded using adjunctions. 
-> The cartesian product is right adjoint to the diagonal functor which duplicates each object and arrow, and the coproduct is the corresponding left adjoint. 
-> The internal hom is defined as a right adjoint to the functor which takes a fixed cartesian product. 
+> Lawvere had noticed before his Hegelian turn (I think) that these axioms can be encoded using adjunctions.
+> The cartesian product is right adjoint to the diagonal functor which duplicates each object and arrow, and the coproduct is the corresponding left adjoint.
+> The internal hom is defined as a right adjoint to the functor which takes a fixed cartesian product.
 
-> The basic idea of a unity of opposites is that in order to entertain any idea, you need to be able to entertain its opposite; otherwise, your idea is vacuous in the sense that it could apply to anything. 
+> The basic idea of a unity of opposites is that in order to entertain any idea, you need to be able to entertain its opposite; otherwise, your idea is vacuous in the sense that it could apply to anything.
 
-> In fact, Hegel's first unity of opposites is just that: the unity of the opposition between vacuity (applying to nothing) and tautology (applying to anything). 
-> This is his unity between Nothing and Being. 
-> He explains this as something like: to even talk of Nothing is to consider it as a thing, and to make it be. 
-> But it is a thing with no characteristics, a pure Being. 
+> In fact, Hegel's first unity of opposites is just that: the unity of the opposition between vacuity (applying to nothing) and tautology (applying to anything).
+> This is his unity between Nothing and Being.
+> He explains this as something like: to even talk of Nothing is to consider it as a thing, and to make it be.
+> But it is a thing with no characteristics, a pure Being.
 > On the other hand, pure Being has no characteristics either, it simply is; thus it is contentless, and therefore Nothing.
 
-> Lawvere's interpretation of this opposition is to see Nothing as the initial object ∅ and Being as the terminal object 1 since in a category of spaces -- e.g. a topos or at least an extensive category -- ∅ is an empty space and 1 is a single point. These are opposite in the sense that they are distinct (and intuitively, very distinct), but are unified in that they are the left and right adjoints of the same functor. 
+> Lawvere's interpretation of this opposition is to see Nothing as the initial object ∅ and Being as the terminal object 1 since in a category of spaces -- e.g. a topos or at least an extensive category -- ∅ is an empty space and 1 is a single point. These are opposite in the sense that they are distinct (and intuitively, very distinct), but are unified in that they are the left and right adjoints of the same functor.
 
 #### 2.[Hegel's "Logic" as Modal Type Theory - nLab, Urs Schreiber](https://ncatlab.org/nlab/show/Hegel's+"Logic"+as+Modal+Type+Theory)
 > While analytic philosophy famously rejected the speculative metaphysics of Hegel in favor of the analysis of concepts by means of mathematical logic, in particular predicate logic,
@@ -2839,7 +2839,7 @@ OOP: class-based Single Dispatch (Function Dispatch doesn't enforce subtyping)
 
 Visitor Pattern: reverse caller-callee once called for a extra Single Dispatch, called Double Dispatch
  (two calls: A call B to get subtype of A, then B call A to get subtype of B, then the end function have subtypes from both A and B)
- 
+
 Strong coupling between concrete Visitor classes and subtypes of B.
 (Adding/Removing subtypes from B will cause a reimplementation of Visitor.)
 
@@ -2877,7 +2877,7 @@ OOP: Void, lead to functions not pure nor composable.
 > - Can NOT have its own type class instances
 > - When pattern matching against data constructor, behaves the same as original type
 > - Used to create higher level concept based on existing type with the same set of supported operations (example: String is [Char])
-    
+
 C# only supports `type` with `using`
 
 4. Advanced Pattern Matching
@@ -2914,7 +2914,7 @@ It also often **hides layout details** under abstraction layers, while a data-or
 
 ### 3.[One Weird Trick to Write Better Code](http://etodd.io/2015/09/28/one-weird-trick-better-code/)
 
-Rather than inheriting functionality, Unity entities are just bags of components. 
+Rather than inheriting functionality, Unity entities are just bags of components.
 
 [Data first, not code first - Hacker News](https://news.ycombinator.com/item?id=10291688)
 
@@ -3054,7 +3054,7 @@ Rather than inheriting functionality, Unity entities are just bags of components
 > When we think about objects, we immediately think of trees— inheritance trees, containment trees, or message-passing trees, and our data is naturally arranged that way. As a result, when we perform an operation on an object, it will usually result in that object in turn accessing other objects further down in the tree. Iterating over a set of objects performing the same operation generates cascading, totally different operations at each object (see Figure 1a).
 
 > To achieve the best possible data layout, it’s helpful to break down each object into the different components, and group components of the same type together in memory, regardless of what object they came from. This organization results in large blocks of homogeneous data, which allow us to process the data sequentially (see Figure 1b).
-> A key reason why data-oriented design is so powerful is because it works very well on large groups of objects. 
+> A key reason why data-oriented design is so powerful is because it works very well on large groups of objects.
 >
 > OOP, by definition, works on a single object.
 >
@@ -3088,7 +3088,7 @@ Operational Semantics vs. Denotational Semantics
 
 > Put differently, while OO and FP are statements about program organization , **reactivity** is a statement about program behavior on update. These are essentially orthogonal issues, enabling reactivity to be added to existing languages.
 
-> Thus **event-driven** programming is another cross-cutting notion that is independent of and orthogonal to the program’s organization 
+> Thus **event-driven** programming is another cross-cutting notion that is independent of and orthogonal to the program’s organization
 > — rather, it is a statement about the program’s relationship with its operating environment.
 
 > 4 Notional Machines
@@ -3097,12 +3097,12 @@ Operational Semantics vs. Denotational Semantics
 
 Complexity of state management
 
-> Notional machines are a useful lens through which to explore the complexities of reasoning about state (program behavior in the presence of mutation). 
+> Notional machines are a useful lens through which to explore the complexities of reasoning about state (program behavior in the presence of mutation).
 > Stateful programming has been taken by many as a sine qua non of programming education.
 > At the same time, numerous studies show that students struggle with this concept, both as novices and as upper-level students (through interactions between state and other language features), while students working in non-stateful paradigms sometimes perform well on problems that are challenging in stateful context.
 > Taken together, these observations make **comparative studies between stateful and non-stateful** features one of the most significant **understudied** topics in computing education.
 
-> If state is so challenging for students to learn, why is it so popular in introductory contexts? 
+> If state is so challenging for students to learn, why is it so popular in introductory contexts?
 > Purely as a language feature (setting aside pedagogy for a moment), state has many benefits:
 > - It provides cheap communication channels between different parts of a program.
 > - It trades off persistence for efficiency.
@@ -3195,7 +3195,7 @@ interface inheritance with instance carried
 diamond problem / multiple inheritance in type class hierarchy
 
 Both `Traversable` and `Monad` are `Functor`.
-When defining `Traversable-and-Monad` 
+When defining `Traversable-and-Monad`
 Using subtyped implicits to encode type classes in Scala does not enforce one unique `Functor` instance for both `Traversable` and `Monad`
 `ambiguous implicit values`: implicit resolver does not know which `Functor` instance to choose
 
@@ -3274,9 +3274,9 @@ To achieve human-level intelligence, learning machines need the guidance of a mo
 
 > Layer 1:
 ```haskell
-newtype AppT m a 
-    = AppT 
-    { unAppT :: ReaderT YourStuff m a 
+newtype AppT m a
+    = AppT
+    { unAppT :: ReaderT YourStuff m a
     } deriving (Functor, Applicative, Monad, etc)
 ```
 
@@ -3429,7 +3429,7 @@ Refactoring into smaller pieces
 
 > Health warning
 
-> Having nested child modules is a sign that your Elm application is complex and potentially over-engineered. 
+> Having nested child modules is a sign that your Elm application is complex and potentially over-engineered.
 > There are perfectly valid reasons for doing so and this package will help you when this is the case.
 > However, you may also consider re-factoring your application to get rid of the nesting and simplify your design.
 
@@ -3448,7 +3448,7 @@ Refactoring into smaller pieces
 > The core Dict/Set implementations only allows keys of `comparable` type. (This includes `Int`, `Float`, `Time`, `Char`, `String`, and `Tuple`s or `List`s of `comparable` types.)
 > This implementation builds off the core implementation but allows the user to provide their own comparer function for ordering the keys.
 
-> 
+>
 ```elm
 {-| Convert an association list into a dictionary using the given comparer.
 -}
@@ -3525,7 +3525,7 @@ Metric
 
 ### 4.[Is timeless UI design a thing?](https://www.imaginarycloud.com/blog/timeless-classic-ui-design/amp/)
 > Sometimes you need your product out really quick because you know it will lose its timing very soon, so you just want to bank now.
-> In that case, you don't need to go for timeless and trendproof. 
+> In that case, you don't need to go for timeless and trendproof.
 > In other cases, you should want your design to last long because the longer it lasts, the more established it becomes.
 
 > The Swiss Style: Functionality is timeless.
@@ -3540,8 +3540,8 @@ Metric
 ### 7.[The Encyclopedia of Human-Computer Interaction, 2nd Ed.](https://www.interaction-design.org/literature/book/the-encyclopedia-of-human-computer-interaction-2nd-ed)
 
 > 6.3.2 Ecological perception theory
-> Two important concepts within Gibson's theory are affordances and effectivities. 
-> This approach, and more specifically affordances, has been introduced to design by Donald Norman (1988) and the present authors (Smets et al, 1988; Smets and Overbeeke, 1994). 
+> Two important concepts within Gibson's theory are affordances and effectivities.
+> This approach, and more specifically affordances, has been introduced to design by Donald Norman (1988) and the present authors (Smets et al, 1988; Smets and Overbeeke, 1994).
 
 > 6.4 Accumulated principles of industrial design
 
@@ -3619,7 +3619,7 @@ Metric
 > [karthik/wesanderson - A Wes Anderson color palette for R (for data visualization)](https://github.com/karthik/wesanderson)
 > [Color Palette Generator (from photos)](https://www.degraeve.com/color-palette/)
 
-> 2d. Color compositions: Learn from others 
+> 2d. Color compositions: Learn from others
 >   - Color Palette Libraries/Communities
 >     - [Color Hunt](https://www.datawrapper.de/privacy)
 >     - [Color Drop](https://colordrop.io/)
@@ -3764,9 +3764,9 @@ This operator-like data structure is a tree / `Free`.
 > Programmer X. Another additional parameter. Another new conditional.
 > Loop until code becomes incomprehensible.
 
-> Existing code exerts a powerful influence. 
+> Existing code exerts a powerful influence.
 > Its very presence argues that it is both correct and necessary.
-> We know that code represents effort expended, and we are very motivated to preserve the value of this effort. 
+> We know that code represents effort expended, and we are very motivated to preserve the value of this effort.
 > And, unfortunately, the sad truth is that the more complicated and incomprehensible the code, i.e. the deeper the investment in creating it, the more we feel pressure to retain it (the "sunk cost fallacy").
 
 > If you find yourself in this situation, resist being driven by sunk costs. When dealing with the wrong abstraction, the fastest way forward is back. Do the following:
@@ -3813,7 +3813,7 @@ Automaton
     - reset
 
 > 2.9.1 Weak and Strong Preemption
-> a transition is 
+> a transition is
 > - weak when it is inspected at the end of the reaction
 >   - the condition determines the active state of the next reaction
 > - strong when it is made immediately, at the beginning of the reaction
@@ -3845,7 +3845,7 @@ Automaton
 ### 3.[Are lambda calculus and combinatory logic the same?](https://cstheory.stackexchange.com/questions/267/are-lambda-calculus-and-combinatory-logic-the-same)
 
 > What distinguishes combinatory logic is that it is **variable free**.
-> Combinators and variants were used to implement graph reduction for lazy languages 
+> Combinators and variants were used to implement graph reduction for lazy languages
 > Be careful: Haskell and ghc aren't the same, and the literature contains several supercombinator-based Haskells. But it's true, the state-of-the art in functional programming has found the efficiency advantages of handling environments that outweigh its complexity. You still see supercombinators used, e.g., in higher-order logic programming, where this is not true. Supercombinators remain part of the inventory of techniques used in implementing higher-order programming.
 
 ### 4.[Free variables and bound variables - Wikipedia](https://en.wikipedia.org/wiki/Free_variables_and_bound_variables)
@@ -3853,7 +3853,7 @@ Automaton
 > a **free variable** is a notation that specifies places in an expression where substitution may take place.
 > a placeholder (a symbol that will later be replaced by some literal string), or a wildcard character that stands for an unspecified symbol.
 
-> A **bound variable** is a variable that was previously free, but has been bound to a specific value or set of values called domain of discourse or universe. 
+> A **bound variable** is a variable that was previously free, but has been bound to a specific value or set of values called domain of discourse or universe.
 
 > In *computer programming*, the term free variable refers to variables used in a function that are **neither local variables nor parameters** of that function.
 
@@ -3867,7 +3867,7 @@ Automaton
 
 > `y(f) = f(f(f(f(f(f(f(f(f(f(f(f(f(...)))))))))))))` => `y(f) = f(y(x))`
 
-> `y(f) = x(x)(f)`, for some other function `x`. 
+> `y(f) = x(x)(f)`, for some other function `x`.
 > In simpler terms, `y = x(x)` — `y` is `x` applied to itself.
 
 > ```javascript
@@ -3910,7 +3910,7 @@ Automaton
 >
 > ```
 
-> By applying `x` to itself, we avoid self-reference in the function body. 
+> By applying `x` to itself, we avoid self-reference in the function body.
 > Everything the function needs to run comes from its parameters.
 
 > ```javascript
@@ -3941,9 +3941,9 @@ Automaton
 Without worrying about the strict evaluation, make it point-free:
 ```javascript
 const y = (
-  x => 
-    f => 
-      f(x(x)(f)) 
+  x =>
+    f =>
+      f(x(x)(f))
 )(
   x =>
     f =>
@@ -3955,10 +3955,10 @@ Original definition by Haskell B. Curry:
 `Y := λf.(λx.f (x x)) (λx.f (x x))`
 
 ```javascript
-const y = 
+const y =
   f =>
     (
-      x => 
+      x =>
         f(x(x))
     )(
       x =>
@@ -3995,9 +3995,9 @@ Point-free style works fine for sequential data transformation (without branchin
 
 > Obfuscated programming languages (see below for links) are typically made nasty by either strongly restricting the set of allowed operations in the language, or making them very different from what programmers are used to, or both. (Of course, the goal is to do that while still being Turing-complete.)
 
-> Despite Unlambda being a form of the lambda calculus, it does not have a lambda (abstraction) operation. 
-> Rather, this operation must be replaced by the use of the S, K and I combinators — this can be done mechanically using abstraction elimination. 
-> Because there is no abstraction, functions are not named in Unlambda (except the builtin ones): there are no variables or such thing. 
+> Despite Unlambda being a form of the lambda calculus, it does not have a lambda (abstraction) operation.
+> Rather, this operation must be replaced by the use of the S, K and I combinators — this can be done mechanically using abstraction elimination.
+> Because there is no abstraction, functions are not named in Unlambda (except the builtin ones): there are no variables or such thing.
 
 ### 9.[Combinatory Logic - Stanford Encyclopedia of Philosophy](https://plato.stanford.edu/entries/logic-combinatory/#ExisFixePoinCombComp)
 
@@ -4005,13 +4005,13 @@ Point-free style works fine for sequential data transformation (without branchin
 
 > Schönfinkel proved that 𝖲 and 𝖪 suffice to define the other combinators he introduced, and we mentioned in the definition of CL▹ that the set of constants is limited to 𝖲 and 𝖪, because other combinators could be defined from those.
 
-> Fixed point theorem. For any function M, there is a term N such that MN=N. 
+> Fixed point theorem. For any function M, there is a term N such that MN=N.
 
 > Both **Haskell B. Curry** and **Alan Turing** defined fixed point combinators (in CL or in the λ-calculus).
 > If we consider the definitions
 > - `𝖸1=𝖡𝖬(𝖡𝖶𝖡)`
 > - `𝖸2=𝖶(𝖡(𝖡𝖶(𝖡𝖳)))(𝖶(𝖡(𝖡𝖶(𝖡𝖳))))`
-> we can see that `𝖸1M=M(𝖸1M)`, but for `𝖸2`, `𝖸2M▹M(𝖸2M)` holds too. 
+> we can see that `𝖸1M=M(𝖸1M)`, but for `𝖸2`, `𝖸2M▹M(𝖸2M)` holds too.
 > In this respect, `𝖸1` is similar to **Curry**'s fixed point combinator (and really, to any fixed point combinator),
 > whereas `𝖸2` is like **Turing**'s fixed point combinator.
 
@@ -4021,13 +4021,13 @@ Point-free style works fine for sequential data transformation (without branchin
 > Consequently, domain theory can be considered as a branch of order theory.
 > The field has major applications in computer science, where it is used to specify **denotational semantics**, especially for functional programming languages.
 > Domain theory formalizes the intuitive ideas of approximation and convergence in a very general way and has close relations to **topology**.
-> An alternative important approach to denotational semantics in computer science is that of metric spaces. 
+> An alternative important approach to denotational semantics in computer science is that of metric spaces.
 
 > Using again just the syntactic transformations available in this formalism, one can obtain so called fixed-point combinators (the best-known of which is the Y combinator);
-> these, by definition, have the property that f(Y(f)) = Y(f) for all functions f. 
+> these, by definition, have the property that f(Y(f)) = Y(f) for all functions f.
 ### 11.[Brouwer fixed-point theorem](https://en.wikipedia.org/wiki/Brouwer_fixed-point_theorem)
 
-> It states that for any continuous function f mapping a compact convex set to itself there is a point x0 such that f ( x0 ) = x0. 
+> It states that for any continuous function f mapping a compact convex set to itself there is a point x0 such that f ( x0 ) = x0.
 
 ### 12.[Haskell / Denotational Semantics](https://en.wikibooks.org/wiki/Haskell/Denotational_semantics)
 
@@ -4048,8 +4048,8 @@ Point-free style works fine for sequential data transformation (without branchin
 
 > ``` haskell
 > fix :: (a -> a) -> a
-> fix f = 
->     let x = f x 
+> fix f =
+>     let x = f x
 >      in x
 > ```
 
@@ -4063,8 +4063,8 @@ Point-free style works fine for sequential data transformation (without branchin
 
 > ```haskell
 > cosFixpoint x =
->     fix (\f b -> 
->             if cos b == b 
+>     fix (\f b ->
+>             if cos b == b
 >                then b
 >                else f (cos b)
 >          ) x
@@ -4154,7 +4154,7 @@ fib :: Number a => [a]
 fib = 1 : 1 : zipWith (+) fib (tail fib)
 ```
 
-> From the point of view of using infinite lists, 
+> From the point of view of using infinite lists,
 > it's `sum` that's badly behaved, and `sumSoFar` that's well behaved.
 ```haskell
 sum :: Number a => [a] -> a
@@ -4190,11 +4190,11 @@ data [a] -- data List a
 > - The possibly infinite lists form the **largest** possible solution.
 
 > We could use the keyword
-> - data to mean the smallest solution 
+> - data to mean the smallest solution
 > - codata to mean the largest solution
 
-> The rule is: you're only allowed to use 
-> - **structural recursion** with **data** 
+> The rule is: you're only allowed to use
+> - **structural recursion** with **data**
 > - **guarded recursion** with **codata**
 
 > to prove that a **structurally recursive** program terminates we use **induction**.
@@ -4207,11 +4207,11 @@ data [a] -- data List a
 
 [Bisimulation - Wikipedia](https://en.wikipedia.org/wiki/Bisimulation)
 > In theoretical computer science a bisimulation is a binary relation between **state transition systems**, associating systems that behave in the same way in the sense that one system simulates the other and vice versa.
-> Intuitively two systems are bisimilar if they match each other's moves. In this sense, each of the systems cannot be distinguished from the other by an observer. 
+> Intuitively two systems are bisimilar if they match each other's moves. In this sense, each of the systems cannot be distinguished from the other by an observer.
 
 Axiom of Foundation in Set theory makes it impossible to construct infinitely-nested set thus induction (structural recursion) works fine.
 
-> But if we decide to use a non-standard variation of set theory where the Axiom of Foundation doesn't hold we can no longer use recursion. 
+> But if we decide to use a non-standard variation of set theory where the Axiom of Foundation doesn't hold we can no longer use recursion.
 > For example the **Axiom of Extension** says that two sets are equal if their elements are equal.
 > This is a recursive definition, but it's useless in the presence of a set a such that `a ∈ a`. At this point mathematicians need a principle of coinduction.
 
@@ -4256,7 +4256,7 @@ Axiom of Foundation in Set theory makes it impossible to construct infinitely-ne
 ### 8. [A couple of quick questions about recursion-schemes](https://www.reddit.com/r/haskell/comments/3q0w7a/a_couple_of_quick_questions_about_recursionschemes/)
 
 catamorphism <-> structural recursion <-> data
-anamorphism 
+anamorphism
 
 ### 9.[Codata and Comonads in Haskell - Richard B. Kieburtz](https://pdfs.semanticscholar.org/cbbc/1323b634101208dbaf84c5660e305784a4b7.pdf)
 
@@ -4273,12 +4273,12 @@ anamorphism
 > I don't know of any word denoting data/codata-ness.
 
 > `gelisam`:
-> To help intuition, let's use `ListF` for `f`. The type `Mu (ListF a)` is thus the type of finite lists, and `Nu (ListF a)` is the type of possibly-infinite lists. 
+> To help intuition, let's use `ListF` for `f`. The type `Mu (ListF a)` is thus the type of finite lists, and `Nu (ListF a)` is the type of possibly-infinite lists.
 > **Agda** distinguishes data and codata
 > allowing recursion on data but not on codata because the recursion must be on a value which is considered smaller
 
 > The brilliance of `Mu` is that a value of type `Mu (ListF a)` is itself a recursion principle.
-> Suppose you want to write a function which recursively examines all the elements of a finite list in order to produce a value of type r. You'll have to write a case for `Nil`, returning an `r`, and a case for `Cons`, combining the head with the r you have recursively computed for the tail. In other words, you need to write a function `f` of type `ListF a r -> r`. The value of type `Mu (ListF a)` is itself represented by a polymorphic function of type `forall r. (ListF a r -> r) -> r`, to which you can pass `f`, and the polymorphic function will recursively apply your `f` to all the elements of the list it represents. 
+> Suppose you want to write a function which recursively examines all the elements of a finite list in order to produce a value of type r. You'll have to write a case for `Nil`, returning an `r`, and a case for `Cons`, combining the head with the r you have recursively computed for the tail. In other words, you need to write a function `f` of type `ListF a r -> r`. The value of type `Mu (ListF a)` is itself represented by a polymorphic function of type `forall r. (ListF a r -> r) -> r`, to which you can pass `f`, and the polymorphic function will recursively apply your `f` to all the elements of the list it represents.
 > This is brilliant, because it solves two problems at once!
 > 1. by hiding the recursion inside a function, it solves the problem of convincing Agda to allow recursive calls on `Mu (ListF a)`,
 > because even though the polymorphic function behaves like a recursive function, a call to this function is not itself considered a recursive call.
@@ -4377,7 +4377,7 @@ higher-order functors
 - `type Expr = HFix ExprF`
 - `hfmap :: forall f g h. (forall a. f a -> g a) -> (forall a. h (f a) -> h (g a))`
   - `h(f a)` ~ `(h . f) a` functor composition
-  
+
 ```haskell
 class HFunctor (h :: (* -> *) -> * -> *) where
   hfmap :: (f :~> g) -> h f :~> h g
@@ -4397,7 +4397,7 @@ data Expr a where
 
 problem solved by GADT over ADT Sum Type
 - all data constructors for an ADT Sum Type share the same type-level representation
-- if the interpreter of the data structure requires extra type information for each case (when pattern matching each data constructor), it's not achievable by ADT 
+- if the interpreter of the data structure requires extra type information for each case (when pattern matching each data constructor), it's not achievable by ADT
 ```purescript
 data ADT
   = Case1 Int
@@ -4641,7 +4641,7 @@ data Day f g a
 
 > Prism: A Prism is a tool which optionally converts elements of type A into elements of type B and back.
 
-> Lens: A Lens is a functional concept which solves a very common problem: how to easily update a complex immutable structure, for this purpose Lens acts as a zoom into a record. 
+> Lens: A Lens is a functional concept which solves a very common problem: how to easily update a complex immutable structure, for this purpose Lens acts as a zoom into a record.
 
 > Optional: A Optional is a weaker Lens and a weaker Prism.
 
@@ -4711,12 +4711,12 @@ data Day f g a
 
 ### 17.[Code Examples and Notes for my talk on Functional References (Lenses and such) at the Santa Monica Haskell Meetup](https://github.com/friedbrice/lenses-talk)
 
-> Further Learning 
-> - Simon Peyton Jones, "Lenses: compositional data access and manipulation" (https://skillsmatter.com/skillscasts/4251-lenses-compositional-data-access-and-manipulation). 
-> - Brian McKenna, "Productionisation of Functional Optics" (https://www.youtube.com/watch?v=H01dw-BMmlE). 
+> Further Learning
+> - Simon Peyton Jones, "Lenses: compositional data access and manipulation" (https://skillsmatter.com/skillscasts/4251-lenses-compositional-data-access-and-manipulation).
+> - Brian McKenna, "Productionisation of Functional Optics" (https://www.youtube.com/watch?v=H01dw-BMmlE).
 > - Gabrial Gonzalez, "lens-tutorial" (http://hackage.haskell.org/package/lens-tutorial).
 >
-> Notable Haskell Lens Libraries 
+> Notable Haskell Lens Libraries
 > - Edward Kmett, "lens" (https://hackage.haskell.org/package/lens).
 > - Russell O'Connor, Michael Thompson, "lens-simple" (http://hackage.haskell.org/package/lens-simple).
 > - Edward Kmett, Artyom Kazak, "microlens" (http://hackage.haskell.org/package/microlens).
@@ -4727,7 +4727,7 @@ data Day f g a
 > - 2008, Edward A. Kmett, Russell O'Connor, Tony Morris, "data-lens" (http://hackage.haskell.org/package/data-lens).
 > - 2008, Conal Elliott, "Semantic editor combinators" (http://conal.net/blog/posts/semantic-editor-combinators).
 > - 2009, Twan van Laarhoven, "CPS based functional references" (https://www.twanvl.nl/blog/haskell/cps-functional-references).
-> - 2012, Russell O'Conner, "Polymorphic Update with van Laarhoven Lenses" (http://r6.ca/blog/20120623T104901Z.html). 
+> - 2012, Russell O'Conner, "Polymorphic Update with van Laarhoven Lenses" (http://r6.ca/blog/20120623T104901Z.html).
 > - 2012, Edward Kmett, "Mirrored Lenses" (http://comonad.com/reader/2012/mirrored-lenses/).
 
 ### 18.[Finding correct (lens) laws - Oleg Grenrus](http://oleg.fi/gists/posts/2018-12-12-find-correct-laws.html)
@@ -4791,7 +4791,7 @@ Direct Logic Reasoning and Actor Model
 > were finally incorporated into the real number system without violating any of the usual rules of arithmetic.
 
 > in the 1970s
-> new developments in the category theory led to the creation of 
+> new developments in the category theory led to the creation of
 > **smooth infinitesimal analysis**, a rigorous axiomatic theory of nilsquare and non-punctiform infinitesimals.
 
 > all functions in $\mathbb{S}$ are continuous
@@ -4925,7 +4925,7 @@ TODO: `/modulization/Monad-Transformer_vs_Class-Mixin.md`
 [The Operational Monad Tutorial](http://themonadreader.wordpress.com/2010/01/26/issue-15/)
 
 - represent monadic operators as data by GADT
-  - able to write optimizers around the data/operational representation of the program 
+  - able to write optimizers around the data/operational representation of the program
   - and pre-process the program before execution/interpretation
 - write separate interpreters to carry out the actual computation
 
@@ -4954,7 +4954,7 @@ interpret (Pure c) stack = c
 
 - note that the interpreter is a recursive function
   - with free monad, we can factor out the recursion to be a generic function `foldFree`
-  
+
 - **Monadic Parser Combinators**
 
 - **Connection with the Continuation Monad**
@@ -5006,14 +5006,14 @@ TODO: graph representation by linear types
 ### 5.[When the fancy technique that seems relevant is the wrong tool (a note of caution on zippers)](https://pchiusano.github.io/2014-08-12/zippers-not-useful.html)
 
 > Can you write a JSON library that uses zippers? Sure. Is it the best tool for that goal? Probably not. Our industry is full of people wasting time solving hard problems created artificially, which could be solved trivially or sidestepped entirely just by revisiting earlier assumptions.
-> Perhaps it is of theoretical interest that certain problems can be solved with zippers, but zippers per se, in their specific instantiation, are rarely (I won’t say never) the best solution to a problem. 
+> Perhaps it is of theoretical interest that certain problems can be solved with zippers, but zippers per se, in their specific instantiation, are rarely (I won’t say never) the best solution to a problem.
 
 > David Barbour:
 > linear typed programming: with generic data structures that may contain linear types, you can't really copy data... but you can break them apart and stick them back together after removing or inserting a few elements. Zippers are great for almost any form of generic programming with linear types.
 
 > runarorama:
 > A path means you navigate the tree from the root every time which is O(n) in the length of your path. For a small tree, that's alright I suppose. But what if you have a large tree, or a cyclic graph?
-> The idea of the zipper is simply that a "path" is a delimited continuation that lets you access the target of that path in O(1). Every path comes "pre-traversed". 
+> The idea of the zipper is simply that a "path" is a delimited continuation that lets you access the target of that path in O(1). Every path comes "pre-traversed".
 > The XMonad zipper is cyclic, so the movements don't return Maybe.
 
 ### 6.[purescript-argonaut-traversals](https://github.com/purescript-contrib/purescript-argonaut-traversals)
@@ -5087,8 +5087,8 @@ TODO: graph representation by linear types
 > CSRF
 > - GET endpoints should be idempotent (stateless)
 > - CSRF token should be unique per user and stored such that the server can look up the expected value when the request is sent
-> - Cookies that are used for sensitive actions (such as session cookies) should 
->   - have a short lifetime 
+> - Cookies that are used for sensitive actions (such as session cookies) should
+>   - have a short lifetime
 >   - with the `SameSite` attribute set to `Strict` or `Lax`.
 
 [Web security essentials - Sessions and cookies](https://www.sohamkamani.com/blog/2017/01/08/web-security-session-cookies/)
@@ -5251,11 +5251,11 @@ the examples do not utilize the power of Monad (control of computation based on 
 >
 > parseArbitrary :: (String -> Bool) -> Parser ()
 > parseArbitrary p =
->       (eof <* guard' (p [])) 
->   <|> foldr (<|>) parserZero 
->         (map (\c -> char c *> 
+>       (eof <* guard' (p []))
+>   <|> foldr (<|>) parserZero
+>         (map (\c -> char c *>
 >                     parseArbitrary (p . (c:)) -- recursion
->              ) 
+>              )
 >              ['a'..'z']
 >         )
 > ```
@@ -5265,7 +5265,7 @@ the examples do not utilize the power of Monad (control of computation based on 
 > We have constructed an infinite grammar: each node in the tree corresponds to a production, one for every possible input prefix.
 
 > wren ng thornton says:
-> Infinite grammars are perfectly useful, provided that we acknowledge the structure they have. This is just like the reason why PDAs are useful: technically push-down automata are infinite-state machines, but by encoding them as a finite-state machine plus a stack we make explicit the **subregularities** of the infinite-state machine. With PDAs we’re saying that infinite graphs (i.e., infinite DFAs) are helpful, because we can finitize them; with your example in mind, we’re saying that infinite hypergraphs (i.e., infinite CFGs) are helpful— which should intuitively follow from the facts that hypergraphs are helpful and that infinite graphs are helpful. 
+> Infinite grammars are perfectly useful, provided that we acknowledge the structure they have. This is just like the reason why PDAs are useful: technically push-down automata are infinite-state machines, but by encoding them as a finite-state machine plus a stack we make explicit the **subregularities** of the infinite-state machine. With PDAs we’re saying that infinite graphs (i.e., infinite DFAs) are helpful, because we can finitize them; with your example in mind, we’re saying that infinite hypergraphs (i.e., infinite CFGs) are helpful— which should intuitively follow from the facts that hypergraphs are helpful and that infinite graphs are helpful.
 > This is the same intuition behind why Ryan Ingram’s implementation gives better error messages: his version makes the subregularities defining the a^n b^n c^n language explicit; that is, he makes the finitization of the infinite hypergraph explicit. We can do this for a large collection of languages simply by adding indices/parameters to the nonterminals of a CFG —which is akin to giving a stack to a DFA— and this is what is done in many grammar formalisms more powerful than context-free. It’s the explicit finitization which enables giving decent error messages.
 > Though your example is quite nice because it shows how we can take an arbitrary characteristic function and convert it into an Applicative parser. I’m loathe to call a characteristic function a “grammar” for precisely the same reason why you get awful error messages— namely, that characteristic functions have no structure, whereas I’d define grammars as being a means of explaining the structure behind (particular classes of) characteristic functions.
 
@@ -5325,7 +5325,7 @@ the examples do not utilize the power of Monad (control of computation based on 
 
 > [safe-exceptions](https://www.stackage.org/package/safe-exceptions)
 > ## Determining sync vs async
-> Run an action in a separate thread, don’t give that thread’s ID to anyone else, and assume that any exception that kills it is a synchronous exception. 
+> Run an action in a separate thread, don’t give that thread’s ID to anyone else, and assume that any exception that kills it is a synchronous exception.
 > Problems
 > - It’s much more expensive to fork a thread every time we want to deal with exceptions
 > - It’s not fully reliable: it’s possible for the thread ID of the forked thread to leak somewhere, or the runtime system to send it an async exception
@@ -5353,7 +5353,7 @@ dangerous = do
     putStrLn "Succeeds this time, but takes some time"
     threadDelay 10000 -- <- thrown here
     return 5
-    
+
 worker :: IO ()
 worker = do
     x <- catchAny dangerous $ \e -> do -- <- caught here
@@ -5598,7 +5598,7 @@ Backend
 > And when language and program fit one another well, you end up with code which is clear, small, and efficient.
 
 > Code size is important, because the time it takes to write a program depends mostly on its length.
-> If your program would be three times as long in another language, it will take three times as long to write-- 
+> If your program would be three times as long in another language, it will take three times as long to write--
 > and you can't get around this by hiring more people, because beyond a certain size new hires are actually a net lose. Fred Brooks described this phenomenon in his famous book **The Mythical Man-Month**, and everything I've seen has tended to confirm what he said.
 
 > As one data point on the curve, at any rate, if you were to compete with ITA and chose to write your software in C, they would be able to develop software twenty times faster than you.
