@@ -2081,6 +2081,11 @@ a DSL for RDP
 
 ### 43.[volkerschatz - Wavelet transform in Haskell](http://www.volkerschatz.com/science/haswavelet.html)
 
+### 44.[Anthony Daniels, A Semantics of Functions and Behaviours, 1999](http://www.cs.nott.ac.uk/Research/fop/daniels-thesis.pdf)
+
+> Chapter 9: Complete Formal Semantics
+> in typed lambda-calculus or PCF (Programming Computable Functions)
+
 
 ## Self-adjusting Computation (SAC)
 
@@ -4713,7 +4718,9 @@ data Day f g a
 
 [Promonads, Arrows, and Einstein Notation for Profunctors](https://bartoszmilewski.com/2019/03/27/promonads-arrows-and-einstein-notation-for-profunctors/)
 
+### 20. [Glassery | Profunctor Optics](http://oleg.fi/gists/posts/2017-04-18-glassery.html)
 
+[Affine Traversal](http://oleg.fi/gists/posts/2017-03-20-affine-traversal.html)
 
 ## Actor Model
 
