@@ -5319,6 +5319,8 @@ the examples do not utilize the power of Monad (control of computation based on 
 
 ### 3. [volkerschatz - A recursive tensor data type](http://www.volkerschatz.com/science/hastensor.html)
 
+### 4. [Monoidal and Applicative Functors](https://coot.me/posts/monoidal-functors.html)
+
 ## Exception Handling
 
 ### 1.[Catching all exceptions](https://www.schoolofhaskell.com/user/snoyberg/general-haskell/exceptions/catching-all-exceptions)
